@@ -6,6 +6,8 @@
 4. [inference] ToolLLaMA에다가 (아카이브, Semantic Scholoar)를 function call하여 output 생성
 ## 진행사항
 ### 16기 박민규
-target paper를 공부하기 전 봐야할 premiminaries paper & target paper 이후에 나온  future works paper 들에 대한 정보를 llm을 이용하여 생성 + 시각화 진행
-  - semantic scholar & archive api를 tool로 사용 >> langchain으로 생성 예정
-  - semantic scholar & archive api 사용하여 llama로 orginal dataset generate
+(세부목표) target paper를 공부하기 전 봐야할 premiminaries & target paper 이후에 나온  future works 들에 대한 정보 생성(ft llama) + 시각화 진행
+  - semantic scholar api와 sentence transformer를 이용하여 data preprocessing ✅
+  - semantic scholar api를 이용하여 preminiaries visualization ✅ >> 조금 더 고급지게 시각화 🏃
+  - semantic scholar & archive api를 tool로 사용 >> langchain으로 생성 🏃
+  - semantic scholar & archive api 사용하여 llama로 orginal dataset generate 🏃
