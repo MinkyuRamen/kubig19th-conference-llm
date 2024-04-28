@@ -15,10 +15,11 @@
 
 ### 16기 이영노
 - ToolFormer 구현
-🏃 `EleutherAI/gpt-j-6B` GPU에 Model Load 이후 ToolFormer `data_generator.py` 실행시, `retrieval_data_{self.num_device}.json` 파일 stack 하는 과정에서 GRAM OOM error 문제 발생 
---> json 파일 저장 코드 수정
 
-🏃 차후 `deepspeed` 통한 FT 진행 (`deepspeed` 사용법 공부)
+  🏃 `EleutherAI/gpt-j-6B` GPU에 Model Load 이후 ToolFormer `data_generator.py` 실행시, `retrieval_data_{self.num_device}.json` 파일 stack 하는 과정에서 GRAM OOM error 문제 발생 
+  --> json 파일 저장 코드 수정
+
+  🏃 차후 `deepspeed` 통한 FT 진행 (`deepspeed` 사용법 공부)
 
 - ToolFormer 개선
   - 배경 : `conceptofmind` huggingface 모델의 Mathematical Reasoning 능력 부족
