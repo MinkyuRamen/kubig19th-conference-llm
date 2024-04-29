@@ -8,7 +8,7 @@
 ### 16기 박민규
 (세부목표) target paper를 공부하기 전 봐야할 premiminaries & target paper 이후에 나온  future works 들에 대한 정보 생성(ft llama) + 시각화 진행
   - semantic scholar api와 sentence transformer를 이용하여 data preprocessing ✅
-  - semantic scholar api를 이용하여 preminiaries visualization ✅ >> 조금 더 고급지게 시각화 🏃
+  - semantic scholar api를 이용하여 preminiaries visualization ✅ >> 조금 더 고급지게 시각화 🏃(보류)
   - semantic scholar & archive api를 tool로 사용 >> langchain으로 생성 🏃
   - semantic scholar & archive api 사용하여 llama로 orginal dataset generate 🏃
 
