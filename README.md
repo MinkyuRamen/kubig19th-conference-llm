@@ -27,3 +27,8 @@
     - e.g. CoT, step-by-step 으로 쪼개는 prompt search 해서 넣어보기 ,tool documentation 넣어주고 zero-shot 으로 시도
     - Sequential Tool Calling 이 가능해야 하는데, 이걸 기존 Toolformer 코드에서 어떻게 수행할지 고민 (LangChain?)
     
+### 18기 최유민
+- Langchain을 이용한 Tool 사용 Language model 구현
+
+- 목표
+  Tool 사용한 모델과 사용하지 않는 기본 모델 사이의 성능 정량적 측정 및 정성적 차이 분석
