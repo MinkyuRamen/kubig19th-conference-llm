@@ -24,6 +24,11 @@ from transformers import AutoTokenizer, AutoModel
 import torch
 import torch.nn.functional as F
 
+import requests
+import feedparser
+import PyPDF2
+import re
+
 from dotenv import load_dotenv
 dotenv_path = '/Users/minkyuramen/Desktop/project/env'
 load_dotenv(dotenv_path)
@@ -39,6 +44,105 @@ def mean_pooling(model_output, attention_mask):
 # sentence-transformers로 embedding 후 abstract간 cosine similarity를 측정하였다.
 tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
 model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
+
+
+def query2paperID(query, api_key=api_key):
+    # Define the API endpoint URL
+    url = 'https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId,title,abstract'
+
+    # paper name 기입
+    query_params = {'query': query}
+    headers = {'x-api-key': api_key}
+
+    response = requests.get(url, params=query_params, headers=headers).json()
+    paper_id = response['data'][0]['paperId']
+    title = response['data'][0]['title']
+    return paper_id, title
+
+# arxiv api 이용, paper search
+def search_arxiv(query, max_results=1):
+    base_url = 'http://export.arxiv.org/api/query?'
+    query_url = f'search_query=all:{query}&start=0&max_results={max_results}'
+    response = requests.get(base_url + query_url)
+
+    if response.status_code != 200:
+        raise Exception('Error fetching data from arXiv API')
+
+    feed = feedparser.parse(response.content)
+    paper = feed.entries[0]
+    print(f'### Searched Paper ###')
+    print(f'Title: {paper.title}')
+    print(f'Authors: {paper.author}')
+    print(f'Published: {paper.published}')
+    print(f'ID: {paper.id.split("/")[-1]}')
+
+    arxiv_id = paper.id.split('/')[-1]
+    return arxiv_id, paper.title
+
+
+def download_pdf(arxiv_id, path_db='./papers_db'):
+    """
+    Download the PDF of a paper given its arXiv ID, if it does not already exist.
+    """
+    if not os.path.exists(path_db):
+        os.makedirs(path_db)
+    
+    file_path = os.path.join(path_db, f'{arxiv_id}.pdf')
+    
+    if os.path.exists(file_path):
+        print(f"File {file_path} already exists. Skipping download.")
+        return file_path
+
+    pdf_url = f'https://arxiv.org/pdf/{arxiv_id}.pdf'
+    response = requests.get(pdf_url)
+
+    if response.status_code != 200:
+        raise Exception('Error downloading PDF from arXiv')
+
+    with open(file_path, 'wb') as file:
+        file.write(response.content)
+    return file_path
+
+def read_pdf(arxiv_id, path_db='./papers_db', limit_page=3, start_page=1, end_page=None):
+    pdf_content = ""
+    file_path = f'{path_db}/{arxiv_id}.pdf'
+    
+    if not os.path.exists(file_path):
+        return f"Error: The file {file_path} does not exist."
+
+    try:
+        with open(file_path, 'rb') as file:
+            reader = PyPDF2.PdfReader(file)
+            total_pages = len(reader.pages)
+            
+            if end_page is None or end_page > total_pages:
+                end_page = total_pages
+
+            for page_num in range(start_page, end_page):
+                page = reader.pages[page_num-1]
+                pdf_content += page.extract_text()
+                if page_num == limit_page:
+                    print('Page limit reached at', limit_page + 1)
+                    break
+
+    except FileNotFoundError:
+        return f"Error: The file {file_path} does not exist."
+    except Exception as e:
+        return f"An error occurred while reading the file: {e}"
+
+    pdf_content = re.sub(r'\s+', ' ', pdf_content).strip()
+    return pdf_content
+
+def query2content(query:str, start_page:int = 1):
+    """
+    Perform a query, download the corresponding PDF (if not already downloaded), and extract its content.
+    """
+    paper_id, title = search_arxiv(query)
+
+    download_path = download_pdf(paper_id)
+    
+    content = read_pdf(paper_id, start_page = start_page)
+    return content
 
 
 def query2references(query, num=20, api_key=api_key):
@@ -77,7 +181,7 @@ def query2references(query, num=20, api_key=api_key):
 
     return response['data'], sorted(references, key=lambda x: x['citedPaper']['influentialCitationCount'], reverse=True)[:num]
 
-def reference_recommend(query, num=20, threshold=0.6, recommend=5, api_key=api_key):
+def reference_recommend(query:str , num=20, threshold=0.6, recommend=5, api_key=api_key):
 
     tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
     model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
