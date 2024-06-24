@@ -6,6 +6,22 @@ import re
 import os
 
 class GetPaper:
+    """
+    A class to interact with scientific papers using the Semantic Scholar API, ar5iv and arxiv.
+
+    Attributes:
+    -----------
+    ss_api_key : str
+        The API key for accessing the Semantic Scholar API.
+    ar5iv_mode : bool, required.
+        If False, download the paper in pdf file in path_db and read it. Defaults to True.
+    path_db : str, optional
+        The path to the local database where paper is stored. Defaults to './papers_db'.
+    page_limit : int, optional
+        The maximum number of pages to retrieve when querying papers. 
+        Recommend for GPT3.5 is 5, and -1 for GPT4o.
+        Defaults to 5.
+    """
     def __init__(self, ss_api_key, ar5iv_mode = True, path_db='./papers_db', page_limit = 5):
         self.ss_api_key = ss_api_key
         self.ar5iv_mode = ar5iv_mode
