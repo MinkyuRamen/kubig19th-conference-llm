@@ -13,7 +13,6 @@ from transformers.models.llama.tokenization_llama_fast import LlamaTokenizerFast
 from transformers import LlamaForCausalLM
 from transformers import PreTrainedTokenizerFast
 from huggingface_hub import login
-login(token="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")
 
 from langchain.llms.base import LLM
 from langchain.callbacks.manager import CallbackManagerForLLMRun
@@ -30,10 +29,12 @@ import PyPDF2
 import re
 
 from dotenv import load_dotenv
-dotenv_path = '/Users/minkyuramen/Desktop/project/env'
+dotenv_path = '.env'
 load_dotenv(dotenv_path)
 
 api_key = os.getenv("SEMANTIC_SCHOLAR_API_KEY")
+huggingface_api_key = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+login(token=huggingface_api_key)
 
 #Mean Pooling - Take attention mask into account for correct averaging
 def mean_pooling(model_output, attention_mask):
@@ -69,6 +70,7 @@ def search_arxiv(query, max_results=1):
         raise Exception('Error fetching data from arXiv API')
 
     feed = feedparser.parse(response.content)
+    
     paper = feed.entries[0]
     print(f'### Searched Paper ###')
     print(f'Title: {paper.title}')
