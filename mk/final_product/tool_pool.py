@@ -88,3 +88,23 @@ recommendpaper = StructuredTool.from_function(
     """,
     args_schema=recommend_input
 )
+
+## figure explanation & visualization
+class loadfigure(BaseModel):
+    query: str = Field(description="target paper title")
+    instruction : str = Field(description='user instruction for figure explanation')
+    start_page: int = Field(description='start page number')
+    
+loadfigure = StructuredTool.from_function(
+    func=ap.query2figure_and_content,
+    name="loadfigure",
+    description="""    
+        The `loadpaper` tool facilitates the retrieval, reading, and visualization of academic papers based on a given search query. \
+        The `instruction` parameter is a string representing the title or relevant keywords of the target paper. \
+        The `question` parameter is a string representing the subject being asked to explain.\
+        If the paper does not contain the desired information, you can adjust the start_page argument to specify the starting page for reading. \
+        For instance, to extract the title, abstract, or detailed method sections, set start_page to 1. \
+        This tool not only provides the text content of the paper but also identifies and displays relevant figures as per the user's instructions.
+    """,
+    args_schema=loadfigure
+)

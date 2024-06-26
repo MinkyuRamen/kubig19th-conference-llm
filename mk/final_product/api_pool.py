@@ -28,6 +28,16 @@ import requests
 import feedparser
 import PyPDF2
 import re
+import arxiv
+import os
+import tarfile
+import fitz  # PyMuPDF
+from PIL import Image
+import matplotlib.pyplot as plt
+
+import os
+import io
+from IPython.display import display, Image as IPImage
 
 from dotenv import load_dotenv
 dotenv_path = '/Users/minkyuramen/Desktop/project/env'
@@ -61,29 +71,41 @@ def search_arxiv(query, max_results=1):
     query_params = {'query': query}
     headers = {'x-api-key': api_key}
 
-    response = requests.get(url, params=query_params, headers=headers).json()
-    # print(response)
-    paper_id = response['data'][0]['paperId']
-    paper_title = response['data'][0]['title']
-    paper_authors = [author['name'] for author in response['data'][0]['authors']]
-    paper_published = response['data'][0]['publicationDate']
-    print(f'### Searched Paper ###')
-    print(f'Title: {paper_title}')
-    print(f'Authors: {paper_authors}')
-    print(f'Published: {paper_published}')
-    # print(f'ID: {paper_id}')
     try:
+        response = requests.get(url, params=query_params, headers=headers).json()
+        # print(response)
+        paper_id = response['data'][0]['paperId']
+        paper_title = response['data'][0]['title']
+        paper_authors = [author['name'] for author in response['data'][0]['authors']]
+        paper_published = response['data'][0]['publicationDate']
+        print(f'### Searched Paper ###')
+        print(f'Title: {paper_title}')
+        print(f'Authors: {paper_authors}')
+        print(f'Published: {paper_published}')
+        # print(f'ID: {paper_id}')
         url = f'https://api.semanticscholar.org/graph/v1/paper/{paper_id}?fields=externalIds'
         headers = {'x-api-key': api_key}
         response = requests.get(url, params=query_params, headers=headers).json()
         print(response)
         arxiv_id = response['externalIds']['ArXiv']
     except:
+        response = requests.get(url, params=query_params, headers=headers).json()
+        # print(response)
+        paper_id = response['data'][0]['paperId']
+        paper_title = response['data'][0]['title']
+        paper_authors = [author['name'] for author in response['data'][0]['authors']]
+        paper_published = response['data'][0]['publicationDate']
+        print(f'### Searched Paper ###')
+        print(f'Title: {paper_title}')
+        print(f'Authors: {paper_authors}')
+        print(f'Published: {paper_published}')
+        # print(f'ID: {paper_id}')
         url = f'https://api.semanticscholar.org/graph/v1/paper/{paper_id}?fields=externalIds'
         headers = {'x-api-key': api_key}
         response = requests.get(url, params=query_params, headers=headers).json()
         print(response)
         arxiv_id = response['externalIds']['ArXiv']
+
     print(f'ArXiv_id: {arxiv_id}')
 
     return arxiv_id, paper_title
@@ -114,7 +136,7 @@ def download_pdf(arxiv_id, path_db='./papers_db'):
         file.write(response.content)
     return file_path
 
-def read_pdf(arxiv_id, path_db='./papers_db', limit_page=3, start_page=1, end_page=None):
+def read_pdf(arxiv_id, path_db='./papers_db', limit_page=5, start_page=1, end_page=None):
     '''
     arixv_id에 해당하는 pdf 파일을 읽어서 text 형태로 변환
     arxiv_id를 가지는 논문 본문을 return
@@ -362,3 +384,114 @@ def query2recommend_paper(query, type='default'):
         return reference_recommend(query=query, num=30, api_key=api_key, threshold=0.6, recommend=5)
     else:
         raise Exception('type should be either citation or reference')
+
+###################### query → figure & figure description ######################
+#################################################################################
+
+def download_arxiv_source(arxiv_id, output_dir):
+    """
+    <figure download>
+    figure가 포함되어 있는 source를 반환한다.
+    """
+    # 검색한 arXiv 논문 정보 가져오기
+    search = arxiv.Search(id_list=[arxiv_id])
+    paper = next(search.results())
+
+    # 소스 파일 다운로드 링크
+    source_url = paper.pdf_url.replace('pdf', 'e-print')
+    
+    # 출력 디렉토리가 없으면 생성
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    
+    # 파일 다운로드
+    response = requests.get(source_url)
+    output_path = os.path.join(output_dir, f"{arxiv_id}.tar.gz")
+    with open(output_path, 'wb') as f:
+        f.write(response.content)
+    
+    file_path = f'{output_path}'
+    with tarfile.open(file_path, "r:gz") as tar:
+        tar.extractall(path=output_dir)
+    
+    print(f"Source files downloaded to: {output_path}")
+
+def find_pdf_files(root_folder):
+    '''
+    <figure path find>
+    source 폴더 내의 모든 figure를 찾아서 {name:path} 형태의 dictionary 반환
+    '''
+    pdf_files = {}
+    for dirpath, dirnames, filenames in os.walk(root_folder):
+        for filename in filenames:
+            if filename.lower().endswith('.pdf'):
+                name = filename.replace('.pdf', '').split('/')[-1]
+                pdf_files[name] = os.path.join(dirpath, filename)
+    return pdf_files
+
+def query_name_matching(query, pdf_files):
+    '''
+    <figure name matching>
+    query와 pdf_files를 받아 query와 가장 유사한 이름을 가진 pdf 파일의 이름을 반환
+    '''
+    figure_name = list(pdf_files.keys())
+    query = query.lower()
+    pdf_names = list(pdf_files.keys())
+    pdf_names = [name.lower() for name in pdf_names]
+    pdf_names.insert(0,query)
+    
+    encoded_input = tokenizer(pdf_names, padding=True, truncation=True, return_tensors='pt')
+    with torch.no_grad():
+        model_output = model(**encoded_input)
+    sentence_embeddings = mean_pooling(model_output, encoded_input['attention_mask'])
+    sentence_embeddings = F.normalize(sentence_embeddings, p=2, dim=1)
+    rec = cosine_similarity(sentence_embeddings)
+    rec = rec[0][1:]
+    max_index = rec.argmax()
+
+    return pdf_names[max_index + 1]
+
+def display_figure(pdf_files, name):
+    """
+    <figure display>
+    name과 pdf_files를 받아 figure를 display
+    """
+    pdf_path = pdf_files[name]
+    print(pdf_path)
+    # PDF 파일 열기
+    pdf_document = fitz.open(pdf_path)
+    
+    # 첫 페이지 가져오기
+    page = pdf_document.load_page(0)
+    pix = page.get_pixmap()
+    
+    # 이미지 변환
+    image_bytes = pix.tobytes()
+    image = Image.open(io.BytesIO(image_bytes))
+
+    plt.imshow(image)
+    plt.axis('off')  # 축을 표시하지 않도록 설정합니다
+    plt.show()
+
+def query2figure_and_content(query:str, instruction:str, start_page:int = 1):
+    """
+    <Paper Content Extract>
+    query(target paper name)가 input으로 들어오면, target paper의 논문 본문(content)를 반환
+    """
+    paper_id, title = search_arxiv(query)
+    download_path = download_pdf(paper_id)
+    content = read_pdf(paper_id, start_page = start_page)
+
+    ## image download
+    output_dir = download_path.replace('.pdf', '')
+    arxiv_id = output_dir.split('/')[-1]
+    # source file download
+    download_arxiv_source(arxiv_id, output_dir)
+    # figure file path
+    pdf_files = find_pdf_files(output_dir)
+    # instruction & figure matching
+    name = query_name_matching(instruction, pdf_files)
+    # figure display
+    display_figure(pdf_files, name)
+
+    return content

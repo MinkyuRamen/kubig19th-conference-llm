@@ -1,0 +1,52 @@
+
+\paragraph{Tool Learning Benchmarks.}
+% \csj{please rewrite.}
+Recent studies have shed light on the burgeoning capabilities of LLMs in understanding and mastering tools~\citep{li2023apibank, patil2023gorilla, gpt4tools, song2023restgpt, tang2023toolalpaca, ye2024tooleyes, xu2023tool}.
+Gaining access to external tools endows LLMs with real-time factual knowledge~\citep{yang2023chatgpt}, multimodal functionalities~\citep{gupta2023visual}, and specialised skills in vertical domains~\citep{jin2023genegpt}. 
+However, few work has been done to explore the stability of the tool environment in specific benchmarks and how it affects the LLMs' performance in tool-augmented tasks. 
+% However, open-source LLMs still lag far behind the state-of-the-art LLMs in tool use, and how tool-use ability is acquired by SOTA LLMs remains unclear. In this paper, we aim to push the boundary by creating a stable tool-learning benchmark.
+
+\paragraph{Tool Inference Methods.}
+Recent literature has begun to explore various methodologies for integrating tool functionalities within LLMs. 
+Notably, the robust in-context learning prowess of LLMs, as demonstrated in \cite{brown2020language}, has facilitated the augmentation of LLMs with external tools via in-context tool descriptions and demonstrations ~\citep{hsieh2023tool, ruan2023tptu, mialon2023augmented}.
+An alternative approach involves the explicit training of LLMs ~\citep{patil2023gorilla, tang2023toolalpaca, chen2023fireact, qin2023toolllm, huang2023metatool} using datasets enriched with tool interactions, thereby familiarising models with the nuances of tool usage. 
+% This area of research is pivotal, as it directly influences the efficiency and effectiveness of tool-augmented LLMs in performing a wide array of tasks.
+
+\begin{table}[t!]
+    \centering
+    \small
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{Methods} & \textbf{Solvability} &\textbf{Solving} & \textbf{Comparison} \\
+        \midrule
+         Claude 2 & 71.0 & - & -\\
+         Gemini Pro & \textbf{82.0} & - & -\\
+         GPT 3.5 Turbo & 65.0 & 68.0 & 56.0 \\
+         GPT 4 Turbo & 80.0 & \textbf{74.0} & \textbf{78.0}\\
+         
+         
+         \bottomrule
+    \end{tabular}
+    \caption{Human evaluation on task solvability, answer solving (for pass rate) and comparison (for win rate).}
+    \label{tab:human_eval_task}
+\end{table}
+
+\paragraph{Evaluation in Tool Learning.}
+Evaluating the performance of LLMs in tool-augmented tasks presents unique challenges and opportunities.
+Numerous works have been developed for the assessment of tool utilisation, primarily emphasising response comparison ~\citep{zhuang2023toolqa}, tool call accuracy ~\citep{patil2023gorilla}, or a synthesis of these aspects ~\citep{li2023apibank}. Distinguishing itself, \cite{qin2023toolllm} introduces an innovative methodology by integrating a large language model (LLM) as a judge to evaluate the comprehensive solution path. 
+Subsequent research ~\citep{wang2023mint} focuses on the multi-turn interaction capabilities of LLMs with both tools and user feedback.
+In a departure from the aforementioned approaches, \cite{chen2023teval} presents itself as the inaugural benchmark specifically tailored for the fine-grained assessment of tool utilisation capabilities.
+% These evaluation methodologies offer insights into the effectiveness of LLMs in real-world scenarios, highlighting areas for further improvement and refinement. 
+However, there exists a gap in the literature concerning the exploration of evaluation stability when evaluating the tool usage capabilities of LLMs.
+
+% \paragraph{In-context Learning with LLMs.}
+% % for response generation
+% In-context learning has been a transformative technique enabling LLMs to perform a wide range of tasks without fine-tuning. \cite{radford2019language} introduced the GPT series, demonstrating the potential of transformer-based models for in-context learning across various natural language processing tasks. \cite{brown2020language} furthered this work with GPT-3, showcasing the ability of LLMs to perform tasks given a small number of examples, or even a single example, within the prompt. This capability forms the foundation of our approach to mimicking API behavior.
+
+% \paragraph{Instruction Generation.}
+% The evolution of LLMs has enabled not only the comprehension but also the generation of instructions, marking a significant leap in natural language understanding and generation. 
+% Benchmarks and tasks designed around instruction generation, as proposed by \citet{wei2021finetuned} and \citet{mishra2021cross}, demonstrate the potential of LLMs to craft coherent and contextually relevant instructions. 
+% Following works ~\citep{patil2023gorilla, qin2023toolllm, tang2023toolalpaca} directly prompt LLMs to generate high-quality instructions or user queries under tool learning scenarios, demonstrating the effectiveness of utilizing LLMs for real-world instruction generation.
+
+% \paragraph{API Generation and Simulation.}
+
