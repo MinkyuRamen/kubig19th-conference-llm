@@ -76,12 +76,12 @@ class GetPaper:
         return title, header_list
 
 
-    def extract_text_under_headers(self, soup, text_list):
+    def extract_text_under_headers(self, soup, section_list):
         # 결과를 저장할 변수
         results = []
 
         # 텍스트 리스트를 순회하며 각 텍스트에 해당하는 헤더와 그 아래의 텍스트를 추출
-        for text in text_list:
+        for text in section_list:
             header_tag = soup.find(lambda tag: tag.name in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] and text in tag.get_text())
             if header_tag:
                 header_text = header_tag.get_text(strip=False)
@@ -190,10 +190,14 @@ class GetPaper:
             title, header_list = self.get_header_from_soup(soup)
             if sections == None:
                 sections_list = self.list_section(header_list)
-                instruction_for_agent = f'Here is the title and section of the paper\ntitle\n{title}\nsections\n{sections_list}\n\n Use the \'loadpaper\' tool again, specifying the exact sections you want to view in detail.'
+                instruction_for_agent = f'Here is the title and section of the paper\ntitle\n{title}\nsections\n{sections_list}\n\n Use the \'loadpaper\' tool again, specifying the section list you want to view in detail.'
                 return instruction_for_agent
             else:
-                return self.extract_text_under_headers(soup, sections)
+                content = self.extract_text_under_headers(soup, sections)
+                if content == '': # Section list was incorrect
+                    sections_list = self.list_section(header_list)
+                    content = f'Section list was incorrect.\nHere is the title and section of the paper\ntitle\n{title}\nsections\n{sections_list}\n\n Use the \'loadpaper\' tool again, specifying the section list you want to view in detail.'
+                return content
         else: # case for ar5iv is not exist or request error
             arxiv_id = url.split('/')[-1]
             download_path = self.download_pdf(arxiv_id)
