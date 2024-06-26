@@ -21,11 +21,35 @@ from langchain import hub
 from langchain.agents import AgentExecutor, create_openai_tools_agent
 import api_pool as ap
 from dotenv import load_dotenv
+
+from getpaper import GetPaper
+
 dotenv_path = '/Users/minkyuramen/Desktop/project/env'
 load_dotenv(dotenv_path)
 
-api_key = os.getenv("SEMANTIC_SCHOLAR_API_KEY")
+ss_api_key = os.getenv("SEMANTIC_SCHOLAR_API_KEY")
 
+
+# Updated loadpaer tool
+# model can use this tool several times, to get the list of the section, and then see the detail content of the paper.
+# if the ar5iv_mode is False, 
+getpapermodule = GetPaper(ss_api_key, ar5iv_mode = True, path_db = './papers_db', page_limit = 5)
+
+class load_paper_input(BaseModel):
+    title: str = Field(description="target paper title")
+    sections: list = Field(description='list of sections', default = None)
+
+loadpaper = StructuredTool.from_function(
+    func=getpapermodule.load_paper,
+    name="loadpaper",
+    description="The `loadPaper` tool is designed to facilitate the process of retrieving and reading academic papers based on a given search title. \
+    The `title` parameter is a string representing the title of the paper. The 'sections' parameter is a list representing the list of the sections in the paper. \
+    If the sections parameter is none, you can get the section list of the paper. If the sections parameter get the section list, you can load the paper's content. \
+    Use this tool several times to get the section first and then get the detail content of each section",
+    args_schema=load_paper_input
+)
+
+'''
 ## target paper context extract
 class load_paper_input(BaseModel):
     query: str = Field(description="target paper title")
@@ -43,7 +67,7 @@ loadpaper = StructuredTool.from_function(
     """,
     args_schema=load_paper_input
 )
-
+'''
 
 ## (reference paper/citation paper) recommendation
 class recommend_input(BaseModel):
