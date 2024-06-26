@@ -1,0 +1,52 @@
+%auto-ignore
+
+\section{Additional Ablation Studies}
+\label{appendix:sec:more_ablation_studies}
+
+\subsection{Effect of Number of Training Steps}
+\label{sec:num_training_steps}
+
+Figure~\ref{fig:step_abalation} presents MNLI Dev accuracy after fine-tuning from a checkpoint that has been pre-trained for $k$ steps. This allows us to answer the following questions:
+
+\input{steps_ablation_fig}
+
+\begin{enumerate}
+\item Question: Does BERT really need such a large amount of pre-training (128,000 words/batch * 1,000,000 steps) to achieve high fine-tuning accuracy? \\
+Answer: Yes, \bertbase achieves almost 1.0\% additional accuracy on MNLI when trained on 1M steps compared to 500k steps.
+\item Question: Does MLM pre-training converge slower than LTR pre-training, since only 15\% of words are predicted in each batch rather than every word? \\
+Answer: The MLM model does converge slightly slower than the LTR model. However, in terms of absolute accuracy the MLM model begins to outperform the LTR model almost immediately.
+\end{enumerate}
+
+\subsection{Ablation for Different Masking Procedures}
+\label{appendix:sec:different_masks}
+
+In Section~\ref{sec:pretraining_tasks}, we mention that BERT uses a mixed strategy for masking the target tokens when pre-training with the masked language
+model (MLM) objective. The following is an ablation study to evaluate the effect of different masking strategies.
+
+Note that the purpose of the masking strategies is to reduce the mismatch
+between pre-training and fine-tuning, as the {\tt [MASK]} symbol never appears during the fine-tuning stage. We report the Dev results for both
+MNLI and NER. For NER, we report both fine-tuning and feature-based approaches,
+as we expect the mismatch will be amplified for the feature-based approach as
+the model will not have the chance to adjust the representations.
+
+\input{mask_procedure_ablation_tab}
+
+The results are presented in Table~\ref{tab:mask_ablation}. In the table,
+ \textsc{Mask} means that we replace the target token with the {\tt [MASK]} symbol
+for MLM; \textsc{Same} means that we keep the target token as is; \textsc{Rnd}
+means that we replace the target token with another random token. 
+
+The numbers in the left part of the table represent the probabilities of the specific strategies used during MLM pre-training (BERT uses 80\%, 10\%, 10\%). The right part of the paper represents the Dev set results. For the feature-based
+approach, we concatenate the last 4 layers of BERT as the features, which
+was shown to be the best approach in Section~\ref{sec:ner}.
+
+From the table it can be seen that fine-tuning is surprisingly robust to
+different masking strategies. However, as expected, using only the \textsc{Mask} strategy
+was problematic when applying the feature-based approach to NER. Interestingly,
+using only the \textsc{Rnd} strategy performs much worse than our strategy as well.
+
+
+
+
+
+

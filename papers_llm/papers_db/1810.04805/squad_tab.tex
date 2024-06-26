@@ -1,0 +1,64 @@
+%auto-ignore
+
+\begin{table}[t]
+\begin{center}
+{\small
+\begin{tabular}{@{}lcccc@{}}
+  \toprule
+  \multicolumn{1}{c}{System} & \multicolumn{2}{c}{Dev} & \multicolumn{2}{c}{Test} \\
+  & EM & F1 & EM & F1 \\
+  \midrule
+
+  \multicolumn{5}{c}{Top Leaderboard Systems (Dec 10th, 2018)} \\
+  Human                & - & - & 82.3 & 91.2 \\ 
+  \#1 Ensemble - nlnet & - & - & 86.0 & 91.7 \\ 
+  \#2 Ensemble - QANet & - & - & 84.5 & 90.5 \\ 
+  \midrule
+  \multicolumn{5}{c}{Published}     \\
+ BiDAF+ELMo (Single)    & -    & 85.6  & -     & 85.8    \\ 
+ R.M. Reader (Ensemble) & 81.2 & 87.9  & 82.3  & 88.5 \\ 
+  \midrule
+  \multicolumn{5}{c}{Ours} \\
+  \bertbase (Single)     & 80.8 & 88.5 & -   & - \\ 
+  \bertlarge (Single)    & 84.1 & 90.9 & -   & - \\ 
+  \bertlarge (Ensemble)  & 85.8 & 91.8 & -   & - \\ 
+  \bertlarge (Sgl.+TriviaQA) & {\bf 84.2} & {\bf 91.1} & {\bf 85.1} & {\bf 91.8} \\ 
+  \bertlarge (Ens.+TriviaQA) & {\bf 86.2} & {\bf 92.2} & {\bf 87.4} & {\bf 93.2}
+ \\ 
+
+\bottomrule
+\end{tabular}
+} % small
+\end{center}
+\caption{\label{tab:squad_results} SQuAD 1.1 results. The BERT ensemble is 7x systems which use different pre-training checkpoints and fine-tuning seeds.}
+\end{table}
+
+
+\begin{table}[t]
+\begin{center}
+{\small
+\begin{tabular}{@{}lcccc@{}}
+  \toprule
+  \multicolumn{1}{c}{System} & \multicolumn{2}{c}{Dev} & \multicolumn{2}{c}{Test} \\
+  & EM & F1 & EM & F1 \\
+  \midrule
+
+\multicolumn{5}{c}{Top Leaderboard Systems (Dec 10th, 2018)} \\
+  Human                & 86.3 & 89.0 & 86.9& 89.5 \\ 
+  \#1 Single - MIR-MRC (F-Net)   & - & - & 74.8 & 78.0 \\ 
+  \#2 Single - nlnet   & - & - & 74.2 & 77.1 \\ 
+  \midrule
+  \multicolumn{5}{c}{Published}     \\
+ unet (Ensemble) & - & -  & 71.4  & 74.9 \\ 
+ SLQA+ (Single) & - & & 71.4 & 74.4\\
+  \midrule
+  \multicolumn{5}{c}{Ours} \\
+  \bertlarge (Single)    & 78.7 & 81.9 & 80.0   &  83.1
+ \\ 
+
+\bottomrule
+\end{tabular}
+} % small
+\end{center}
+\caption{\label{tab:squad2_results} SQuAD 2.0 results. We exclude entries that use BERT as one of their components.}
+\end{table}
