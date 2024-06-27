@@ -1,9 +1,16 @@
+from httpx import NetworkError
 import requests
 from bs4 import BeautifulSoup
 from requests.exceptions import RequestException
 import PyPDF2
 import re
 import os
+import feedparser
+
+
+class NetworkError(Exception):
+    """Custom exception for network errors."""
+    pass
 
 class GetPaper:
     """
@@ -28,24 +35,59 @@ class GetPaper:
         self.path_db= path_db
         self.page_limit = page_limit
 
-    def get_paper_info_by_title(self, title):
+    def get_paper_info_by_title_ss(self, title):
         """논문의 제목으로 정보를 가져오는 함수"""
         # Define the API endpoint URL
         url = 'https://api.semanticscholar.org/graph/v1/paper/search?query={}&fields=paperId,title,abstract,authors,citations,fieldsOfStudy,influentialCitationCount,isOpenAccess,openAccessPdf,publicationDate,publicationTypes,references,venue'
 
         headers = {'x-api-key': self.ss_api_key}
-        response = requests.get(url.format(title), headers=headers).json()
+        try:
+            response = requests.get(url.format(title), headers=headers)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise NetworkError(f"Error fetching data from Semantic Scholar API: {e}")
 
-        if response.get('data'):
-            paper = response['data'][0]
-            return paper
+        try:
+            data = response.json()
+        except ValueError:
+            raise NetworkError("Error parsing JSON response from Semantic Scholar API")
+
+        if 'data' in data and data['data']:
+            paper = data['data'][0]
+            external_ids = paper.get('openAccessPdf', {})
+            if external_ids and 'url' in external_ids:
+                arxiv_id = external_ids['url']
+                return arxiv_id
+            else:
+                raise NetworkError("No paper found for the given title")
         else:
-            return None
+            raise NetworkError("No paper found for the given title")
 
-    def get_ar5iv_url(self, paper):
+    # arxiv api 이용, paper search
+    def get_paper_info_by_title_arxiv(self, query, max_results=1):
+        # arxiv api 는 : 이 포함된 query를 검색하지 못함. : 이후의 문자열로 검색.
+        query = query.split(':')[-1]
+
+        base_url = 'http://export.arxiv.org/api/query?'
+        query_url = f'search_query=all:{query}&start=0&max_results={max_results}'
+        response = requests.get(base_url + query_url)
+
+        if response.status_code != 200:
+            raise Exception('Error fetching data from arXiv API')
+
+        feed = feedparser.parse(response.content)
+
+        if 'entries' in feed and len(feed.entries) > 0:
+            paper = feed.entries[0]
+            arxiv_id = paper.id.split('/')[-1]
+            return arxiv_id
+        else:
+            raise NetworkError("No paper found for the given title")
+
+
+    def get_ar5iv_url(self, arxiv_id):
         "논문의 ar5iv 주소를 받아오는 함수"
-        external_ids = paper.get('openAccessPdf', {})
-        arxiv_id = external_ids.get('url')
+        
         if 'http' in arxiv_id:
             arxiv_id = arxiv_id.split('/')[-1]
             return f"https://ar5iv.org/abs/{arxiv_id}"
@@ -183,8 +225,14 @@ class GetPaper:
                 list of sections in paper
         OUTPUT : text of the paper
         '''
-        paper = self.get_paper_info_by_title(title)
-        url = self.get_ar5iv_url(paper)
+        try:
+            arxiv_id = self.get_paper_info_by_title_ss(title)
+        except NetworkError as e:
+            try:
+                arxiv_id = self.get_paper_info_by_title_arxiv(title)
+            except NetworkError as e:
+                return f"Error: No paper was founded in database"
+        url = self.get_ar5iv_url(arxiv_id)
         soup = self.get_soup_from_url(url) if self.ar5iv_mode else None
         if (soup):
             title, header_list = self.get_header_from_soup(soup)
@@ -199,7 +247,6 @@ class GetPaper:
                     content = f'Section list was incorrect.\nHere is the title and section of the paper\ntitle\n{title}\nsections\n{sections_list}\n\n Use the \'loadpaper\' tool again, specifying the section list you want to view in detail.'
                 return content
         else: # case for ar5iv is not exist or request error
-            arxiv_id = url.split('/')[-1]
             download_path = self.download_pdf(arxiv_id)
             pdf_content = self.read_pdf(arxiv_id)
             return pdf_content
