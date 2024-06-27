@@ -57,6 +57,8 @@ class GetPaper:
             external_ids = paper.get('openAccessPdf', {})
             if external_ids and 'url' in external_ids:
                 arxiv_id = external_ids['url']
+                if 'http' in arxiv_id:
+                    arxiv_id = arxiv_id.split('/')[-1]
                 return arxiv_id
             else:
                 raise NetworkError("No paper found for the given title")
@@ -87,12 +89,7 @@ class GetPaper:
 
     def get_ar5iv_url(self, arxiv_id):
         "논문의 ar5iv 주소를 받아오는 함수"
-        
-        if 'http' in arxiv_id:
-            arxiv_id = arxiv_id.split('/')[-1]
-            return f"https://ar5iv.org/abs/{arxiv_id}"
-        else:
-            return None
+        return f"https://ar5iv.org/abs/{arxiv_id}"
 
     def get_soup_from_url(self, url):
         try:
