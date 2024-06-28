@@ -23,17 +23,18 @@ import api_pool as ap
 from dotenv import load_dotenv
 
 from getpaper import GetPaper
+from code_analysis import CodeAnalysis
 
 dotenv_path = '/Users/minkyuramen/Desktop/project/env'
 load_dotenv(dotenv_path)
 
 ss_api_key = os.getenv("SEMANTIC_SCHOLAR_API_KEY")
 
-
 # Updated loadpaer tool
 # model can use this tool several times, to get the list of the section, and then see the detail content of the paper.
 # if the ar5iv_mode is False, 
 getpapermodule = GetPaper(ss_api_key, ar5iv_mode = True, path_db = './papers_db', page_limit = 5)
+codeanalysismodule = CodeAnalysis(ss_api_key, path_db = './papers_db', code_db = './code_db')
 
 class load_paper_input(BaseModel):
     title: str = Field(description="target paper title")
@@ -107,4 +108,28 @@ loadfigure = StructuredTool.from_function(
         This tool not only provides the text content of the paper but also identifies and displays relevant figures as per the user's instructions.
     """,
     args_schema=loadfigure
+)
+
+
+####### Code Analysis와 관련된 tool 정의
+class cloning_github(BaseModel):
+    title: str = Field(description="target paper title")
+
+GitCloning = StructuredTool.from_function(
+    func=codeanalysismodule.Git_cloning,
+    name="get_github_repository",
+    description="""  """,
+    args_schema=cloning_github
+) ## repo_path를 반환(optional)
+
+load_all_functions = StructuredTool.from_function(
+    func=codeanalysismodule.get_all_functions,
+    name="get_github_repository_functions_names",
+    description=""" """
+)
+
+code_matching = StructuredTool.from_function(
+    func=codeanalysismodule.code_analysis,
+    name="code_analysis",
+    description="""  """
 )
