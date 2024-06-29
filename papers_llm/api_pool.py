@@ -294,7 +294,6 @@ def reference_recommend(query:str , num=20, threshold=0.6, recommend=5, api_key=
     
     return rec_lst
 
-
 def query2citations(query, num=20, api_key=api_key):
     '''
     <Citations>
@@ -373,6 +372,7 @@ def citation_recommend(query, num=20, threshold=0.6, recommend=5, api_key=api_ke
 
     # 날짜순으로 정렬
     return sorted(rec_lst, key=lambda x: datetime.strptime(x['publicationDate'], '%Y-%m-%d') if isinstance(x['publicationDate'], str) else x['publicationDate'])
+
 
 def query2recommend_paper(query, type='default'):
     '''

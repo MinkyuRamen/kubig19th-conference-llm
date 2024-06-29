@@ -250,6 +250,7 @@ def reference_recommend(query:str , num=20, threshold=0.6, recommend=5, api_key=
 
     ## target 논문과 num개의 reference 사이의 유사도 계산
     abs_dict = {}
+
     abs_dict[target_response[0]['title']] = target_response[0]['abstract']
 
     for keyword in reference_response:
@@ -345,6 +346,9 @@ def citation_recommend(query, num=20, threshold=0.6, recommend=5, api_key=api_ke
 
     ## target 논문과 20개의 citation 사이의 유사도 계산
     abs_dict = {}
+    # print('dfas')
+    # print(target_response['abstract'])
+    # print('dfas')
     abs_dict[target_response['title']] = target_response['abstract']
 
     for keyword in citation_response:
@@ -373,6 +377,9 @@ def citation_recommend(query, num=20, threshold=0.6, recommend=5, api_key=api_ke
 
     # 날짜순으로 정렬
     return sorted(rec_lst, key=lambda x: datetime.strptime(x['publicationDate'], '%Y-%m-%d') if isinstance(x['publicationDate'], str) else x['publicationDate'])
+
+print(citation_recommend('Large Language Model Connected with Massive APIs'))
+
 
 def query2recommend_paper(query, type='default'):
     '''
