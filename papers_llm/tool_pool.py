@@ -11,7 +11,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from dotenv import load_dotenv
 # Import things that are needed generically
 from langchain.pydantic_v1 import BaseModel, Field
-from typing import Literal
+from typing import Literal, Optional
 from langchain.tools import BaseTool, StructuredTool, tool
 
 from langchain_core.utils.function_calling import convert_to_openai_function
@@ -23,7 +23,8 @@ import api_pool as ap
 from dotenv import load_dotenv
 
 from getpaper import GetPaper
-# from code_analysis import CodeAnalysis
+from code_analysis import CodeAnalysis
+from recommendpaper import RecommendPaper
 
 dotenv_path = '/Users/minkyuramen/Desktop/project/env'
 load_dotenv(dotenv_path)
@@ -34,7 +35,8 @@ ss_api_key = os.getenv("SEMANTIC_SCHOLAR_API_KEY")
 # model can use this tool several times, to get the list of the section, and then see the detail content of the paper.
 # if the ar5iv_mode is False, 
 getpapermodule = GetPaper(ss_api_key, ar5iv_mode = True, path_db = './papers_db', page_limit = 5)
-# codeanalysismodule = CodeAnalysis(ss_api_key, path_db = './papers_db', code_db = './code_db')
+recommendpapermodule = RecommendPaper(ss_api_key)
+codeanalysismodule = CodeAnalysis(ss_api_key, path_db = './papers_db', code_db = './code_db')
 
 class load_paper_input(BaseModel):
     title: str = Field(description="target paper title")
@@ -71,6 +73,29 @@ loadpaper = StructuredTool.from_function(
 '''
 
 ## (reference paper/citation paper) recommendation
+class recommend_paper_input(BaseModel):
+    query: str = Field(description="target paper title")
+    rec_type: Literal['reference', 'citation'] = Field(description="reference or citation paper recommendation")
+    rec_num: Optional[int] = Field(default=5, description="number of recommended papers default is 5")  # 기본값 5로 설정
+
+recommendpaper = StructuredTool.from_function(
+    func=recommendpapermodule.query2recommend_paper,
+    name="recommendpaper",
+    description="""
+        This 'recommendpaper' tool is designed to recommend relevant academic papers based on a given query, \
+        focusing on either the papers cited by the target paper (references) or the papers citing the target paper (citations).\
+        The `query` parameter is a string representing the title of the paper.\
+        The `rec_type` parameter specifies whether the recommendation should be based on references or citations.\
+        The `rec_num` parameter specifies the number of recommended papers. if the number is NOT MENTIONED set rec_num=5\
+        The recommendation is based on the cosine similarity between the abstracts of the target paper and its references or citations.\
+        Users can specify whether they want recommendations from references or citations. \
+        The tool returns the top relevant papers sorted by publication date or influential citation count.
+    """,
+    args_schema=recommend_paper_input
+)
+
+'''
+## (reference paper/citation paper) recommendation
 class recommend_input(BaseModel):
     query: str = Field(description="target paper title")
     type: Literal['reference', 'citation'] = Field(description="reference or citation paper recommendation")
@@ -89,8 +114,8 @@ recommendpaper = StructuredTool.from_function(
     """,
     args_schema=recommend_input
 )
-
-## figure explanation & visualization
+'''
+## figure explanation & visualization << loadpaper와 통합
 class loadfigure(BaseModel):
     query: str = Field(description="target paper title")
     instruction : str = Field(description='user instruction for figure explanation')
@@ -109,11 +134,7 @@ loadfigure = StructuredTool.from_function(
     """,
     args_schema=loadfigure
 )
-
-
-<<<<<<< HEAD
 ####### Code Analysis와 관련된 tool 정의
-
 class github_contents(BaseModel):
     title: str = Field(description="target paper title")
     contents : str = Field(description = "Contents in paper")
@@ -131,7 +152,7 @@ code_matching = StructuredTool.from_function(
     thus providing references for the implementation process.""",
     args_schema = github_contents
 )
-=======
+
 # ####### Code Analysis와 관련된 tool 정의
 # class cloning_github(BaseModel):
 #     title: str = Field(description="target paper title")
@@ -154,4 +175,3 @@ code_matching = StructuredTool.from_function(
 #     name="code_analysis",
 #     description="""  """
 # )
->>>>>>> e3dfad1 (updates intergate code)

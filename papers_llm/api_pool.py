@@ -229,6 +229,9 @@ def query2references(query, num=20, api_key=api_key):
 
     return response['data'], sorted(references, key=lambda x: x['citedPaper']['influentialCitationCount'], reverse=True)[:num]
 
+# print(query2references(query='StableToolBench'))
+
+
 def reference_recommend(query:str , num=20, threshold=0.6, recommend=5, api_key=api_key, sorting=True):
     """
     <References Recommendation>
