@@ -18,7 +18,7 @@ class NetworkError(Exception):
     """Custom exception for network errors."""
     pass
 
-class GitClone:
+class CodeAnalysis:
     """
     
     
@@ -143,52 +143,50 @@ class GitClone:
                             self.clone_github_repository(github_link)
                     elif len(github_links) == 1 :
                         self.clone_github_repository(github_links[0])
-            
-            # return self.repo_path
 
         except Exception as e:
             print(e)
 
-######### Github 내부 python 파일들의 전체 function의 이름을 불러오기
+# ######### Github 내부 python 파일들의 전체 function의 이름을 불러오기
 
-    def get_python_files(self):
-        """지정된 디렉토리 내의 모든 Python 파일 목록을 반환"""
-        python_files = []
-        for root, _, files in os.walk(self.repo_path):
-            for file in files:
-                if file.endswith(".py"):
-                    python_files.append(os.path.join(root, file))
-        return python_files
+#     def get_python_files(self):
+#         """지정된 디렉토리 내의 모든 Python 파일 목록을 반환"""
+#         python_files = []
+#         for root, _, files in os.walk(self.repo_path):
+#             for file in files:
+#                 if file.endswith(".py"):
+#                     python_files.append(os.path.join(root, file))
+#         return python_files
 
-    def get_functions_from_file(self):
-        """지정된 Python 파일에서 정의된 모든 함수 이름을 반환"""
-        with open(self.repo_path, "r", encoding="utf-8") as file:
-            tree = ast.parse(file.read(), filename=self.repo_path)
+#     def get_functions_from_file(self):
+#         """지정된 Python 파일에서 정의된 모든 함수 이름을 반환"""
+#         with open(self.repo_path, "r", encoding="utf-8") as file:
+#             tree = ast.parse(file.read(), filename=self.repo_path)
 
-        functions = [node.name for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)]
-        return functions
+#         functions = [node.name for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)]
+#         return functions
 
-    def get_all_functions_from_directory(self): ## main 함수
-        """지정된 디렉토리 내의 모든 Python 파일에서 정의된 모든 함수 이름을 반환"""
-        python_files = self.get_python_files(self.repo_path)
-        all_functions = {}
+#     def get_all_functions_from_directory(self): ## main 함수
+#         """지정된 디렉토리 내의 모든 Python 파일에서 정의된 모든 함수 이름을 반환"""
+#         python_files = self.get_python_files(self.repo_path)
+#         all_functions = {}
 
-        for file_path in python_files:
-            functions = self.get_functions_from_file(self.repo_path)
-            all_functions[file_path] = functions
+#         for file_path in python_files:
+#             functions = self.get_functions_from_file(self.repo_path)
+#             all_functions[file_path] = functions
 
-        return all_functions
+#         return all_functions
 
     
-    def get_all_functions(self, repo_path): ### functions 불러오는 전체 함수
-        all_functions = self.get_all_functions_from_directory(self.repo_path)
+#     def get_all_functions(self, repo_path): ### functions 불러오는 전체 함수
+#         all_functions = self.get_all_functions_from_directory(self.repo_path)
 
-        for file_path, functions in all_functions.items():
-            print(f"File: {file_path}")
-            for func in functions:
-                print(f"  Function: {func}")
+#         for file_path, functions in all_functions.items():
+#             print(f"File: {file_path}")
+#             for func in functions:
+#                 print(f"  Function: {func}")
 
-        return all_functions
+#         return all_functions
 
 ## Code Generation & Analysis
 
@@ -238,30 +236,46 @@ class GitClone:
         vectors = vectorizer.toarray()
         return cosine_similarity(vectors)[0, 1]
     
-    def code_analysis(self, contents):
-        # Paper content presented to LLaMA3
-        contents = """To summarize, QLORA has one storage data type (usually 4-bit NormalFloat)and a computation data type (16-bit BrainFloat).
-        We dequantize the storage data type to the computation data type to perform the forward and backward pass,
-        but we only compute weight gradients for the LoRA parameters which use 16-bit BrainFloat."""
-
+    def code_analysis(self, title:str, contents:str, response:str = None):
+        """
+        input : title of paper,
+                contents in paper,
+                generated code by GPT (response)
+        output : explanation about how to implement based on contents
+        """
         # Generate code from paper content
-        generated_code = self.generate_code_from_content(contents)
+        self.Git_cloning(title) # self.repo_path 제공
 
-        # Extracted code from the repository
-        repo_code_files = self.extract_code_from_repo(self.repo_path)
+        if response==None:
+            agent_instruction = f"""
+            Based on the following content from a research paper, write the corresponding Python code that implements the described concept.\n\nPaper Content: \"{contents}\"
+            \n\n
+            And Use the \'code_matching\' tool again, Calculate the cosine similarity between the generated Python code and the actual functions, and identify the most similar code.
+            """
+            return agent_instruction
 
-        # Calculate cosine similarity for each file in the repository
-        similarity_scores = {}
-        for file_path, code in repo_code_files.items():
-            functions = self.split_code_into_functions(code)
-            for func_name, func_code in functions.items():
-                similarity = self.calculate_cosine_similarity(generated_code, func_code)
-                similarity_scores[(file_path, func_name)] = similarity
+        else:
+            generated_code = response # self.generate_code_from_content(contents) 대신 사용, GPT에서 만들어낸 코드로 진행
 
-        # Find the file and function with the highest similarity score
-        most_relevant_file, most_relevant_function = max(similarity_scores, key=similarity_scores.get)
-        highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
+            # Extracted code from the repository
+            repo_code_files = self.extract_code_from_repo(self.repo_path)
 
-        # Present the standardized answer
-        print(f"Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}.\n")
-        print(f"Here is the most relevant function code:\n\n{repo_code_files[most_relevant_file].split('def ' + most_relevant_function)[1].split('def ')[0]}")
+            # Calculate cosine similarity for each file in the repository
+            similarity_scores = {}
+            for file_path, code in repo_code_files.items():
+                functions = self.split_code_into_functions(code)
+                for func_name, func_code in functions.items():
+                    similarity = self.calculate_cosine_similarity(generated_code, func_code)
+                    similarity_scores[(file_path, func_name)] = similarity
+
+            # Find the file and function with the highest similarity score
+            most_relevant_file, most_relevant_function = max(similarity_scores, key=similarity_scores.get)
+            highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
+
+            # Present the standardized answer
+            print(f"Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}.\n")
+            instruction = f"""Explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. \n
+            contents: \"{contents}\" \n
+            most relevant code: \"{most_relevant_function}\" \n
+            """
+            return instruction
