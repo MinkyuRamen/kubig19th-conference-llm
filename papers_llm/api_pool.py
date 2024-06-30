@@ -374,6 +374,7 @@ def citation_recommend(query, num=20, threshold=0.6, recommend=5, api_key=api_ke
     return sorted(rec_lst, key=lambda x: datetime.strptime(x['publicationDate'], '%Y-%m-%d') if isinstance(x['publicationDate'], str) else x['publicationDate'])
 
 
+
 def query2recommend_paper(query, type='default'):
     '''
     type에 따라 target paper에 대한 citation 혹은 reference를 추천
@@ -435,9 +436,9 @@ def query_name_matching(query, pdf_files):
     query와 pdf_files를 받아 query와 가장 유사한 이름을 가진 pdf 파일의 이름을 반환
     '''
     figure_name = list(pdf_files.keys())
-    query = query.lower()
+    query = query
     pdf_names = list(pdf_files.keys())
-    pdf_names = [name.lower() for name in pdf_names]
+    pdf_names = [name for name in pdf_names]
     pdf_names.insert(0,query)
     
     encoded_input = tokenizer(pdf_names, padding=True, truncation=True, return_tensors='pt')
@@ -495,3 +496,6 @@ def query2figure_and_content(query:str, instruction:str, start_page:int = 1):
     display_figure(pdf_files, name)
 
     return content
+
+
+# print(query2figure_and_content('StableToolBench', 'sopr', start_page=1))

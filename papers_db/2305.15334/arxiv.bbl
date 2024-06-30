@@ -1,0 +1,291 @@
+\begin{thebibliography}{}
+
+\bibitem[Ahn et~al., 2022]{ahn2022can}
+Ahn, M., Brohan, A., Brown, N., Chebotar, Y., Cortes, O., David, B., Finn, C.,
+  Gopalakrishnan, K., Hausman, K., Herzog, A., et~al. (2022).
+\newblock Do as i can, not as i say: Grounding language in robotic affordances.
+\newblock {\em arXiv preprint arXiv:2204.01691}.
+
+\bibitem[Andor et~al., 2019]{andor2019giving}
+Andor, D., He, L., Lee, K., and Pitler, E. (2019).
+\newblock Giving bert a calculator: Finding operations and arguments with
+  reading comprehension.
+\newblock {\em arXiv preprint arXiv:1909.00109}.
+
+\bibitem[Anthropic, 2022]{Claude}
+Anthropic, h.-c. (2022).
+\newblock Claude.
+
+\bibitem[Bavishi et~al., 2019]{autopandas}
+Bavishi, R., Lemieux, C., Fox, R., Sen, K., and Stoica, I. (2019).
+\newblock Autopandas: neural-backed generators for program synthesis.
+\newblock {\em Proceedings of the ACM on Programming Languages},
+  3(OOPSLA):1--27.
+
+\bibitem[Brown et~al., 2020]{brown2020language}
+Brown, T., Mann, B., Ryder, N., Subbiah, M., Kaplan, J.~D., Dhariwal, P.,
+  Neelakantan, A., Shyam, P., Sastry, G., Askell, A., et~al. (2020).
+\newblock Language models are few-shot learners.
+\newblock {\em Advances in neural information processing systems},
+  33:1877--1901.
+
+\bibitem[Bubeck et~al., 2023]{bubeck2023sparks}
+Bubeck, S., Chandrasekaran, V., Eldan, R., Gehrke, J., Horvitz, E., Kamar, E.,
+  Lee, P., Lee, Y.~T., Li, Y., Lundberg, S., et~al. (2023).
+\newblock Sparks of artificial general intelligence: Early experiments with
+  gpt-4.
+\newblock {\em arXiv preprint arXiv:2303.12712}.
+
+\bibitem[Chen et~al., 2021]{chen2021evaluating}
+Chen, M., Tworek, J., Jun, H., Yuan, Q., Pinto, H. P. d.~O., Kaplan, J.,
+  Edwards, H., Burda, Y., Joseph, N., Brockman, G., et~al. (2021).
+\newblock Evaluating large language models trained on code.
+\newblock {\em arXiv preprint arXiv:2107.03374}.
+
+\bibitem[Chen et~al., 2023]{chen2023teaching}
+Chen, X., Lin, M., Sch{\"a}rli, N., and Zhou, D. (2023).
+\newblock Teaching large language models to self-debug.
+\newblock {\em arXiv preprint arXiv:2304.05128}.
+
+\bibitem[Chiang et~al., 2023]{vicuna}
+Chiang, W.-L., Li, Z., Lin, Z., Sheng, Y., Wu, Z., Zhang, H., Zheng, L.,
+  Zhuang, S., Zhuang, Y., Gonzalez, J.~E., Stoica, I., and Xing, E.~P. (2023).
+\newblock Vicuna: An open-source chatbot impressing gpt-4 with 90\%* chatgpt
+  quality.
+
+\bibitem[Chowdhery et~al., 2022]{chowdhery2022palm}
+Chowdhery, A., Narang, S., Devlin, J., Bosma, M., Mishra, G., Roberts, A.,
+  Barham, P., Chung, H.~W., Sutton, C., Gehrmann, S., et~al. (2022).
+\newblock Palm: Scaling language modeling with pathways.
+\newblock {\em arXiv preprint arXiv:2204.02311}.
+
+\bibitem[Chung et~al., 2022]{chung2022scaling}
+Chung, H.~W., Hou, L., Longpre, S., Zoph, B., Tay, Y., Fedus, W., Li, E., Wang,
+  X., Dehghani, M., Brahma, S., et~al. (2022).
+\newblock Scaling instruction-finetuned language models.
+\newblock {\em arXiv preprint arXiv:2210.11416}.
+
+\bibitem[Cobbe et~al., 2021]{cobbe2021training}
+Cobbe, K., Kosaraju, V., Bavarian, M., Chen, M., Jun, H., Kaiser, L., Plappert,
+  M., Tworek, J., Hilton, J., Nakano, R., et~al. (2021).
+\newblock Training verifiers to solve math word problems.
+\newblock {\em arXiv preprint arXiv:2110.14168}.
+
+\bibitem[Devlin et~al., 2017]{devlin2017robustfill}
+Devlin, J., Uesato, J., Bhupatiraju, S., Singh, R., Mohamed, A.-r., and Kohli,
+  P. (2017).
+\newblock Robustfill: Neural program learning under noisy i/o.
+\newblock In {\em International conference on machine learning}, pages
+  990--998. PMLR.
+
+\bibitem[Gao et~al., 2022]{gao2022pal}
+Gao, L., Madaan, A., Zhou, S., Alon, U., Liu, P., Yang, Y., Callan, J., and
+  Neubig, G. (2022).
+\newblock Pal: Program-aided language models.
+\newblock {\em arXiv preprint arXiv:2211.10435}.
+
+\bibitem[Iyer et~al., 2022]{iyer2022opt}
+Iyer, S., Lin, X.~V., Pasunuru, R., Mihaylov, T., Simig, D., Yu, P., Shuster,
+  K., Wang, T., Liu, Q., Koura, P.~S., et~al. (2022).
+\newblock Opt-iml: Scaling language model instruction meta learning through the
+  lens of generalization.
+\newblock {\em arXiv preprint arXiv:2212.12017}.
+
+\bibitem[Jain et~al., 2022]{jain2022jigsaw}
+Jain, N., Vaidyanath, S., Iyer, A., Natarajan, N., Parthasarathy, S., Rajamani,
+  S., and Sharma, R. (2022).
+\newblock Jigsaw: Large language models meet program synthesis.
+\newblock In {\em Proceedings of the 44th International Conference on Software
+  Engineering}, pages 1219--1231.
+
+\bibitem[Kim et~al., 2023]{kim2023language}
+Kim, G., Baldi, P., and McAleer, S. (2023).
+\newblock Language models can solve computer tasks.
+\newblock {\em arXiv preprint arXiv:2303.17491}.
+
+\bibitem[Kojima et~al., 2022]{kojima2022large}
+Kojima, T., Gu, S.~S., Reid, M., Matsuo, Y., and Iwasawa, Y. (2022).
+\newblock Large language models are zero-shot reasoners.
+\newblock {\em arXiv preprint arXiv:2205.11916}.
+
+\bibitem[Komeili et~al., 2021]{komeili2021internet}
+Komeili, M., Shuster, K., and Weston, J. (2021).
+\newblock Internet-augmented dialogue generation.
+\newblock {\em arXiv preprint arXiv:2107.07566}.
+
+\bibitem[Lachaux et~al., 2020]{lachaux2020unsupervised}
+Lachaux, M.-A., Roziere, B., Chanussot, L., and Lample, G. (2020).
+\newblock Unsupervised translation of programming languages.
+\newblock {\em arXiv preprint arXiv:2006.03511}.
+
+\bibitem[Lazaridou et~al., 2022]{lazaridou2022internet}
+Lazaridou, A., Gribovskaya, E., Stokowiec, W., and Grigorev, N. (2022).
+\newblock Internet-augmented language models through few-shot prompting for
+  open-domain question answering.
+\newblock {\em arXiv preprint arXiv:2203.05115}.
+
+\bibitem[Li et~al., 2023]{li2023starcoder}
+Li, R., Allal, L.~B., Zi, Y., Muennighoff, N., Kocetkov, D., Mou, C., Marone,
+  M., Akiki, C., Li, J., Chim, J., et~al. (2023).
+\newblock Starcoder: may the source be with you!
+\newblock {\em arXiv preprint arXiv:2305.06161}.
+
+\bibitem[Li et~al., 2022]{li2022competition}
+Li, Y., Choi, D., Chung, J., Kushman, N., Schrittwieser, J., Leblond, R.,
+  Eccles, T., Keeling, J., Gimeno, F., Dal~Lago, A., et~al. (2022).
+\newblock Competition-level code generation with alphacode.
+\newblock {\em Science}, 378(6624):1092--1097.
+
+\bibitem[Liang et~al., 2023]{liang2023taskmatrix}
+Liang, Y., Wu, C., Song, T., Wu, W., Xia, Y., Liu, Y., Ou, Y., Lu, S., Ji, L.,
+  Mao, S., et~al. (2023).
+\newblock Taskmatrix. ai: Completing tasks by connecting foundation models with
+  millions of apis.
+\newblock {\em arXiv preprint arXiv:2303.16434}.
+
+\bibitem[Menon et~al., 2013]{flashfill}
+Menon, A., Tamuz, O., Gulwani, S., Lampson, B., and Kalai, A. (2013).
+\newblock A machine learning framework for programming by example.
+\newblock In {\em International Conference on Machine Learning}, pages
+  187--195. PMLR.
+
+\bibitem[Nakano et~al., 2021]{nakano2021webgpt}
+Nakano, R., Hilton, J., Balaji, S., Wu, J., Ouyang, L., Kim, C., Hesse, C.,
+  Jain, S., Kosaraju, V., Saunders, W., et~al. (2021).
+\newblock Webgpt: Browser-assisted question-answering with human feedback.
+\newblock {\em arXiv preprint arXiv:2112.09332}.
+
+\bibitem[Nijkamp et~al., 2023]{nijkamp2023codegen2}
+Nijkamp, E., Hayashi, H., Xiong, C., Savarese, S., and Zhou, Y. (2023).
+\newblock Codegen2: Lessons for training llms on programming and natural
+  languages.
+\newblock {\em arXiv preprint arXiv:2305.02309}.
+
+\bibitem[Nijkamp et~al., 2022]{nijkamp2022codegen}
+Nijkamp, E., Pang, B., Hayashi, H., Tu, L., Wang, H., Zhou, Y., Savarese, S.,
+  and Xiong, C. (2022).
+\newblock Codegen: An open large language model for code with multi-turn
+  program synthesis.
+\newblock {\em arXiv preprint arXiv:2203.13474}.
+
+\bibitem[OpenAI, 2023]{openai2023gpt4}
+OpenAI (2023).
+\newblock Gpt-4 technical report.
+
+\bibitem[OpenAI and https://openai.com/blog/chatgpt, 2022]{ChatGPT}
+OpenAI and https://openai.com/blog/chatgpt (2022).
+\newblock Chatgpt.
+
+\bibitem[Sanh et~al., 2021]{sanh2021multitask}
+Sanh, V., Webson, A., Raffel, C., Bach, S.~H., Sutawika, L., Alyafeai, Z.,
+  Chaffin, A., Stiegler, A., Scao, T.~L., Raja, A., et~al. (2021).
+\newblock Multitask prompted training enables zero-shot task generalization.
+\newblock {\em arXiv preprint arXiv:2110.08207}.
+
+\bibitem[Scao et~al., 2022]{scao2022bloom}
+Scao, T.~L., Fan, A., Akiki, C., Pavlick, E., Ili{\'c}, S., Hesslow, D.,
+  Castagn{\'e}, R., Luccioni, A.~S., Yvon, F., Gall{\'e}, M., et~al. (2022).
+\newblock Bloom: A 176b-parameter open-access multilingual language model.
+\newblock {\em arXiv preprint arXiv:2211.05100}.
+
+\bibitem[Schick et~al., 2023]{schick2023toolformer}
+Schick, T., Dwivedi-Yu, J., Dess{\`\i}, R., Raileanu, R., Lomeli, M.,
+  Zettlemoyer, L., Cancedda, N., and Scialom, T. (2023).
+\newblock Toolformer: Language models can teach themselves to use tools.
+\newblock {\em arXiv preprint arXiv:2302.04761}.
+
+\bibitem[Schick and Sch{\"u}tze, 2020]{schick2020exploiting}
+Schick, T. and Sch{\"u}tze, H. (2020).
+\newblock Exploiting cloze questions for few shot text classification and
+  natural language inference.
+\newblock {\em arXiv preprint arXiv:2001.07676}.
+
+\bibitem[Shen et~al., 2023]{shen2023hugginggpt}
+Shen, Y., Song, K., Tan, X., Li, D., Lu, W., and Zhuang, Y. (2023).
+\newblock Hugginggpt: Solving ai tasks with chatgpt and its friends in
+  huggingface.
+\newblock {\em arXiv preprint arXiv:2303.17580}.
+
+\bibitem[Shinn et~al., 2023]{shinn2023reflexion}
+Shinn, N., Labash, B., and Gopinath, A. (2023).
+\newblock Reflexion: an autonomous agent with dynamic memory and
+  self-reflection.
+\newblock {\em arXiv preprint arXiv:2303.11366}.
+
+\bibitem[Shuster et~al., 2022]{shuster2022blenderbot}
+Shuster, K., Xu, J., Komeili, M., Ju, D., Smith, E.~M., Roller, S., Ung, M.,
+  Chen, M., Arora, K., Lane, J., et~al. (2022).
+\newblock Blenderbot 3: a deployed conversational agent that continually learns
+  to responsibly engage.
+\newblock {\em arXiv preprint arXiv:2208.03188}.
+
+\bibitem[Taori et~al., 2023]{alpaca}
+Taori, R., Gulrajani, I., Zhang, T., Dubois, Y., Li, X., Guestrin, C., Liang,
+  P., and Hashimoto, T.~B. (2023).
+\newblock Stanford alpaca: An instruction-following llama model.
+\newblock \url{https://github.com/tatsu-lab/stanford_alpaca}.
+
+\bibitem[Thoppilan et~al., 2022]{thoppilan2022lamda}
+Thoppilan, R., De~Freitas, D., Hall, J., Shazeer, N., Kulshreshtha, A., Cheng,
+  H.-T., Jin, A., Bos, T., Baker, L., Du, Y., et~al. (2022).
+\newblock Lamda: Language models for dialog applications.
+\newblock {\em arXiv preprint arXiv:2201.08239}.
+
+\bibitem[Touvron et~al., 2023]{touvron2023llama}
+Touvron, H., Lavril, T., Izacard, G., Martinet, X., Lachaux, M.-A., Lacroix,
+  T., Rozi{\`e}re, B., Goyal, N., Hambro, E., Azhar, F., et~al. (2023).
+\newblock Llama: Open and efficient foundation language models.
+\newblock {\em arXiv preprint arXiv:2302.13971}.
+
+\bibitem[Vemprala et~al., 2023]{vemprala2023chatgpt}
+Vemprala, S., Bonatti, R., Bucker, A., and Kapoor, A. (2023).
+\newblock Chatgpt for robotics: Design principles and model abilities.
+\newblock {\em 2023}.
+
+\bibitem[Wang et~al., 2022a]{wang2022self}
+Wang, Y., Kordi, Y., Mishra, S., Liu, A., Smith, N.~A., Khashabi, D., and
+  Hajishirzi, H. (2022a).
+\newblock Self-instruct: Aligning language model with self generated
+  instructions.
+\newblock {\em arXiv preprint arXiv:2212.10560}.
+
+\bibitem[Wang et~al., 2022b]{wang2022super}
+Wang, Y., Mishra, S., Alipoormolabashi, P., Kordi, Y., Mirzaei, A., Naik, A.,
+  Ashok, A., Dhanasekaran, A.~S., Arunkumar, A., Stap, D., et~al. (2022b).
+\newblock Super-naturalinstructions: Generalization via declarative
+  instructions on 1600+ nlp tasks.
+\newblock In {\em Proceedings of the 2022 Conference on Empirical Methods in
+  Natural Language Processing}, pages 5085--5109.
+
+\bibitem[Wei et~al., 2022]{wei2022chain}
+Wei, J., Wang, X., Schuurmans, D., Bosma, M., Chi, E., Le, Q., and Zhou, D.
+  (2022).
+\newblock Chain of thought prompting elicits reasoning in large language
+  models.
+\newblock {\em arXiv preprint arXiv:2201.11903}.
+
+\bibitem[Xu et~al., 2022]{xu2022systematic}
+Xu, F.~F., Alon, U., Neubig, G., and Hellendoorn, V.~J. (2022).
+\newblock A systematic evaluation of large language models of code.
+\newblock In {\em Proceedings of the 6th ACM SIGPLAN International Symposium on
+  Machine Programming}, pages 1--10.
+
+\bibitem[Yao et~al., 2022]{yao2022react}
+Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., and Cao, Y.
+  (2022).
+\newblock React: Synergizing reasoning and acting in language models.
+\newblock {\em arXiv preprint arXiv:2210.03629}.
+
+\bibitem[Zeng et~al., 2022]{zeng2022glm}
+Zeng, A., Liu, X., Du, Z., Wang, Z., Lai, H., Ding, M., Yang, Z., Xu, Y.,
+  Zheng, W., Xia, X., et~al. (2022).
+\newblock Glm-130b: An open bilingual pre-trained model.
+\newblock {\em arXiv preprint arXiv:2210.02414}.
+
+\bibitem[Zhang et~al., 2022]{zhang2022opt}
+Zhang, S., Roller, S., Goyal, N., Artetxe, M., Chen, M., Chen, S., Dewan, C.,
+  Diab, M., Li, X., Lin, X.~V., et~al. (2022).
+\newblock Opt: Open pre-trained transformer language models.
+\newblock {\em arXiv preprint arXiv:2205.01068}.
+
+\end{thebibliography}

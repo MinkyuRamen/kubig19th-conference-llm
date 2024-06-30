@@ -431,9 +431,11 @@ def find_pdf_files(root_folder):
     pdf_files = {}
     for dirpath, dirnames, filenames in os.walk(root_folder):
         for filename in filenames:
-            if filename.lower().endswith('.pdf'):
+            # if filename.lower().endswith('.pdf'):
+            if filename.endswith('.pdf'):
                 name = filename.replace('.pdf', '').split('/')[-1]
                 pdf_files[name] = os.path.join(dirpath, filename)
+    print(pdf_files)
     return pdf_files
 
 def query_name_matching(query, pdf_files):
@@ -442,9 +444,10 @@ def query_name_matching(query, pdf_files):
     query와 pdf_files를 받아 query와 가장 유사한 이름을 가진 pdf 파일의 이름을 반환
     '''
     figure_name = list(pdf_files.keys())
-    query = query.lower()
+    query = query
     pdf_names = list(pdf_files.keys())
-    pdf_names = [name.lower() for name in pdf_names]
+    pdf_names = [name for name in pdf_names]
+    # pdf_names = [name for name in pdf_names]
     pdf_names.insert(0,query)
     
     encoded_input = tokenizer(pdf_names, padding=True, truncation=True, return_tensors='pt')
@@ -455,6 +458,7 @@ def query_name_matching(query, pdf_files):
     rec = cosine_similarity(sentence_embeddings)
     rec = rec[0][1:]
     max_index = rec.argmax()
+    print("ANSS",pdf_names[max_index + 1])
 
     return pdf_names[max_index + 1]
 
@@ -502,3 +506,5 @@ def query2figure_and_content(query:str, instruction:str, start_page:int = 1):
     display_figure(pdf_files, name)
 
     return content
+
+print(query2figure_and_content('StableToolBench', 'sopr', start_page=1))
