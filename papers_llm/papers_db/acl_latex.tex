@@ -1,0 +1,196 @@
+% This must be in the first 5 lines to tell arXiv to use pdfLaTeX, which is strongly recommended.
+\pdfoutput=1
+% In particular, the hyperref package requires pdfLaTeX in order to break URLs across lines.
+
+\documentclass[11pt]{article}
+
+% Change "review" to "final" to generate the final (sometimes called camera-ready) version.
+% Change to "preprint" to generate a non-anonymous version with page numbers.
+\usepackage[preprint]{acl}
+
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily,
+  breaklines=true
+}
+
+
+% For proper rendering and hyphenation of words containing Latin characters (including in bib files)
+\usepackage[T1]{fontenc}
+% For Vietnamese characters
+% \usepackage[T5]{fontenc}
+% See https://www.latex-project.org/help/documentation/encguide.pdf for other character sets
+
+% This assumes your files are encoded as UTF8
+\usepackage[utf8]{inputenc}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\usepackage{booktabs}
+\usepackage{cleveref}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{tablefootnote}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{makecell}
+\usepackage{color,colortbl}
+\usepackage{enumitem}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\usepackage{hyperref}
+
+\newcommand{\csj}[1]{\textcolor{blue}{[Sijie: #1]}}
+
+% This is not strictly necessary, and may be commented out,
+% but it will improve the layout of the manuscript,
+% and will typically save some space.
+\usepackage{microtype}
+
+% This is also not strictly necessary, and may be commented out.
+% However, it will improve the aesthetics of text in
+% the typewriter font.
+\usepackage{inconsolata}
+
+% If the title and author information does not fit in the area allocated, uncomment the following
+%
+% \setlength\titlebox{6cm}
+%
+% and set <dim> to something 5cm or larger.
+
+\title{StableToolBench: Towards Stable Large-Scale Benchmarking on \\
+Tool Learning of Large Language Models}
+
+% Author information can be set in various styles:
+% For several authors from the same institution:
+\author{
+Zhicheng Guo$\textsuperscript{\rm $1,2$}$,
+Sijie Cheng$\textsuperscript{\rm $1,2,3$}$, 
+Hao Wang$\textsuperscript{\rm $4$}$, Shihao Liang$\textsuperscript{\rm $5$}$, Yujia Qin$\textsuperscript{\rm $1$}$, \\
+\textbf{Peng Li}$\textsuperscript{\rm $2$}$,
+\textbf{Zhiyuan Liu}$\textsuperscript{\rm $1$}$,
+\textbf{Maosong Sun}$\textsuperscript{\rm $1$}$,
+\textbf{Yang Liu}$^{1,2,6}$
+\\
+ $\textsuperscript{\rm $1$}$Dept. of Comp. Sci. \& Tech., Institute for AI, Tsinghua University, Beijing, China\\
+ $\textsuperscript{\rm $2$}$Institute for AI Industry Research (AIR), Tsinghua University, Beijing, China \\
+ % $\textsuperscript{\rm $3$}$Beijing National Research Center for Information Science and Technology \\
+ $\textsuperscript{\rm $3$}$01.AI  $\textsuperscript{\rm $4$}$Google
+ $\textsuperscript{\rm $5$}$The University of Hong Kong \\
+  % $\textsuperscript{\rm $6$}$Shanghai Artificial Intelligence Laboratory, Shanghai, China \\
+  $\textsuperscript{\rm $6$}$Jiangsu Collaborative Innovation Center for Language Competence, Jiangsu, China \\
+ \{\texttt{guo-zc21}, \texttt{csj23}\}\texttt{@mails.tsinghua.edu.cn}
+}
+
+
+% if the names do not fit well on one line use
+%         Author 1 \\ {\bf Author 2} \\ ... \\ {\bf Author n} \\
+% For authors from different institutions:
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \And  ... \And
+%         Author n \\ Address line \\ ... \\ Address line}
+% To start a separate ``row'' of authors use \AND, as in
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \AND
+%         Author 2 \\ Address line \\ ... \\ Address line \And
+%         Author 3 \\ Address line \\ ... \\ Address line}
+
+% \author{First Author \\
+%   Affiliation / Address line 1 \\
+%   Affiliation / Address line 2 \\
+%   Affiliation / Address line 3 \\
+%   \texttt{email@domain} \\\And
+%   Second Author \\
+%   Affiliation / Address line 1 \\
+%   Affiliation / Address line 2 \\
+%   Affiliation / Address line 3 \\
+%   \texttt{email@domain} \\}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+% This document is a supplement to the general instructions for *ACL authors. It contains instructions for using the \LaTeX{} style files for ACL conferences. 
+% The document itself conforms to its own specifications, and is therefore an example of what your manuscript should look like.
+% These instructions should be used both for papers submitted for review and for final versions of accepted papers.
+% This document is a supplement to the general instructions for *ACL authors. It contains instructions for using the \LaTeX{} style files for ACL conferences. 
+% The document itself conforms to its own specifications, and is therefore an example of what your manuscript should look like.
+% These instructions should be used both for papers submitted for review and for final versions of accepted papers.
+% This document is a supplement to the general instructions for *ACL authors. It contains instructions for using the \LaTeX{} style files for ACL conferences.
+Large Language Models (LLMs) have witnessed remarkable advancements in recent years, prompting the exploration of tool learning, which integrates LLMs with external tools to address diverse real-world challenges. Assessing the capability of LLMs to utilise tools necessitates large-scale and stable benchmarks. However, previous works relied on either hand-crafted online tools with limited scale, or large-scale real online APIs suffering from instability of API status. To address this problem, we introduce StableToolBench, a benchmark evolving from ToolBench, proposing a virtual API server and stable evaluation system. The virtual API server contains a caching system and API simulators which are complementary to alleviate the change in API status. Meanwhile, the stable evaluation system designs solvable pass and win rates using GPT-4 as the automatic evaluator to eliminate the randomness during evaluation. Experimental results demonstrate the stability of StableToolBench, and further discuss the effectiveness of API simulators, the caching system, and the evaluator system. 
+\end{abstract}
+
+
+\section{Introduction}
+\input{sections/1_intro}
+
+\section{Stability Analysis on ToolBench}
+\input{sections/2_pre_analysis}
+
+\section{StableToolBench}
+\input{sections/3_stabletools}
+
+% \section{Methods}
+% \input{sections/3_methods}
+
+% \section{Experiments}
+% \input{sections/4_results}
+
+% \section{Experiments}
+% \input{sections/4_exps}
+
+% \section{Analysis}
+% \input{sections/5_ablation}
+
+\section{Related Work}
+\input{sections/6_related_work}
+
+
+% \section{Discussion}
+% The phenomenon may occur beyound tool learning
+% The experiments can be put afterwards, Stability first
+
+\section{Conclusion}
+% In this paper, to improve the stability of ToolBench, we propose a new stable benchmark named StableToolBench. Starting by the analysis of ToolBench, we find that the original ToolBench suffers from instability of evaluation processes and API status, which leads to fluctuation of evaluated model performance. To tackle the problem, we firstly determined all solvable problems in advance. We then replace the real API server with a virtual API server, supported by GPT-4 simulation of API behaviours when real APIs are not available. Finally, we build a caching system to store the server responses to use for increased stability. Extensive experiments show that StableToolBench can provide much more stable model performance. The simulated APIs demonstrate considerable reality and diversity while the caching system plays an important role in increasing stability.
+
+In this paper, we propose StableToolBench, a benchmark developed to enhance the stability of ToolBench. Our analysis identified instability issues in the evaluation processes of ToolBench and API status, causing variability in model performance assessments. To address this, we implement a caching system for consistent data availability. We also replace the real API server with an LLM-simulated virtual server for reliable API behaviour simulation. Experiments show that StableToolBench significantly improves the stability of model performance evaluations, with the simulated APIs offering realism and the caching system contributing greatly to the enhanced stability of the benchmark.
+
+% \clearpage
+\section*{Acknowledgement}
+This work is supported by the National Natural Science Foundation of China (No. 62276152, 61925601).
+We also extend our gratitude to Jingwen Wu and Yao Li for their assistance with human evaluation and additional suggestions.
+ 
+\section*{Limitations}
+In this work, we propose StableToolBench, a new tool learning benchmark with increased stability but non-declining reality. However, our work faces the following limitations. Firstly, we used GPT-4 as the automatic evaluator in the evaluation process and as the backbone server, which increase the cost of using our benchmark. 
+% Secondly, despite careful designs, including fixed version number and other parameters, GPT-4 as an backbone server still suffers from subtle instability when OpenAI updates its model. Though the impact of such instability is limited, we aim to further improve it by training an open-source model in the future. 
+Secondly, the GPT-4 backboned server demonstrate strong performance in simulating API behaviours. Nevertheless, the backbone LLM may experience significant upgrades, which may affect the performance.
+Therefore, we believe that the ultimate solution is to solve the problem with a trained open-source LLM. However, current open-source LLMs are not performant enough to simulate API behaviours well. As a result, closed-source LLMs are the only options. 
+We believe that when open-source LLMs are strong enough to be well suited for this task, 
+In the future, we may turn to open-source LLMs when they are strong enough to be well suited for this task.
+Thirdly, although the cache hit rates are high with our explored methods, new methods will be developed in the future. Whether this cache will still be effective is unsure. In this regard, we aim to continuously update the cache in the future in a slow pace for both balanced stability and effectiveness. 
+
+
+% Nevertheless, the backbone LLM may experience significant upgrades, which may affect the performance.
+% Therefore, we believe that the ultimate solution is to solve the problem with a trained open-source LLM. However, current open-source LLMs are not performant enough to simulate API behaviours well. As a result, closed-source LLMs are the only options. 
+% % We believe that when open-source LLMs are strong enough to be well suited for this task, 
+% In the future, we may turn to open-source LLMs when they are strong enough to be well suited for this task.
+
+\bibliography{custom}
+
+\clearpage
+\appendix
+\input{sections/appendix}
+% \section{Example Appendix}
+% \label{sec:appendix}
+
+% This is an appendix.
+
+
+\end{document}
