@@ -1,4 +1,5 @@
 from httpx import NetworkError
+import time
 import requests
 from bs4 import BeautifulSoup
 from requests.exceptions import RequestException
@@ -115,12 +116,14 @@ class CodeAnalysis:
         if not os.path.exists(clone_dir):
             os.makedirs(clone_dir)
 
-        # GitHub 리포지토리 클론
-        result = subprocess.run(['git', 'clone', github_url, clone_dir], capture_output=True, text=True)
-        if result.returncode != 0:
-            raise Exception(f"Failed to clone repository: {result.stderr}")
-        self.repo_path = clone_dir
-        print(f"Repository cloned into {clone_dir}")
+            # GitHub 리포지토리 클론
+            result = subprocess.run(['git', 'clone', github_url, clone_dir], capture_output=True, text=True)
+            if result.returncode != 0:
+                raise Exception(f"Failed to clone repository: {result.stderr}")
+            self.repo_path = clone_dir
+            print(f"Repository cloned into {clone_dir}")
+        else : 
+            print(f"Repository already clonded into {clone_dir}")
 
     def Git_cloning(self, title:str, github_link:str = None): ## git clone하는 과정들의 main 함수
         try:
@@ -146,6 +149,7 @@ class CodeAnalysis:
                         if len(github_links) > 1 :
                             for github_link in github_links :
                                 self.clone_github_repository(github_link)
+                            
                         elif len(github_links) == 1 :
                             self.clone_github_repository(github_links[0])
 
@@ -241,12 +245,12 @@ class CodeAnalysis:
         vectors = vectorizer.toarray()
         return cosine_similarity(vectors)[0, 1]
     
-    def answer_quality_score(question: str, answer: str) -> float:
+    def answer_quality_score(self, code1: str, code2: str) -> float:
         """질문과 답변 코드의 유사도를 기반으로 품질 점수를 계산하는 함수"""
         model = SentenceTransformer('all-MiniLM-L6-v2')
         # 질문과 답변을 임베딩
-        question_embedding = model.encode(question, convert_to_tensor=True)
-        answer_embedding = model.encode(answer, convert_to_tensor=True)
+        question_embedding = model.encode(code1, convert_to_tensor=True)
+        answer_embedding = model.encode(code2, convert_to_tensor=True)
 
         # 코사인 유사도 계산
         cos_sim = util.cos_sim(question_embedding, answer_embedding)
@@ -266,11 +270,14 @@ class CodeAnalysis:
         # Generate code from paper content
         self.Git_cloning(title, github_link) # self.repo_path 제공
 
+        os.environ['OPEN_API_KEY'] = self.openai_key
         llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+
         first_question = f"""
             Based on the following content from a research paper, write the corresponding Python code that implements the described concept.\n\n
             Paper Content: \"{contents}\" \n\n
             """
+        time.sleep(3)
         generated_code = llm.predict(first_question)
 
         # Extracted code from the repository
@@ -281,7 +288,7 @@ class CodeAnalysis:
         for file_path, code in repo_code_files.items():
             functions = self.split_code_into_functions(code)
             for func_name, func_code in functions.items():
-                similarity = self.calculate_cosine_similarity(generated_code, func_code)
+                similarity = self.answer_quality_score(generated_code, func_code)
                 similarity_scores[(file_path, func_name)] = similarity
 
         # Find the file and function with the highest similarity score
