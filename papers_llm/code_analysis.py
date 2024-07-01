@@ -125,16 +125,11 @@ class CodeAnalysis:
                 raise Exception(f"Failed to clone repository: {result.stderr}")
             self.repo_path = clone_dir
             print(f"Repository cloned into {clone_dir}")
-<<<<<<< HEAD
             return self.repo_path
         else : 
             self.repo_path = clone_dir
             print(f"Repository already clonded into {clone_dir}")
             return self.repo_path
-=======
-        else : 
-            print(f"Repository already clonded into {clone_dir}")
->>>>>>> 904b154d61f6f91b50a8611a23194eb64cf586a3
 
     def Git_cloning(self, title:str, github_link:str = None): ## git clone하는 과정들의 main 함수
         try:
@@ -158,15 +153,7 @@ class CodeAnalysis:
                         print(f"GitHub Links: {github_links}")
 
                         if len(github_links) > 1 :
-<<<<<<< HEAD
                             self.repo_path = self.clone_github_repository(github_links[0])
-=======
-                            for github_link in github_links :
-                                self.clone_github_repository(github_link)
-                            
-                        elif len(github_links) == 1 :
-                            self.clone_github_repository(github_links[0])
->>>>>>> 904b154d61f6f91b50a8611a23194eb64cf586a3
 
                         elif len(github_links) == 1 :
                             self.repo_path = self.clone_github_repository(github_links[0])
@@ -263,11 +250,7 @@ class CodeAnalysis:
         vectors = vectorizer.toarray()
         return cosine_similarity(vectors)[0, 1]
     
-<<<<<<< HEAD
     def answer_quality_score(self, code1, code2) :
-=======
-    def answer_quality_score(self, code1: str, code2: str) -> float:
->>>>>>> 904b154d61f6f91b50a8611a23194eb64cf586a3
         """질문과 답변 코드의 유사도를 기반으로 품질 점수를 계산하는 함수"""
         model = SentenceTransformer('all-MiniLM-L6-v2')
         # 질문과 답변을 임베딩
@@ -293,7 +276,6 @@ class CodeAnalysis:
         self.Git_cloning(title, github_link) # self.repo_path 제공
 
         llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
-<<<<<<< HEAD
 
         first_question = f"""Based on the following content from a research paper, write the corresponding Python code that implements the described concept. Provide only the Python code without any additional text or explanation.\n\n
                         Paper Content: \"{contents}\" \n\n
@@ -329,35 +311,4 @@ class CodeAnalysis:
         most relevant code: \"{most_relevant_function}\" \n
         """
 
-=======
-
-        first_question = f"""
-            Based on the following content from a research paper, write the corresponding Python code that implements the described concept.\n\n
-            Paper Content: \"{contents}\" \n\n
-            """
-        time.sleep(3)
-        generated_code = llm.predict(first_question)
-
-        # Extracted code from the repository
-        repo_code_files = self.extract_code_from_repo(self.repo_path)
-
-        # Calculate cosine similarity for each file in the repository
-        similarity_scores = {}
-        for file_path, code in repo_code_files.items():
-            functions = self.split_code_into_functions(code)
-            for func_name, func_code in functions.items():
-                similarity = self.answer_quality_score(generated_code, func_code)
-                similarity_scores[(file_path, func_name)] = similarity
-
-        # Find the file and function with the highest similarity score
-        most_relevant_file, most_relevant_function = max(similarity_scores, key=similarity_scores.get)
-        highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
-
-        # Present the standardized answer
-        print(f"Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}.\n")
-        instruction = f"""Explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. \n
-        contents: \"{contents}\" \n
-        most relevant code: \"{most_relevant_function}\" \n
-        """
->>>>>>> 904b154d61f6f91b50a8611a23194eb64cf586a3
         return instruction
