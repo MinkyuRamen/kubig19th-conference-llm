@@ -45,7 +45,6 @@ class CodeAnalysis:
         headers = {
             "x-api-key": api_key
         }
-        time.sleep(3)
         response = requests.get(search_url, params=params, headers=headers)
 
         if response.status_code == 403:
@@ -67,7 +66,6 @@ class CodeAnalysis:
 
     def get_arxiv_pdf_url(self, paper_id, api_key):
         url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}?fields=externalIds"
-        time.sleep(3)
         response = requests.get(url, headers={"x-api-key": api_key})
 
         if response.status_code == 403:
@@ -132,10 +130,12 @@ class CodeAnalysis:
             return self.repo_path
 
     def Git_cloning(self, title:str, github_link:str = None): ## git clone하는 과정들의 main 함수
+        # title에서 paper id + paper id에서 url + url에서 pdf 다운 받는 과정 ==> Requests 많이 사용됨 ==> API requests failed 오류 발생
+        # loadpaper tool을 이용해서 앞선 과정들을 해결할 수 없을까?
         try:
             paper_id = self.get_paper_id_from_title(title, self.ss_api_key)
             if github_link :
-                self.clone_github_repository(github_link)
+                self.clone_github_repository(github_link) # Github Link가 제시 되면 바로 git clone
             else:
                 if not paper_id:
                     print("Paper ID not found.")
@@ -273,8 +273,9 @@ class CodeAnalysis:
         output : explanation about how to implement based on contents
         """
         # Generate code from paper content
-        self.Git_cloning(title, github_link) # self.repo_path 제공
+        self.Git_cloning(title, github_link) # Git clone하는 과정
 
+        os.environ["OPENAI_API_KEY"] = self.openai_key
         llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
         first_question = f"""Based on the following content from a research paper, write the corresponding Python code that implements the described concept. Provide only the Python code without any additional text or explanation.\n\n
@@ -293,18 +294,18 @@ class CodeAnalysis:
         for file_path, code in repo_code_files.items():
             functions = self.split_code_into_functions(code)
             for func_name, func_code in functions.items():
-                # similarity = self.calculate_cosine_similarity(generated_code, func_code)
-                similarity = self.answer_quality_score(generated_code, func_code)
+                # similarity = self.calculate_cosine_similarity(generated_code, func_code) # Vectorizer를 이용한 단순한 유사도 측정
+                similarity = self.answer_quality_score(generated_code, func_code) # Sentence transformer를 이용한 유사도 측정
                 similarity_scores[(file_path, func_name)] = similarity
 
-        # Find the file and function with the highest similarity score
         # max_score = max(similarity_scores.values())
         # most_relevant_file, most_relevant_function = [(file_path, func_name) for (file_path, func_name), score in similarity_scores.items() if score == max_score][0]
         # highest_similarity_score = max_score
+
         most_relevant_file, most_relevant_function = max(similarity_scores, key=similarity_scores.get)
         highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
 
-        # Present the standardized answer
+        # 관련 있는 함수가 존재하는 py 파일의 경로 + 함수 + 유사도 제시, 이후 부가적인 설명을 요청하는 prompt
         instruction = f""" First, provide the following information exactly as given: "Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}." \n\n
         Then, explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. \n
         contents: \"{contents}\" \n
