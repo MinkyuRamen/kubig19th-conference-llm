@@ -356,11 +356,12 @@ class GetPaper_v2:
                     name = self.query_name_matching(content, pdf_files)
                     self.display_figure(pdf_files, name)
                     print('Figure displayed')
+                    figure_path = pdf_files[name]
                 # else:
                     # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
                     # return instruction_for_agent2
                 
-                return content
+                return content, figure_path
             
         else: # case for ar5iv is not exist or request error
             download_path = self.download_pdf(arxiv_id)
@@ -369,12 +370,9 @@ class GetPaper_v2:
                 self.download_arxiv_source(arxiv_id)
                 pdf_files = self.find_pdf_files(self.path_db)
                 name = self.query_name_matching(pdf_content, pdf_files)
-                self.display_figure(pdf_files, name)    
+                self.display_figure(pdf_files, name) 
+                figure_path = pdf_files[name]   
             # else:
                 # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
                 # return instruction_for_agent2
-            return pdf_content
-        
-
-        
-
+            return pdf_content, figure_path
