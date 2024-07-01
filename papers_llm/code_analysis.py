@@ -270,7 +270,6 @@ class CodeAnalysis:
         # Generate code from paper content
         self.Git_cloning(title, github_link) # self.repo_path 제공
 
-        os.environ['OPEN_API_KEY'] = self.openai_key
         llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
         first_question = f"""
