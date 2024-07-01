@@ -1,4 +1,5 @@
 from httpx import NetworkError
+import time
 import requests
 from bs4 import BeautifulSoup
 from requests.exceptions import RequestException
@@ -12,7 +13,8 @@ import subprocess
 from urllib.parse import urlparse
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
+from langchain_openai import ChatOpenAI
+from sentence_transformers import SentenceTransformer, util
 
 class NetworkError(Exception):
     """Custom exception for network errors."""
@@ -25,8 +27,9 @@ class CodeAnalysis:
     
     """
 
-    def __init__(self, ss_api_key, path_db='./papers_db', code_db='./code_db'):
+    def __init__(self, ss_api_key, openai_key, path_db='./papers_db', code_db='./code_db'):
         self.ss_api_key = ss_api_key
+        self.openai_key = openai_key
         self.path_db= path_db
         self.code_db = code_db
 
@@ -42,12 +45,14 @@ class CodeAnalysis:
         headers = {
             "x-api-key": api_key
         }
+        time.sleep(3)
         response = requests.get(search_url, params=params, headers=headers)
 
         if response.status_code == 403:
             raise Exception("API request failed with status code 403: Forbidden. Please check your API key and permissions.")
         elif response.status_code != 200:
             raise Exception(f"API request failed with status code {response.status_code}")
+        
 
         data = response.json()
 
@@ -62,7 +67,7 @@ class CodeAnalysis:
 
     def get_arxiv_pdf_url(self, paper_id, api_key):
         url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}?fields=externalIds"
-
+        time.sleep(3)
         response = requests.get(url, headers={"x-api-key": api_key})
 
         if response.status_code == 403:
@@ -83,6 +88,7 @@ class CodeAnalysis:
         return pdf_url
 
     def download_pdf(self, pdf_url):
+        time.sleep(3)
         response = requests.get(pdf_url)
         if response.status_code != 200:
             raise Exception(f"Failed to download PDF with status code {response.status_code}")
@@ -113,37 +119,45 @@ class CodeAnalysis:
         if not os.path.exists(clone_dir):
             os.makedirs(clone_dir)
 
-        # GitHub 리포지토리 클론
-        result = subprocess.run(['git', 'clone', github_url, clone_dir], capture_output=True, text=True)
-        if result.returncode != 0:
-            raise Exception(f"Failed to clone repository: {result.stderr}")
-        self.repo_path = clone_dir
-        print(f"Repository cloned into {clone_dir}")
+            # GitHub 리포지토리 클론
+            result = subprocess.run(['git', 'clone', github_url, clone_dir], capture_output=True, text=True)
+            if result.returncode != 0:
+                raise Exception(f"Failed to clone repository: {result.stderr}")
+            self.repo_path = clone_dir
+            print(f"Repository cloned into {clone_dir}")
+            return self.repo_path
+        else : 
+            self.repo_path = clone_dir
+            print(f"Repository already clonded into {clone_dir}")
+            return self.repo_path
 
-    def Git_cloning(self, title:str): ## git clone하는 과정들의 main 함수
+    def Git_cloning(self, title:str, github_link:str = None): ## git clone하는 과정들의 main 함수
         try:
             paper_id = self.get_paper_id_from_title(title, self.ss_api_key)
-            if not paper_id:
-                print("Paper ID not found.")
+            if github_link :
+                self.clone_github_repository(github_link)
             else:
-                # ArXiv PDF URL 얻기
-                pdf_url = self.get_arxiv_pdf_url(paper_id, self.ss_api_key)
-                if not pdf_url:
-                    print("ArXiv PDF URL not found.")
+                if not paper_id:
+                    print("Paper ID not found.")
                 else:
-                    # PDF 다운로드
-                    pdf_content = self.download_pdf(pdf_url)
+                    # ArXiv PDF URL 얻기
+                    pdf_url = self.get_arxiv_pdf_url(paper_id, self.ss_api_key)
+                    if not pdf_url:
+                        print("ArXiv PDF URL not found.")
+                    else:
+                        # PDF 다운로드
+                        pdf_content = self.download_pdf(pdf_url)
 
-                    # PDF에서 GitHub 링크 추출
-                    github_links = self.extract_github_links_from_pdf(pdf_content)
-                    print(f"GitHub Links: {github_links}")
+                        # PDF에서 GitHub 링크 추출
+                        github_links = self.extract_github_links_from_pdf(pdf_content)
+                        print(f"GitHub Links: {github_links}")
 
-                    if len(github_links) > 1 :
-                        for github_link in github_links :
-                            self.clone_github_repository(github_link)
-                    elif len(github_links) == 1 :
-                        self.clone_github_repository(github_links[0])
+                        if len(github_links) > 1 :
+                            self.repo_path = self.clone_github_repository(github_links[0])
 
+                        elif len(github_links) == 1 :
+                            self.repo_path = self.clone_github_repository(github_links[0])
+                            
         except Exception as e:
             print(e)
 
@@ -236,7 +250,22 @@ class CodeAnalysis:
         vectors = vectorizer.toarray()
         return cosine_similarity(vectors)[0, 1]
     
-    def code_analysis(self, title:str, contents:str, response:str = None):
+    def answer_quality_score(self, code1, code2) :
+        """질문과 답변 코드의 유사도를 기반으로 품질 점수를 계산하는 함수"""
+        model = SentenceTransformer('all-MiniLM-L6-v2')
+        # 질문과 답변을 임베딩
+        question_embedding = model.encode(code1, convert_to_tensor=True)
+        answer_embedding = model.encode(code2, convert_to_tensor=True)
+
+        # 코사인 유사도 계산
+        cos_sim = util.cos_sim(question_embedding, answer_embedding)
+
+        # 유사도 점수를 0~1 사이로 정규화
+        normalized_score = float(cos_sim.item()) / 2 + 0.5
+
+        return normalized_score
+    
+    def code_analysis(self, title:str, contents:str, github_link:str = None):
         """
         input : title of paper,
                 contents in paper,
@@ -244,38 +273,42 @@ class CodeAnalysis:
         output : explanation about how to implement based on contents
         """
         # Generate code from paper content
-        self.Git_cloning(title) # self.repo_path 제공
+        self.Git_cloning(title, github_link) # self.repo_path 제공
 
-        if response==None:
-            agent_instruction = f"""
-            Based on the following content from a research paper, write the corresponding Python code that implements the described concept.\n\nPaper Content: \"{contents}\"
-            \n\n
-            And Use the \'code_matching\' tool again, Calculate the cosine similarity between the generated Python code and the actual functions, and identify the most similar code.
-            """
-            return agent_instruction
+        llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
-        else:
-            generated_code = response # self.generate_code_from_content(contents) 대신 사용, GPT에서 만들어낸 코드로 진행
+        first_question = f"""Based on the following content from a research paper, write the corresponding Python code that implements the described concept. Provide only the Python code without any additional text or explanation.\n\n
+                        Paper Content: \"{contents}\" \n\n
+                        """
 
-            # Extracted code from the repository
-            repo_code_files = self.extract_code_from_repo(self.repo_path)
 
-            # Calculate cosine similarity for each file in the repository
-            similarity_scores = {}
-            for file_path, code in repo_code_files.items():
-                functions = self.split_code_into_functions(code)
-                for func_name, func_code in functions.items():
-                    similarity = self.calculate_cosine_similarity(generated_code, func_code)
-                    similarity_scores[(file_path, func_name)] = similarity
+        generated_code = llm.predict(first_question)
+        print(generated_code)
 
-            # Find the file and function with the highest similarity score
-            most_relevant_file, most_relevant_function = max(similarity_scores, key=similarity_scores.get)
-            highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
+        # Extracted code from the repository
+        repo_code_files = self.extract_code_from_repo(self.repo_path)
 
-            # Present the standardized answer
-            print(f"Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}.\n")
-            instruction = f"""Explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. \n
-            contents: \"{contents}\" \n
-            most relevant code: \"{most_relevant_function}\" \n
-            """
-            return instruction
+        # Calculate cosine similarity for each file in the repository
+        similarity_scores = {}
+        for file_path, code in repo_code_files.items():
+            functions = self.split_code_into_functions(code)
+            for func_name, func_code in functions.items():
+                # similarity = self.calculate_cosine_similarity(generated_code, func_code)
+                similarity = self.answer_quality_score(generated_code, func_code)
+                similarity_scores[(file_path, func_name)] = similarity
+
+        # Find the file and function with the highest similarity score
+        # max_score = max(similarity_scores.values())
+        # most_relevant_file, most_relevant_function = [(file_path, func_name) for (file_path, func_name), score in similarity_scores.items() if score == max_score][0]
+        # highest_similarity_score = max_score
+        most_relevant_file, most_relevant_function = max(similarity_scores, key=similarity_scores.get)
+        highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
+
+        # Present the standardized answer
+        instruction = f""" First, provide the following information exactly as given: "Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}." \n\n
+        Then, explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. \n
+        contents: \"{contents}\" \n
+        most relevant code: \"{most_relevant_function}\" \n
+        """
+
+        return instruction

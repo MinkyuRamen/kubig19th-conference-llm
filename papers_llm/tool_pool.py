@@ -32,13 +32,14 @@ dotenv_path = '/Users/minkyuramen/Desktop/project/env'
 load_dotenv(dotenv_path)
 
 ss_api_key = os.getenv("SEMANTIC_SCHOLAR_API_KEY")
+openai_key = os.getenv("OPENAI_API_KEY")
 
 # Updated loadpaer tool
 # model can use this tool several times, to get the list of the section, and then see the detail content of the paper.
 # if the ar5iv_mode is False, 
 getpapermodule = GetPaper_v2(ss_api_key, ar5iv_mode = True, path_db = './papers_db', page_limit = 5)
 recommendpapermodule = RecommendPaper(ss_api_key)
-codeanalysismodule = CodeAnalysis(ss_api_key, path_db = './papers_db', code_db = './code_db')
+codeanalysismodule = CodeAnalysis(ss_api_key, openai_key, path_db = './papers_db', code_db = './code_db')
 
 class load_paper_input(BaseModel):
     title: str = Field(description="target paper title")
@@ -145,14 +146,15 @@ loadfigure = StructuredTool.from_function(
 '''
 
 ####### Code Analysis와 관련된 tool 정의
+
 class github_contents(BaseModel):
     title: str = Field(description="target paper title")
     contents : str = Field(description = "Contents in paper")
-    response : str = Field(description = "Generated code by GPT", default = None)
+    github_link : Optional[str] = Field(description = "Generated code by GPT", default = None)
 
 code_matching = StructuredTool.from_function(
     func=codeanalysismodule.code_analysis,
-    name="code_analysis",
+    name="code_matching",
     description="""
     'code_matching' tool provides references for the most closely matching parts between the content of a research paper and the actual implemented code. \
     'title' is a parameter that takes the title of the research paper. \
@@ -163,25 +165,29 @@ code_matching = StructuredTool.from_function(
     args_schema = github_contents
 )
 
-# ####### Code Analysis와 관련된 tool 정의
-# class cloning_github(BaseModel):
-#     title: str = Field(description="target paper title")
 
-# GitCloning = StructuredTool.from_function(
-#     func=codeanalysismodule.Git_cloning,
-#     name="get_github_repository",
-#     description="""  """,
-#     args_schema=cloning_github
-# ) ## repo_path를 반환(optional)
 
-# load_all_functions = StructuredTool.from_function(
-#     func=codeanalysismodule.get_all_functions,
-#     name="get_github_repository_functions_names",
-#     description=""" """
-# )
+####### Code Analysis와 관련된 tool 정의
+"""
+class cloning_github(BaseModel):
+    title: str = Field(description="target paper title")
 
-# code_matching = StructuredTool.from_function(
-#     func=codeanalysismodule.code_analysis,
-#     name="code_analysis",
-#     description="""  """
-# )
+GitCloning = StructuredTool.from_function(
+    func=codeanalysismodule.Git_cloning,
+    name="get_github_repository",
+    description="""  """,
+    args_schema=cloning_github
+) ## repo_path를 반환(optional)
+
+load_all_functions = StructuredTool.from_function(
+    func=codeanalysismodule.get_all_functions,
+    name="get_github_repository_functions_names",
+    description=""" """
+)
+
+code_matching = StructuredTool.from_function(
+    func=codeanalysismodule.code_analysis,
+    name="code_analysis",
+    description="""  """
+)
+"""
