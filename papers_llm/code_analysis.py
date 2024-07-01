@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from langchain_openai import ChatOpenAI
+from sentence_transformers import SentenceTransformer, util
 
 class NetworkError(Exception):
     """Custom exception for network errors."""
@@ -239,6 +240,21 @@ class CodeAnalysis:
         vectorizer = TfidfVectorizer().fit_transform([code1, code2])
         vectors = vectorizer.toarray()
         return cosine_similarity(vectors)[0, 1]
+    
+    def answer_quality_score(question: str, answer: str) -> float:
+        """질문과 답변 코드의 유사도를 기반으로 품질 점수를 계산하는 함수"""
+        model = SentenceTransformer('all-MiniLM-L6-v2')
+        # 질문과 답변을 임베딩
+        question_embedding = model.encode(question, convert_to_tensor=True)
+        answer_embedding = model.encode(answer, convert_to_tensor=True)
+
+        # 코사인 유사도 계산
+        cos_sim = util.cos_sim(question_embedding, answer_embedding)
+
+        # 유사도 점수를 0~1 사이로 정규화
+        normalized_score = float(cos_sim.item()) / 2 + 0.5
+
+        return normalized_score
     
     def code_analysis(self, title:str, contents:str, github_link:str = None):
         """

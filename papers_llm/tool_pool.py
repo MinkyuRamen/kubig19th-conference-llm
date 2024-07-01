@@ -147,10 +147,10 @@ loadfigure = StructuredTool.from_function(
 
 ####### Code Analysis와 관련된 tool 정의
 
-class code_generation_input(BaseModel):
-    contents : str = Field(description = "Contents in paper")
+# class code_generation_input(BaseModel):
+#     contents : str = Field(description = "Contents in paper")
 
-code_generation = StructuredTool.from_function()
+# code_generation = StructuredTool.from_function()
 
 class github_contents(BaseModel):
     title: str = Field(description="target paper title")
