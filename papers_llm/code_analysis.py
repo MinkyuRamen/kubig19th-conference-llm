@@ -12,7 +12,7 @@ import subprocess
 from urllib.parse import urlparse
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-
+from langchain_openai import ChatOpenAI
 
 class NetworkError(Exception):
     """Custom exception for network errors."""
@@ -25,8 +25,9 @@ class CodeAnalysis:
     
     """
 
-    def __init__(self, ss_api_key, path_db='./papers_db', code_db='./code_db'):
+    def __init__(self, ss_api_key, openai_key, path_db='./papers_db', code_db='./code_db'):
         self.ss_api_key = ss_api_key
+        self.openai_key = openai_key
         self.path_db= path_db
         self.code_db = code_db
 
@@ -120,29 +121,32 @@ class CodeAnalysis:
         self.repo_path = clone_dir
         print(f"Repository cloned into {clone_dir}")
 
-    def Git_cloning(self, title:str): ## git clone하는 과정들의 main 함수
+    def Git_cloning(self, title:str, github_link:str = None): ## git clone하는 과정들의 main 함수
         try:
             paper_id = self.get_paper_id_from_title(title, self.ss_api_key)
-            if not paper_id:
-                print("Paper ID not found.")
+            if github_link :
+                self.clone_github_repository(github_link)
             else:
-                # ArXiv PDF URL 얻기
-                pdf_url = self.get_arxiv_pdf_url(paper_id, self.ss_api_key)
-                if not pdf_url:
-                    print("ArXiv PDF URL not found.")
+                if not paper_id:
+                    print("Paper ID not found.")
                 else:
-                    # PDF 다운로드
-                    pdf_content = self.download_pdf(pdf_url)
+                    # ArXiv PDF URL 얻기
+                    pdf_url = self.get_arxiv_pdf_url(paper_id, self.ss_api_key)
+                    if not pdf_url:
+                        print("ArXiv PDF URL not found.")
+                    else:
+                        # PDF 다운로드
+                        pdf_content = self.download_pdf(pdf_url)
 
-                    # PDF에서 GitHub 링크 추출
-                    github_links = self.extract_github_links_from_pdf(pdf_content)
-                    print(f"GitHub Links: {github_links}")
+                        # PDF에서 GitHub 링크 추출
+                        github_links = self.extract_github_links_from_pdf(pdf_content)
+                        print(f"GitHub Links: {github_links}")
 
-                    if len(github_links) > 1 :
-                        for github_link in github_links :
-                            self.clone_github_repository(github_link)
-                    elif len(github_links) == 1 :
-                        self.clone_github_repository(github_links[0])
+                        if len(github_links) > 1 :
+                            for github_link in github_links :
+                                self.clone_github_repository(github_link)
+                        elif len(github_links) == 1 :
+                            self.clone_github_repository(github_links[0])
 
         except Exception as e:
             print(e)
@@ -236,7 +240,7 @@ class CodeAnalysis:
         vectors = vectorizer.toarray()
         return cosine_similarity(vectors)[0, 1]
     
-    def code_analysis(self, title:str, contents:str, response:str = None):
+    def code_analysis(self, title:str, contents:str, github_link:str = None):
         """
         input : title of paper,
                 contents in paper,
@@ -244,38 +248,34 @@ class CodeAnalysis:
         output : explanation about how to implement based on contents
         """
         # Generate code from paper content
-        self.Git_cloning(title) # self.repo_path 제공
+        self.Git_cloning(title, github_link) # self.repo_path 제공
 
-        if response==None:
-            agent_instruction = f"""
-            Based on the following content from a research paper, write the corresponding Python code that implements the described concept.\n\nPaper Content: \"{contents}\"
-            \n\n
-            And Use the \'code_matching\' tool again, Calculate the cosine similarity between the generated Python code and the actual functions, and identify the most similar code.
+        llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+        first_question = f"""
+            Based on the following content from a research paper, write the corresponding Python code that implements the described concept.\n\n
+            Paper Content: \"{contents}\" \n\n
             """
-            return agent_instruction
+        generated_code = llm.predict(first_question)
 
-        else:
-            generated_code = response # self.generate_code_from_content(contents) 대신 사용, GPT에서 만들어낸 코드로 진행
+        # Extracted code from the repository
+        repo_code_files = self.extract_code_from_repo(self.repo_path)
 
-            # Extracted code from the repository
-            repo_code_files = self.extract_code_from_repo(self.repo_path)
+        # Calculate cosine similarity for each file in the repository
+        similarity_scores = {}
+        for file_path, code in repo_code_files.items():
+            functions = self.split_code_into_functions(code)
+            for func_name, func_code in functions.items():
+                similarity = self.calculate_cosine_similarity(generated_code, func_code)
+                similarity_scores[(file_path, func_name)] = similarity
 
-            # Calculate cosine similarity for each file in the repository
-            similarity_scores = {}
-            for file_path, code in repo_code_files.items():
-                functions = self.split_code_into_functions(code)
-                for func_name, func_code in functions.items():
-                    similarity = self.calculate_cosine_similarity(generated_code, func_code)
-                    similarity_scores[(file_path, func_name)] = similarity
+        # Find the file and function with the highest similarity score
+        most_relevant_file, most_relevant_function = max(similarity_scores, key=similarity_scores.get)
+        highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
 
-            # Find the file and function with the highest similarity score
-            most_relevant_file, most_relevant_function = max(similarity_scores, key=similarity_scores.get)
-            highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
-
-            # Present the standardized answer
-            print(f"Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}.\n")
-            instruction = f"""Explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. \n
-            contents: \"{contents}\" \n
-            most relevant code: \"{most_relevant_function}\" \n
-            """
-            return instruction
+        # Present the standardized answer
+        print(f"Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}.\n")
+        instruction = f"""Explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. \n
+        contents: \"{contents}\" \n
+        most relevant code: \"{most_relevant_function}\" \n
+        """
+        return instruction
