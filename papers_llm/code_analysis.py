@@ -15,6 +15,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from langchain_openai import ChatOpenAI
 from sentence_transformers import SentenceTransformer, util
+from transformers import AutoModel, AutoTokenizer
 
 class NetworkError(Exception):
     """Custom exception for network errors."""
@@ -34,49 +35,110 @@ class CodeAnalysis:
         self.code_db = code_db
 
 ########## PDF 안의 github repository 링크를 찾아서 cloning
-    def get_paper_id_from_title(self, title, api_key):
-        search_url = "https://api.semanticscholar.org/graph/v1/paper/search"
+    def get_paper_id_from_title(self, title):
+        """논문의 제목으로 정보를 가져오는 함수"""
+        # Define the API endpoint URL
+        url = 'https://api.semanticscholar.org/graph/v1/paper/search?query={}&fields=paperId,title,abstract,authors,citations,fieldsOfStudy,influentialCitationCount,isOpenAccess,openAccessPdf,publicationDate,publicationTypes,references,venue'
 
-        params = {
-            "query": title,
-            "fields": "paperId",
-            "limit": 1
-        }
-        headers = {
-            "x-api-key": api_key
-        }
-        response = requests.get(search_url, params=params, headers=headers)
+        headers = {'x-api-key': self.ss_api_key}
+        try:
+            response = requests.get(url.format(title), headers=headers)
+            response.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise NetworkError(f"Error fetching data from Semantic Scholar API: {e}")
 
-        if response.status_code == 403:
-            raise Exception("API request failed with status code 403: Forbidden. Please check your API key and permissions.")
-        elif response.status_code != 200:
-            raise Exception(f"API request failed with status code {response.status_code}")
+        try:
+            data = response.json()
+        except ValueError:
+            raise NetworkError("Error parsing JSON response from Semantic Scholar API")
+
+        if 'data' in data and data['data']:
+            paper = data['data'][0]
+            external_ids = paper.get('openAccessPdf', {})
+            if external_ids and 'url' in external_ids:
+                arxiv_id = external_ids['url']
+                if 'http' in arxiv_id:
+                    arxiv_id = arxiv_id.split('/')[-1]
+                return arxiv_id
+            else:
+                raise NetworkError("No paper found for the given title")
+        else:
+            raise NetworkError("No paper found for the given title")
+
+    def get_paper_info_by_title_arxiv(self, query, max_results=1):
+        # arxiv api 는 : 이 포함된 query를 검색하지 못함. : 이후의 문자열로 검색.
+        query = query.split(':')[-1]
+
+        base_url = 'http://export.arxiv.org/api/query?'
+        query_url = f'search_query=all:{query}&start=0&max_results={max_results}'
+        response = requests.get(base_url + query_url)
+
+        if response.status_code != 200:
+            raise Exception('Error fetching data from arXiv API')
+
+        feed = feedparser.parse(response.content)
+
+        if 'entries' in feed and len(feed.entries) > 0:
+            paper = feed.entries[0]
+            arxiv_id = paper.id.split('/')[-1]
+            return arxiv_id
+        else:
+            raise NetworkError("No paper found for the given title")
+    # def get_paper_id_from_title(self, title, api_key):
+        # search_url = "https://api.semanticscholar.org/graph/v1/paper/search"
+
+        # params = {
+        #     "query": title,
+        #     "fields": "paperId",
+        #     "limit": 1
+        # }
+        # headers = {
+        #     "x-api-key": api_key
+        # }
+        # response = requests.get(search_url, params=params, headers=headers)
+
+        # if response.status_code == 403:
+        #     raise Exception("API request failed with status code 403: Forbidden. Please check your API key and permissions.")
+        # elif response.status_code == 429:
+        #     time.sleep(3)
+        #     self.get_paper_id_from_title(title, api_key)
+        # elif response.status_code != 200 and response.status_code != 429:
+        #     raise Exception(f"API request failed with status code {response.status_code}")
         
+        # data = response.json()
 
-        data = response.json()
+        # papers = data.get('data', [])
+        # if not papers:
+        #     return None
 
-        papers = data.get('data', [])
-        if not papers:
-            return None
+        # first_paper = papers[0]
+        # paper_id = first_paper.get('paperId')
 
-        first_paper = papers[0]
-        paper_id = first_paper.get('paperId')
+        # return paper_id
 
-        return paper_id
+    def get_arxiv_pdf_url(self, title, api_key):
+        ### 
+        try:
+            arxiv_id = self.get_paper_id_from_title(title)
+        except NetworkError as e:
+            try:
+                arxiv_id = self.get_paper_info_by_title_arxiv(title)
+            except NetworkError as e:
+                return f"Error: No paper was founded in database"
+        ###
+    # def get_arxiv_pdf_url(self, paper_id, api_key):
+        # url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}?fields=externalIds"
+        # response = requests.get(url, headers={"x-api-key": api_key})
 
-    def get_arxiv_pdf_url(self, paper_id, api_key):
-        url = f"https://api.semanticscholar.org/graph/v1/paper/{paper_id}?fields=externalIds"
-        response = requests.get(url, headers={"x-api-key": api_key})
+        # if response.status_code == 403:
+        #     raise Exception("API request failed with status code 403: Forbidden. Please check your API key and permissions.")
+        # elif response.status_code != 200 :
+        #     raise Exception(f"API request failed with status code {response.status_code}")
 
-        if response.status_code == 403:
-            raise Exception("API request failed with status code 403: Forbidden. Please check your API key and permissions.")
-        elif response.status_code != 200:
-            raise Exception(f"API request failed with status code {response.status_code}")
+        # data = response.json()
 
-        data = response.json()
-
-        external_ids = data.get('externalIds', {})
-        arxiv_id = external_ids.get('ArXiv')
+        # external_ids = data.get('externalIds', {})
+        # arxiv_id = external_ids.get('ArXiv')
 
         if not arxiv_id:
             return None
@@ -86,7 +148,7 @@ class CodeAnalysis:
         return pdf_url
 
     def download_pdf(self, pdf_url):
-        time.sleep(3)
+        time.sleep(1)
         response = requests.get(pdf_url)
         if response.status_code != 200:
             raise Exception(f"Failed to download PDF with status code {response.status_code}")
@@ -133,76 +195,50 @@ class CodeAnalysis:
         # title에서 paper id + paper id에서 url + url에서 pdf 다운 받는 과정 ==> Requests 많이 사용됨 ==> API requests failed 오류 발생
         # loadpaper tool을 이용해서 앞선 과정들을 해결할 수 없을까?
         try:
-            paper_id = self.get_paper_id_from_title(title, self.ss_api_key)
+            # paper_id = self.get_paper_id_from_title(title, self.ss_api_key)
             if github_link :
                 self.clone_github_repository(github_link) # Github Link가 제시 되면 바로 git clone
             else:
-                if not paper_id:
-                    print("Paper ID not found.")
+                pdf_url = self.get_arxiv_pdf_url(title, self.ss_api_key)
+                
+                if not pdf_url:
+                    print("ArXiv PDF URL not found.")
                 else:
-                    # ArXiv PDF URL 얻기
-                    pdf_url = self.get_arxiv_pdf_url(paper_id, self.ss_api_key)
-                    if not pdf_url:
-                        print("ArXiv PDF URL not found.")
-                    else:
-                        # PDF 다운로드
-                        pdf_content = self.download_pdf(pdf_url)
+                    # PDF 다운로드
+                    pdf_content = self.download_pdf(pdf_url)
 
-                        # PDF에서 GitHub 링크 추출
-                        github_links = self.extract_github_links_from_pdf(pdf_content)
-                        print(f"GitHub Links: {github_links}")
+                    # PDF에서 GitHub 링크 추출
+                    github_links = self.extract_github_links_from_pdf(pdf_content)
+                    print(f"GitHub Links: {github_links}")
 
-                        if len(github_links) > 1 :
-                            self.repo_path = self.clone_github_repository(github_links[0])
+                    if len(github_links) > 1 :
+                        self.repo_path = self.clone_github_repository(github_links[0])
 
-                        elif len(github_links) == 1 :
-                            self.repo_path = self.clone_github_repository(github_links[0])
+                    elif len(github_links) == 1 :
+                        self.repo_path = self.clone_github_repository(github_links[0])
+                # if not paper_id:
+                #     print("Paper ID not found.")
+                # else:
+                #     # ArXiv PDF URL 얻기
+                #     pdf_url = self.get_arxiv_pdf_url(paper_id, self.ss_api_key)
+                    # if not pdf_url:
+                    #     print("ArXiv PDF URL not found.")
+                    # else:
+                    #     # PDF 다운로드
+                    #     pdf_content = self.download_pdf(pdf_url)
+
+                    #     # PDF에서 GitHub 링크 추출
+                    #     github_links = self.extract_github_links_from_pdf(pdf_content)
+                    #     print(f"GitHub Links: {github_links}")
+
+                    #     if len(github_links) > 1 :
+                    #         self.repo_path = self.clone_github_repository(github_links[0])
+
+                    #     elif len(github_links) == 1 :
+                    #         self.repo_path = self.clone_github_repository(github_links[0])
                             
         except Exception as e:
             print(e)
-
-# ######### Github 내부 python 파일들의 전체 function의 이름을 불러오기
-
-#     def get_python_files(self):
-#         """지정된 디렉토리 내의 모든 Python 파일 목록을 반환"""
-#         python_files = []
-#         for root, _, files in os.walk(self.repo_path):
-#             for file in files:
-#                 if file.endswith(".py"):
-#                     python_files.append(os.path.join(root, file))
-#         return python_files
-
-#     def get_functions_from_file(self):
-#         """지정된 Python 파일에서 정의된 모든 함수 이름을 반환"""
-#         with open(self.repo_path, "r", encoding="utf-8") as file:
-#             tree = ast.parse(file.read(), filename=self.repo_path)
-
-#         functions = [node.name for node in ast.walk(tree) if isinstance(node, ast.FunctionDef)]
-#         return functions
-
-#     def get_all_functions_from_directory(self): ## main 함수
-#         """지정된 디렉토리 내의 모든 Python 파일에서 정의된 모든 함수 이름을 반환"""
-#         python_files = self.get_python_files(self.repo_path)
-#         all_functions = {}
-
-#         for file_path in python_files:
-#             functions = self.get_functions_from_file(self.repo_path)
-#             all_functions[file_path] = functions
-
-#         return all_functions
-
-    
-#     def get_all_functions(self, repo_path): ### functions 불러오는 전체 함수
-#         all_functions = self.get_all_functions_from_directory(self.repo_path)
-
-#         for file_path, functions in all_functions.items():
-#             print(f"File: {file_path}")
-#             for func in functions:
-#                 print(f"  Function: {func}")
-
-#         return all_functions
-
-## Code Generation & Analysis
 
     def generate_code_from_content(self, content):
         prompt=f"Based on the following content from a research paper, write the corresponding Python code that implements the described concept.\n\nPaper Content: \"{content}\""
@@ -220,7 +256,7 @@ class CodeAnalysis:
             for file in files:
                 if file.endswith('.py'):
                     file_path = os.path.join(subdir, file)
-                    with open(file_path, 'r') as f:
+                    with open(file_path, 'r', encoding='utf-8') as f:
                         code_files[file_path] = f.read()
         return code_files
 
@@ -250,6 +286,23 @@ class CodeAnalysis:
         vectors = vectorizer.toarray()
         return cosine_similarity(vectors)[0, 1]
     
+    def calculate_similarity_codet5(self, code1, code2):
+        checkpoint = "Salesforce/codet5p-110m-embedding"
+        tokenizer = AutoTokenizer.from_pretrained(checkpoint, trust_remote_code=True)
+        model = AutoModel.from_pretrained(checkpoint, trust_remote_code=True)
+
+        first_code = tokenizer.encode(code1, return_tensors="pt")
+        secode_code = tokenizer.encode(code2, return_tensors="pt")
+
+        first_embedding = model(first_code)[0]
+        secode_code = model(secode_code)[0]
+        cos_sim = util.cos_sim(first_embedding, secode_code)
+
+        # 유사도 점수를 0~1 사이로 정규화
+        normalized_score = float(cos_sim.item()) / 2 + 0.5
+
+        return normalized_score
+    
     def answer_quality_score(self, code1, code2) :
         """질문과 답변 코드의 유사도를 기반으로 품질 점수를 계산하는 함수"""
         model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -274,8 +327,6 @@ class CodeAnalysis:
         """
         # Generate code from paper content
         self.Git_cloning(title, github_link) # Git clone하는 과정
-
-        os.environ["OPENAI_API_KEY"] = self.openai_key
         llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
         first_question = f"""Based on the following content from a research paper, write the corresponding Python code that implements the described concept. Provide only the Python code without any additional text or explanation.\n\n
@@ -294,8 +345,9 @@ class CodeAnalysis:
         for file_path, code in repo_code_files.items():
             functions = self.split_code_into_functions(code)
             for func_name, func_code in functions.items():
-                # similarity = self.calculate_cosine_similarity(generated_code, func_code) # Vectorizer를 이용한 단순한 유사도 측정
-                similarity = self.answer_quality_score(generated_code, func_code) # Sentence transformer를 이용한 유사도 측정
+                similarity = self.calculate_cosine_similarity(generated_code, func_code) # Vectorizer를 이용한 단순한 유사도 측정
+                # similarity = self.answer_quality_score(generated_code, func_code) # Sentence transformer를 이용한 유사도 측정
+                # similarity = self.calculate_similarity_codet5(generated_code, func_code) # CodeT5 모델을 사용한 유사도 측정
                 similarity_scores[(file_path, func_name)] = similarity
 
         # max_score = max(similarity_scores.values())
@@ -306,8 +358,8 @@ class CodeAnalysis:
         highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
 
         # 관련 있는 함수가 존재하는 py 파일의 경로 + 함수 + 유사도 제시, 이후 부가적인 설명을 요청하는 prompt
-        instruction = f""" First, provide the following information exactly as given: "Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}." \n\n
-        Then, explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. \n
+        instruction = f""" First, Please start your response with the following sentence : ["Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}."] \n\n
+        Then, explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. 한국말로 설명해. \n
         contents: \"{contents}\" \n
         most relevant code: \"{most_relevant_function}\" \n
         """
