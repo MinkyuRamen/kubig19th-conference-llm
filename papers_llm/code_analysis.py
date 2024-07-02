@@ -335,7 +335,7 @@ class CodeAnalysis:
 
 
         generated_code = llm.predict(first_question)
-        print(generated_code)
+        # print(generated_code)
 
         # Extracted code from the repository
         repo_code_files = self.extract_code_from_repo(self.repo_path)
