@@ -358,8 +358,8 @@ class GetPaper_v2:
                     print('Figure displayed')
                     figure_path = pdf_files[name]
 
-                    content += f'\n\nADD figure_path : {figure_path} \n after generate response'
-                    return content#, figure_path
+                    content += f'Provide them in JSON format with the following keys: \n\n {{figure_path : {figure_path}}}'
+                    return content
                 # else:
                     # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
                     # return instruction_for_agent2
