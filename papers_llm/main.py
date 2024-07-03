@@ -88,7 +88,7 @@ def handle_message_events(event, message, say):
                 )
                 app.client.chat_postMessage(
                     channel=channel_id,
-                    text=bot_response['output'],
+                    text=' '.join(bot_response['output'].split('\n')[:-1]),
                     thread_ts=ts  
                 )
             else:         
