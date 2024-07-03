@@ -258,12 +258,17 @@ class GetPaper_v2:
         output_path = os.path.join(self.path_db, f"{arxiv_id}.tar.gz")
         with open(output_path, 'wb') as f:
             f.write(response.content)
+
+        # else:
+        #     output_path = os.path.join(self.path_db, f"{arxiv_id}")
+        #     print(f"Source already in : {output_path}")
         
         file_path = f'{output_path}'
         with tarfile.open(file_path, "r:gz") as tar:
             tar.extractall(path=self.path_db)
         
         print(f"Source files downloaded to: {output_path}")
+
 
     def find_pdf_files(self, root_folder):
         '''

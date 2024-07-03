@@ -44,7 +44,6 @@ tools = [tp.loadpaper, tp.recommendpaper, tp.code_matching]
 prompt = hub.pull("hwchase17/openai-tools-agent")
 
 
-# @app.event("message")
 @app.event("app_mention")
 def handle_message_events(event, message, say): 
     llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
@@ -52,38 +51,66 @@ def handle_message_events(event, message, say):
     text = event['text'] + '대답은 한글로 해줘'
     
     agent = create_openai_tools_agent(llm, tools, prompt=prompt)
-    
+
     memory = ConversationBufferMemory(return_messages=True, memory_key="chat_history")
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, memory=memory)
-    try: 
-        bot_response = agent_executor.invoke({"input": text, 'chat_history': memory})
-        try:
-            img_path = bot_response['figure_path']
-            with open(img_path, 'rb') as file:
-                response = client.files_upload_v2(
+    try:
+        try: 
+            bot_response = agent_executor.invoke({"input": text, 'chat_history': memory})
+            if bot_response['output'].split(': ')[-1].endswith('.pdf'):
+                img_path = bot_response['output'].split(': ')[-1]
+                print('there is a figure path FORMAT1!',img_path)
+                
+                app.client.files_upload_v2(
                     channels=channel_id,
-                    file=file,
-                    # title='figure',
-                    # initial_comment=f'*{figure}*'
+                    file=img_path,
+                    title=img_path.split('/')[0],
+                    filetype='pdf',
+                    thread_ts=ts  
+
                 )
-                return response
+                app.client.chat_postMessage(
+                    channel=channel_id,
+                    text=bot_response['output'],
+                    thread_ts=ts  
+                )
+                
+            elif ['output'].split(']')[-1].split('(')[-1].split(')')[0].endswith('.pdf'):
+                img_path = bot_response['output'].split(']')[-1].split('(')[-1].split(')')[0]
+                print('there is a figure path FORMAT2!',img_path)
+
+                app.client.files_upload_v2(
+                    channels=channel_id,
+                    file=img_path,
+                    title=img_path.split('/')[0],
+                    filetype='pdf',
+                    thread_ts=ts  
+                )
+                app.client.chat_postMessage(
+                    channel=channel_id,
+                    text=bot_response['output'],
+                    thread_ts=ts  
+                )
+            else:         
+                app.client.chat_postMessage(
+                    channel=channel_id,
+                    text=bot_response['output'],
+                    thread_ts=ts,
+                )
+            
+        except:
             app.client.chat_postMessage(
-                channel=channel_id,
-                text=bot_response['output'],
-                thread_ts=ts  
+            channel=channel_id,
+            text=bot_response['output'],
+            thread_ts=ts,
             )
-        except:             
-            app.client.chat_postMessage(
-                channel=channel_id,
-                text=bot_response['output'],
-                thread_ts=ts  
-            )
+
     except Exception as e:    
         error_message = f"에러 발생: {str(e)}"
         app.client.chat_postMessage(
                 channel=channel_id,
                 text=error_message,
-                thread_ts=ts  
+                thread_ts=ts,
             )
 
 
