@@ -8,6 +8,8 @@ from datetime import datetime
 from sklearn.metrics.pairwise import cosine_similarity
 from transformers import AutoTokenizer, AutoModel
 import torch.nn.functional as F
+import time
+
 
 
 from httpx import NetworkError
@@ -61,8 +63,13 @@ class RecommendPaper:
         query_params = {'query': query}
         headers = {'x-api-key': self.ss_api_key}
         try:
-            response = requests.get(url, params=query_params, headers=headers)
-            response.raise_for_status()
+            try:
+                response = requests.get(url, params=query_params, headers=headers)
+                response.raise_for_status()
+            except:
+                time.sleep(1)
+                response = requests.get(url, params=query_params, headers=headers)
+                response.raise_for_status()
         except requests.exceptions.RequestException as e:
             raise NetworkError(f"Error fetching data from Semantic Scholar API: {e}")
         try:
