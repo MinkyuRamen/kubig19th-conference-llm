@@ -23,9 +23,18 @@ class NetworkError(Exception):
 
 class CodeAnalysis:
     """
-    
-    
-    
+    A class to interact with scientific papers using the Semantic Scholar API and arxiv.
+
+    Attributes:
+    -----------
+    ss_api_key : str
+        The API key for accessing the Semantic Scholar API.
+    openai_key : str
+        The API key for accessing the ChatOpenAI.
+    path_db : str
+        The path to the local database where paper is stored. Defaults to './papers_db'.
+    code_db : str
+        The path to the local database where github repository is sotred. Defaults to './code_db'.
     """
 
     def __init__(self, ss_api_key, openai_key, path_db='./papers_db', code_db='./code_db'):
@@ -191,51 +200,30 @@ class CodeAnalysis:
             print(f"Repository already clonded into {clone_dir}")
             return self.repo_path
 
-    def Git_cloning(self, title:str, github_link:str = None): ## git clone하는 과정들의 main 함수
-        # title에서 paper id + paper id에서 url + url에서 pdf 다운 받는 과정 ==> Requests 많이 사용됨 ==> API requests failed 오류 발생
-        # loadpaper tool을 이용해서 앞선 과정들을 해결할 수 없을까?
+    def Git_cloning(self, title:str, github_link:str): 
         try:
             # paper_id = self.get_paper_id_from_title(title, self.ss_api_key)
-            if github_link :
-                self.clone_github_repository(github_link) # Github Link가 제시 되면 바로 git clone
-            else:
-                pdf_url = self.get_arxiv_pdf_url(title, self.ss_api_key)
+            if not github_link :
+                raise Exception("Github 링크가 필요합니다.")
+            self.repo_path = self.clone_github_repository(github_link) # Github Link가 제시 되면 바로 git clone
+            # else:
+            #     pdf_url = self.get_arxiv_pdf_url(title, self.ss_api_key)
                 
-                if not pdf_url:
-                    print("ArXiv PDF URL not found.")
-                else:
-                    # PDF 다운로드
-                    pdf_content = self.download_pdf(pdf_url)
+            #     if not pdf_url:
+            #         print("ArXiv PDF URL not found.")
+            #     else:
+            #         # PDF 다운로드
+            #         pdf_content = self.download_pdf(pdf_url)
 
-                    # PDF에서 GitHub 링크 추출
-                    github_links = self.extract_github_links_from_pdf(pdf_content)
-                    print(f"GitHub Links: {github_links}")
+            #         # PDF에서 GitHub 링크 추출
+            #         github_links = self.extract_github_links_from_pdf(pdf_content)
+            #         print(f"GitHub Links: {github_links}")
 
-                    if len(github_links) > 1 :
-                        self.repo_path = self.clone_github_repository(github_links[0])
+            #         if len(github_links) > 1 :
+            #             self.repo_path = self.clone_github_repository(github_links[0])
 
-                    elif len(github_links) == 1 :
-                        self.repo_path = self.clone_github_repository(github_links[0])
-                # if not paper_id:
-                #     print("Paper ID not found.")
-                # else:
-                #     # ArXiv PDF URL 얻기
-                #     pdf_url = self.get_arxiv_pdf_url(paper_id, self.ss_api_key)
-                    # if not pdf_url:
-                    #     print("ArXiv PDF URL not found.")
-                    # else:
-                    #     # PDF 다운로드
-                    #     pdf_content = self.download_pdf(pdf_url)
-
-                    #     # PDF에서 GitHub 링크 추출
-                    #     github_links = self.extract_github_links_from_pdf(pdf_content)
-                    #     print(f"GitHub Links: {github_links}")
-
-                    #     if len(github_links) > 1 :
-                    #         self.repo_path = self.clone_github_repository(github_links[0])
-
-                    #     elif len(github_links) == 1 :
-                    #         self.repo_path = self.clone_github_repository(github_links[0])
+            #         elif len(github_links) == 1 :
+            #             self.repo_path = self.clone_github_repository(github_links[0])
                             
         except Exception as e:
             print(e)
@@ -325,28 +313,30 @@ class CodeAnalysis:
                 generated code by GPT (response)
         output : explanation about how to implement based on contents
         """
-        # Generate code from paper content
+
+        if not github_link : 
+            raise Exception("Github 링크가 필요합니다.")
+
         self.Git_cloning(title, github_link) # Git clone하는 과정
+
         llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
         first_question = f"""Based on the following content from a research paper, write the corresponding Python code that implements the described concept. Provide only the Python code without any additional text or explanation.\n\n
                         Paper Content: \"{contents}\" \n\n
                         """
 
-
         generated_code = llm.predict(first_question)
-        # print(generated_code)
 
-        # Extracted code from the repository
+        # Repository에서 code 추출
         repo_code_files = self.extract_code_from_repo(self.repo_path)
 
-        # Calculate cosine similarity for each file in the repository
+        # Cosine similarity 계산
         similarity_scores = {}
         for file_path, code in repo_code_files.items():
             functions = self.split_code_into_functions(code)
             for func_name, func_code in functions.items():
-                similarity = self.calculate_cosine_similarity(generated_code, func_code) # Vectorizer를 이용한 단순한 유사도 측정
-                # similarity = self.answer_quality_score(generated_code, func_code) # Sentence transformer를 이용한 유사도 측정
+                # similarity = self.calculate_cosine_similarity(generated_code, func_code) # Vectorizer를 이용한 단순한 유사도 측정
+                similarity = self.answer_quality_score(generated_code, func_code) # Sentence transformer를 이용한 유사도 측정
                 # similarity = self.calculate_similarity_codet5(generated_code, func_code) # CodeT5 모델을 사용한 유사도 측정
                 similarity_scores[(file_path, func_name)] = similarity
 
