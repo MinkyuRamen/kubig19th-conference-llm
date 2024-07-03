@@ -56,7 +56,7 @@ loadpaper = StructuredTool.from_function(
         The 'show_figure' parameter is a boolean value that determines whether to display the figures in the paper. \
         If the sections parameter is none, you can get the section list of the paper. If the sections parameter get the section list, you can load the paper's content. \
         Use this tool several times to get the section first and then get the detail content of each section. \
-        Do NOT show the figures when 'sections' parameter is None.
+        Do NOT show the figures when 'sections' parameter is None. \
     """,
     args_schema=load_paper_input
 )
