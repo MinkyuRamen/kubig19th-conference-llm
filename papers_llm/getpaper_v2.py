@@ -327,22 +327,25 @@ class GetPaper_v2:
         plt.show()
 
     ## main code
-    def load_paper(self, title:str, sections:list=None, show_figure:bool=False):
+    def load_paper(self, title:str, sections:list=None, show_figure:bool=False, arxiv_id:str=None):
         '''
         INPUT : title of paper,
                 list of sections in paper
         OUTPUT : text of the paper
         '''
-        try:
-            arxiv_id = self.get_paper_info_by_title_ss(title)
-        except NetworkError as e:
+
+        if arxiv_id == None or arxiv_id == '':
             try:
-                arxiv_id = self.get_paper_info_by_title_arxiv(title)
+                arxiv_id = self.get_paper_info_by_title_ss(title)
             except NetworkError as e:
-                return f"Error: No paper was founded in database"
-            
+                try:
+                    arxiv_id = self.get_paper_info_by_title_arxiv(title)
+                except NetworkError as e:
+                    return f"Error: No paper was founded in database"
+
         url = self.get_ar5iv_url(arxiv_id)
         soup = self.get_soup_from_url(url) if self.ar5iv_mode else None
+
         if (soup):
             title, header_list = self.get_header_from_soup(soup)
             if sections == None or sections == []:
@@ -371,17 +374,21 @@ class GetPaper_v2:
                 
                 return content
             
-        else: # case for ar5iv is not exist or request error
-            download_path = self.download_pdf(arxiv_id)
-            pdf_content = self.read_pdf(arxiv_id)
-            if sections != None or sections != [] and show_figure:
-                self.download_arxiv_source(arxiv_id)
-                pdf_files = self.find_pdf_files(self.path_db)
-                name = self.query_name_matching(pdf_content, pdf_files)
-                self.display_figure(pdf_files, name) 
-                figure_path = pdf_files[name]
-                print(figure_path)
-            # else:
-                # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
-                # return instruction_for_agent2
-            return pdf_content, figure_path
+        else: # case for ar5iv is not exist or request error. assume that arxiv_id is correct
+            try:
+                download_path = self.download_pdf(arxiv_id)
+                pdf_content = self.read_pdf(arxiv_id)
+                if sections != None or sections != [] and show_figure:
+                    self.download_arxiv_source(arxiv_id)
+                    pdf_files = self.find_pdf_files(self.path_db)
+                    name = self.query_name_matching(pdf_content, pdf_files)
+                    self.display_figure(pdf_files, name) 
+                    figure_path = pdf_files[name]
+                    print(figure_path)
+                # else:
+                    # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
+                    # return instruction_for_agent2
+                return pdf_content, figure_path
+            except:
+                raise Exception(f'Error downloading PDF from arXiv using arxiv id {arxiv_id}')
+
