@@ -1,0 +1,86 @@
+% \begin{table}[]
+% \centering
+% \caption{Benchmark table}
+% \label{tab:all_tasks}
+% \begin{adjustbox}{max width=\textwidth}
+% \begin{tabular}{cccccccccc}
+% \toprule
+% \multicolumn{1}{l}{}            & \multicolumn{2}{c}{\textbf{Rest API}}                                         & \multicolumn{3}{c}{\textbf{Software}}                              & \multicolumn{4}{c}{\textbf{Real world agent}}                                                                                         \\
+% \cmidrule(lr){2-3} \cmidrule(lr){4-6} \cmidrule(lr){7-10}
+%                                 & \textbf{Open}                           & \textbf{The Cat}                    & \textbf{Home}        & \textbf{Trip}        & \textbf{Google}      &                                        & \multicolumn{2}{c}{}                                   &                                     \\
+% \multirow{-2}{*}{\textbf{Task}} & {\color[HTML]{1F1F1F} \textbf{Weather}} & {\color[HTML]{1F1F1F} \textbf{API}} & \textbf{Search}      & \textbf{Booking}     & \textbf{Sheets}      & \multirow{-2}{*}{\textbf{VirtualHome}} & \multicolumn{2}{c}{\multirow{-2}{*}{\textbf{WebShop}}} & \multirow{-2}{*}{\textbf{Tabletop}} \\
+% Steps                           & Single                                  & Single                              & Single               & Single               & Single               & Single                                 & \multicolumn{2}{c}{Multiple}                           & Multiple                            \\
+% Language                        & Shell                                   & Shell                               & Python               & Python               & Python               & Python                                 & \multicolumn{2}{c}{Text}                               & Python                              \\
+% \midrule
+% \textit{Metrics}                &                                         &                                     &                      &                      &                      &                                        & \multicolumn{2}{c}{}                                   &                                     \\
+% Excetability                    &                                         &                                     &                      &                      &                      & \checkmark                                      & \multicolumn{2}{c}{}                                   &                                     \\
+% Success rate                    & \checkmark                                       & \checkmark                                   & \checkmark                    & \checkmark                    & \checkmark                    &                                        & \multicolumn{2}{c}{\checkmark}                                  & \checkmark                                   \\
+% Score                           & f1                                      & f1                                  & f1                   & f1                   &                      & LCS                                    & \multicolumn{2}{c}{Rewards}                            &                                     \\
+% \midrule
+% \textit{Datasets}               &                                         &                                     &                      &                      &                      &                                        &                            &                           & \multicolumn{1}{l}{}                \\
+% API functions                   & 9                                       & 6                                   & 15                   & 20                   & 108                  & 40                                     & \multicolumn{2}{c}{2}                                  & \multicolumn{1}{l}{}                \\
+% Training examples               & 18                                      & 12                                  & 10                   & 11                   & 10                   & 83                                     & 1533                       & 200                       & ?                                   \\
+% Example coverage                & 100\%                                   & 100\%                               & 80\%                 & 100\%                & 100\%                & 100\%                                  & \multicolumn{2}{c}{100\%}                              & \multicolumn{1}{l}{}                \\
+% Test examples                   & 100                                     & 100                                 & 100                  & 120                  & 70                   & 100                                    & \multicolumn{2}{c}{100}                                & 105                                 \\
+% Public test set                 & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                & \multicolumn{1}{l}{} &                      & \multicolumn{1}{l}{} & \checkmark                                      & \multicolumn{2}{c}{\checkmark}                                  & \checkmark                                   \\
+% \midrule
+% \textit{Capabilities}           &                                         &                                     &                      &                      &                      & \multicolumn{1}{l}{}                   & \multicolumn{2}{c}{}                                   &                                     \\
+% Args filling                    & \checkmark                                       & \checkmark                                   & \checkmark                    & \checkmark                    & \checkmark                    & \checkmark                                      & \multicolumn{2}{c}{\checkmark}                                  & \checkmark                                   \\
+% API selection                   & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                & \checkmark                    & \checkmark                    & \checkmark                    & \checkmark                                      & \multicolumn{2}{c}{\checkmark}                                  & \checkmark                                   \\
+% API dependency                  & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                & \checkmark                    & \checkmark                    & \checkmark                    & \checkmark                                      & \multicolumn{2}{l}{}                                   & \checkmark                                   \\
+% Python Coding                   & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                &                      &                      & \checkmark                    & \multicolumn{1}{l}{}                   & \multicolumn{2}{l}{}                                   & \checkmark                                   \\
+% Common sense                    & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \checkmark                    & \checkmark                                      & \multicolumn{2}{c}{}                                   & \checkmark                              \\  \bottomrule
+  
+% \end{tabular}
+% \end{adjustbox}
+% \end{table}
+
+
+
+\begin{table}[]
+\centering
+\caption{Tasks in the \snact. We provide demonstration examples for few-shot in-context-learning while test cases are for quantitatively evaluation. We develop API complexity, a metric to quantify the challenge level in generalizing to unseen API combinations; higher complexity indicates more challenging tasks. We package the challenges beyond API complexity as advanced reasoning. We refer to \Cref{sec:benchmark_details} for more details on these tasks.}
+\label{tab:all_tasks}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{@{}cccccccccc@{}}
+\toprule
+\multicolumn{1}{l}{}            & \multicolumn{6}{c}{\textbf{Single Step}}                                         & \multicolumn{2}{c}{\textbf{Multi-Step}}                                                             \\
+% \multicolumn{1}{l}{}            & \multicolumn{2}{c}{\textbf{Rest API}}                                         & \multicolumn{3}{c}{\textbf{Software}}                              & \multicolumn{3}{c}{\textbf{Real world agent}}                                                                     \\
+\cmidrule(lr){2-7} \cmidrule(lr){8-9} 
+                                & \textbf{Open}                           & \textbf{The Cat}                    & \textbf{Home}        & \textbf{Trip}        & \textbf{Google}      &                                        &                   \textbf{WebShop}                 &                                     \\
+\multirow{-2}{*}{\textbf{Task}} & {\color[HTML]{1F1F1F} \textbf{Weather}} & {\color[HTML]{1F1F1F} \textbf{API}} & \textbf{Search}      & \textbf{Booking}     & \textbf{Sheets}      & \multirow{-2}{*}{\textbf{VirtualHome}} & \textbf{Long / Short} & \multirow{-2}{*}{\textbf{Tabletop}} \\
+\midrule
+% Multi-step generation & & & & & & & \checkmark & \checkmark \\
+\textbf{\textit{Data}}               &                                         &                                     &                      &                      &                      &                                        &                                    & \multicolumn{1}{l}{}                \\
+API functions                   & 9                                       & 6                                   & 15                   & 20                   & 108                  & 40                                     & 2                                 & 32                \\
+Demonstration examples               & 18                                      & 12                                  & 10                   & 11                   & 10                   & 83                                & 1533 / 200                        & 74                \\
+% API coverage in examples                & 100\%                                   & 100\%                               & 80\%                 & 100\%                & 100\%                & 100\%                                  & 100\%                              & 100\%                 \\
+Test cases                   & 100                                     & 100                                 & 100                  & 120                  & 70                   & 100                                    & 100                                & 105                                 \\
+% Public test set                 & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                & \multicolumn{1}{l}{} &                      & \multicolumn{1}{l}{} & \checkmark                                      & \checkmark                                  & \checkmark                                   \\
+% \midrule
+% \textbf{\textit{Capabilities}}           &                                         &                                     &                      &                      &                      & \multicolumn{1}{l}{}                   &                                    &                                     \\
+% Args filling                    & \checkmark                                       & \checkmark                                   & \checkmark                    & \checkmark                    & \checkmark                    & \checkmark                                      & \checkmark                                  & \checkmark                                   \\
+% API selection                  & \checkmark                   & \checkmark                & \checkmark                    & \checkmark                    & \checkmark                    & \checkmark                                      & \checkmark                                  & \checkmark                                   \\
+% API dependency                  & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                & \checkmark                    & \checkmark                    & \checkmark                    & \checkmark                                      & \multicolumn{1}{l}{}               & \checkmark                                   \\
+% Python coding                   & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                &                      &                      & \checkmark                    & \multicolumn{1}{l}{}                   & \multicolumn{1}{l}{}               & \checkmark                                   \\
+% Common sense                    & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \checkmark                    & \checkmark                                      &                                    & \checkmark    
+% Multi-call action & & & \checkmark & \checkmark & \checkmark & \checkmark & & \checkmark \\
+% Steps                           & Single                                  & Single                              & Single               & Single               & Single               & Single                                 & Multiple                           & Multiple                            \\
+% Language                        & Shell                                   & Shell                               & Python               & Python               & Python               & Python                                 & Text                               & Python                              \\
+% \midrule
+% \textbf{\textit{Metrics}}                &                                         &                                     &                      &                      &                      &                                        &                                    &                                     \\
+% Executability                    & \checkmark                                       & \checkmark                                   & \checkmark                    & \checkmark                    & \checkmark                    & \checkmark                                      & \checkmark                                  & \checkmark                                   \\
+% Success rate                    & \checkmark                                       & \checkmark                                   & \checkmark                    & \checkmark                    & \checkmark                    &                                        & \checkmark                                  & \checkmark                                   \\
+% Score                           & f1                                      & f1                                  & f1                   & f1                   &                      & LCS                                    & Rewards                            &                                     \\
+\midrule
+\textbf{\emph{Level of challenges}}\\
+% Unseen args. combinations  & \multirow{1}{*}{\checkmark} & \multirow{1}{*}{\checkmark} & & & \multirow{1}{*}{\checkmark} & & & \multirow{1}{*}{\checkmark}  \\
+% Unseen API combinations  & & & \multirow{1}{*}{\checkmark} & \multirow{1}{*}{\checkmark} & \multirow{1}{*}{\checkmark} & \multirow{1}{*}{\checkmark} & & \multirow{1}{*}{\checkmark}  \\
+% unseen API combination \\
+% \cmidrule(lr){2-9}
+API complexity & 2.2 & 1.4 & 7.3 & 11.1 & 8.4 & 12.3 & 0.0 & 4.6  \\
+Advanced reasoning & & & &  & \checkmark & & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}

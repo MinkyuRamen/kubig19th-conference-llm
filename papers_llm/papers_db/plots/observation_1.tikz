@@ -1,0 +1,59 @@
+\begin{tikzpicture}[]
+    \begin{axis}[
+        ybar=0.0cm,
+        % ybar interval=0.3,
+        enlarge x limits=0.2,
+        % enlarge y limits=0.2,
+        % Size
+        width=0.57\linewidth,
+        height=3.7cm,
+        % bar width=6pt,
+        bar width=5,
+        ymajorgrids,
+        % Axes
+        ylabel={Success rate},
+        ymin=0,
+        xtick=data,
+        ytick={0, 20, 40, 60, 80},
+        % ytick={0, 30, 60, 90},
+        x tick label style={xshift=3ex,rotate=20,anchor=east,yshift=-4pt,font=\tiny},
+        y label style={yshift=-3ex, font=\small},
+        % symbolic x coords = {GPT-4, LLaMA-30b, NeoX-20b, CodeGen-mono-16b},
+        symbolic x coords = {GPT-4, LLaMA, StarCoder, CodeGen},
+        tickwidth         = 1pt,
+        % Legend
+        legend style={
+            at={(0.715,1)},
+            anchor=north,
+            legend columns=1,
+            font=\tiny,
+            /tikz/every even column/.append style={column sep=0.cm, row sep=-6pt},
+        },
+        ]
+        
+        % zero-shot, with API doc, without "(Answer in code only)"
+        \addplot[black, fill=blue] coordinates { 
+            (GPT-4, 81)
+            (LLaMA, 39)
+            % (NeoX-20b, 18)
+            (CodeGen, 7)
+            (StarCoder, 32)
+        };
+
+        % oracle one-shot, with API doc, without "(Answer in code only)"
+        \addplot[black, fill=red, postaction={pattern=north east lines}] coordinates {
+            (GPT-4, 89)
+            (LLaMA, 62) % <-- manualy reduced to 57 for better visuaization
+            % (NeoX-20b, 38)
+            (CodeGen, 52)
+            (StarCoder, 67)
+        };
+                    
+        % Some legend hacks
+        \legend{,}
+        \addlegendimage{black, fill=blue}
+        \addlegendentry{zero-shot}
+        \addlegendimage{black, fill=red, postaction={pattern=north east lines}}
+        \addlegendentry{one-shot}
+    \end{axis}
+\end{tikzpicture}

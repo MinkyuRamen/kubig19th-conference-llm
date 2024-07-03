@@ -1,0 +1,106 @@
+% \input{tables/motivating_egs}
+To establish backgrounds, we first concretize the software tool manipulation setup. We then present a preliminary observation on the capability of open-source LLMs. This observation motivates our study on the challenges in~\Cref{sec:insights} which inspire simple techniques for enhancements in~\Cref{sec:techniques}.  
+
+\subsection{Tool manipulation setup}
+\label{subsec:tool_setup}
+In this paper, we study the scenario where software users intend to translate a natural language goal description $\emph{g}$ into a sequence of application programming interface (API) calls $C_g = \left\{c_0, c_1, \cdots, c_{n_g} \right\}$ to accomplish the goal. We study tool manipulation with open-source LLMs in this specific setting, because APIs serve as the prevalent abstraction for developers and users in modern software systems. 
+
+\paragraph{Large language model} Autoregressive language models encode probabilities of the next word $x_{N + 1}$ given $x_0, x_1, \cdots, x_N$ as the context sequence~\cite{dan_ngram}. By sampling from this conditional probability $p\left(x_{N + 1} | x_0, x_1, \cdots, x_N\right)$ iteratively, it generates language continuations from given contexts. In the recent wave of scaling up model size and training data volume, transformer-based language models show unprecedented capability in instruction following for text and code generation~\cite{brown2020language,sanh2021multitask,chen2021evaluating}. In the context of tool manipulation, we cast goal descriptions and optional information as an instruction in the context and task the LLMs to generate code for API calls as the continuation. 
+% For simplicity, we refer to the large autoregressive  models as large language models (LLMs) for the rest of this paper.
+
+\begin{wrapfigure}[9]{r}{0.475\textwidth}
+\vspace{-23pt}
+    \begin{minipage}{0.475\textwidth}
+      \begin{algorithm}[H]
+        \caption{API Call Generation}
+        \label{alg:multi_step}
+        \begin{algorithmic}[1]
+            \small
+            \Require{Goal $g$, API docs $\mathcal{D}$, action generator $
+            \mathcal{A}$}
+            \Require{Optional info $O$}
+        \Procedure{ActionGen}{$g$, $\mathcal{D}$, $\mathcal{A}$, $O$}
+        \State{$\mathcal{D}_g \leftarrow \mathcal{R}\left(g, 
+\mathcal{D}\right) $} \Comment{Retrieve API functions}
+        % \State{$O_0 \leftarrow \emptyset$}
+        % \For{$i=1,2, \cdots, K$}
+           \State {$C_g\leftarrow\mathcal{A}\left(g, \mathcal{D}_g, O \right)$} \Comment{API call generation}
+           % \State {$O_i \leftarrow \mathcal{E}\left(C_{g, i}\right)$} \Comment{environment observation}
+        % \EndFor
+        % \State\Return {$C_g \leftarrow \textproc{Concat}{\left(C_{g, 0}, C_{g, 1}, \cdots, C_{g, K-1}\right)}$}
+        \State\Return {$C_g$}
+        \EndProcedure
+        \end{algorithmic}
+      \end{algorithm}
+    \end{minipage}
+  \end{wrapfigure}
+\paragraph{Action generator} A key implementation for tool manipulation is an action generator $\mathcal{A}$
+% $\mathcal{A}: g \rightarrow C_g$ 
+which maps a goal $g$ to API calls $ C_g$. As open-source LLMs likely have not seen the information regarding the relevant APIs, we augment an LLM $\mathcal{M}$ into an action generator by providing access to a pool of $m$ candidate API functions $\mathcal{D} =\left\{d_0, d_1, \cdots, d_m \right\}$.
+% \footnote{In practice, we use cleaned-up short documentation containing only API signatures and descriptions.} 
+Due to the input sequence length limit of LLMs, we provide an optional retriever $\mathcal{R}$ to retain a relevant subset of API documents $\mathcal{D}_g = \mathcal{R}\left(g, 
+\mathcal{D}\right) \in \mathcal{D}$. 
+Thus, the action generator produces the sequence of API calls $C_g = \mathcal{A}\left(g, \mathcal{D}_g, O\right)$, where $O$ represents the optional information that can be included in the prompt. 
+This is a naive way of retrieval augmented generation \cite{ram2023context, lewis2020retrieval, izacard2022few} and we employ an off-the-shelf retriever implementation~\cite{bm25} for our study, but we also highly encourage the community to explore algorithms tailored for the action generator.
+ % To , we use a retrier $\mathcal{D}_g = $
+ % We augment the LLM with retrieved documentation to gain knowledge on the relevant APIs because highly likely these APIs are not seen during generic pretraining.
+% We optionally provide the action generator with access to a fixed set of demonstration examples $\mathcal{E} = \left\{e_0, e_1, ..., e_p \right\}$ of goals and API calls. Such examples could potentially provide additional human supervision for enhancement. 
+% \comment{QT: Lets get some correlation on symbols into figure 1 to resolve Tian's comments}
+% \comment{Jian: Let's explicitly mentioned this retrieve based approach is just a baseline and we are encouraging people to explore any other algorithms. }
+
+\paragraph{Single and multi-step tool manipulation}
+% \begin{wrapfigure}[12]{r}{0.55\textwidth}
+% \vspace{-2em}
+%     \begin{minipage}{0.55\textwidth}
+%       \begin{algorithm}[H]
+%         \caption{Multi-Step Tool Manipulation}
+%         \label{alg:multi_step}
+%         \begin{algorithmic}[1]
+%             \small
+%             \Require{Goal $g$, API docs $\mathcal{D}$, multi-step action generator $
+%             \mathcal{A}$}
+%         \Procedure{Multi-Step}{$g$, $\mathcal{D}$, $\mathcal{A}$}
+%         \State{$\mathcal{D}_g \leftarrow \mathcal{R}\left(g, 
+% \mathcal{D}\right) $} \Comment{Retrieve relevant docs}
+%         \State{$O_0 \leftarrow \emptyset$}
+%         \For{$i=1,2, \cdots, K$}
+%            \State {$C_{g, i}\leftarrow\mathcal{A}\left(g, \mathcal{D}_g, O_{i-1} \right)$} \Comment{Action segment}
+%            \State {$O_i \leftarrow \mathcal{E}\left(C_{g, i}\right)$} \Comment{environment observation}
+%         \EndFor
+%         \State\Return {$C_g \leftarrow \textproc{Concat}{\left(C_{g, 0}, C_{g, 1}, \cdots, C_{g, K-1}\right)}$}
+%         \EndProcedure
+%         \end{algorithmic}
+%       \end{algorithm}
+%     \end{minipage}
+%   \end{wrapfigure}
+As shown in \Cref{fig:task_setup}, an action generator may interact with software in either a single-step or a multi-step scenario. 
+In a single-step scenario, action generator directly produces an API call sequence $C_g=\mathcal{A}\left(g, \mathcal{D}_g, \emptyset\right)$. 
+In a multi-step scenario, the action generator produces a series of API call sequences $C_g = \cup_i C_{g, i}$ where each segment $C_{g, i}$ is used to interact with a predefined environment $\mathcal{E}$ and generates the observation $O_i = \mathcal{E}(C_{g, i})$. The observation is then used to generate a new segment $C_{g, i+1} = \mathcal{A}\left(g, \mathcal{D}_g, O_i\right)$. The process stops at an exit state. 
+%%%%%%%%%%%%%% Old Description from Jian.
+% In other cases, the action generator may interact with software environments in multiple steps. 
+% In a $K$-step case, a multi-step LLM action generator $\mathcal{A}_m$ produces a segment of API call sequence $C_g$. Specifically in~\Cref{alg:multi_step}, the $i$-th segment $C_{g, i}$ is generated based on the software-returned information $I_{i-1}$ from the previous step. As an concrete example in \comment{QT, please refer to the example here} for a web shopping task, we implement the segment generation by concatenating the goal description $g$, the retrieved documents $\mathcal{D}_g$ and the software-returned information $I_{i-1}$ on items as the context. The LLM-based action generator then produces the segment $C_{g, i}=\mathcal{A}_s\left(g, \mathcal{D}_g, I_{i-1} \right)$. 
+% where $\mathcal{A}_km$ is a function determined by the model weights of the underlying LLM. 
+Throughout the remainder of this paper, we use the single-step setup for illustration clarity unless stated otherwise. Our experiments in~\Cref{sec:experiments} cover both single and multi-step cases.
+% \comment{QT: we need a multiround example to make the narratives I gave more concretely understandable. Please also align the text to the example you provided here.} 
+% \comment{Jian: See if to use algorithm block}
+
+\subsection{Motivating Observation}
+\begin{wraptable}[8]{r}{0.5\linewidth}
+\caption{Huge capability gaps on a house searching task. Open-source LLMs lag behind the OpenAI GPT-4 by $70\%$ on success rate.}\label{tab:motivating_observation}
+% \vspace{-7pt}
+\begin{adjustbox}{max width=\linewidth}
+\small
+% \begin{tabular}{c@{\hskip 0.75em}c@{\hskip 0.75em}c@{\hskip 0.75em}c}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{ccccc}
+\toprule
+Model & GPT-4 & LLaMA & StarCoder & CodeGen \\
+\midrule
+Open source & \textcolor{red}{\xmark} & \textcolor{green}{\cmark} & \textcolor{green}{\cmark} & \textcolor{green}{\cmark} \\
+Success rate & 77\% & 0\% & 7\% & 0\% \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{wraptable} 
+To assess the tool manipulation capability of open-source LLMs, we compare them to OpenAI GPT-4 API using the setup discussed in~\Cref{subsec:tool_setup}. In this preliminary comparison, we initially anticipate the closed LLMs go exhibit an advantage in tool manipulation, as observed in traditional NLP tasks~\cite{liang2022holistic}. However we observe a significantly larger gap than expected. For instance, in a home search task, open-source LLMs have a hard time to generate correct API calls, resulting in a $70\%$ success rate gap compared to the zero-shot GPT-4 APIs as shown in~\Cref{tab:motivating_observation}. Such gap motivates us to study what impedes open-source LLM' performance.
+% in tool manipulation.

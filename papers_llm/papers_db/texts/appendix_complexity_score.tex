@@ -1,0 +1,131 @@
+\subsection{Complexity score}
+This section introduces a complexity score system designed to measure the intrinsic complexity and difficulty of the tasks from \textit{ToolBench}. The complexity score system aims to provide a quantitative measure of the intrinsic complexity of the tests given the examples by calculating the probability of the tests being derived or converted from the examples; and the derivation or conversion is performed in a random system with all possible outcomes equally likely. This score serves to assess the inherent level of difficulty involved in transitioning from one scenario to another, thereby assisting researchers and developers in benchmark evaluation and analysis.
+
+% \subsubsection{Analogy to entropy theory}
+% The complexity score system presented in this research is closely related to entropy theory, particularly the concept of information entropy. Entropy is a fundamental measure of uncertainty and randomness within a system. In the context of information theory, it quantifies the average amount of information contained in a message or the average amount of uncertainty in the outcome of an event \cite{Shannon1948}. In the complexity score system proposed herein, the calculation of the complexity score involves assessing the probability or likelihood of the tests being derived from an example in the particular task. Analogous to information theory, where entropy is computed based on the probabilities of various events, the complexity score system utilizes the probabilities of different actions, i.e. deletion, insertion, and substitution, of APIs to quantify the complexity between examples and tests.
+
+\subsubsection{The likelihood of a test being derived from an example}
+In the complexity score system proposed herein, the calculation of the complexity score involves assessing the probability or likelihood of the tests being derived from an example in the particular task. Given a demonstration example $e$ and a set of API functions $\mathcal{D}$, the derivation of a particular test sample $t$ involves two major steps: 1) remove all the unused API calls while keeping all the necessary ones and 2) insert the new API calls that $e$ does not cover. Given a random system, where all possible outcomes are equally likely, we suppose the deletion possibility of each API call from $e$ is 50\%, while the insertion possibilities of the correct API call is $1 / |\mathcal{D}|$, where $|\mathcal{D}|$ is the total number of API functions of the given task. If $t$ or $e$ contains multiple calls to the same API function, we consider them as different API calls, because they are usually not interchangeable. Based on these assumptions, the likelihood of generating a test sample $t$ is calculated using Equation (1). 
+
+% Given any example $e$, the derivation of a particular test $t$ involves three actions: deletion, insertion, and substitution, as depicted in \cite{Shannon1948}. In a random system where all possible outcomes are equally likely, the deletion possibility of each API call from the example can be 50\%, while the insertion and substitution possibilities of a particular API call can be  \(1/N\), as \(N\) is the total number of API functions in the task. Based on these assumptions, the likelihood of generating a test \(test_i\) given an example \(example_j\) can be calculated using Equation (1). 
+
+\begin{equation}
+    \label{eq:equation1}
+    p(t~|~e, \mathcal{D})=\left(\frac{1}{2}\right)^{|e|} \left(\frac{1}{|\mathcal{D}|}\right)^{|t \setminus e|}
+\end{equation}
+
+where $|e|$ represents the number of API calls in the example $e$, and $|t \setminus e|$ is the number of uncovered API calls in the test sample. Suppose we have a task that has 10 API functions in total $\{a_i\}_1^{10}$, and the demonstration example covers $\{a_1, a_2, a_3, a_4\}$, but the test sample requires $\{a_1, a_2, a_6, a_4, a_5\}$. In the first step, the probability of successfully dropping $a_3$ while keeping the rest ones in $e$ is $\left(\frac{1}{2}\right)^4$. Then, the probability of correctly adding in the uncovered ones, $a_5$ and $a_6$, is $\left(\frac{1}{10}\right)^2$. Note that we do not take the order of API calls into consideration for the purpose of being simple without losing generosity. 
+
+
+\subsubsection{The distance between a test and example pair}
+We first define the distance $d$ between one particular test and example pair by take the logarithm of the reciprocal of Equation (1) as:
+\begin{equation}
+    \label{eq:equation2}
+    d(t, e) = \log\left[\frac{1}{p(t~|~e, \mathcal{D})}\right]
+\end{equation}
+The use of the reciprocal in the expression aligns the complexity score with the definition of complexity, where a higher score indicates a greater level of complexity. Additionally, applying the logarithm to the reciprocal value aids in addressing the magnitude gap. The logarithm function compresses the range of values, reducing the impact of extreme values and creating a more manageable scale. This normalization ensures that the complexity score is not disproportionately influenced by outliers or extreme values, providing a more balanced representation of complexity across the range of input values. By combining the reciprocal and logarithm, the expression effectively balances the score by aligning it with the definition of complexity and mitigating the impact of magnitude differences in the input values.
+
+\subsubsection{Complexity score of a task}
+\label{sec:complexity}
+Based on the complexity score of generating a test from an example, we can construct the complexity score $S$ of a given task. The score $S = f(\mathcal{T}, \mathcal{X}, \mathcal{D})$ is a function of the test samples $\mathcal{T}$, the demonstration examples $\mathcal{X}$ and the API functions $\mathcal{D}$ of each task. 
+% The process involves traversing all the tests in the task and retrieving the minimum complexity score  \(complexity_{test\_example\_pair}\). To obtain the task complexity score, we average the complexity scores across all the tests. This approach accounts for the inherent complexity and difficulty associated with each test-example pair, capturing the overall complexity of the task.
+% \begin{equation}
+%     \label{eq:equation3}
+%     complexity_{task} = \frac{1}{n}\sum_{j=0}^{n-1}(\min\limits_{0 \leq j \leq m-1}\log(\frac{1}{p(test_i|example_j)})) 
+% \end{equation}
+
+
+\begin{equation}
+\begin{aligned}
+    % S &= f(\mathcal{T}, \mathcal{X}, \mathcal{D}) \\
+    S(\mathcal{T}, \mathcal{X}, \mathcal{D}) &= \mathbb{E}_{t \in \mathcal{T}}\min\nolimits_{e \in \mathcal{X}} d(t, e) \\
+    &= \mathbb{E}_{t \in \mathcal{T}}\min\nolimits_{e \in \mathcal{X}}\log\left[\frac{1}{p(t~|~e, \mathcal{D})}\right]  \\
+    &= - \mathbb{E}_{t \in \mathcal{T}}\max\nolimits_{e \in \mathcal{X}}\log\left[\left(\frac{1}{2}\right)^{|e|} \left(\frac{1}{|\mathcal{D}|}\right)^{|t \setminus e|}\right]
+\end{aligned}
+\end{equation}
+
+This score ranges from zero to infinity. The larger the score is, the more challenging a task is in terms of API selection. We calculate this score for both the original \snact~(\Cref{tab:all_tasks}) and the training data we created for alignment \Cref{tab:training_data}. They share the same $\mathcal{D}$ and $\mathcal{T}$, but have a different $\mathcal{X}$, so that their API selection complexities are different for each task.
+
+
+% \subsubsection{Multi-argument case}
+% In the multi-argument API scenario, each API $a \in \mathcal{T}$ composed of multiple arguments $r \in \mathcal{Z}$.
+
+
+% \begin{equation}
+% \begin{aligned}
+%     % S &= f(\mathcal{T}, \mathcal{X}, \mathcal{D}) \\
+%     S(\mathcal{T}, \mathcal{X}, \mathcal{D}, \mathcal{Z}) = - \mathbb{E}_{t \in \mathcal{T}}\max\nolimits_{e \in \mathcal{X}}\log\left[\left(\frac{1}{2}\right)^{|e|} \left(\frac{1}{|\mathcal{D}|}\right)^{|t \setminus e|} \prod_{i=1}^{|t \setminus e|}\frac{1}{r_i} \right]
+% \end{aligned}
+% \end{equation}
+
+\subsection{Complexity score on the \snact}
+In this section we demonstrate how the complexity score behaves on the \snact. 
+
+\subsubsection{Computation details}
+For the Trip Booking, Home Search, Virtual Home, and Google Sheets tasks, the set of API functions $\mathcal{D}$ is the same as described in~\cref{sec:benchmark_details}. For the single-step, single-API-call tasks, Open Weather and The Cat API, each valid URL with parameters is treated as a unique API option in set $\mathcal{D}$. In total, Open Weather has 37 API options, while The Cat API has 52 API options. In the case of the Tabletop task, since there are no predefined correct answers for the test cases, we divide the three set of "Tabletop Manipulation" examples\footnote{https://code-as-policies.github.io/} into 65 single-step samples. Note that for the WebShop task, since there are only two API functions always covered by the example set, the complexity score is 0 by definition. 
+
+\subsubsection{Reversed-F1 Score}
+For comparison purpose, we also consider the simple Reversed-F1 (r-F1) distance $d_{r-F1}$, derived from the conventional F1 score\cite{davis2006relationship}, between one particular test and example pair as
+
+\begin{equation}
+    d_{r-F1}(t, e) = (1-F1(t,e)) *100
+\end{equation}
+We multiply 100 to the score to align with the range of the complexity score defined above. Follow the same definition proposed in \cref{sec:complexity}, we can construct the r-F1 score $S_{r-F1}$ of a given task as:
+
+\begin{equation}
+\begin{aligned}
+    S_{r-F1}(\mathcal{T}, \mathcal{X}) &= \mathbb{E}_{t \in \mathcal{T}}\min\nolimits_{e \in \mathcal{X}} d_{r-F1}(t, e) \\
+    &= \mathbb{E}_{t \in \mathcal{T}}\min\nolimits_{e \in \mathcal{X}}\left[(1-F1(t,e)) *100\right]
+\end{aligned}
+\end{equation}
+
+\subsubsection{Measurements}
+
+\begin{figure}
+    % \vspace{-18pt}
+    \caption{Spearman's correlation coefficient(SCC) is computed separately for two comparisons: (1) complexity score and error rate, and (2) reversed F1 score and error rate on five tasks: (1) Open Weather, (2) The Cat API, (3) Home Search, (4) Trip Booking, and (5) Virtual Home. }\label{fig:scc}
+    \includegraphics[width=\textwidth]{plots/scc.png}
+\end{figure}
+
+\begin{wraptable}[7]{r}{0.63\textwidth}
+\vspace{-12pt}
+    \centering
+    \caption{Spearman’s Correlation Coefficients}
+    \begin{tabular}{ccccc}
+        \toprule
+        & GPT-4 & LLaMA & CodeGen & StarCoder  \\
+        \midrule
+        Complexity & 0.2 & 1.0 & 1.0 & 0.7 \\
+        r-F1 & -0.3 & 0.7 & 0.7 & 0.3 \\
+        \bottomrule
+    \end{tabular}
+    \label{table:scc}
+\end{wraptable}
+In this section, Spearman's Correlation Coefficient (SCC) \cite{hauke2011comparison} is employed to assess the effectiveness of the proposed complexity score. The evaluation involves the analysis of five different tasks using three models: GPT-4, LLaMA-30b, CodeGen-16b, and StarCoder. We only include the five tasks without advanced reasoning from \cref{tab:all_tasks}, as the advanced reasoning breaks the correlation between the API selection difficulty and the final model performance. The complexity score and the r-F1 score are calculated for each task. SCC is then computed separately for two comparisons: (1) complexity score and error rate, and (2) reversed F1 score and error rate, for all five tasks. The results are illustrated in \cref{fig:scc} and \cref{table:scc}.
+
+The findings of the study reveal near-perfect Spearman's correlation coefficient (SCC) between the complexity score and the error rate for the LLaMA-30b, CodeGen-16b and StarCoder models. This strong correlation indicates that the proposed complexity score system accurately captures the intrinsic difficulty of these tasks.
+
+For more powerful models like GPT4, which exhibit near-perfect accuracy (above 93\%) for low-complexity tasks (complexity < 12) such as Open Weather, The Cat API, Home Search, and Trip Booking, the SCC becomes relatively sensitive to any randomness or turbulence during the experiments. Consequently, the complexity score system shows a non-perfect SCC of 0.2 in this case.
+
+Despite the sensitivity of the SCC in the GPT4 experiments, the complexity score remains a superior indicator of task difficulty compared to the r-F1 score. It effectively captures the inherent difficulty of each task and provides valuable insights into task complexity. Overall, complexity score is more effective at capturing the inherent difficulty of each task, thus providing valuable insights into task complexity.
+
+The obtained results provide empirical evidence supporting the validity and reliability of the proposed complexity score system. The high SCC values signify a consistent relationship between the complexity score and the error rate across different models and tasks. This correlation strengthens the argument that the complexity score accurately captures the complexity and difficulty of the benchmarks, enabling researchers and developers to assess and compare the inherent challenges associated with different tasks.
+
+% \comment{edison: clearer definition of r-f1, also do we have any simpler metrics to compare with? Let's list a table for better comparison as well.}
+
+
+%% Review Q
+% 1. Show example of oracle examples (to describe)?
+% 2. Closed API?
+% 3. "In this paper, we ask can we enhance open-source LLMs to be competitive to leading closed APIs in tool manipulation, with practical amount of human supervision"?
+% 3. capitalization of the terms?e.g. GPT-4
+
+
+
+
+
+
+
+
+
+

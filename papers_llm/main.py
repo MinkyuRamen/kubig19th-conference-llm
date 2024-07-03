@@ -55,8 +55,8 @@ def handle_message_events(event, message, say):
     memory = ConversationBufferMemory(return_messages=True, memory_key="chat_history")
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, memory=memory)
     try:
+        bot_response = agent_executor.invoke({"input": text, 'chat_history': memory})
         try: 
-            bot_response = agent_executor.invoke({"input": text, 'chat_history': memory})
             if bot_response['output'].split(': ')[-1].endswith('.pdf'):
                 img_path = bot_response['output'].split(': ')[-1]
                 print('there is a figure path FORMAT1!',img_path)

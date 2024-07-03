@@ -1,0 +1,21 @@
+% \comment{Tian: Feel free to remove this paragraph if you find it not super relevant.}
+% Our work enriches the existing literature tool learning and LLM-powered program synthesis. We first provide a comprehensive overview of the latest developments in tool learning. Then, we examine relevant research on LLM-powered program synthesis.
+
+Our work establishes a strong connection to the LLM-driven program synthesis. In contrast to the conventional rule-based code generation in popular compilation frameworks \cite{lattner2020mlir}, recent auto-regressive LLMs such as CodeGen\cite{nijkamp2022codegen}, SantaCoder\cite{allal2023santacoder} and StarCoder\cite{li2023starcoder} treat the problem as a sequence generation task and demonstrate superior capabilities in emitting semantically correct computer programs. We use CodeGen as a representative from these models in our study for API call generation. 
+% We select CodeGen as it shows the best success rate among these models in our preliminary study.
+% However, as noted by \cite{nijkamp2022codegen}, large search space of programs states and nuances of user intent often limit the quality of the generated program. To pave the way towards high-quality program synthesis, we leverage high-level API calls as a middle point between lower-level programs and high-level user actions to narrow down the search space and elucidate user intent.
+
+Tool manipulation are also known as tool augmented learning \cite{qin2023tool, yang2023foundation}. Some of the works seek to augment generations with the execution results from various tools\cite{schick2023toolformer, mialon2023augmented, yao2022react, izacard2022few, liang2023taskmatrix, cobbe2021training, parisi2022talm}, while another line of works focus on executing the tools themselves, including embodied robotic learning \cite{liang2022code, huang2022language, ahn2022can, singh2022progprompt, vemprala2023chatgpt}, and automation for other tools \cite{yao2023webshop, nakano2021webgpt, wu2023visual, kim2023language}. 
+% Tool learning can be categorized into two main streams \cite{qin2023tool, yang2023foundation}. 
+% The first stream, tool-augmented learning, seeks to augment foundation models with the execution results from various tools\cite{mialon2023augmented}. In this paradigm, tools are viewed as complementary resources that aid in the generation of high-quality outputs.
+% Typical works along this line of augmentation from other tools \cite{yao2022react, izacard2022few, schick2023toolformer, liang2023taskmatrix, cobbe2021training, parisi2022talm}.
+% The second stream, tool-oriented learning, shifts the primary goal of the learning process from model augmentation to executing the tool itself. This paradigm focuses on developing models that can govern tools and make sequential decisions in place of humans \cite{yang2023foundation}. This is a popular research topic including, embodied robotic learning \cite{huang2022language, ahn2022can, liang2022code, singh2022progprompt, vemprala2023chatgpt}, and automation for other tools \cite{nakano2021webgpt, yao2023webshop, wu2023visual, kim2023language}. 
+We focus on the study of the second stream with different models and techniques. 
+
+Recent works in tool manipulation with LLMs mostly study techniques to enhance in-context-learning with closed LLMs APIs~\cite{schick2023toolformer, li2023api, qin2023tool, autogpt, shen2023hugginggpt}. In contrast, we study simple techniques to allow for developers to practically build on top of open-source LLMs.
+The three techniques we mention in this paper~\cite{glaese2022improving, brown2020language, izacard2022few, ratner2017snorkel} are well studied in the conventional NLP tasks. We revisit and adapt them in the context of tool manipulation on open-source models with a practical amount of human supervision.
+In the recent LLM literature, there are several works presenting tool manipulation benchmarks~\cite{li2023api, qin2023tool}. Compared to these benchmarks, the \snact~is the first one providing predefined test cases for evaluation on real execution results.
+
+
+
+

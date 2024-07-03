@@ -1,0 +1,63 @@
+
+\begin{table}[]
+\centering
+\caption{The performance on \snact~of different models in 3-shot scenario. The models are group by their architecture and training data.}
+\label{tab:baselines_over_models}
+\begin{adjustbox}{max width=\textwidth}
+
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}cccccccccc@{}}
+\toprule
+                                 & \textbf{Open}                           & \textbf{The Cat}                    & \textbf{Home}        & \textbf{Trip}        & \textbf{Google}      &                                        & \multicolumn{2}{c}{\textbf{WebShop}}                                   &                                     \\
+\multirow{-2}{*}{\textbf{Task}}  & {\color[HTML]{1F1F1F} \textbf{Weather}} & {\color[HTML]{1F1F1F} \textbf{API}} & \textbf{Search}      & \textbf{Booking}     & \textbf{Sheets}      & \multirow{-2}{*}{\textbf{VirtualHome}} &  \textbf{Long} & \textbf{Short} & \multirow{-2}{*}{\textbf{Tabletop}} \\
+max tokens to generate & 128 & 128 & 128 & 300 & 256 & 128 & \multicolumn{2}{c}{128} & 256 \\
+num API function       & all & all & all & all & 10  & 10  & \multicolumn{2}{c}{all} & 0  \\
+\midrule
+\textbf{\textit{Closed-source}}                         & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{}                   & \multicolumn{1}{l}{}       & \multicolumn{1}{l}{}      & \multicolumn{1}{l}{}                \\
+gpt4                    & 93.0 & 96.0 & 97.0 & 96.7 & 62.9 & 23.0 / 23.5 & \multicolumn{2}{c}{0.0} & 81.0 \\
+text-davinci-003        & 99.0 & 98.0 & 97.0 & 89.2 & 62.9 & 31.0 / 25.1 & \multicolumn{2}{c}{0.0} & 66.7 \\
+gpt-3.5-turbo           & 90.0 & 92.0 & 80.0 & 85.8 & 51.4 & 20.0 / 18.9 & 0.0        & 1.8        & 33.3 \\
+text-curie-001          & 8.0  & 58.0 & 6.0  & 6.7  & 1.4  & 12.0 / 4.1  & 0.0        & 0.0        & 1.0  \\
+\midrule
+\textbf{\textit{Open-source}}                         & \multicolumn{1}{l}{}                    & \multicolumn{1}{l}{}                & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{} & \multicolumn{1}{l}{}                   & \multicolumn{1}{l}{}       & \multicolumn{1}{l}{}      & \multicolumn{1}{l}{}                \\
+llama-65b               & 90.0 & 80.0 & 84.0 & 65.8 & 32.9 & 32.0 / 20.3 & 0.0 & 41.2 & 30.5 \\
+% llama-30b               & 80.0 & 84.0 & 65.0 & 45.8 & 37.1 & 25.0 / 21.5 & 0.0 & 31.4 & 34.3 \\
+llama-30b               & 78.0 & 84.0 & 66.0 & 45.0 & 37.1 & 27.0 / 21.7 & 0.0 & 30.6 & 34.3 \\
+
+llama-13b               & 70.0 & 74.0 & 45.0 & 35.8 & 5.7  & 28.0 / 18.9 & 0.0 & 27.6 & 17.1 \\
+llama-13b-alpaca   & 62.0 & 43.0 & 44.0 & 40.8 & 11.4 & 1.0 / 1.6   & 0.0 & 2.7  & 9.5  \\
+\cmidrule(lr){1-1}
+% starcoder               & 47.0 & 82.0 & 80.0 & 55.0 & 44.3 & 22.0 / 18.1 & 1.5 & 0.4  & 22.9 \\
+starcoder               & 91.0 & 84.0 & 82.0 & 51.7 & 48.0 & 23.0 / 19.4 & 2.6 & 0.0  & 21.9 \\
+starcoderbase           & 90.0 & 86.0 & 79.0 & 63.3 & 42.9 & 24.0 / 16.3 & 5.8 & 23.1 & 17.1 \\
+\cmidrule(lr){1-1}
+codegen-16B-nl          & 51.0 & 75.0 & 37.0 & 21.7 & 7.1  & 43.0 / 18.0 & 0.0 & 0.0  & 16.2 \\
+codegen-16B-multi       & 56.0 & 75.0 & 47.0 & 7.5  & 21.4 & 31.0 / 14.1 & 0.0 & 0.5  & 8.6  \\
+% codegen-16B-mono        & 65.0 & 72.0 & 52.0 & 22.5 & 38.6 & 26.0 / 15.5 & 0.0 & 5.7  & 14.3 \\
+codegen-16B-mono        & 63.7 & 72.0 & 52.0 & 28.3 & 31.5 & 28.0 / 15.7 & 1.5 & 6.6  & 15.2 \\
+\cmidrule(lr){1-1}
+bloomz                  & 58.0 & 85.0 & 36.0 & 22.5 & 14.3 & 9.0 / 4.9   & 0.0 & 1.0  & 1.0  \\
+\cmidrule(lr){1-1}
+opt-iml-30b             & 44.0 & 48.0 & 5.0  & 3.3  & 2.9  & 13.0 / 8.3  & 0.0 & 0.0  & 1.0  \\
+opt-30b                 & 46.0 & 35.0 & 2.0  & 3.3  & 8.6  & 24.0 / 11.7 & 0.0 & 0.0  & 1.0  \\
+opt-iml-1.3b            & 20.0 & 28.0 & 0.0  & 0.0  & 4.3  & 13.0 / 3.1  & 0.0 & 0.0  & 1.0  \\
+opt-1.3b                & 18.0 & 30.0 & 0.0  & 0.0  & 1.4  & 31.0 / 9.7  & 0.0 & 0.0  & 1.0  \\
+\cmidrule(lr){1-1}
+neox-20b                & 55.0 & 69.0 & 27.0 & 10.8 & 18.6 & 28.0 / 15.3 & 0.0 & 8.8  & 6.7  \\
+GPT-NeoXT-Chat-Base-20B & 43.0 & 73.0 & 28.0 & 10.8 & 4.3  & 26.0 / 13.1 & 0.0 & 0.7  & 7.6  \\
+\cmidrule(lr){1-1}
+pythia-12b              & 53.0 & 65.0 & 12.0 & 0.8  & 11.4 & 17.0 / 12.1 & 0.0 & 0.0  & 1.9  \\
+dolly-v2-12b            & 0.0  & 1.0  & 10.0 & 5.0  & 7.1  & 11.0 / 8.9  & 0.0 & 0.0  & 7.6  \\
+pythia-12b              & 53.0 & 65.0 & 12.0 & 0.8  & 11.4 & 17.0 / 12.1 & 0.0 & 0.0  & 1.9  \\
+pythia-6.9b  & 41.0 & 72.0 & 8.0  & 7.5  & 4.3  & 29.0 / 14.0 & 0.0 & 0.0  & 8.6  \\
+pythia-2.8b  & 49.0 & 54.0 & 7.0  & 3.3  & 12.9 & 24.0 / 14.8 & 0.0 & 0.0  & 7.6  \\
+pythia-1.4b  & 37.0 & 48.0 & 4.0  & 5.0  & 10.0 & 22.0 / 10.7 & 0.0 & 5.2  & 7.6  \\
+\cmidrule(lr){1-1}
+stablelm-base-alpha-7b  & 22.0 & 47.0 & 0.0  & 0.0  & 4.3  & 28.0 / 10.3 & 0.0 & 0.0  & 2.9  \\
+stablelm-tuned-alpha-7b & 23.0 & 38.0 & 0.0  & 0.0  & 1.4  & 26.0 / 7.3  & 0.0 & 0.0  & 3.8  \\
+stablelm-base-alpha-3b  & 6.0  & 28.0 & 0.0  & 0.0  & 1.4  & 29.0 / 5.3  & 0.0 & 0.0  & 1.0  \\
+stablelm-tuned-alpha-3b & 14.0 & 31.0 & 0.0  & 0.8  & 0.0  & 8.0 / 5.6   & 0.0 & 0.0  & 1.0  \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}

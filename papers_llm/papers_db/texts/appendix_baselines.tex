@@ -1,0 +1,85 @@
+\input{tables/all_models}
+
+In this section, we want to compare the performance of different models on the \snact. Specifically, we selected 27 representative LLMs from both closed and open-source community, and evaluate them on the \snact~in 3-shot scenario.
+
+\subsection{Models}
+
+
+As listed in Table \ref{tab:all_models}, we select a set of representative LLMs from both closed-source and open-source community.
+
+The closed models are the (Generative Pre-trained Transformer) GPT series from OpenAI, especially the GPT-3\cite{brown2020language} and its successors\cite{OpenAI2023-ov}. GPT-3 is a state-of-the-art language model developed by OpenAI, with 175 billion parameters, making it the largest and most powerful language model ever created. It is capable of performing a wide range of natural language processing tasks and has the potential to revolutionize the way we interact with and understand language. Due to the lack of detailed information about its training, we are motivated to study methods to build models achieving similar capabilities, especially using open-source models.
+
+We select the representative and the most advanced open-source models from recent years in our work. They are all decoder-only models, based on transformers\cite{vaswani2017attention} architecture. 
+Bloomz\cite{muennighoff2022crosslingual} is the largest open-source LLM built upon the large-scale multilingual pretrained BLOOM\cite{bigscience_workshop_2022}. Bloomz is funtuned on xP3\cite{muennighoff2022crosslingual}, a crosslingual task mixture, for crosslingual generalization to unseen tasks and languages. 
+StarCoder\cite{li2023starcoder} is a family of models developed for purely code generation and synthesis with 8K context length. They exhibit superior performance on common code generation benchmarks. 
+LLaMA\cite{touvron2023llama} is a family of pretrained models, that are performant on quite a few NLP benchamrks. Although they are not as large as Bloomz, they are all trained for almost 4 times longer than Bloom. This is an important reason why they are able to outperform several top peer models on many NLP tasks. Alpaca \cite{chavinlo-gpt4-x-alpaca, alpaca} is fine-tuned LLaMA-13b model on 52K instruction-following data as well responses from GPT-4. 
+OPT-IML\cite{iyer2022opt} is the finetuned version of the original OPT\cite{zhang2022opt}, which is the first family of large-scale (176 billion parameters) open-source models that are trained on publicly available datasets. OPT-IML significatly improves the instruction following capability of OPT by training on a large benchmark of 2000 NLP tasks for Instruction MetaLearning (IML). We only select the publicly accessibile checkpoints from the OPT families in our work.
+
+Another important family of models are all developed from the NeoX toolkit\cite{gpt-neox-library} and pretrained using the PILE dataset\cite{gao2020pile}. 
+GPT-NeoX-20B\cite{black2022gpt} is only pretrained on the PILE, while GPT-NeoXT-Chat-Base-20B\cite{openchatkit} is further finetuned on the OIG-43M\cite{oig-data}, a dataset targetting better instruction following capability. 
+CodeGen family\cite{nijkamp2022codegen} is designed for superior capability on code generation, as they are heavily finetuned on large code datasets. 
+% Cerebras-GPT-13B \cite{dey2023cerebras}.
+Pythia family\cite{biderman2023pythia} is a suite of models designed for analyzing LLMs across training and scaling. They are all pretrained on the Pile in the same way, but have different model sizes and intermediate checkpoints released during training. We use those variants in our ablation study.
+Dolly\cite{dolly} is finetuned beyond Pythia-12b on a new, high-quality human generated instruction following dataset, crowdsourced among Databricks employees.
+The StableLM family\cite{stablelm} is pre-trained on an experimental version of the PILE datasets which has 1.5 trillion tokens in total. The models have a sequence length of 4096 to push beyond the context window limitations of the existing open-source language models. The instruction tuned counterpart of each model is also released. By the time we publish this work, only 7b and 3b models are released, while the team behind them is training larger models. 
+
+There are other notable models, such as FlanT5\cite{chung2022scaling}, the T0 family\cite{sanh2021multitask}, and the T5 family\cite{raffel2020exploring}, that have shown promising performance. We do not include all of them in our baseline comparison, as some of their features are not designed for the task at hand. For example, their tokenizers do not distinguish between spaces, tabs and new lines, making it hard for them to generate executable code based on API function calls.
+
+
+\subsection{Evaluation}
+
+% Specifically, the prompt is formed like
+% $$
+% I have the following set of API:
+% {top-k API functions}
+% -------------
+% I have the following set of examples:
+% {top-k examples}
+% -------------
+% Task: {command} (Answer in code only)
+% Actions:
+% $$
+
+To collect the baseline results, we exploit the naive approach described in section \ref{sec:background} as the action generator. 
+We give each LLM sufficient max tokens to generate on each task and retrieve as many API functions as possible in the prompt. The detailed information is listed in \Cref{tab:baselines_over_models}. We evaluate all the models on a mixture of GPUs and RDUs\cite{koeplinger2018spatial, prabhakar2017plasticine, prabhakar2021sambanova}. In particular, the 176b-parameter bloomz is evaluated on RDU, while all the other models are evaluated on NVIDIA A100 GPUs with 80GB RAM. 
+
+For these models, We only conduct the few-shot evaluation described \Cref{sec:experiments} because 1) zero-shot results are not representative, as most of them are zero, 2) it is not practical to tune all the models on our training data, and 3) few-shot results can be used as a great proxy of the model performance in all the other settings.
+For the conversation-oriented models, including gpt-3.5-turbo, chavinlo/gpt4-x-alpaca, GPT-NeoXT-Chat-Base-20B and dolly-v2-12b, we additionally add \texttt{<human>:} and \texttt{<bot>:} key words in the prompt to better align with their training data format for better performance.
+
+\input{tables/baselines_over_models}
+After we get the completion from the LLMs given a prompt, only minimal post-processing steps are applied to the completion: 
+1) Properly truncate the completion, given the list of task-specific stop sequences and 
+2) Replace the \texttt{\{API\_KEY\}} keywords in the completion with the real API key, so as to execute the code properly. Finally, as shown in Figure \ref{fig:task_setup}, to validate the action generated for the single-step tasks, we execute the generated API calls and compare its output against the ground truth; while for the multi-step tasks, the actions are used to interact with the environment directly and only the final status is evaluated. For each task, we report the metrics described in~\Cref{sec:benchmarks} for each task. Note that we only evaluate the top 1 generated action with sampling disabled. This is because, in practice, action can only be executed once and there is no chance to reset things and try another action. 
+
+
+
+
+
+
+
+
+\subsection{\snact~performance of different models}
+The performance of different models are summarized in \Cref{tab:baselines_over_models}. Below we show several observations.
+
+\paragraph{Capability Gap} Currently, the GPT family of models stands out as the leading players in the field, and there is a significant gap between GPT-4, GPT-3.5 and all the other open-source models. While open-source models may demonstrate competitiveness on some simpler tasks, they lag far behind on more challenging tasks such as Google Sheets and Tabletop.
+
+\paragraph{Instruction tuning on conventional NLP tasks doesn't help}
+Comparing the models between chavinlo/gpt4-x-alpaca and LLaMA-13b, OPT-IML and OPT, StableLM-tuned and StableLM-base, NeoX-Chat-Base-20b and NeoX, and dolly and pythia, the former model in each pair is intentionally optimized to enhance instruction following capability compared to the latter model. However, no significant accuracy improvement is observed on the \snact. 
+Further, the LLaMA family, despite not undergoing any specific instruction tuning during training, still achieves relatively good quality compared to other public models.  
+
+\paragraph{Model size is important} By comparing the performance of models from GPT faimily, LLaMA family, OPT family, Pythia family and StableLM family, we can clearly see the trend that the larger models tend to perform better on the \snact, given the same quantity and quality of their training data. 
+
+\paragraph{Code generation is important} StarCoder and CodeGen faimily stand out among other models with similar sizes on \snact, while StarCoderBase is even on par with the llama-65b model which is more than 4 times larger in size. CodeGen-16B-mono is overall better than its base model CodeGen-16B-nl, which is not specifically tuned for code generation. It is also surprisingly better than CodeGen-16B-multi on almost all the tasks, indicating that it is highly beneficial for action generation if the model is heavily tuned on Python-style code generation. 
+% CodeGen-16B-mono also stands out among other models with similar sizes and is on par with llama-13b that has trained 1.5 times longer. 
+
+
+% \textbf{[Optional] Training for longer is important} LLaMA family has superior performance among other models, and we conjecture it is because they are trained for much longer than their competitors. We have an ablation study on pythia intermediate checkpoints, and we can confirm that the longer the better. [results not consistent]
+
+
+% \textbf{[Optional] Instruction following is important}. Results are not consistent. The major difference between opt-30b and opt-iml-30b is the latter was built to follow instructions while the former doesn't. 
+
+% \textbf{larger SS / better context -> better acc}
+
+% \textbf{zero-shot is much harder}
+
+% \textbf{IT does not help for <=7B models?}

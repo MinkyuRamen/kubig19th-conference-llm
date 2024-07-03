@@ -1,0 +1,56 @@
+\begin{tikzpicture}[]
+    \begin{axis}[
+        ybar=0.0cm,
+        % Size
+        width=0.57\linewidth,
+        height=3.7cm,
+        bar width=5pt,
+        enlarge x limits=0.2,
+        ymajorgrids,
+        % Axes
+        ylabel={API selection acc.},
+        ymin=0,
+        xtick=data,
+        ytick={0, 30, 60, 90},
+        x tick label style={xshift=3ex,rotate=20,anchor=east,yshift=-4pt,font=\tiny},
+        y label style={yshift=-2.5ex, font=\small},
+        symbolic x coords = {GPT-4, LLaMA, StarCoder, CodeGen},
+        tickwidth         = 1pt,
+        % Legend
+        legend style={
+            at={(0.715,1)},
+            anchor=north,
+            legend columns=1,
+            font=\tiny,
+            /tikz/every even column/.append style={column sep=0.cm, row sep=-2pt},
+        },
+        ]
+        
+        % goal only, with "To achieve this request, utilize Curl to make a GET request and call the OpenWeather API. (Answer in code only)"
+        \addplot[black, fill=blue] coordinates { 
+            (GPT-4, 76)
+            % (LLaMA, 11)
+            % (NeoX-20b, 28)
+            (LLaMA, 2)
+            (CodeGen, 18)
+            (StarCoder, 13)
+        };
+
+        % % API doc + goal, with "(Answer in code only)"
+        % \addplot[black, fill=red, postaction={pattern=north east lines}] coordinates {
+        %     (GPT-4, 99)
+        %     % (LLaMA, 14)
+        %     % (NeoX-20b, 68)
+        %     % (CodeGen, 59)
+        %     (LLaMA, 33)
+        %     (StarCoder, 3)
+        % };
+                    
+        % Some legend hacks
+        \legend{}
+        \addlegendimage{black, fill=blue}
+        \addlegendentry{goal only}
+        % \addlegendimage{black, fill=red, postaction={pattern=north east lines}}
+        % \addlegendentry{API doc + goal}
+    \end{axis}
+\end{tikzpicture}

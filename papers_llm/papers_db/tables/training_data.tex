@@ -1,0 +1,36 @@
+\begin{table}[]
+\centering
+\caption{The statistics of model alignment data}
+\label{tab:training_data}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{ccccccccc}
+\toprule
+\multirow{2}{*}{\textbf{Task}} &
+  \textbf{Open} &
+  \textbf{The Cat} &
+  \textbf{Home} &
+  \textbf{Trip} &
+  \multicolumn{1}{c}{\textbf{Google}} &
+  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{VirtualHome}}} &
+  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{WebShop}}} &
+  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Tabletop}}} \\
+ &
+  \textbf{Weather} &
+  \textbf{API} &
+  \textbf{Search} &
+  \textbf{Booking} &
+  \multicolumn{1}{c}{\textbf{Sheets}} &
+  \multicolumn{1}{c}{} &
+  \multicolumn{1}{c}{} &
+  \multicolumn{1}{c}{} \\
+\midrule
+Templates        & 90   & 40   & 100  & 30   & 1   & 1   & 2    & 1 \\
+Repeat           & 20   & 45   & 18   & 60   & 118 & 512 & 900  & 74 \\
+Training samples & 1800 & 1800 & 1800 & 1800 & 118 & 512 & 1800 & 74 \\
+\midrule
+Complexity score & 1.1 & 1.0 & 6.4 & 10.1 & 12.1 & 12.3 & 0.0 & 4.6 \\
+
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}

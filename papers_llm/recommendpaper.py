@@ -206,7 +206,9 @@ class RecommendPaper:
             response = requests.get(url, params=query_params, headers=headers)
             response.raise_for_status()
         except requests.exceptions.RequestException as e:
-            raise NetworkError(f"Error fetching data from Semantic Scholar API: {e}")
+            raise NetworkError(f"현재 Semantic Scholar API가 불안정해서 에러가 발생했습니다. 잠시후에 다시 진행해주세요(API 키가 무료버전이여서 그래요 ㅜㅜ)")
+            # raise NetworkError(Error fetching data from Semantic Scholar API: {e}")
+
         try:
             target_response = response.json()
         except ValueError:
@@ -283,4 +285,4 @@ class RecommendPaper:
         elif rec_type == 'reference':
             return self.reference_recommend(query=query, rec_num=rec_num, num=30)
         else:
-            raise Exception('rec type should be either citation or reference')
+            raise Exception('citation 논문들을 추천받을지 reference 논문들을 추천받을지 입력해줘야 합니다!')

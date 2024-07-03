@@ -1,0 +1,49 @@
+
+\subsection{OpenWeather}
+
+This task involves using the REST API to interact with OpenWeather website\footnote{https://openweathermap.org/api}. We include 9 types of API calls that cater to 9 categories of queries, including but not limited to retrieving current weather data in a city, obtaining air quality data at a specific longitude and latitude, and acquiring weather forecast data for a location specified by a zip code. Making each type of API calls involves correctly filling 2 to 3 required parameters (such as \texttt{lon} for longitude and \texttt{lat} for latitude) and 0 to 3 optional parameters (such as \texttt{lang} for language and \texttt{units} for units of measurement), depending on the requirements specified in each query. In total, we develop 100 unique queries for the 9 categories and 2 demonstration examples for each category. To assess the quality of the LLM's generation, we look for the first line beginning with the word "curl", if it exists. We then execute this line using the shell process. If the shell process returns a non-zero value, we declare "not executable" for this generation. On the other hand, if the code can be executed, we compare the returned response with the corresponding result from the ground-truth Curl request. The model's generation will be considered successful if the output matches the expected result precisely.
+
+
+\subsection{The Cat API}
+
+This task is a similar REST API task as the OpenWeather, but it involves making all the \texttt{GET}, \texttt{DELETE}, or \texttt{POST} request to The Cat API website\footnote{https://thecatapi.com}. There are 6 types of API calls for 6 types of queries, including deleting a cat image from the user's list of favorites, adding an image to the user's list of favorites, returning the list of favorite images, voting up or down to an image, and searching for cat images with filtering requirements. We develop 100 queries for the test set and 2 demonstration examples for each category. To evaluate the executability and success of the LLM's generation in these scenarios, we follow a similar procedure as that of the Open Weather task. It is worth noting that for queries related to removing an image from the list of favorites, we compare the LLM's generation verbatim with the ground-truth label since duplicated deletion would inevitably lead to failure if executed.
+
+\subsection{Home Search}
+This task is designed to replicate the process of searching for homes at a specific location based on certain criteria. We design the API with 15 functions, including
+\begin{itemize}
+  \item \texttt{set\_location} which sets the desired location;
+  \item \texttt{set\_but\_or\_rent} which specifies whether the user is looking to buy or rent a home;
+  \item 12 functions for setting criteria, such as home prices, number of bedrooms, and home square footage;
+  \item \texttt{search} which submits the criteria to get search results.
+\end{itemize}
+
+We consider executability and f1 score of the generated action. To ensure executable searches, the agent should make a sequence of function calls that starts with \texttt{set\_location} and \texttt{set\_buy\_or\_rent}, followed by the criterion-setting functions, and then ends with a call to the \texttt{search} function. If executable, an f1 score is computed between the criteria set by the generated program and that by the ground-truth program. We develop a test set consisting of 100 queries that asked for home options with varying criteria combinations and provide 10 demonstration examples. To test the LLM's ability to utilize unseen API functions, we intentionally exclude 3 criterion-setting functions from all demonstration examples.
+
+\subsection{Trip Booking}
+The Trip Booking task is similar to the Home Search task but with more advanced dependency requirements among function calls. It simulates the process of submitting search requests for transportation tickets, hotel rooms, or both based on specific requirements like locations, dates, and the number of tickets required. We design 20 functions for the three types of booking scenarios. Depending on the scenario, some function calls may be required while others are optional. Missing any required function call or mistake the order of some function calls results in a non-executable search, while missing optional function calls lead to an unsuccessful search. We include 120 queries in the test set and provide 11 demonstration examples.
+
+\subsection{Google Sheets}
+This task is to manipulate the real worksheets from the Google Sheets\footnote{https://www.google.com/sheets/about/}, via the gspread library\footnote{https://docs.gspread.org/}. We include 100 distinct API function calls from the gspread library, but we only create tests for the most common use cases, including updating cell values, sorting, adding or deleting rows and columns, merging cells, filtering, formatting and creating pivot tables. There are 70 test cases and 10 examples in total. We also encourage the model to utilize Pandas DataFrame\footnote{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html} and gspread-dataframe\footnote{https://gspread-dataframe.readthedocs.io/en/latest/} for advanced manipulations, by explicitly providing 8 additional API functions and certain examples for them. The manipulation is considered as correct only if both the value and the format of each cell match the expectation.
+
+\subsection{Virtual Home}
+
+This task is inherited from the setting of the VirtualHome\footnote{http://virtual-home.org/} simulator and asks the LLM to generate sequences of actions for completing household activities. We develop API definitions, demonstration examples, and a test set based on the list of available examples\footnote{https://github.com/huangwl18/language-planner/blob/main/src/available\_examples.json} curated in \cite{huang2022language}. The API consists of 40 functions, each of which corresponds to a specific action used in the examples. These functions can take up to two arguments, and we collect the list of valid object names for each argument based on all examples. Some examples of the functions include \texttt{Sleep()}, \texttt{Push(object)}, and \texttt{PourInto(object1, object2)}.
+
+The original example list contains 202 household activities, represented by 5088 examples, with each example being a series of actions to complete a specific activity. However, some activities have exactly the same solution as another activity. After deduplication, we are left with 183 unique activities with non-overlapping solutions between any two activities. We randomly select 100 activities to form the test set, while the remaining 83 tasks with their 512 solutions are used as demonstration examples.
+
+When evaluating the LLM’s generation for a given task, we consider both executability and correctness. The generation is considered executable if it can be correctly parsed into a series of valid actions, where each action involves only recognizable objects. Regarding correctness, we measure the similarity between the generated program and the ground-truth solution, using the longest common subsequence (LCS) \cite{puig2018virtualhome} normalized by the maximum length of the two. For tasks with multiple solutions, we consider the highest LCS score from any solution.
+
+
+
+\subsection{WebShop}
+
+This is a multi-step task inherited from Webshop \cite{yao2023webshop}, a simulated online shopping environment. 
+The task requires an agent to navigate through a series of webpages to find and purchase a desired product based on a text instruction that outlines the item description.The agent can perform two primary types of actions: \texttt{search[text]}, which involves entering a text query, and \texttt{click[button]} which involves selecting a button on the page.
+
+We generate demonstration examples based on this file\footnote{https://github.com/princeton-nlp/WebShop/blob/master/baseline\_models/data/il\_trajs\_finalized\_images.zip}, which contains trajectories collected from humans performing the online shopping tasks. We formulate each trajectory into a series of (instruction, webpage description, action) tuples in plain text format. The Long version of the demonstration set consists of 1533 full trajectories, which often exceed the input sequence length limit of the LLM. To address this issue, we provide a Short version of the demonstration examples, by first removing 80\% of the non-targeted items from any webpage description, and selecting only the 200 shortest trajectories from the complete set.
+
+For evaluation, we use the predefined simple mode of the WebShop environment\footnote{https://github.com/princeton-nlp/WebShop\#text-environment-simple-mode} and set up the environment with the provided option of using only 1000 random products. We include 100 instructions from sessions with ID numbers 0 to 99 in the test set. We define success as making a purchase which receives a positive reward from the environment within 25 steps. 
+
+\subsection{Tabletop}
+
+This task is developed based on the simulated tabletop manipulation domain presented by \cite{liang2023code} and outlined in their Appendix K. In this simulation environment, a UR5e robot with a Robotiq 2F85 jaw gripper can perform pick and place actions parameterized by 2D top-down positions. We reuse their API definitions and prompts as demonstration examples. We iterate on the 14 instruction templates used in their evaluation benchmark and create 15 types of tasks that involve manipulating up to 4 colored blocks and 4 colored bowls. For each type of task, we generate 7 valid initial setups of blocks and bowls for the test set, ensuring that no collisions occur during the execution of a valid solution. The success of the LLM’s generated program is determined by whether all objects are within a small threshold of their target positions after execution. 

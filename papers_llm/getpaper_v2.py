@@ -252,35 +252,38 @@ class GetPaper_v2:
         # 출력 디렉토리가 없으면 생성
         if not os.path.exists(self.path_db):
             os.makedirs(self.path_db)
-        
+
         # 파일 다운로드
         response = requests.get(source_url)
         output_path = os.path.join(self.path_db, f"{arxiv_id}.tar.gz")
         with open(output_path, 'wb') as f:
             f.write(response.content)
-
-        # else:
-        #     output_path = os.path.join(self.path_db, f"{arxiv_id}")
-        #     print(f"Source already in : {output_path}")
         
         file_path = f'{output_path}'
         with tarfile.open(file_path, "r:gz") as tar:
             tar.extractall(path=self.path_db)
-        
-        print(f"Source files downloaded to: {output_path}")
 
+        output_source = os.path.join(self.path_db, arxiv_id)
+
+        print(f"Source files downloaded to: {output_source}")
+        return output_source
 
     def find_pdf_files(self, root_folder):
         '''
         <figure path find>
         source 폴더 내의 모든 figure를 찾아서 {name:path} 형태의 dictionary 반환
         '''
+        print('ROOT',root_folder)
         pdf_files = {}
         for dirpath, dirnames, filenames in os.walk(root_folder):
+            print('FILES',filenames)
+            print('DIRPATH',dirpath)
+            print('DIRNAMES',dirnames)
             for filename in filenames:
                 if filename.lower().endswith('.pdf'):
                     name = filename.replace('.pdf', '').split('/')[-1]
                     pdf_files[name] = os.path.join(dirpath, filename)
+        print('PDF files :', pdf_files)
         return pdf_files
     
     def query_name_matching(self, query, pdf_files):
@@ -292,7 +295,7 @@ class GetPaper_v2:
         pdf_names = list(pdf_files.keys())
         pdf_names = [name for name in pdf_names]
         pdf_names.insert(0,query)
-        
+
         encoded_input = self.tokenizer(pdf_names, padding=True, truncation=True, return_tensors='pt')
         with torch.no_grad():
             model_output = self.model(**encoded_input)
@@ -357,20 +360,24 @@ class GetPaper_v2:
                 if content == '': # Section list was incorrect
                     sections_list = self.list_section(header_list)
                     content = f'Section list was incorrect.\nHere is the title and section of the paper\ntitle\n{title}\nsections\n{sections_list}\n\n Use the \'loadpaper\' tool again, specifying the section list you want to view in detail with keeping \'show_figure\' value same as before.'
+                
+                try:
+                    if show_figure:
+                        output_source = self.download_arxiv_source(arxiv_id)
+                        print('OUTPUTPATH', output_source)
+                        pdf_files = self.find_pdf_files(root_folder=output_source)
+                        name = self.query_name_matching(content, pdf_files)
+                        self.display_figure(pdf_files, name)
+                        # print('Figure displayed')
+                        figure_path = pdf_files[name]
 
-                if show_figure:
-                    self.download_arxiv_source(arxiv_id)
-                    pdf_files = self.find_pdf_files(self.path_db)
-                    name = self.query_name_matching(content, pdf_files)
-                    self.display_figure(pdf_files, name)
-                    print('Figure displayed')
-                    figure_path = pdf_files[name]
-
-                    content += f'Provide them in format in the end of the responses with the following keys: \n\n figure_path : {figure_path}'
-                    return content
-                # else:
-                    # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
-                    # return instruction_for_agent2
+                        content += f'Provide them in format in the end of the responses with the following keys: \n\n figure_path : {figure_path}'
+                        return content
+                    # else:
+                        # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
+                        # return instruction_for_agent2
+                except:
+                    pass
                 
                 return content
             
@@ -378,13 +385,15 @@ class GetPaper_v2:
             try:
                 download_path = self.download_pdf(arxiv_id)
                 pdf_content = self.read_pdf(arxiv_id)
+
                 if sections != None or sections != [] and show_figure:
-                    self.download_arxiv_source(arxiv_id)
-                    pdf_files = self.find_pdf_files(self.path_db)
+                    output_source = self.download_arxiv_source(arxiv_id)
+                    print('OUTPUTPATH', output_source)
+                    pdf_files = self.find_pdf_files(output_source)
                     name = self.query_name_matching(pdf_content, pdf_files)
                     self.display_figure(pdf_files, name) 
                     figure_path = pdf_files[name]
-                    print(figure_path)
+                    # print(figure_path)
                 # else:
                     # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
                     # return instruction_for_agent2

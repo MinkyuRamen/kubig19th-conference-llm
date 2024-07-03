@@ -1,0 +1,38 @@
+In this section, we extended \Cref{sec:experiments} with more details about model training and results.
+
+
+\subsection{Training data}\label{sec:training_data_section}
+
+
+
+For the OpenWeather, The Cat API, Trip Booking, and Home Search tasks, we generate the training data by converting or expanding the demonstration examples of each task into templates and populating them with various sets of variable values. For the remaining four tasks, we format the training samples directly from the demonstration example set described in~\cref{sec:benchmarks}. We exclude any test samples from the training data and minimize the overlap of the API function call combinations between any training and test samples. For example, we make sure that the API function combinations used in each test case for the Home Search task are never present in the training data. However, for the OpenWeather task, it was unavoidable to have some overlap because each test case only involved a single function call and the training examples covered all the API functions. The numbers of templates and training samples for each task are summarized in~\cref{tab:training_data}. Example templates and variable values are shown in~\cref{tab:templates}. The training sets for all tasks, except for the Google Sheets and WebShop task, reduce the complexity score of their respective test sets when compared to the example sets. As expected, the model's accuracy shows improvement after fine-tuning.
+
+\input{tables/training_data}
+\input{tables/templates}
+
+\subsection{All-shot loss}
+\begin{figure}[h]
+\caption{We use all-shot loss for model alignment. We concatenate several examples into a single training sample and backpropagate through the loss on the blue actions in every example. There is no separator token between examples.
+}
+\centering
+\vspace{-8pt}
+\includegraphics[width=0.85\textwidth]{plots/all_shot.pdf}
+\label{fig:all_shot}
+\end{figure}
+To construct the training samples, we concatenate API documents and multiple pairs of goal and API calls as one input sequence to the LLMs. We use an all-shot loss formulation illustrated in~\Cref{fig:all_shot} which learns to generate the API calls for every goal in a sequence.
+We use this loss formulation because it empirically delivers better success rate, especially when using in-context demonstrations, than the conventional loss which only backpropagates the loss associated with the API calls for the last goal.
+
+\subsection{Training details}
+
+We finetune each model on the same dataset created with the method described in Section \ref{sec:training_data_section} for $8$ epochs. We use a max sequence length of $2048$ without packing and mix the data from all the tasks into a single dataset with random shuffling. In each sample, all the goal-action pairs are from the same task. We report the validation accuracy on the best checkpoint. We use a batch size of 16 and a constant learning rate of $1e-5$ for each model and train on an internal cluster of 4 A100 GPU's, each with 80GB RAM.
+
+
+
+
+
+\input{tables/baselines_over_techniques}
+\subsection{Extended results for \Cref{sec:experiments}}
+We list out the detailed results of \Cref{sec:experiments} in \Cref{tab:baselines_over_techniques}, where we report the model performance on all the possible combinations of the three proposed techniques. The main observations are all covered in \Cref{sec:experiments}. We run each job 3 times, and report the mean and standard deviation of the main metrics. Their are some inevitable randomness happens in API or example retrieval, public API services and the environment provided in Webshop and Tabletop. Even though randoness exists, we observe that they barely change the final results. Thus, we only report the mean value everywhere else in the paper.
+
+
+

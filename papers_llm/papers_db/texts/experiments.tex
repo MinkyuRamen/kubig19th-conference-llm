@@ -1,0 +1,103 @@
+In this section, we leverage the \snact\  to empirically validate the techniques introduced in \Cref{sec:techniques}. First, to concretize the capability gap between open-source and closed LLMs, we demonstrate that OpenAI GPT-4 API can have substantially higher success rate than representative open-source LLMs in~\Cref{subsec:cap_gap}. 
+We then show in~\Cref{subsec:boost} that the simple techniques in~\Cref{sec:techniques} can boost open-source LLMs to achieve success rates competitive to in-context-learning with GPT-4 APIs\footnote{GPT-4 tuning APIs were not released by the time this work is done.} in four out of the eight tasks.
+Through ablation studies in~\Cref{subsec:abl}, we additionally show that model alignment does the heavy lifting for boosting open-source LLMs, while system prompt and in-context learning robustify LLMs for further improvement. 
+
+\subsection{Experiment Setup}
+To establish strong baselines, we use GPT-4 API as the representative closed LLM in our study because it attains the leading accuracy in mainstream NLP tasks. 
+In our study, we compare LLAMA-30B \cite{touvron2023llama}, StarCoder \cite{li2023starcoder} and CodeGen-16B-mono \cite{nijkamp2022codegen} to GPT-4. LLAMA represents open research models, while StarCoder and CodeGen are publicly available for both research and commercial purposes. We choose these three models due to their superior performance on \snact\  among open-source models as shown in~\Cref{tab:baselines_over_models}\footnote{Surprisingly, we observe that for tool manipulations, open-source LLMs instruction-tuned for conventional NLP tasks do not outperform their base models before tuning.}. 
+In our experiments, we consider the zero-shot setting as the out-of-the-box configuration where only API documentation is provided without any demonstration examples. We use this configuration to understand the initial gap in capabilities among models. We then incorporate all available techniques on top of this initial configuration to assess their benefits. 
+For the original Tabletop dataset~\cite{liang2022code}, which includes examples in a few-shot setting without explicit API definitions, we only evaluate settings with in-context demonstrations. 
+More detailed setup information is included in \Cref{sec:app_exp_details}. We run each job 3 times with different random seeds and report average accuracy. The variation is minimal, so we ignore them in the main paper but report them in appendix.
+
+
+
+
+
+\subsection{Capability Gap}
+\label{subsec:cap_gap}
+\Cref{tab:baselines} exhibits significant disparities in tool manipulation between the closed GPT-4 API and open-source models in the out-of-the-box zero-shot setting. 
+For simpler tasks, namely Open Weather and the Cat API, which require only one API call for each goal, the open-source models exhibit success rates up to $74\%$ lower than GPT-4. 
+Furthermore, on all the remaining tasks other than the Webshop, none of the LLAMA, the StarCoder and the CodeGen model can reach meaningful accuracy or compare with GPT-4. 
+These results highlight an opportunity to enhance open-source LLMs.
+% for tool manipulation.
+% 1. Large gap across tasks
+% 2. Some tasks demonstrate zero.
+% 3. One interesting observation is that in context.
+
+\input{tables/baslines}
+\subsection{Boosting open-source LLMs}
+\label{subsec:boost}
+To boost the open-source LLMs, we first perform model alignment using programmatially generated data. We then apply a system prompt and a 3-shot demonstration retriever during inference. Given GPT-4 does not provide tuning APIs, we enhance the out-of-the-box GPT-4 with the same system prompt and demonstration retriever as the baseline. The improvements from the combined enhancement techniques are shown in~\Cref{tab:baselines}, where the success rates of the open-source LLMs can improve up to $90\%$. As a result, the open-source models achieve competitive or better success rates on 4 out of 8 tasks, including Open Weather, the Cat API, VirturalHome and WebShop. Moreover, on Home Search and Trip Booking, the gap between the LLAMA model and the GPT-4 API is reduced to $11\%$ and $13.4\%$ respectively, compared to the initial gap of up to $91\%$. Despite the fact that open-source models are still lagging behind on the Google Sheets and Tabletop, these observations show that \emph{our recipe can significantly improve the performance of open-source LLMs and attain success rates comparable to GPT-4 API on many of the \snact\  tasks}.
+
+\paragraph{Human supervision} To identify the practicality of an enhancement recipe, the amount of required human supervision is a crucial factor. In our approach, human supervision is primarily in the form of in-context demonstration examples and alignment data templates.
+Regarding the demonstration examples, we provide $10$ to $83$ examples for each task as shown in~\Cref{tab:all_tasks}, except for WebShop given its difficulty in advanced reasoning.
+% and the ones in VirtualHome, Webshop and Tabletop are already provided in their original datasets.
+As shown in~\Cref{tab:training_data}, the number of templates for alignment data is typically less than $100$ for each task. We observe that providing these supervisions takes one developer day on average, making it practical in terms of the time cost on human supervision.
+% \comment{QT: need the statistics on volume of templates for each task and maybe also total generated alignment example count}
+
+
+\paragraph{Remaining challenges} In our experiments, we observe that the boosted open-source LLMs still have relatively low success rates on tasks that require advanced reasoning, such as Google Sheets, WebShop and Tabletop tasks. This implies the need to further enhance the reasoning capabilities of open-source models. We are excited about the prospect of more exploration from the community to address the challenges for tool manipulation on these complex tasks.
+
+
+
+% % 1. Compared 3 trick open sourced to GPT + 2 things for GPT
+% 2. Discuss a few examples
+% 3. Supervision needed
+% 4. Remaining challenges
+
+\subsection{Ablation Study}
+\label{subsec:abl}
+
+\begin{wraptable}[14]{r}{6cm}
+\vspace{-12pt}
+\caption{The number of \snact~tasks improved (+N) or hurt (-N) over the baselines when adding or dropping techniques.}
+\label{tab:breakdown}
+\begin{adjustbox}{max width=\linewidth}
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+               & LLaMA & StarCoder & CodeGen \\
+\midrule
+\textbf{Zero-shot} & - & - & -                                                \\
++ Sys. Prompt       & +4 & +4 & +4                                               \\
++ 3-shot & +8 & +8 & +8                                                \\
++ Alignment   & +7 & +7 &+7                                     \\  
+\midrule
+\textbf{Full system} & - & - & -                                                \\
+- Sys. Prompt       & -0 & -2 & -3                                                \\
+- 3-shot    & -3 & -4 & -5                                                 \\
+- Alignment  & -5 & -5 & -7                                      \\        
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{wraptable} 
+% To break down the contribution of model alignment, in-context demonstration and sysmtem prompts, we ablate these techniques in two ways in~\Cref{tab:breakdown}. We first apply one technique a time on top of the out-of-the-box zero-shot configuration and show the impacts in isolation. We then take the combination of the techniques and remove one at a time to evaluate the relative contributions in the context of the full system.
+% The full results of the experiments in this section can be found in \Cref{tab:baselines_over_techniques}.
+
+% \paragraph{Impact of techniques} 
+% As seen in~\Cref{tab:breakdown}, both 3-shot in-context demonstration and model alignment can bump up the success rate of all the tasks, while system prompts only boosts simple tasks requiring relatively fewer number of API call for each goal.
+
+% \paragraph{System ablation} In the context of full system with all three techniques, we can observe that solely removing model alignment triggers success rate degradation in up to 7 tasks in~\Cref{tab:breakdown}, while removing either in-context demonstration or system prompt hurts up to 5 tasks. We notice that the tasks that are not significantly hurt when removing techniques are the ones that have relatively low success rate (usually <20\%) even in the full system. Thus those accuracy changes are subject to high variance and fluctuation.
+
+
+% To break down the contribution of model alignment, in-context demonstration and sysmtem prompts, we ablate these techniques in two ways. 
+We break down the contribution of the techniques in two ways.
+First, we apply each technique individually on top of the out-of-the-box zero-shot configuration and evaluate its impact. 
+As shown in~\Cref{tab:breakdown}, both the 3-shot in-context demonstration and model alignment techniques bump up the success rates across all tasks, while the system prompt only benefits simple tasks that involve relatively fewer API calls for each goal.
+
+Next, we consider the combination of all techniques and remove them one at a time to evaluate their relative contributions within the full system. As shown in in~\Cref{tab:breakdown}, solely removing model alignment triggers success rate degradation in up to 7 tasks, while removing either in-context demonstration up to 5 tasks and dropping system prompt up to 3. We notice that the tasks that are not significantly impacted when removing techniques are typically the ones with relatively low success rate (usually <20\% even in the full system). Thus, those accuracy changes are hypothetically subject to high variance and fluctuation.
+The full results from the experiments in this section can be found in \Cref{tab:baselines_over_techniques}.
+
+
+
+% \textbf{Greatly reduce the gap between open- and close-source models}. There is a great gap between open-source models and closed models out-of-the-box in the zero-shot setting. However, when armed with the techniques we provided, the open-source model are dramatically improved from almost non-usable (e.g. the accuracy of LLaMA is below 10\% for most of the tasks) to GPT-4 level on 6 out of 8 tasks, even though the GPT-4 can also benefit from those techniques. 
+
+% \textbf{Our proposed techniques are effective}. Comparing with the zero-shot baseline, every single technique - system prompting, few-shot learning, alignment tuning - can individually bump up the model performance universally across different tasks. Alignment tuning and in-context learning can each close the gap in 5 out of 8 tasks, while deliminate major gap in the rest, when comparing with the GPT-4 zero-shot baseline.
+
+% \textbf{Minimum human supervision's needed.} Show the amount of human labor needed for curate demonstration examples and tuning templates. 
+
+% \subsection{Techniques Contribution Breakdown}
+% \label{subsec:abl}
+
+
+% To understand the contribution of each task, we compute the average success rate of the first 4 tasks on LLaMA and CodeGen, by incrementally removing techniques from the joint setting. We exclude the last four tasks from \snact~ because of their highly variant results (we didn't fully exploit the tuning) \comment{rephrase me to align with 6.1}. As shown in \Cref{tab:breakdown}, combining the three techniques together delivers the best model performance, indicating the techniques are complimentary to each other. Also, we confirm again that tuning is the most beneficial techniques to bump up the open-source model accuracy.
