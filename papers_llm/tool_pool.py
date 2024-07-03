@@ -38,7 +38,7 @@ openai_key = os.getenv("OPENAI_API_KEY")
 # model can use this tool several times, to get the list of the section, and then see the detail content of the paper.
 # if the ar5iv_mode is False, 
 getpapermodule = GetPaper_v2(ss_api_key, ar5iv_mode = True, path_db = './papers_db', page_limit = 5)
-recommendpapermodule = RecommendPaper(ss_api_key)
+recommendpapermodule = RecommendPaper(ss_api_key, threshold = 0.6)
 codeanalysismodule = CodeAnalysis(ss_api_key, openai_key, path_db = './papers_db', code_db = './code_db')
 
 class load_paper_input(BaseModel):

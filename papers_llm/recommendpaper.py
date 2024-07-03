@@ -32,7 +32,7 @@ class RecommendPaper:
     When type is 'citation' it returns the papers that cite the target paper.(target paper를 인용한 후속 논문 추천)
     When type is 'reference' it returns the papers that are referenced by the target paper.(target paper가 인용한 이전 논문 추천)
     """
-    def __init__(self, ss_api_key):
+    def __init__(self, ss_api_key, threshold = 0.6):
         """
         Parameters
         ----------
@@ -42,7 +42,7 @@ class RecommendPaper:
         model : AutoModel
         """
         self.ss_api_key = ss_api_key
-
+        self.threshold = threshold
         self.tokenizer = AutoTokenizer.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
         self.model = AutoModel.from_pretrained('sentence-transformers/all-MiniLM-L6-v2')
 
@@ -103,7 +103,7 @@ class RecommendPaper:
         return response['data'], sorted(references, key=lambda x: x['citedPaper']['influentialCitationCount'], reverse=True)[:num]
     
 
-    def reference_recommend(self, query:str, rec_num, num=20, threshold=0.6, sorting=True):
+    def reference_recommend(self, query:str, rec_num, num=20, sorting=True):
         """
         <References Recommendation>
         target paper에서 reference paper가 인용된 부분(context)와 의도(intend) 또한 함께 고려하여 논문 추천
@@ -140,7 +140,7 @@ class RecommendPaper:
         rec = cosine_similarity(sentence_embeddings)
         
         ## 유사도가 threshold 이상인 논문들을 추출
-        indices = np.where(rec[0][1:] > threshold)[0]
+        indices = np.where(rec[0][1:] > self.threshold)[0]
         rec_lst = [reference_response[i] for i in indices]
         rec_context = [reference_context[i] for i in indices]
         rec_intent = [reference_intent[i] for i in indices]
@@ -164,9 +164,14 @@ class RecommendPaper:
         # 날짜순으로 정렬
         if sorting==True:
             rec_lst = sorted(rec_lst, key=lambda x: x['influentialCitationCount'], reverse=True)[:num]
-            return target_response, sorted(rec_lst, key=lambda x: datetime.strptime(x['publicationDate'], '%Y-%m-%d') if isinstance(x['publicationDate'], str) else x['publicationDate'])
+            rec_lst = sorted(rec_lst, key=lambda x: datetime.strptime(x['publicationDate'], '%Y-%m-%d') if isinstance(x['publicationDate'], str) else x['publicationDate'])
         
-        return rec_lst
+        updated_result = []
+        for paper in rec_lst:
+            paper.pop('paperId', None)  # 'paperId'가 없는 경우에도 에러가 발생하지 않도록 함
+            updated_result.append(paper)
+
+        return updated_result
     
 
     def query2citations(self, query, num=20):
@@ -216,7 +221,7 @@ class RecommendPaper:
             
         return target_response, sorted(citations_response['data'][0]['citations'], key=get_citation_count, reverse=True)[:num]
     
-    def citation_recommend(self, query, rec_num, num=20, threshold=0.6):
+    def citation_recommend(self, query, rec_num, num=20):
         '''
         <Citations Recommendation>
         query(target paper name)가 input으로 들어오면, target paper의 citation 중 유사한 논문들을 추천
@@ -248,7 +253,7 @@ class RecommendPaper:
         rec = cosine_similarity(sentence_embeddings)
         
         ## 유사도가 threshold 이상인 논문들을 추출
-        indices = np.where(rec[0][1:] > threshold)[0]
+        indices = np.where(rec[0][1:] > self.threshold)[0]
         rec_lst = [citation_response[i] for i in indices]
 
         for item in rec_lst:
@@ -259,7 +264,14 @@ class RecommendPaper:
             rec_lst = rec_lst[1:recommend]
 
         # 날짜순으로 정렬
-        return sorted(rec_lst, key=lambda x: datetime.strptime(x['publicationDate'], '%Y-%m-%d') if isinstance(x['publicationDate'], str) else x['publicationDate'])
+        rec_lst = sorted(rec_lst, key=lambda x: datetime.strptime(x['publicationDate'], '%Y-%m-%d') if isinstance(x['publicationDate'], str) else x['publicationDate'])
+
+        updated_result = []
+        for paper in rec_lst:
+            paper.pop('paperId', None)  # 'paperId'가 없는 경우에도 에러가 발생하지 않도록 함
+            updated_result.append(paper)
+
+        return updated_result
     
 
     def query2recommend_paper(self, query, rec_type, rec_num=5):
@@ -267,8 +279,8 @@ class RecommendPaper:
         type에 따라 target paper에 대한 citation 혹은 reference를 추천
         '''
         if rec_type == 'citation':
-            return self.citation_recommend(query=query, rec_num=rec_num, num=30, threshold=0.6)
+            return self.citation_recommend(query=query, rec_num=rec_num, num=30)
         elif rec_type == 'reference':
-            return self.reference_recommend(query=query, rec_num=rec_num, num=30, threshold=0.6)
+            return self.reference_recommend(query=query, rec_num=rec_num, num=30)
         else:
             raise Exception('rec type should be either citation or reference')
