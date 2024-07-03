@@ -48,7 +48,7 @@ prompt = hub.pull("hwchase17/openai-tools-agent")
 def handle_message_events(event, message, say): 
     llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
     ts = event['ts']
-    text = event['text'] + '대답은 한글로 해줘'
+    text = 'target 논문 \'제목(target paper title)\'을 앞에 출력해줘' + event['text'] + '대답은 한글로 해줘'
     
     agent = create_openai_tools_agent(llm, tools, prompt=prompt)
 
@@ -71,7 +71,7 @@ def handle_message_events(event, message, say):
                 )
                 app.client.chat_postMessage(
                     channel=channel_id,
-                    text=bot_response['output'],
+                    text=' '.join(bot_response['output'].split('\n')[:-1]),
                     thread_ts=ts  
                 )
                 
