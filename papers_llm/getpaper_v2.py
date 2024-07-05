@@ -363,27 +363,28 @@ class GetPaper_v2:
                     content = f'Section list was incorrect.\nHere is the title and section of the paper\ntitle\n{title}\nsections\n{sections_list}\n\n Use the \'loadpaper\' tool again, specifying the section list you want to view in detail with keeping \'show_figure\' value same as before.'
 
                 
-                if show_figure:
-                    output_dir = f'{self.path_db}/{arxiv_id}'
-                    self.download_arxiv_source(arxiv_id, output_dir)
-                    pdf_files = self.find_pdf_files(output_dir)
-                    name = self.query_name_matching(content, pdf_files)
-                    # self.display_figure(pdf_files, name)
-                    # print('Figure displayed')
-                    figure_path = pdf_files[name]
+            if show_figure:
+                output_dir = f'{self.path_db}/{arxiv_id}'
+                self.download_arxiv_source(arxiv_id, output_dir)
+                pdf_files = self.find_pdf_files(output_dir)
+                name = self.query_name_matching(content, pdf_files)
+                # self.display_figure(pdf_files, name)
+                # print('Figure displayed')
+                figure_path = pdf_files[name]
 
-                    content += f'Mentioned about the \'sections\' you used. And provide them in format in the end of the responses with the following keys: \n\n figure_path : {figure_path}'
-                    return content
-                # else:
-                    # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
-                    # return instruction_for_agent2
-                else:
-                    content += f'Mentioned about the \'sections\' you used'
-
-                    # Mentioned about the \'sections\' you used
-                    # Use up to three section in the \'sections\' list.
-                
+                content += f'And provide them in format in the end of the responses with the following keys: \n\n figure_path : {figure_path}'
                 return content
+            # else:
+                # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
+                # return instruction_for_agent2
+            # else:
+            #     content += f'Mentioned about the \'sections\' you used'
+
+                # Mentioned about the \'sections\' you used
+                # Mentioned about the \'sections\' you used at the very begining of the response. 
+                # Use up to three section in the \'sections\' list.
+            
+            return content
             
         else: # case for ar5iv is not exist or request error. assume that arxiv_id is correct
             try:

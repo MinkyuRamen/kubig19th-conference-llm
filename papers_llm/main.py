@@ -40,7 +40,7 @@ client = WebClient(os.environ.get("SLACK_BOT_TOKEN"))
 # load model
 # model = ChatOpenAI(model="gpt-3.5-turbo")
 # load tool
-tools = [tp.loadpaper, tp.recommendpaper]#, tp.code_matching]
+tools = [tp.loadpaper, tp.recommendpaper, tp.code_matching]
 # load Agent prompt
 prompt = hub.pull("hwchase17/openai-tools-agent")
 
@@ -191,7 +191,7 @@ def send_guideline_message(channel_id, user_id):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "*[예시 질문 모음]* \n\n • 'DDIM'을 읽기 전에 읽을만한 논문 4편을 추천해줘 \n\n • 'MobileNets'(1704.04861) 의 논문에서 아키텍쳐가 어떻게 구성되어 있는지 그림과 함께 설명해줘 \n\n • 'Deep Residual Learning for Image Recognition'에서 skip connection에 대해 설명해줘 \n\n • 'Attention is All You Need'(아카이브 id 1706.03762) 의 논문에서 'To the best of our knowledge, however, the Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence aligned RNNs or convolution.' 이 내용을 어떻게 구현할 수 있어? 깃허브 코드는 다음과 같아. https://github.com/nawnoes/pytorch-transformer.git"
+                    "text": "*[예시 질문 모음]* \n\n • 'DDIM'을 읽기 전에 읽을만한 논문 4편을 추천해줘 \n\n • 'MobileNets'(1704.04861) 의 논문에서 아키텍쳐가 어떻게 구성되어 있는지 그림과 함께 설명해줘 \n\n • 'Attention is all you need'(아카이브 id 1706.03762)에서 positional encoding에 대해 그림과 함께 설명해줘 \n\n • 'Attention is All You Need'(아카이브 id 1706.03762) 의 논문에서 'To the best of our knowledge, however, the Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence aligned RNNs or convolution.' 이 내용을 어떻게 구현할 수 있어? 깃허브 코드는 다음과 같아. https://github.com/nawnoes/pytorch-transformer"
                 }
             },
             {
