@@ -1,0 +1,70 @@
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Instance-level image retrieval}
+
+Studies on instance-level image retrieval can be roughly, but not exclusively, divided into three types: (1) studies on \emph{global descriptors} \cite{Babenko01, Gordo01, Kalantidis01, Weyand01, Babenko03, Radenovic01}; (2) studies on \emph{local descriptors} and geometry-based re-ranking \cite{Noh01, Teichmann01, simeoni2019local, Weyand01}; (3) \emph{re-ranking} by graph-based methods \cite{Donoser01, iscen2017efficient, Yang01}.
+The first two types of studies focus on the feature representation, while the last type focuses on re-ranking extracted features.
+
+Studies on global descriptors focus on \emph{spatial pooling} of CNN feature maps into vectors, including MAC~\cite{Razavian2015VisualIR}, SPoC~\cite{Babenko03}, CroW~\cite{Kalantidis01}, R-MAC~\cite{ToliasSJ15, Gordo00, Gordo01}, GeM~\cite{Radenovic01}, and NetVLAD~\cite{Arandjelovic01, Kim01}, as well as \emph{learning the representation}~\cite{Babenko01, Gordo00, Gordo01, Radenovi01, Radenovic01}. Studies before deep learning dominated image retrieval were mostly based on \emph{local descriptors} like SIFT~\cite{Lowe01} and \emph{bag-of-words} representation~\cite{Philbin01} or aggregated descriptors like VLAD~\cite{JPD+11} or ASMK~\cite{TAJ13}. Local descriptors have been revived in deep learning, \eg with DELF~\cite{Noh01}, DELG~\cite{ECCV2020_912} and ASMK extensions~\cite{Teichmann01, tolias2020learning}.
+
+%------------------------------------------------------------------------------
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{2.6pt}
+\begin{tabular}{lcccccc} \toprule
+	 \mr{2}{\Th{Method}}                          & \mc{2}{\Th{Local}}    & \mc{2}{\Th{Global}} & \mr{2}{\Th{Lrn}} & \mr{2}{\Th{Ret}} \\ \cmidrule{2-5}
+	                                              & Spatial   & Channel   & Spatial  & Channel  &                  &                  \\ \midrule
+	 SENet~\cite{Hu01}                            &           & \ch       &          &          & \ch              &                  \\
+	 ECA-Net~\cite{wang01}                        &           & \ch       &          &          & \ch              &                  \\
+	 GCNet~\cite{Cao01}                           &           & \ch       &          &          & \ch              &                  \\
+	 CBAM~\cite{woo01}                            & \ch       & \ch       &          &          & \ch              &                  \\
+	 GE~\cite{HuSASV18}                           & \ch       &           &          &          & \ch              &                  \\
+	 NL-Net~\cite{Wang02}                         &           &           & \ch      &          & \ch              &                  \\
+	 AA-Net~\cite{Bello_2019_ICCV}                &           &           & \ch      &          & \ch              &                  \\
+	 SAN~\cite{zhao2020exploring}                 &           &           & \ch      &          & \ch              &                  \\
+	 N$^3$Net~\cite{plotz2018neural}              &           &           & \ch      &          & \ch              &                  \\
+	 A$^2$-Net~\cite{ChenKLYF18}                  &           &           &          & \ch      & \ch              &                  \\
+	 GSoP~\cite{Gao_2019_CVPR}                    &           &           &          & \ch      & \ch              &                  \\ \midrule
+	 OnA~\cite{JimenezAN17}                       & \ch       &           &          &          &                  & \ch              \\
+	 AGeM~\cite{gu2018attention}                  & \ch       &           &          &          &                  & \ch              \\
+	 CroW~\cite{Kalantidis01}                     & \ch       & \ch       &          &          &                  & \ch              \\
+	 CRN~\cite{Kim01}                             & \ch       &           &          &          & \ch              & \ch              \\
+	 DELF~\cite{Noh01}                            & \ch       &           &          &          & \ch              & \ch              \\
+	 DELG~\cite{ECCV2020_912}                     & \ch       &           &          &          & \ch              & \ch              \\
+	 Tolias \etal~\cite{tolias2020learning}       & \ch       &           &          &          & \ch              & \ch              \\
+	 SOLAR~\cite{Ng01}                            &           &           & \ch      &          & \ch              & \ch              \\ \midrule
+	 \tb{Ours}                                    & \ch       & \ch       & \ch      & \ch      & \ch              & \ch              \\ \bottomrule
+\end{tabular}
+\caption{Related work on attention. LRN: learned; RET: applied to instance-level image retrieval.}
+\label{tab:rel}
+\end{table}
+%------------------------------------------------------------------------------
+
+We focus on learning a global descriptor in this work, because it is the most efficient in terms of storage and search. However, our generic attention mechanism produces a feature tensor and could be applicable to local descriptors as well, if global pooling were replaced by local feature detection. Re-ranking methods are complementary to the representation and we do not consider them in this work.
+
+%------------------------------------------------------------------------------
+\input{tex/fig-styles}
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+\begin{figure}
+\centering
+\input{tex/fig-local-channel}
+\caption{Local channel attention.}
+\label{fig:fig4}
+\end{figure}
+%------------------------------------------------------------------------------
+
+\paragraph{Attention}
+
+Attention mechanisms have been first proposed in \emph{image classification} studies focusing on \emph{channel attention}~\cite{Hu01, wang01, Cao01}, \emph{spatial attention}~\cite{HuSASV18} or both, like CBAM~\cite{woo01}. In \emph{image retrieval}, CroW \cite{Kalantidis01} also  employs both spatial and channel attention and can be seen as a precursor of CBAM, but, like other studies of spatial attention on retrieval~\cite{simeoni2019graph, JimenezAN17, gu2018attention}, it is not learned. CRN~\cite{Kim01} applies spatial attention for feature reweighting and is learned. Learned spatial attention mechanisms are common for local descriptors~\cite{Noh01, ECCV2020_912, tolias2020learning}.
+
+We call the above methods \emph{local attention}, in the sense that elements of the feature tensor (channels / spatial locations), are weighted independently, based on contextual information obtained by pooling or learned. By constrast, by \emph{global attention} we refer to mechanisms that model interaction between elements of the feature tensor, for example between channels or between locations.
+
+In \emph{image classification}, \emph{non-local neural network} (NLNet)~\cite{Wang02} is maybe the first global attention mechanism, followed by similar studies~\cite{Bello_2019_ICCV,zhao2020exploring,plotz2018neural}. It is global \emph{spatial attention}, allowing interaction between any pair of spatial locations. Similarly, there are studies of global \emph{channel attention}, allowing interaction between channels~\cite{ChenKLYF18, Gao_2019_CVPR}. Global attention has focused mostly on image recognition and has been applied to either spatial or channel attention so far, not both. In \emph{image retrieval}, SOLAR~\cite{Ng01} is a direct application of the global spatial attention mechanism of~\cite{Wang02}.
+
+\autoref{tab:rel} attempts to categorize related work on attention according to whether attention is local or global, spatial or channel, whether it is learned and whether it is applied to instance-level image retrieval. We observe that all methods limit to one or two forms of attention only. Of those studies that focus on image retrieval, many are not learned~\cite{JimenezAN17, gu2018attention, Kalantidis01}, and of those that are, some are designed for local descriptors~\cite{Noh01,tolias2020learning}.
+
+By contrast, we provide a comprehensive study of \emph{all forms} of attention, global and local, spatial and channel, to obtain a learned representation in the form of a tensor that can be used in any way. We spatially pool it into a global descriptor and we study the relative gain of different forms of attention in image retrieval.

@@ -1,0 +1,17 @@
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\bf Model & \bf Accuracy & \bf Middle & \bf High \\
+\midrule
+\multicolumn{4}{l}{\textit{Single models on test (as of July 25, 2019)}}\\
+\bertlarge{} &  72.0 & 76.6 & 70.1 \\
+\xlnetlarge{} & 81.7 & 85.4 & 80.2 \\
+\midrule
+\ourmodel{} & \bf{83.2} &  \bf{86.5} & \bf{81.3}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Results on the RACE test set. BERT$_{\textsc{large}}$ and XLNet$_{\textsc{large}}$ results are from \newcite{yang2019xlnet}.}
+\label{tab:roberta_race}
+\end{table}

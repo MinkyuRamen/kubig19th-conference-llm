@@ -1,0 +1,20 @@
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\bf Masking & \bf SQuAD 2.0 & \bf MNLI-m & \bf SST-2 \\
+\midrule
+reference & 76.3 & 84.3 & 92.8 \\
+\midrule
+\multicolumn{4}{l}{\emph{Our reimplementation:}} \\
+static & 78.3 & 84.3 & 92.5 \\
+dynamic & 78.7 & 84.0 & 92.9 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Comparison between static and dynamic masking for \bertbase{}.
+We report F1 for SQuAD and accuracy for MNLI-m and SST-2.
+Reported results are medians over 5 random initializations (seeds).
+Reference results are from \newcite{yang2019xlnet}.}
+\label{tab:static_vs_dynamic_masking}
+\end{table}

@@ -1,0 +1,40 @@
+\begin{table*}[t!]
+    \centering
+    \footnotesize
+    \setlength\tabcolsep{4.0pt}
+    \begin{tabular}{l|ccccccccccc}
+    \toprule[1.5pt]
+        \textbf{Method} & \textbf{Training Data} & \textbf{Transformer} &\textbf{IDF1}  $\uparrow$ & \textbf{MOTA} $\uparrow$ & \textbf{HOTA} $\uparrow$ & \textbf{AssA} $\uparrow$ & \textbf{IDsw} $\downarrow$ & \textbf{MT(\%)} $\uparrow$ & \textbf{ML(\%)} $\downarrow$ & \textbf{FP} $\downarrow$ & \textbf{FN} $\downarrow$  \\\hline
+        \multicolumn{12}{c}{\textbf{MOT16} \cite{milan2016mot16}} \\\hline\hline
+        FairMOT~\cite{zhang2020fair} & 13.1x & & 72.3 & 69.3 & 58.3 & 58.0 & 815& 40.3& 16.7 & 13501 & 41653\\
+        TubeTK~\cite{pang2020tubetk} & 44.5x & & 62.2 & 66.9 & 50.8 & 47.3 & 1236 & 39.0 & 16.1 & 11544 & 47502 \\
+        CTracker~\cite{peng2020chained} & 1.0x & & 57.2 & 67.6 & 48.8 & 43.7 & 1897 & 32.9 & 23.1 & 8934 & 48350 \\ 
+        JDE~\cite{wang2019towards} & 10.2x & & 55.8 & 64.4 & - & - & 1544 & 35.4 & 20.0 & - & - \\
+        \rowcolor{gray!20} MOTR \cite{zeng2021motr} & 1.9x & \checkmark &  67.0 & 66.8 & -& -& \textbf{586} & 34.1 & 25.7 & \textbf{10364} & 49582 \\
+        \rowcolor{gray!20} \textbf{MeMOT} (ours) & 1.9x & \checkmark & \textbf{69.7} & \textbf{72.6} & \textbf{57.4} & \textbf{55.7} & 845 & \textbf{44.9} & \textbf{16.6} & 14595 & \textbf{34595} \\\hline
+        \multicolumn{12}{c}{\textbf{MOT17} \cite{milan2016mot16}} \\\hline\hline
+        CorrTracker~\cite{wang2021multiple} & 13.1x & & 73.6 & 76.5 & 60.7 & 58.9 & 3396 & 47.6 & 12.7 & 29808 & 99510\\
+        FairMOT \cite{zhang2020fair} & 13.1x & & 72.3 & 73.7 & 59.3 & 58.0 & 3303 & 43.2 & 17.3 & 27507 & 117477\\
+        PermaTrack~\cite{tokmakov2021learning} & 18.7x & & 68.9 & 73.8 & 55.5 & 53.1 & 3699 & 43.8 & 17.2 & 28998 & 115104 \\
+        GSDT~\cite{wang2021joint} & 10.2x &&  66.5 & 73.2 & 55.2 & 51.0 & 3891 & 41.7 & 17.5 & 263397 & 120666 \\
+        TraDeS~\cite{wu2021track} & 3.8x & &  63.9 & 69.1 & 52.7 & 50.8 & 3555 & 36.4 & 21.5 & 20892 & 150060 \\
+        TransTrack~\cite{sun2020transtrack} & 3.8x & \checkmark &  63.5 & 75.2 & 54.1 & 47.9 & 4614 & 55.3 & 10.2 & 50157 & 86442 \\
+        TransCenter~\cite{xu2021transcenter} & 3.8x & \checkmark & 62.2 & 73.2 & 54.5 & 49.7 & 3663 & 40.8 & 18.5 & 23112 & 123738 \\
+        TubeTK~\cite{pang2020tubetk} & 44.5x & & 58.6 & 63.0 & 48.0 & 45.1 & 4137 & 31.2 & 19.9 & 27060 & 177483 \\
+        CTracker~\cite{peng2020chained} & 1.0x & & 57.4 & 66.6 & 49.0 & 37.8 & 5529 & 32.2 & 24.2 & 22284 & 160491 \\
+        \rowcolor{gray!20} TrackFormer~\cite{meinhardt2021trackformer} & 1.0x & \checkmark & 63.9 & 65.0 & - & -& 3258 & - & - & 70443 & 123552 \\
+        \rowcolor{gray!20} MOTR~\cite{zeng2021motr} & 1.9x & \checkmark & 67.0 & 67.4& - & - & \textbf{1992} & 34.6 & 21.5 & \textbf{32355} & 149400 \\
+        \rowcolor{gray!20} \textbf{MeMOT} (ours) & 1.9x & \checkmark & \textbf{69.0} & \textbf{72.5} & \textbf{56.9} & \textbf{55.2} & 2724 & \textbf{43.8} & \textbf{18.0} & 37221 & \textbf{115248} \\ \hline
+        \multicolumn{12}{c}{\textbf{MOT20} \cite{dendorfer2020mot20}} \\\hline\hline
+        FairMOT~\cite{zhang2020fair} & 8.2x & & 67.3 & 61.8 & 54.6 & 54.7 & 5243 & 68.8 & 7.6 & 103440 & 88901\\
+        TransTrack~\cite{sun2020transtrack} & 2.7x & \checkmark &  59.4 & 65.0 & 48.9 & 45.2 & 3608 & 50.1 & 13.4 & 27191 & 150197 \\
+        TransCenter~\cite{xu2021transcenter} & 2.7x & \checkmark & 49.6 & 58.5 & 43.5 & 37.0 & 4695 & 48.6 & 14.9 & 64217 & 146019 \\
+        \rowcolor{gray!20} \textbf{MeMOT} (ours) & 1.0x & \checkmark & \textbf{66.1} & \textbf{63.7} & \textbf{54.1} & \textbf{55.0} & \textbf{1938} & \textbf{57.5} & \textbf{14.3} & \textbf{47882} & \textbf{137983} \\
+    \bottomrule[1.5pt]
+    \end{tabular}
+    \vspace{-2.0mm}
+    \caption{\textbf{Evaluation results on MOT challenge datasets}. Trackers with gray background use the in-network association solver (IAS), and others with white background use the post-model association solver (PAS).
+    Best results of IAS are marked in bold.}
+    \label{tab:MOTexp}
+    \vspace{-1.5mm}
+\end{table*}

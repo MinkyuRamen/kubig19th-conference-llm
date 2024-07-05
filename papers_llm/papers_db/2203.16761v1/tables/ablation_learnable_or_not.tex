@@ -1,0 +1,19 @@
+\begin{table}
+\centering
+\footnotesize
+%\setlength\tabcolsep{5.0pt}
+\begin{tabular}{cc|cccccc}
+\toprule[1.5pt]
+        \textbf{$q_s$}  & \textbf{$q_l$} & \textbf{IDF1} & \textbf{MOTA} & \textbf{HOTA} & \textbf{IDsw} & \textbf{DetA} & \textbf{AssA} \\\hline
+        & \checkmark  & \textbf{73.15}& 68.08 & \textbf{59.75}& \textbf{93}& 57.92 & 63.10\\
+        \checkmark  & & 67.25 & \textbf{69.88} & 57.36 & 112 & \textbf{58.01} & 61.76\\
+        \checkmark  & \checkmark & 41.09& 59.80& 43.28& 207 & 45.36 & 38.52\\
+        & & 72.30 & 62.68 & 58.84 & 103 & 55.72 & \textbf{63.37}\\
+\bottomrule[1.5pt]
+    \end{tabular}
+    \vspace{-2.0mm}
+\caption{Comparisons on different configuration of the short-term cross-attention query $q_s$ and long-term cross-attention query $q_l$.}
+%\caption{Comparisons on different configuration of the short-term cross-attention query $q_s$ and long-term cross-attention query $q_l$. Empty means using the latest observation, $\checkmark$ represents the query is learnable and recursively updated during inference. Our MeMoT design (row-1) yields best overall performance. }
+\label{tab:ablation:learn}
+\vspace{-2.0mm}
+\end{table}

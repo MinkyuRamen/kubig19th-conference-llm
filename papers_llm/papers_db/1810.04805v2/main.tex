@@ -1,0 +1,79 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[hyperref]{naaclhlt2019}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{xspace}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{tikz,tikz-qtree}
+\usepackage{pgfplots}
+\usepackage{amssymb}
+\usepackage{xfrac}
+\usepackage{graphicx}
+\usepackage{tablefootnote}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\pgfplotsset{compat=1.14}
+
+\newcommand\BibTeX{B{\sc ib}\TeX}
+\newcommand\bert{BERT\xspace}
+\newcommand{\eat}[1]{\ignorespaces}
+
+
+\hyphenation{OpenAI}
+
+\definecolor{g-red}{HTML}{DB4437}
+\definecolor{g-blue}{HTML}{4285F4}
+\definecolor{g-green}{HTML}{0F9D58}
+\definecolor{g-yellow}{HTML}{F4B400}
+\definecolor{g-orange}{HTML}{FF9800}
+\definecolor{g-grey}{HTML}{9E9E9E}
+
+\setlength{\tabcolsep}{0.3em}
+
+
+\newcommand\bertbase{BERT$_{\small \textsc{BASE}}$\xspace}
+\newcommand\bertlarge{BERT$_{\small \textsc{LARGE}}$\xspace}
+
+\title{\textbf{BERT}: Pre-training of Deep Bidirectional Transformers for \\ Language Understanding}
+
+\author{Jacob Devlin \quad Ming-Wei Chang \quad Kenton Lee \quad Kristina Toutanova \\
+  Google AI Language \\
+  {\tt \{jacobdevlin,mingweichang,kentonl,kristout\}@google.com} \\}
+
+\date{}
+
+\aclfinalcopy % Uncomment this line for the final submission
+\def\aclpaperid{1584} %  Enter the acl Paper ID here
+
+% REMOVE THIS IN THE FINAL COPY!
+%\hypersetup{draft}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+  \input{abstract}
+\end{abstract}
+
+\input{intro}
+
+\input{related}
+
+\input{bert}
+
+\input{experiment}
+
+\input{ablation}
+
+\input{conclusion}
+
+\bibliographystyle{acl_natbib}
+\bibliography{lumiere}
+
+%\clearpage
+\pagenumbering{arabic} 
+\appendix                                     
+\input{appendix_main}
+
+\end{document}

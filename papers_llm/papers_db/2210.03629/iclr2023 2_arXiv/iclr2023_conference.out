@@ -1,0 +1,30 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{ReAct: Synergizing Reasoning + Acting}{}% 2
+\BOOKMARK [1][-]{section.3}{Knowledge-Intensive Reasoning Tasks}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Setup}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Methods}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Results and Observations}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Decision Making Tasks}{}% 7
+\BOOKMARK [1][-]{section.5}{Related Work}{}% 8
+\BOOKMARK [1][-]{section.6}{Conclusion}{}% 9
+\BOOKMARK [1][-]{appendix.A}{Additional Results}{}% 10
+\BOOKMARK [2][-]{subsection.A.1}{GPT-3 Experiments}{appendix.A}% 11
+\BOOKMARK [2][-]{subsection.A.2}{ReAct obtains up-to-date knowledge on HotpotQA}{appendix.A}% 12
+\BOOKMARK [2][-]{subsection.A.3}{Human-in-the-loop behavior correction on AlfWorld}{appendix.A}% 13
+\BOOKMARK [1][-]{appendix.B}{Experiment Details}{}% 14
+\BOOKMARK [2][-]{subsection.B.1}{HotpotQA Finetuning Details}{appendix.B}% 15
+\BOOKMARK [2][-]{subsection.B.2}{AlfWorld IM-Style Details}{appendix.B}% 16
+\BOOKMARK [1][-]{appendix.C}{Prompts}{}% 17
+\BOOKMARK [2][-]{subsection.C.1}{HotpotQA}{appendix.C}% 18
+\BOOKMARK [2][-]{subsection.C.2}{Fever}{appendix.C}% 19
+\BOOKMARK [2][-]{subsection.C.3}{Webshop}{appendix.C}% 20
+\BOOKMARK [2][-]{subsection.C.4}{ALFWorld}{appendix.C}% 21
+\BOOKMARK [1][-]{appendix.D}{Trajectories}{}% 22
+\BOOKMARK [2][-]{subsection.D.1}{FEVER Trajectories}{appendix.D}% 23
+\BOOKMARK [2][-]{subsection.D.2}{ALFWorld Trajectories}{appendix.D}% 24
+\BOOKMARK [3][-]{subsubsection.D.2.1}{ReAct trajectory}{subsection.D.2}% 25
+\BOOKMARK [3][-]{subsubsection.D.2.2}{Act trajectory}{subsection.D.2}% 26
+\BOOKMARK [3][-]{subsubsection.D.2.3}{ReAct-IM trajectory}{subsection.D.2}% 27
+\BOOKMARK [2][-]{subsection.D.3}{Webshop Trajectories}{appendix.D}% 28
+\BOOKMARK [1][-]{appendix.E}{More Analysis}{}% 29
+\BOOKMARK [2][-]{subsection.E.1}{Success and Failure Modes Analysis}{appendix.E}% 30

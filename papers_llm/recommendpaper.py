@@ -67,11 +67,11 @@ class RecommendPaper:
                 response = requests.get(url, params=query_params, headers=headers)
                 response.raise_for_status()
             except:
-                time.sleep(1)
+                time.sleep(5)
                 response = requests.get(url, params=query_params, headers=headers)
                 response.raise_for_status()
         except requests.exceptions.RequestException as e:
-            raise NetworkError(f"Error fetching data from Semantic Scholar API: {e}")
+            raise NetworkError(f"Error fetching data from Semantic Scholar API REF: {e}")
         try:
             response = response.json()
         except ValueError:
@@ -79,7 +79,7 @@ class RecommendPaper:
         paper_id = response['data'][0]['paperId']
 
 
-        fields = '?fields=title,publicationDate,influentialCitationCount,contexts,intents,abstract'
+        fields = '?fields=title,publicationDate,influentialCitationCount,abstract&limit=50'
         """
         context ; snippets of text where the reference is mentioned
         intents ; intents derived from the contexts in which this citation is mentioned.
@@ -118,8 +118,8 @@ class RecommendPaper:
         ### 상위 num=20개의 reference이 많은 논문들을 select
         target_response, reference = self.query2references(query=query, num=num)
         reference_response = [ref['citedPaper'] for ref in reference]
-        reference_context = [ref['contexts'] for ref in reference]
-        reference_intent = [ref['intents'] for ref in reference]
+        # reference_context = [ref['contexts'] for ref in reference]
+        # reference_intent = [ref['intents'] for ref in reference]
 
 
         ## target 논문과 num개의 reference 사이의 유사도 계산
@@ -139,39 +139,35 @@ class RecommendPaper:
         sentence_embeddings = F.normalize(sentence_embeddings, p=2, dim=1)
         rec = cosine_similarity(sentence_embeddings)
         
-        ## 유사도가 threshold 이상인 논문들을 추출
-        indices = np.where(rec[0][1:] > self.threshold)[0]
-        rec_lst = [reference_response[i] for i in indices]
-        rec_context = [reference_context[i] for i in indices]
-        rec_intent = [reference_intent[i] for i in indices]
+        ## 유사도 계산
+        for ind in range(len(reference_response)):
+            reference_response[ind]['similarity score'] = rec[0][1:][ind]
+        
+        rec_lst = reference_response
+        print(f'cit : {len(rec_lst)}')
+        print(rec_lst)
 
         for item in rec_lst:
             if item['publicationDate'] is None:
                 item['publicationDate'] = datetime.max
 
-        # intent와 context를 list에 추가
-        for i in range(len(rec_lst)):
-            try:
-                rec_lst[i]['intent'] = ' '.join(rec_intent[i])
-                rec_lst[i]['context'] = rec_context[i][0]
-            except: 
-                rec_lst[i]['intent'] = 'None'
-                rec_lst[i]['context'] = 'None'
-        if recommend:
-            if len(rec_lst) > recommend:
-                rec_lst = rec_lst[1:recommend]
+        if len(rec_lst) > recommend:
+            rec_lst = rec_lst[1:recommend]
 
-        # 날짜순으로 정렬
-        if sorting==True:
-            rec_lst = sorted(rec_lst, key=lambda x: x['influentialCitationCount'], reverse=True)[:num]
-            rec_lst = sorted(rec_lst, key=lambda x: datetime.strptime(x['publicationDate'], '%Y-%m-%d') if isinstance(x['publicationDate'], str) else x['publicationDate'])
+        # 유사순으로 정렬
+        return sorted(rec_lst, key=lambda x: x['similarity score'], reverse=True)[:num]
+
+        # # 날짜순으로 정렬
+        # if sorting==True:
+        #     rec_lst = sorted(rec_lst, key=lambda x: x['influentialCitationCount'], reverse=True)[:num]
+        #     rec_lst = sorted(rec_lst, key=lambda x: datetime.strptime(x['publicationDate'], '%Y-%m-%d') if isinstance(x['publicationDate'], str) else x['publicationDate'])
         
-        updated_result = []
-        for paper in rec_lst:
-            paper.pop('paperId', None)  # 'paperId'가 없는 경우에도 에러가 발생하지 않도록 함
-            updated_result.append(paper)
+        # updated_result = []
+        # for paper in rec_lst:
+        #     paper.pop('paperId', None)  # 'paperId'가 없는 경우에도 에러가 발생하지 않도록 함
+        #     updated_result.append(paper)
 
-        return updated_result
+        # return updated_result
     
 
     def query2citations(self, query, num=20):
@@ -182,46 +178,84 @@ class RecommendPaper:
             num : 반환할 citation paper 최대 개수
         Citation paper를 Citation 순으로 정렬
         '''
+        headers = {'x-api-key': self.ss_api_key}
+
         ## Citation paper list
         url = 'https://api.semanticscholar.org/graph/v1/paper/search'
+        query_params = {'query': query, 'fields': 'citations,citations.influentialCitationCount,citations.title,citations.publicationDate,citations.abstract', 'limit': 50}
 
-        # paper name 기입
-        query_params = {'query': query,'fields': 'citations,citations.influentialCitationCount,citations.title,citations.publicationDate,citations.abstract'}
-
-        headers = {'x-api-key': self.ss_api_key}
         try:
-            response = requests.get(url, params=query_params, headers=headers)
-            response.raise_for_status()
+            try:
+                response = requests.get(url, params=query_params, headers=headers)
+                response.raise_for_status()
+            except:
+                time.sleep(5)
+                response = requests.get(url, params=query_params, headers=headers)
+                response.raise_for_status()
         except requests.exceptions.RequestException as e:
-            raise NetworkError(f"Error fetching data from Semantic Scholar API: {e}")
+            raise NetworkError(f"Error fetching data from Semantic Scholar API CIT1: {e}")
         try:
             citations_response = response.json()
             paper_id = citations_response['data'][0]['paperId']
         except ValueError:
-            raise NetworkError("Error parsing JSON response from Semantic Scholar API")
+            raise NetworkError("Error parsing JSON response from Semantic Scholar API CIT1-1")
 
-        ## target paper information
-        url = f'https://api.semanticscholar.org/graph/v1/paper/{paper_id}?fields=abstract,title'
-        try:
-            response = requests.get(url, params=query_params, headers=headers)
-            response.raise_for_status()
-        except requests.exceptions.RequestException as e:
-            raise NetworkError(f"현재 Semantic Scholar API가 불안정해서 에러가 발생했습니다. 잠시후에 다시 진행해주세요(API 키가 무료버전이여서 그래요 ㅜㅜ)")
-            # raise NetworkError(Error fetching data from Semantic Scholar API: {e}")
+        # ## target paper information
+        # url = f'https://api.semanticscholar.org/graph/v1/paper/{paper_id}'
+        # query_params = {'query': query, 'fields': 'abstract,title','limit': 1}
+        # try:
+        #     try:
+        #         response = requests.get(url, params=query_params, headers=headers)
+        #         response.raise_for_status()
+        #     except:
+        #         time.sleep(5)
+        #         response = requests.get(url, params=query_params, headers=headers)
+        #         response.raise_for_status()
+        # except requests.exceptions.RequestException as e:
+        #     raise NetworkError(f"Error fetching data from Semantic Scholar API CIT2: {e}")
 
-        try:
-            target_response = response.json()
-        except ValueError:
-            raise NetworkError("Error parsing JSON response from Semantic Scholar API")
+        # try:
+        #     target_response = response.json()
+        # print('tar res:',target_response)
+        # except ValueError:
+        #     raise NetworkError("Error parsing JSON response from Semantic Scholar API CIT2-2")
 
+        # Define the API endpoint URL
+        url = 'https://api.semanticscholar.org/graph/v1/paper/search?fields=paperId,title,abstract'
+
+        # paper name 기입
+        query_params = {'query': query, 'limit': 1}
+        headers = {'x-api-key': self.ss_api_key}
+
+        response = requests.get(url, params=query_params, headers=headers)
+        response = response.json()
+
+        # try:
+        #     try:
+        #         response = requests.get(url, params=query_params, headers=headers)
+        #         response.raise_for_status()
+        #     except:
+        #         time.sleep(5)
+        #         response = requests.get(url, params=query_params, headers=headers)
+        #         response.raise_for_status()
+        # except requests.exceptions.RequestException as e:
+        #     raise NetworkError(f"Error fetching data from Semantic Scholar API CIT: {e}")
+        # try:
+        #     response = response.json()
+        # except ValueError:
+        #     raise NetworkError("Error parsing JSON response from Semantic Scholar API")
+
+        target_response = response['data'][0]
         def get_citation_count(item):
             influential_citation_count = item.get('influentialCitationCount')
             if influential_citation_count is not None:
                 return influential_citation_count
             else:
                 return 0
+        print('tar res :', target_response)
             
         return target_response, sorted(citations_response['data'][0]['citations'], key=get_citation_count, reverse=True)[:num]
+
     
     def citation_recommend(self, query, rec_num, num=20):
         '''
@@ -255,8 +289,13 @@ class RecommendPaper:
         rec = cosine_similarity(sentence_embeddings)
         
         ## 유사도가 threshold 이상인 논문들을 추출
-        indices = np.where(rec[0][1:] > self.threshold)[0]
-        rec_lst = [citation_response[i] for i in indices]
+        # indices = np.where(rec[0][1:] > self.threshold)[0]
+        for ind in range(len(citation_response)):
+            citation_response[ind]['similarity score'] = rec[0][1:][ind]
+        
+        rec_lst = citation_response
+        print(f'cit : {len(rec_lst)}')
+        print(rec_lst)
 
         for item in rec_lst:
             if item['publicationDate'] is None:
@@ -265,15 +304,8 @@ class RecommendPaper:
         if len(rec_lst) > recommend:
             rec_lst = rec_lst[1:recommend]
 
-        # 날짜순으로 정렬
-        rec_lst = sorted(rec_lst, key=lambda x: datetime.strptime(x['publicationDate'], '%Y-%m-%d') if isinstance(x['publicationDate'], str) else x['publicationDate'])
-
-        updated_result = []
-        for paper in rec_lst:
-            paper.pop('paperId', None)  # 'paperId'가 없는 경우에도 에러가 발생하지 않도록 함
-            updated_result.append(paper)
-
-        return updated_result
+        # 유사순으로 정렬
+        return sorted(rec_lst, key=lambda x: x['similarity score'], reverse=True)[:num]
     
 
     def query2recommend_paper(self, query, rec_type, rec_num=5):

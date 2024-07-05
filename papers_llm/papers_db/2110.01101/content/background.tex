@@ -1,0 +1,75 @@
+\section{Background}
+\subsection{Markov Decision Process}\label{sec:mdp}
+Reinforcement learning algorithms aim to solve Markov Decision Process (MDP) with unknown dynamics. A Markov Decision Process \cite{rl_intro} is also referred as \textit{world} or \textit{environment} in this context. An environment has five key components as follows:
+\begin{itemize}
+    \item State space $\mathcal{S}$: the set of all possible states in an environment. For example, in the Go game, the state space is all the possible positions of the stones.
+    \item Action space $\mathcal{A}$: the set of all possible actions. For example, in the Go game, the action space is all the possible moves in the current state.
+    \item System dynamics $\mathcal{P}$: the function that computes the next state given the current state and the action. 
+    \item Reward function $\mathcal{R}$: the intermediate reward received by the agent when transiting from the current state to the next state.
+    \item Initial state distribution $\mu$: the distribution of states where the agents will be initially at.
+\end{itemize}
+We define an episode as one trajectory of the agent acting from the initial state to the terminal state.
+The policy $\pi(a|s)$ is defined as a stationary function that maps from the state space to the action space. The objective of reinforcement learning is to learn the policy such that the expected long-term accumulated rewards in an episode is maximized. 
+\\\textbf{High level abstractions and APIs}
+Reinforcement learning improves the performance of the agent by learning from the data collected from interacting with the environment. To facilitate the understanding from a system level, we introduce the high level APIs inspired from the ones used in OpenAI gym \cite{openai_gym} in Python programming language \cite{python}:
+\begin{itemize}
+    \item \mintinline{python}{def reset() -> S}: return a state by sampling from the initial state distribution $\mu$.
+    \item \mintinline{python}{def step(a: A) -> (S, float, bool)}: return a tuple of state, reward (float type) and done signal (bool type) by taking action \textit{a}. The done signal indicates whether the current episode is finished. If the current episode is finished, call the reset to restart the episode. The environment class maintains its own internal state.
+    \item \mintinline{python}{def act(s: S) -> A}: the acting function of the agent that takes the current state and outputs the action.
+    \item \mintinline{python}{def learn(data: Data)}: the learning function of the agent that takes the data and updates its internal weights to improve the performance. The standard Data type contains a tuple consisting of a transition (state ($s$), action ($a$), next\_state ($s'$), reward ($r$)).
+\end{itemize}
+
+\subsection{Reinforcement Learning}
+In reinforcement learning, a Replay Buffer is employed \cite{prioritized_experience_replay} to store all the data collected from the start of the training. The agent is updated using data sampled from the Replay Buffer. We show a generic paradigm of reinforcement learning algorithms in Figure~\ref{fig:generic_off_policy_rl}. 
+Typical reinforcement learning algorithms include DQN \cite{dqn}, DDQN \cite{double_q_learning}, DDPG \cite{ddpg}, TD3 \cite{td3}, SAC \cite{sac}, etc. 
+These algorithms only differ in how the learning is performed while the training loop is the same.
+
+\subsection{Prioritized Replay Buffer}
+To illustrate the motivation of using a Prioritized Replay Buffer \cite{prioritized_experience_replay}, we start by examining how the learning is performed in Deep Q Network (DQN) \cite{dqn}. DQN trains a Q network parameterized by $\psi$ by minimizing the following objective:
+\begin{align}
+    \min_{\psi}\frac{1}{N}\sum_{i=1}^{N} (Q_{\psi}(s_i,a_i) - (r_i + \gamma \max_{a_i'}Q_{\psi}(s_i',a_i')))^2
+\end{align}
+where $Q_{\psi}(s,a) - (r + \gamma \max_{a'}Q_{\psi}(s',a'))$ is the temporal difference (TD) error. Uniform sampling from the replay buffer to update the TD error is less effective because the sampled data may already have low TD error. Prioritized Replay Buffer \cite{prioritized_experience_replay} is proposed to mitigate this problem by assigning a priority to each data item using the absolute value of the TD error:
+\begin{align}
+    P(i) = |Q_{\psi}(s_i,a_i) - (r_i + \gamma \max_{a_i'}Q_{\psi}(s_i',a_i'))|
+\end{align}
+where $P(i)$ denotes the priority of data $i$.
+Then, the data is sampled according to the probability proportional to the priority. To fix the bias introduced by the prioritized sampling, importance weights are computed as $w(i) = (\frac{1}{N}\cdot\frac{\sum_{i}P(i)}{P(i)})^{\beta}$, where $w(i)$ denotes the importance weights for data $i$ and $\beta$ is a hyper-parameter. The learning step of DQN using a Prioritized Replay Buffer is:
+\begin{align}
+    \min_{\psi} \frac{1}{N}\sum_{i=1}^{N} w(i)\cdot(Q_{\psi}(s_i,a_i) - (r_i + \gamma \max_{a_i'}Q_{\psi}(s_i',a_i')))^2
+\end{align}
+After each update, the new priority is stored in the Replay Buffer. A complete training process is shown in Algorithm~\ref{alg:off_policy_rl}. Other algorithms follow the same structure and only differ slightly in the technique used to update the Q function.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{generic_off_policy_rl.png}
+    \caption{A generic paradigm of reinforcement learning algorithms}
+    \label{fig:generic_off_policy_rl}
+\end{figure}
+
+\begin{algorithm}[!t]
+    \caption{Generic Reinforcement Learning}
+    \label{alg:off_policy_rl}
+    \begin{algorithmic}[1]
+        \State \textbf{Input:} Environment \textit{env}, Agent $\pi_{\theta}$, Replay buffer $\mathcal{B}$.
+        \State \textbf{Output:} Trained agent $\pi_{\theta}$.
+        \For{$i$ = 1; $i$ $\leq$ iterations; $i++$}
+            \If{done}
+                \State obs = \textit{env}.reset(); \Comment{Episode terminates}
+            \EndIf
+            \State action = agent.act(obs); \Comment{Agent select action}
+            \State next\_obs, reward, done = \textit{env}.step(action); \Comment{Actuator}
+            \State $\mathcal{B}$.insert(obs, action, next\_obs, done);
+            \State obs = next\_obs;
+            \If{$i$ \% update\_interval == 0}
+                \State index, data = $\mathcal{B}$.sample(batch\_size);
+                \State priority = $\mathcal{B}$.get\_priority(index);
+                \For{$i$ in index}
+                    \State $w(i) = (\frac{1}{N}\cdot\frac{\sum_{i}P(i)}{P(i)})^{\beta}$; \Comment{importance weights}
+                \EndFor
+                \State new\_priority = agent.learn(data, is);
+                \State $\mathcal{B}$.update\_priority(index, new\_priority);
+            \EndIf
+        \EndFor
+    \end{algorithmic}
+\end{algorithm}

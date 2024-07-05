@@ -37,7 +37,7 @@ openai_key = os.getenv("OPENAI_API_KEY")
 # Updated loadpaer tool
 # model can use this tool several times, to get the list of the section, and then see the detail content of the paper.
 # if the ar5iv_mode is False, 
-getpapermodule = GetPaper_v2(ss_api_key, ar5iv_mode = True, path_db = '/root/limlab/lim_helper_v2/kubig19th-conference-llm/papers_llm/papers_db', page_limit = 5)
+getpapermodule = GetPaper_v2(ss_api_key, ar5iv_mode = True, path_db = '/root/limlab/lim_helper_v2/kubig19th-conference-llm/papers_llm/papers_db', page_limit = 9)
 recommendpapermodule = RecommendPaper(ss_api_key, threshold = 0.6)
 codeanalysismodule = CodeAnalysis(ss_api_key, openai_key, path_db = '/root/limlab/lim_helper_v2/kubig19th-conference-llm/papers_llm/papers_db', code_db = '/root/limlab/lim_helper_v2/kubig19th-conference-llm/papers_llm/code_db')
 
@@ -55,7 +55,7 @@ loadpaper = StructuredTool.from_function(
     description="""
         The `loadPaper` tool is designed to facilitate the process of retrieving and reading academic papers based on a given search title. \
         The `title` parameter is a string representing the title of the paper. The 'sections' parameter is a list representing the list of the sections in the paper. \
-        The 'arxiv_id' parameter is a string representing the arxiv id. \
+        The 'arxiv_id' parameter is a unique identifier for preprints on the Arxiv repository, formatted as `YYMM.NNNNN`. \
         The 'show_figure' parameter is a boolean value that determines whether to display the figures in the paper. \
         If the sections parameter is none, you can get the section list of the paper. If the sections parameter get the section list, you can load the paper's content. \
         Use this tool several times to get the section first and then get the detail content of each section. \

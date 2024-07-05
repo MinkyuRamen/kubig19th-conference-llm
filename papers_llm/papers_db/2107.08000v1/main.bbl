@@ -1,0 +1,330 @@
+\begin{thebibliography}{10}\itemsep=-1pt
+
+\bibitem{Arandjelovic01}
+Relja Arandjelović, Petr Gronat, Akihiko Torii, Tomas Pajdla, and Josef Sivic.
+\newblock {NetVLAD: CNN architecture for weakly supervised place recognition}.
+\newblock In {\em CVPR}, 2016.
+
+\bibitem{Babenko03}
+Artem Babenko and Victor Lempitsky.
+\newblock {Aggregating Local Deep Features for Image Retrieval}.
+\newblock In {\em ICCV}, 2015.
+
+\bibitem{Babenko01}
+Artem Babenko, Anton Slesarev, Alexandr Chigorin, and Victor Lempitsky.
+\newblock {Neural Codes for Image Retrieval}.
+\newblock In {\em ECCV}, 2014.
+
+\bibitem{Bello_2019_ICCV}
+Irwan Bello, Barret Zoph, Ashish Vaswani, Jonathon Shlens, and Quoc~V. Le.
+\newblock Attention augmented convolutional networks.
+\newblock In {\em ICCV}, 2019.
+
+\bibitem{ECCV2020_912}
+Bingyi Cao, Andr\'e Araujo, and Jack Sim.
+\newblock Unifying deep local and global features for image search.
+\newblock In {\em ECCV}, 2020.
+
+\bibitem{Cao01}
+Yue Cao, Jiarui Xu, Stephen Lin, Fangyun Wei, and Han Hu.
+\newblock {GCNet: Non-Local Networks Meet Squeeze-Excitation Networks and
+  Beyond}.
+\newblock In {\em ICCV}, 2019.
+
+\bibitem{chen2017rethinking}
+Liang-Chieh Chen, George Papandreou, Florian Schroff, and Hartwig Adam.
+\newblock Rethinking atrous convolution for semantic image segmentation.
+\newblock {\em arXiv preprint arXiv:1706.05587}, 2017.
+
+\bibitem{chen2020simple}
+Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton.
+\newblock A simple framework for contrastive learning of visual
+  representations.
+\newblock In {\em ICML}, 2020.
+
+\bibitem{ChenKLYF18}
+Yunpeng Chen, Yannis Kalantidis, Jianshu Li, Shuicheng Yan, and Jiashi Feng.
+\newblock A{\^{}}2-nets: Double attention networks.
+\newblock In {\em NeurIPS}, 2018.
+
+\bibitem{Deng01}
+Jiankang Deng, Jia Guo, Niannan Xue, and Stefanos Zafeiriou.
+\newblock {ArcFace: Additive Angular Margin Loss for Deep Face Recognition}.
+\newblock In {\em CVPR}, 2019.
+
+\bibitem{Donoser01}
+Michael Donoser and Horst Bischof.
+\newblock {Diffusion Processes for Retrieval Revisited}.
+\newblock In {\em CVPR}, 2013.
+
+\bibitem{dosovitskiy2020image}
+Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn,
+  Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg
+  Heigold, Sylvain Gelly, et~al.
+\newblock An image is worth 16x16 words: Transformers for image recognition at
+  scale.
+\newblock {\em arXiv preprint arXiv:2010.11929}, 2020.
+
+\bibitem{2102.05644}
+Alaaeldin El-Nouby, Natalia Neverova, Ivan Laptev, and Hervé Jégou.
+\newblock Training vision transformers for image retrieval.
+\newblock Technical report, 2021.
+
+\bibitem{Gao_2019_CVPR}
+Zilin Gao, Jiangtao Xie, Qilong Wang, and Peihua Li.
+\newblock Global second-order pooling convolutional networks.
+\newblock In {\em CVPR}, 2019.
+
+\bibitem{Gordo00}
+Albert Gordo, Jon Almazan, Jerome Revaud, and Diane Larlus.
+\newblock {Deep image retrieval: Learning global representations for image
+  search}.
+\newblock In {\em ECCV}, 2016.
+
+\bibitem{Gordo01}
+Albert Gordo, Jon Almazan, Jerome Revaud, and Diane Larlus.
+\newblock End-to-end learning of deep visual representations for image
+  retrieval.
+\newblock {\em IJCV}, 2017.
+
+\bibitem{gu2018attention}
+Yinzheng Gu, Chuanpeng Li, and Jinbin Xie.
+\newblock Attention-aware generalized mean pooling for image retrieval.
+\newblock {\em arXiv preprint arXiv:1811.00202}, 2018.
+
+\bibitem{Zhang01}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock {Deep residual learning for image recognition}.
+\newblock In {\em CVPR}, 2016.
+
+\bibitem{HuSASV18}
+Jie Hu, Li Shen, Samuel Albanie, Gang Sun, and Andrea Vedaldi.
+\newblock Gather-excite: Exploiting feature context in convolutional neural
+  networks.
+\newblock In {\em NeurIPS}, 2018.
+
+\bibitem{Hu01}
+Jie Hu, Li Shen, Samuel Albanie, Gang Sun, and Enhua Wu.
+\newblock {Squeeze-and-Excitation Networks}.
+\newblock In {\em CVPR}, 2018.
+
+\bibitem{iscen2017efficient}
+Ahmet Iscen, Giorgos Tolias, Yannis Avrithis, Teddy Furon, and Ondrej Chum.
+\newblock Efficient diffusion on region manifolds: Recovering small objects
+  with compact cnn representations.
+\newblock In {\em CVPR}, 2017.
+
+\bibitem{JPD+11}
+H. Jegou, F. Perronnin, M. Douze, J. Sanchez, P. Perez, and C. Schmid.
+\newblock Aggregating local image descriptors into compact codes.
+\newblock {\em PAMI}, (99):1--1, 2011.
+
+\bibitem{JimenezAN17}
+Albert Jimenez, Jose~M. Alvarez, and Xavier Gir{\'{o}}{-}i{-}Nieto.
+\newblock Class weighted convolutional features for visual instance search.
+\newblock In {\em BMVC}, 2017.
+
+\bibitem{Kalantidis01}
+Yannis Kalantidis, Clayton Mellina, and Simon Osindero.
+\newblock {Crossdimensional weighting for aggregated deep convolutional
+  features}.
+\newblock In {\em ECCV}, 2016.
+
+\bibitem{Kim01}
+Hyo~Jin Kim, Enrique Dunn, and Jan-Michael Frahm.
+\newblock {Learned Contextual Feature Reweighting for Image Geo-Localization}.
+\newblock In {\em CVPR}, 2017.
+
+\bibitem{KKCK20}
+Sungyeon Kim, Dongwon Kim, Minsu Cho, and Suha Kwak.
+\newblock Proxy anchor loss for deep metric learning.
+\newblock In {\em CVPR}, 2020.
+
+\bibitem{Lowe01}
+David~G. Lowe.
+\newblock Distinctive image features from scale-invariant keypoints.
+\newblock In {\em IJCV}, 2004.
+
+\bibitem{Ng01}
+Tony Ng, Vassileios Balntas, Yurun Tian, and Krystian Mikolajczyk.
+\newblock {SOLAR: Second-Order Loss and Attention for Image Retrieval}.
+\newblock In {\em ECCV}, 2020.
+
+\bibitem{Noh01}
+Hyeonwoo Noh, Andre Araujo, Jack Sim, Tobias Weyand, and Bohyung Han.
+\newblock {Large Scale Image Retrieval with Attentive Deep Local Features}.
+\newblock In {\em ICCV}, 2017.
+
+\bibitem{oh2016deep}
+Hyun Oh~Song, Yu Xiang, Stefanie Jegelka, and Silvio Savarese.
+\newblock Deep metric learning via lifted structured feature embedding.
+\newblock In {\em CVPR}, 2016.
+
+\bibitem{Paszke01}
+Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
+  Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, Alban
+  Desmaison, Andreas Köpf, Edward Yang, Zach DeVito, Martin Raison, Alykhan
+  Tejani, Sasank Chilamkurthy, Benoit Steiner, Lu Fang, Junjie Bai, and Soumith
+  Chintala.
+\newblock {PyTorch: An imperative style, high-performance deep learning}.
+\newblock In {\em NeurIPS}, 2019.
+
+\bibitem{Philbin01}
+James Philbin, Ondrej Chum, Michael Isard, Josef Sivic, and Andrew Zisserman.
+\newblock {Object retrieval with large vocabularies and fast spatial matching}.
+\newblock In {\em CVPR}, 2007.
+
+\bibitem{Philbin02}
+James Philbin, Ondrej Chum, Michael Isard, Josef Sivic, and Andrew Zisserman.
+\newblock {Lost in quantization:Improving particular object retrieval in large
+  scale image databases}.
+\newblock In {\em CVPR}, 2008.
+
+\bibitem{plotz2018neural}
+Tobias Pl{\"o}tz and Stefan Roth.
+\newblock Neural nearest neighbors networks.
+\newblock In {\em NeurIPS}, 2018.
+
+\bibitem{RITAC18}
+Filip Radenović, Ahmet Iscen, Giorgos Tolias, Yannis Avrithis, and Ondřej
+  Chum.
+\newblock {Revisiting Oxford and Paris: Large-Scale Image Retrieval
+  Benchmarking}.
+\newblock In {\em CVPR}, 2018.
+
+\bibitem{Radenovi01}
+Filip Radenović, Giorgos Tolias, and Ondřej Chum.
+\newblock {CNN image retrieval learns from BoW: Unsupervised fine-tuning with
+  hard examples}.
+\newblock In {\em ECCV}, 2016.
+
+\bibitem{Radenovic01}
+Filip Radenović, Giorgos Tolias, and Ondřej Chum.
+\newblock {Fine-Tuning CNN Image Retrieval with No Human Annotation}.
+\newblock In {\em TPAMI}, 2019.
+
+\bibitem{Razavian2015VisualIR}
+Ali~Sharif Razavian, Josephine Sullivan, Stefan Carlsson, and Atsuto Maki.
+\newblock {Visual Instance Retrieval with Deep Convolutional Networks}.
+\newblock In {\em CoRR}, 2015.
+
+\bibitem{Russakovsky01}
+Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma,
+  Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein,
+  Alexander~C. Berg, and Li Fei-Fei.
+\newblock {ImageNet Large Scale Visual Recognition Challenge}.
+\newblock In {\em International booktitle of Computer Vision}, 2015.
+
+\bibitem{simeoni2019local}
+Oriane Sim{\'e}oni, Yannis Avrithis, and Ondrej Chum.
+\newblock Local features and visual words emerge in activations.
+\newblock In {\em CVPR}, 2019.
+
+\bibitem{simeoni2019graph}
+O. Sim\'eoni, A. Iscen, G. Tolias, Y. Avrithis, and O. Chum.
+\newblock Graph-based particular object discovery.
+\newblock {\em Machine Vision and Applications}, 30(2):243--254, 3 2019.
+
+\bibitem{SnellSZ17}
+Jake Snell, Kevin Swersky, and Richard~S. Zemel.
+\newblock Prototypical networks for few-shot learning.
+\newblock In {\em NeurIPS}, 2017.
+
+\bibitem{Szegedy01}
+Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir
+  Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich.
+\newblock {Going deeper with convolutions}.
+\newblock In {\em CVPR}, 2015.
+
+\bibitem{Tan01}
+Mingxing Tan, Ruoming Pang, and Quoc~V. Le.
+\newblock {EfficientDet: Scalable and Efficient Object Detection}.
+\newblock In {\em CVPR}, 2020.
+
+\bibitem{Teichmann01}
+Marvin Teichmann, Andre Araujo, Menglong Zhu, and Jack Sim.
+\newblock Detect-to-retrieve: Efficient regional aggregation for image search.
+\newblock In {\em CVPR}, 2019.
+
+\bibitem{TAJ13}
+Giorgios Tolias, Yannis Avrithis, and Herv{\'e} J{\'e}gou.
+\newblock To aggregate or not to aggregate: Selective match kernels for image
+  search.
+\newblock In {\em ICCV}, 2013.
+
+\bibitem{tolias2020learning}
+Giorgos Tolias, Tomas Jenicek, and Ond{\v{r}}ej Chum.
+\newblock Learning and aggregating deep local descriptors for instance-level
+  recognition.
+\newblock In {\em ECCV}, 2020.
+
+\bibitem{ToliasSJ15}
+Giorgos Tolias, Ronan Sicre, and Herv{\'{e}} J{\'{e}}gou.
+\newblock Particular object retrieval with integral max-pooling of {CNN}
+  activations.
+\newblock In {\em ICLR}, 2016.
+
+\bibitem{Vaswani01}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N. Gomez, Lukasz Kaiser, and Illia Polosukhin.
+\newblock {Attention is all you need}.
+\newblock In {\em NeurIPS}, 2017.
+
+\bibitem{VSP+17}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, Lukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock In {\em NeurIPS}, 2017.
+
+\bibitem{wang01}
+Qilong Wang, Banggu Wu, Pengfei Zhu, Peihua Li, Wangmeng Zuo, and Qinghua Hu.
+\newblock {ECA-Net: Efficient Channel Attention for Deep Convolutional Neural
+  Networks}.
+\newblock In {\em CVPR}, 2020.
+
+\bibitem{Wang02}
+Xiaolong Wang, Ross Girshick, Abhinav Gupta, and Kaiming He.
+\newblock {Non-local Neural Networks}.
+\newblock In {\em CVPR}, 2018.
+
+\bibitem{Weyand01}
+Tobias Weyand, Andre Araujo, Bingyi Cao, and Jack Sim.
+\newblock {Google Landmarks Dataset v2 - A Large-Scale Benchmark for
+  Instance-Level Recognition and Retrieval}.
+\newblock In {\em CVPR}, 2020.
+
+\bibitem{woo01}
+Sanghyun Woo, Jongchan Park, Joon-Young Lee, and In~So Kweon.
+\newblock {CBAM: Convolutional Block Attention Module}.
+\newblock In {\em ECCV}, 2018.
+
+\bibitem{Yang01}
+Fan Yang, Ryota Hinami, Yusuke Matsui, Steven Ly, and Shin'ichi Satoh.
+\newblock {Efficient image retrieval via decoupling diffusion into online and
+  offline processing}.
+\newblock In {\em AAAI}, 2019.
+
+\bibitem{Yokoo01}
+Shuhei Yokoo, Kohei Ozaki, Edgar Simo-Serra, and Satoshi Iizuka.
+\newblock {Two-stage Discriminative Re-ranking for Large-scale Landmark
+  Retrieval}.
+\newblock In {\em arXiv:2003.11211}, 2020.
+
+\bibitem{Yu_2017_CVPR}
+Fisher Yu, Vladlen Koltun, and Thomas Funkhouser.
+\newblock Dilated residual networks.
+\newblock In {\em CVPR}, 2017.
+
+\bibitem{2101.11986}
+Li Yuan, Yunpeng Chen, Tao Wang, Weihao Yu, Yujun Shi, Francis~EH Tay, Jiashi
+  Feng, and Shuicheng Yan.
+\newblock Tokens-to-token vit: Training vision transformers from scratch on
+  imagenet.
+\newblock {\em arXiv preprint arXiv:2101.11986}, 2021.
+
+\bibitem{zhao2020exploring}
+Hengshuang Zhao, Jiaya Jia, and Vladlen Koltun.
+\newblock Exploring self-attention for image recognition.
+\newblock In {\em CVPR}, 2020.
+
+\end{thebibliography}

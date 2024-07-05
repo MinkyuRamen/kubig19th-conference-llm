@@ -1,0 +1,21 @@
+\begin{tikzpicture}[
+	font={\footnotesize},
+]
+\matrix[
+	row sep=15pt,column sep=10pt,cells={scale=1,},
+]{
+	\node[inp](i){feature map}; \\
+	\node[gap](g){GAP}; \\
+	\node[fix](c5){conv1d($k$)}; \\
+	\node[fun](s){$\sigmoid$}; \\
+	\node[outp](o){attention map}; \\
+};
+\draw[->] 
+	(i) edge node[dim,midway,right]{$c \times h \times w$} (g)
+	(g) edge node[dim,midway,right]{$c \times 1 \times 1$} (c5) 
+	(c5) edge (s)
+	(s) edge node[dim,midway,right]{$c \times 1 \times 1$} (o)
+	;
+\node[left=1pt of i] {$\vF$};
+\node[left=1pt of o] {$\vA_c^l$};
+\end{tikzpicture}

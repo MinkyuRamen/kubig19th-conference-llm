@@ -1,0 +1,31 @@
+%auto-ignore
+\section{Detailed Experimental Setup}
+\label{appendix:sec:exp_details}
+
+\subsection{Detailed Descriptions for the GLUE Benchmark Experiments.}
+\label{appendix:sec:glue}
+
+Our GLUE results in Table\ref{tab:glue_official} are obtained from  \url{https://gluebenchmark.com/leaderboard} and \url{https://blog.openai.com/language-unsupervised}.
+The GLUE benchmark includes the following datasets, the descriptions of which were originally summarized in \citet{wang-etal:2018:_glue}:
+
+\paragraph{MNLI} Multi-Genre Natural Language Inference is a large-scale, crowdsourced entailment classification task~\cite{williams-nangia-bowman:2018}. Given a pair of sentences, the goal is to predict whether the second sentence is an {\it entailment}, {\it contradiction}, or {\it neutral} with respect to the first one.
+
+\paragraph{QQP} Quora Question Pairs is a binary classification task where the goal is to determine if two questions asked on Quora are semantically equivalent~\cite{chen-etal:2018:_quora}.
+
+\paragraph{QNLI} Question Natural Language Inference is a version of the Stanford Question Answering Dataset~\cite{rajpurkar-etal:2016:_squad} which has been converted to a binary classification task~\cite{wang-etal:2018:_glue}. The positive examples are (question, sentence) pairs which do contain the correct answer, and the negative examples are (question, sentence) from the same paragraph which do not contain the answer.
+
+\paragraph{SST-2} The Stanford Sentiment Treebank is a binary single-sentence classification task consisting of sentences extracted from movie reviews with human annotations of their sentiment~\cite{socher-etal:2013:_recur}.
+
+\paragraph{CoLA} The Corpus of Linguistic Acceptability is a binary single-sentence classification task, where the goal is to predict whether an English sentence is linguistically ``acceptable'' or not~\cite{warstadt-singh-bowman:2018:_corpus}.
+
+\paragraph{STS-B} The Semantic Textual Similarity Benchmark is a collection of sentence pairs drawn from news headlines and other sources~\cite{cer-etal:2017}. They were annotated with a score from 1 to 5 denoting how similar the two sentences are in terms of semantic meaning. 
+
+\paragraph{MRPC} Microsoft Research Paraphrase Corpus consists of sentence pairs automatically extracted from online news sources, with human annotations for whether the sentences in the pair are semantically equivalent~\cite{dolan-brockett:2005:_autom}.
+
+\paragraph{RTE} Recognizing Textual Entailment is a binary entailment task similar to MNLI, but with much less training data~\cite{bentivogli-etal:2009}.\footnote{Note that we only report single-task fine-tuning results in this paper. A multitask fine-tuning approach could potentially push
+the performance even further. For example, we did observe substantial improvements on RTE from multi-task training with MNLI.}
+
+\paragraph{WNLI} Winograd NLI is a small natural language inference dataset \cite{levesque-davis-morgenstern:2011:_winog}. The GLUE webpage notes that there are issues with the construction of this dataset,~\footnote{\url{https://gluebenchmark.com/faq}} and every trained system that's been submitted to GLUE has performed worse than the 65.1 baseline accuracy of predicting the majority class. We therefore exclude this set to be fair to OpenAI GPT. For our GLUE submission, we always predicted the majority class.
+
+
+

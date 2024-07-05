@@ -1,0 +1,114 @@
+\section{\ourmodel{}} \label{sec:roberta}
+
+\input{tables/ablation.tex}
+
+In the previous section we propose modifications to the BERT pretraining procedure that improve end-task performance.
+We now aggregate these improvements and evaluate their combined impact.
+We call this configuration \textbf{\ourmodel{}} for \underline{\textbf{R}}obustly \underline{\textbf{o}}ptimized \underline{\textbf{BERT}} \underline{\textbf{a}}pproach.
+Specifically, \ourmodel{} is trained with dynamic masking (Section~\ref{sec:dynamic_masking}), \textsc{full-sentences} without NSP loss (Section~\ref{sec:model_input_nsp}), large mini-batches (Section~\ref{sec:large_batches}) and a larger byte-level BPE (Section~\ref{sec:bpe}).
+
+Additionally, we investigate two other important factors that have been under-emphasized in previous work: (1) the data used for pretraining, and (2) the number of training passes through the data.
+For example, the recently proposed XLNet architecture~\cite{yang2019xlnet} is pretrained using nearly 10 times more data than the original BERT~\cite{devlin2018bert}.
+It is also trained with a batch size eight times larger for half as many optimization steps, thus seeing four times as many sequences in pretraining compared to BERT.
+
+To help disentangle the importance of these factors from other modeling choices (e.g., the pretraining objective), we begin by training \ourmodel{} following the \bertlarge{} architecture ($L=24$, $H=1024$, $A=16$, 355M parameters).
+We pretrain for 100K steps over a comparable \textsc{BookCorpus} plus \textsc{Wikipedia} dataset as was used in \newcite{devlin2018bert}.
+We pretrain our model using 1024 V100 GPUs for approximately one day.
+
+\paragraph{Results}
+
+We present our results in Table~\ref{tab:ablation}.
+When controlling for training data, we observe that \ourmodel{} provides a large improvement over the originally reported \bertlarge{} results, reaffirming the importance of the design choices we explored in Section~\ref{sec:design}.
+
+Next, we combine this data with the three additional datasets described in Section~\ref{sec:data}.
+We train \ourmodel{} over the combined data with the same number of training steps as before (100K).
+In total, we pretrain over 160GB of text.
+We observe further improvements in performance across all downstream tasks, validating the importance of data size and diversity in pretraining.\footnote{Our experiments conflate increases in data size and diversity. We leave a more careful analysis of these two dimensions to future work.}
+
+\input{tables/roberta_glue.tex}
+
+Finally, we pretrain \ourmodel{} for significantly longer, increasing the number of pretraining steps from 100K to 300K, and then further to 500K.
+We again observe significant gains in downstream task performance, and the 300K and 500K step models outperform \xlnetlarge{} across most tasks.
+We note that even our longest-trained model does not appear to overfit our data and would likely benefit from additional training.
+
+In the rest of the paper, we evaluate our best \ourmodel{} model on the three different benchmarks: GLUE, SQuaD and RACE.
+Specifically we consider \ourmodel{} trained for 500K steps over all five of the datasets introduced in Section~\ref{sec:data}.
+
+\subsection{GLUE Results} \label{sec:results_glue}
+
+For GLUE we consider two finetuning settings.
+In the first setting (\emph{single-task, dev}) we finetune \ourmodel{} separately for each of the GLUE tasks, using only the training data for the corresponding task.
+We consider a limited hyperparameter sweep for each task, with batch sizes $\in \{16, 32\}$ and learning rates $\in \{1e-5, 2e-5, 3e-5\}$, with a linear warmup for the first 6\% of steps followed by a linear decay to 0.
+We finetune for 10 epochs and perform early stopping based on each task's evaluation metric on the dev set.
+The rest of the hyperparameters remain the same as during pretraining.
+In this setting, we report the median development set results for each task over five random initializations, without model ensembling.
+
+In the second setting (\emph{ensembles, test}), we compare \ourmodel{} to other approaches on the test set via the GLUE leaderboard.
+While many submissions to the GLUE leaderboard depend on multi-task finetuning, \textbf{our submission depends only on single-task finetuning}.
+For RTE, STS and MRPC we found it helpful to finetune starting from the MNLI single-task model, rather than the baseline pretrained \ourmodel{}.
+We explore a slightly wider hyperparameter space, described in the Appendix, and ensemble between 5 and 7 models per task.
+
+\paragraph{Task-specific modifications}
+
+Two of the GLUE tasks require task-specific finetuning approaches to achieve competitive leaderboard results.
+
+\underline{QNLI}:
+Recent submissions on the GLUE leaderboard adopt a pairwise ranking formulation for the QNLI task, in which candidate answers are mined from the training set and compared to one another, and a single (question, candidate) pair is classified as positive~\cite{liu2019mtdnn,liu2019improving,yang2019xlnet}.
+This formulation significantly simplifies the task, but is not directly comparable to BERT~\cite{devlin2018bert}.
+Following recent work, we adopt the ranking approach for our test submission, but for direct comparison with BERT we report development set results based on a pure classification approach.
+
+\underline{WNLI}: We found the provided NLI-format data to be challenging to work with.
+Instead we use the reformatted WNLI data from SuperGLUE~\cite{wang2019superglue}, which indicates the span of the query pronoun and referent.
+We finetune \ourmodel{} using the margin ranking loss from \newcite{kocijan2019surprisingly}.
+For a given input sentence, we use spaCy~\cite{spacy2} to extract additional candidate noun phrases from the sentence and finetune our model so that it assigns higher scores to positive referent phrases than for any of the generated negative candidate phrases.
+One unfortunate consequence of this formulation is that we can only make use of the positive training examples, which excludes over half of the provided training examples.\footnote{While we only use the provided WNLI training data, our results could potentially be improved by augmenting this with additional pronoun disambiguation datasets.}
+
+\paragraph{Results}
+
+We present our results in Table~\ref{tab:roberta_glue}.
+In the first setting (\emph{single-task, dev}), \ourmodel{} achieves state-of-the-art results on all 9 of the GLUE task development sets.
+Crucially, \ourmodel{} uses the same masked language modeling pretraining objective and architecture as \bertlarge{}, yet consistently outperforms both \bertlarge{} and \xlnetlarge{}.
+This raises questions about the relative importance of model architecture and pretraining objective, compared to more mundane details like dataset size and training time that we explore in this work.
+
+In the second setting (\emph{ensembles, test}), we submit \ourmodel{} to the GLUE leaderboard and achieve state-of-the-art results on 4 out of 9 tasks and the highest average score to date.
+This is especially exciting because \ourmodel{} does not depend on multi-task finetuning, unlike most of the other top submissions.
+We expect future work may further improve these results by incorporating more sophisticated multi-task finetuning procedures.
+
+\subsection{SQuAD Results} \label{sec:results_squad}
+
+We adopt a much simpler approach for SQuAD compared to past work.
+In particular, while both BERT~\cite{devlin2018bert} and XLNet~\cite{yang2019xlnet} augment their training data with additional QA datasets, \textbf{we only finetune \ourmodel{} using the provided SQuAD training data}.
+\newcite{yang2019xlnet} also employed a custom layer-wise learning rate schedule to finetune XLNet, while we use the same learning rate for all layers.
+
+For SQuAD v1.1 we follow the same finetuning procedure as \newcite{devlin2018bert}.
+For SQuAD v2.0, we additionally classify whether a given question is answerable; we train this classifier jointly with the span predictor by summing the classification and span loss terms.
+
+\paragraph{Results}
+
+\input{tables/roberta_squad.tex}
+
+We present our results in Table~\ref{tab:roberta_squad}.
+On the SQuAD v1.1 development set, \ourmodel{} matches the state-of-the-art set by XLNet.
+On the SQuAD v2.0 development set, \ourmodel{} sets a new state-of-the-art, improving over XLNet by 0.4 points (EM) and 0.6 points (F1).
+
+We also submit \ourmodel{} to the public SQuAD 2.0 leaderboard and evaluate its performance relative to other systems.
+Most of the top systems build upon either BERT~\cite{devlin2018bert} or XLNet~\cite{yang2019xlnet}, both of which rely on additional external training data.
+In contrast, our submission does not use any additional data.
+
+Our single \ourmodel{} model outperforms all but one of the single model submissions, and is the top scoring system among those that do not rely on data augmentation.
+
+\subsection{RACE Results} \label{sec:results_race}
+
+In RACE, systems are provided with a passage of text, an associated question, and four candidate answers. Systems are required to classify which of the four candidate answers is correct.
+
+We modify \ourmodel{} for this task by concatenating each candidate answer with the corresponding question and passage.
+We then encode each of these four sequences and pass the resulting \emph{[CLS]} representations through a fully-connected layer, which is used to predict the correct answer.
+We truncate question-answer pairs that are longer than 128 tokens and, if needed, the passage so that the total length is at most 512 tokens.
+
+
+\input{tables/roberta_race.tex}
+
+Results on the RACE test sets are presented in Table~\ref{tab:roberta_race}.
+\ourmodel{} achieves state-of-the-art results on both middle-school and high-school settings.
+
+

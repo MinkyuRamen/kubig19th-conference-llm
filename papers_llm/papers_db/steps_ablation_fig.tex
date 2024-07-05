@@ -1,0 +1,47 @@
+%auto-ignore
+
+\begin{figure}[b]
+\begin{tikzpicture}
+ \begin{axis}[
+   width=0.95\columnwidth,
+   height=0.7\columnwidth,
+   legend cell align=left,
+   legend style={at={(1, 0)},anchor=south east,font=\scriptsize},
+   mark options={mark size=3},
+   font=\scriptsize,
+   xmin=0, xmax=1000,
+   ymin=75, ymax=85,
+   xtick={200,400,600,800,1000},
+   ymajorgrids=true,
+   xmajorgrids=true,
+   xlabel style={yshift=0.5ex,},
+   xlabel=Pre-training Steps (Thousands) ,
+   ylabel=MNLI Dev Accuracy,
+   ylabel style={yshift=-0.5ex,}]
+    \addplot[mark=triangle,g-blue] plot coordinates {
+      (30, 78.6)
+      (50, 79.6)
+      (100, 80.5)
+      (200, 82.2)
+      (400, 83.2)
+      (600, 84.0)
+      (800, 84.3)
+      (1000, 84.4)
+    };
+    \addlegendentry{\bertbase (Masked LM)}
+    \addplot[mark=x,g-red] plot coordinates {
+      (30, 79.4)
+      (50, 79.8)
+      (100, 80.3)
+      (200, 81.0)
+      (400, 81.7)
+      (600, 81.9)
+      (800, 82.1)
+      (1000, 82.2)
+    };
+    \addlegendentry{\bertbase (Left-to-Right)}
+     \end{axis}
+\end{tikzpicture}
+\caption{Ablation over number of training steps. This shows the MNLI accuracy after fine-tuning, starting from model parameters that have been pre-trained for $k$ steps. The x-axis is the value of $k$.}
+\label{fig:step_abalation}
+\end{figure}

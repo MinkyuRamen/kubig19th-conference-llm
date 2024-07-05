@@ -1,0 +1,29 @@
+\begin{table*}[t]
+\begin{center}
+\begin{tabular}{lcccccccccc}
+\toprule
+& \bf MNLI & \bf QNLI & \bf QQP & \bf RTE & \bf SST & \bf MRPC & \bf CoLA & \bf STS & \bf WNLI & \bf Avg \\
+\midrule 
+\multicolumn{10}{l}{\textit{Single-task single models on dev}}\\
+\bertlarge{} & 86.6/- & 92.3 & 91.3 & 70.4 & 93.2 & 88.0 & 60.6 & 90.0 & - & -\\
+\xlnetlarge{} & 89.8/- & 93.9 & 91.8 & 83.8 & 95.6 & 89.2 & 63.6 & 91.8 & - & -\\
+\ourmodel{} & \textbf{90.2}/\textbf{90.2} & \textbf{94.7} & \textbf{92.2} & \textbf{86.6} & \textbf{96.4} & \textbf{90.9} & \textbf{68.0} & \textbf{92.4} & \textbf{91.3} & - \\
+\midrule
+\multicolumn{10}{l}{\textit{Ensembles on test (from leaderboard as of July 25, 2019)}} \\
+ALICE & 88.2/87.9 & 95.7 & \textbf{90.7} & 83.5 & 95.2 & 92.6 & \textbf{68.6} & 91.1 & 80.8 & 86.3 \\
+MT-DNN & 87.9/87.4 & 96.0 & 89.9 & 86.3 & 96.5 & 92.7 & 68.4 & 91.1 & 89.0 & 87.6 \\
+XLNet  & 90.2/89.8 & 98.6 & 90.3 & 86.3 & \textbf{96.8} & \textbf{93.0} & 67.8 & 91.6 & \textbf{90.4} & 88.4 \\
+\ourmodel{} & \textbf{90.8/90.2} & \textbf{98.9} & 90.2 & \textbf{88.2} & 96.7 & 92.3 & 67.8 & \textbf{92.2} & 89.0 & \bf 88.5 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{
+Results on GLUE. All results are based on a 24-layer architecture.
+\bertlarge{} and \xlnetlarge{} results are from \newcite{devlin2018bert} and \newcite{yang2019xlnet}, respectively.
+\ourmodel{} results on the development set are a median over five runs.
+\ourmodel{} results on the test set are ensembles of \emph{single-task} models.
+For RTE, STS and MRPC we finetune starting from the MNLI model instead of the baseline pretrained model.
+Averages are obtained from the GLUE leaderboard.
+}
+\label{tab:roberta_glue}
+\end{table*}

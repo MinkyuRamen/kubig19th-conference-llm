@@ -1,0 +1,360 @@
+\begin{thebibliography}{37}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Inproceedings
+\bibitem[{Devlin et~al.(2019)Devlin, Chang, Lee, and Toutanova}]{Delvin19}
+\bibinfo{author}{J.~Devlin}, \bibinfo{author}{M.~Chang},
+  \bibinfo{author}{K.~Lee}, \bibinfo{author}{K.~Toutanova},
+\newblock \bibinfo{title}{{BERT:} pre-training of deep bidirectional
+  transformers for language understanding},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 2019 Conference of the
+  North American Chapter of the Association for Computational Linguistics:
+  Human Language Technologies}, \bibinfo{year}{2019}, pp.
+  \bibinfo{pages}{4171--4186}. \DOIprefix\doi{10.18653/v1/n19-1423}.
+%Type = Misc
+\bibitem[{Goodfellow et~al.(2015)Goodfellow, Mirza, Xiao, Courville, and
+  Bengio}]{Goodfellow13}
+\bibinfo{author}{I.~J. Goodfellow}, \bibinfo{author}{M.~Mirza},
+  \bibinfo{author}{D.~Xiao}, \bibinfo{author}{A.~Courville},
+  \bibinfo{author}{Y.~Bengio}, \bibinfo{title}{An empirical investigation of
+  catastrophic forgetting in gradient-based neural networks},
+  \bibinfo{year}{2015}. \href{http://arxiv.org/abs/1312.6211}{{\tt
+  arXiv:1312.6211}}.
+%Type = Inproceedings
+\bibitem[{Yang et~al.(2020)Yang, Wang, Zhou, Zhao, Zhang, Yu, and Li}]{Yang20}
+\bibinfo{author}{J.~Yang}, \bibinfo{author}{M.~Wang},
+  \bibinfo{author}{H.~Zhou}, \bibinfo{author}{C.~Zhao},
+  \bibinfo{author}{W.~Zhang}, \bibinfo{author}{Y.~Yu}, \bibinfo{author}{L.~Li},
+\newblock \bibinfo{title}{Towards making the most of {BERT} in neural machine
+  translation},
+\newblock in: \bibinfo{booktitle}{The Thirty-Fourth {AAAI} Conference on
+  Artificial Intelligence}, \bibinfo{year}{2020}, pp.
+  \bibinfo{pages}{9378--9385}.
+%Type = Inproceedings
+\bibitem[{Zhu et~al.(2020)Zhu, Xia, Wu, He, Qin, Zhou, Li, and Liu}]{Zhu20}
+\bibinfo{author}{J.~Zhu}, \bibinfo{author}{Y.~Xia}, \bibinfo{author}{L.~Wu},
+  \bibinfo{author}{D.~He}, \bibinfo{author}{T.~Qin}, \bibinfo{author}{W.~Zhou},
+  \bibinfo{author}{H.~Li}, \bibinfo{author}{T.~Liu},
+\newblock \bibinfo{title}{Incorporating {BERT} into neural machine
+  translation},
+\newblock in: \bibinfo{booktitle}{8th International Conference on Learning
+  Representations}, \bibinfo{year}{2020}.
+%Type = Inproceedings
+\bibitem[{Weng et~al.(2020)Weng, Yu, Huang, Cheng, and Luo}]{Weng20}
+\bibinfo{author}{R.~Weng}, \bibinfo{author}{H.~Yu}, \bibinfo{author}{S.~Huang},
+  \bibinfo{author}{S.~Cheng}, \bibinfo{author}{W.~Luo},
+\newblock \bibinfo{title}{Acquiring knowledge from pre-trained model to neural
+  machine translation},
+\newblock in: \bibinfo{booktitle}{The 34th {AAAI} Conference on Artificial
+  Intelligence}, \bibinfo{year}{2020}, pp. \bibinfo{pages}{9266--9273}.
+%Type = Inproceedings
+\bibitem[{He et~al.(2016)He, Zhang, Ren, and Sun}]{He16}
+\bibinfo{author}{K.~He}, \bibinfo{author}{X.~Zhang}, \bibinfo{author}{S.~Ren},
+  \bibinfo{author}{J.~Sun},
+\newblock \bibinfo{title}{Deep residual learning for image recognition},
+\newblock in: \bibinfo{booktitle}{2016 {IEEE} Conference on Computer Vision and
+  Pattern Recognition}, \bibinfo{year}{2016}, pp. \bibinfo{pages}{770--778}.
+  \DOIprefix\doi{10.1109/CVPR.2016.90}.
+%Type = Article
+\bibitem[{Ba et~al.(2016)Ba, Kiros, and Hinton}]{Ba16}
+\bibinfo{author}{L.~J. Ba}, \bibinfo{author}{J.~R. Kiros},
+  \bibinfo{author}{G.~E. Hinton},
+\newblock \bibinfo{title}{Layer normalization}  (\bibinfo{year}{2016}).
+  \href{http://arxiv.org/abs/1607.06450}{{\tt arXiv:1607.06450}}.
+%Type = Inproceedings
+\bibitem[{Koehn et~al.(2007)Koehn, Hoang, Birch, Callison{-}Burch, Federico,
+  Bertoldi, Cowan, Shen, Moran, Zens, Dyer, Bojar, Constantin, and
+  Herbst}]{Koehn07}
+\bibinfo{author}{P.~Koehn}, \bibinfo{author}{H.~Hoang},
+  \bibinfo{author}{A.~Birch}, \bibinfo{author}{C.~Callison{-}Burch},
+  \bibinfo{author}{M.~Federico}, \bibinfo{author}{N.~Bertoldi},
+  \bibinfo{author}{B.~Cowan}, \bibinfo{author}{W.~Shen},
+  \bibinfo{author}{C.~Moran}, \bibinfo{author}{R.~Zens},
+  \bibinfo{author}{C.~Dyer}, \bibinfo{author}{O.~Bojar},
+  \bibinfo{author}{A.~Constantin}, \bibinfo{author}{E.~Herbst},
+\newblock \bibinfo{title}{Moses: Open source toolkit for statistical machine
+  translation},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 45th Annual Meeting of the
+  Association for Computational Linguistics}, \bibinfo{year}{2007}.
+%Type = Inproceedings
+\bibitem[{Sennrich et~al.(2016)Sennrich, Haddow, and Birch}]{Sennrich16}
+\bibinfo{author}{R.~Sennrich}, \bibinfo{author}{B.~Haddow},
+  \bibinfo{author}{A.~Birch},
+\newblock \bibinfo{title}{Neural machine translation of rare words with subword
+  units},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 54th Annual Meeting of the
+  Association for Computational Linguistics}, \bibinfo{year}{2016}.
+  \DOIprefix\doi{10.18653/v1/p16-1162}.
+%Type = Inproceedings
+\bibitem[{Kingma and Ba(2015)}]{Kingma15}
+\bibinfo{author}{D.~P. Kingma}, \bibinfo{author}{J.~Ba},
+\newblock \bibinfo{title}{Adam: {A} method for stochastic optimization},
+\newblock in: \bibinfo{booktitle}{3rd International Conference on Learning
+  Representations}, \bibinfo{year}{2015}.
+  \href{http://arxiv.org/abs/1412.6980}{{\tt arXiv:1412.6980}}.
+%Type = Inproceedings
+\bibitem[{Papineni et~al.(2002)Papineni, Roukos, Ward, and Zhu}]{Papineni02}
+\bibinfo{author}{K.~Papineni}, \bibinfo{author}{S.~Roukos},
+  \bibinfo{author}{T.~Ward}, \bibinfo{author}{W.-J. Zhu},
+\newblock \bibinfo{title}{{B}leu: a method for automatic evaluation of machine
+  translation},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 40th Annual Meeting of the
+  Association for Computational Linguistics}, \bibinfo{year}{2002}, pp.
+  \bibinfo{pages}{311--318}. \DOIprefix\doi{10.3115/1073083.1073135}.
+%Type = Inproceedings
+\bibitem[{Post(2018)}]{Post18}
+\bibinfo{author}{M.~Post},
+\newblock \bibinfo{title}{A call for clarity in reporting {BLEU} scores},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 3rd Conference on Machine
+  Translation: Research Papers}, \bibinfo{year}{2018}, pp.
+  \bibinfo{pages}{186--191}. \DOIprefix\doi{10.18653/v1/w18-6319}.
+%Type = Inproceedings
+\bibitem[{Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones,
+  Gomez, Kaiser, and Polosukhin}]{Vaswani17}
+\bibinfo{author}{A.~Vaswani}, \bibinfo{author}{N.~Shazeer},
+  \bibinfo{author}{N.~Parmar}, \bibinfo{author}{J.~Uszkoreit},
+  \bibinfo{author}{L.~Jones}, \bibinfo{author}{A.~N. Gomez},
+  \bibinfo{author}{u.~Kaiser}, \bibinfo{author}{I.~Polosukhin},
+\newblock \bibinfo{title}{Attention is all you need},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 31st International
+  Conference on Neural Information Processing Systems}, \bibinfo{year}{2017},
+  p. \bibinfo{pages}{6000–6010}.
+%Type = Inproceedings
+\bibitem[{Wu et~al.(2019)Wu, Fan, Baevski, Dauphin, and Auli}]{Wu19}
+\bibinfo{author}{F.~Wu}, \bibinfo{author}{A.~Fan},
+  \bibinfo{author}{A.~Baevski}, \bibinfo{author}{Y.~N. Dauphin},
+  \bibinfo{author}{M.~Auli},
+\newblock \bibinfo{title}{Pay less attention with lightweight and dynamic
+  convolutions},
+\newblock in: \bibinfo{booktitle}{7th International Conference on Learning
+  Representations}, \bibinfo{year}{2019}.
+%Type = Misc
+\bibitem[{Fan et~al.(2020)Fan, Xie, Xia, Wu, Qin, Li, and Liu}]{Fan20}
+\bibinfo{author}{Y.~Fan}, \bibinfo{author}{S.~Xie}, \bibinfo{author}{Y.~Xia},
+  \bibinfo{author}{L.~Wu}, \bibinfo{author}{T.~Qin}, \bibinfo{author}{X.-Y.
+  Li}, \bibinfo{author}{T.-Y. Liu}, \bibinfo{title}{Multi-branch attentive
+  transformer}, \bibinfo{year}{2020}.
+  \href{http://arxiv.org/abs/2006.10270}{{\tt arXiv:2006.10270}}.
+%Type = Article
+\bibitem[{Zhao et~al.(2019)Zhao, Sun, Xu, Zhang, and Luo}]{Zhao19}
+\bibinfo{author}{G.~Zhao}, \bibinfo{author}{X.~Sun}, \bibinfo{author}{J.~Xu},
+  \bibinfo{author}{Z.~Zhang}, \bibinfo{author}{L.~Luo},
+\newblock \bibinfo{title}{{MUSE:} parallel multi-scale attention for sequence
+  to sequence learning}  (\bibinfo{year}{2019}).
+  \href{http://arxiv.org/abs/1911.09483}{{\tt arXiv:1911.09483}}.
+%Type = Article
+\bibitem[{Iyer et~al.(2020)Iyer, Thejas, Kwatra, Ramjee, and
+  Sivathanu}]{Iyer20}
+\bibinfo{author}{N.~Iyer}, \bibinfo{author}{V.~Thejas},
+  \bibinfo{author}{N.~Kwatra}, \bibinfo{author}{R.~Ramjee},
+  \bibinfo{author}{M.~Sivathanu},
+\newblock \bibinfo{title}{Wide-minima density hypothesis and the
+  explore-exploit learning rate schedule}  (\bibinfo{year}{2020}).
+  \href{http://arxiv.org/abs/2003.03977}{{\tt arXiv:2003.03977}}.
+%Type = Inproceedings
+\bibitem[{Edunov et~al.(2018)Edunov, Ott, Auli, and Grangier}]{Edunov18}
+\bibinfo{author}{S.~Edunov}, \bibinfo{author}{M.~Ott},
+  \bibinfo{author}{M.~Auli}, \bibinfo{author}{D.~Grangier},
+\newblock \bibinfo{title}{Understanding back-translation at scale},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 2018 Conference on
+  Empirical Methods in Natural Language Processing}, \bibinfo{year}{2018}, pp.
+  \bibinfo{pages}{489--500}. \DOIprefix\doi{10.18653/v1/D18-1045}.
+%Type = Article
+\bibitem[{Raffel et~al.(2019)Raffel, Shazeer, Roberts, Lee, Narang, Matena,
+  Zhou, Li, and Liu}]{Raffel19}
+\bibinfo{author}{C.~Raffel}, \bibinfo{author}{N.~Shazeer},
+  \bibinfo{author}{A.~Roberts}, \bibinfo{author}{K.~Lee},
+  \bibinfo{author}{S.~Narang}, \bibinfo{author}{M.~Matena},
+  \bibinfo{author}{Y.~Zhou}, \bibinfo{author}{W.~Li}, \bibinfo{author}{P.~J.
+  Liu},
+\newblock \bibinfo{title}{Exploring the limits of transfer learning with a
+  unified text-to-text transformer}  (\bibinfo{year}{2019}).
+  \href{http://arxiv.org/abs/1910.10683}{{\tt arXiv:1910.10683}}.
+%Type = Inproceedings
+\bibitem[{So et~al.(2019)So, Le, and Liang}]{So19}
+\bibinfo{author}{D.~R. So}, \bibinfo{author}{Q.~V. Le},
+  \bibinfo{author}{C.~Liang},
+\newblock \bibinfo{title}{The evolved transformer},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 36th International
+  Conference on Machine Learning}, volume~\bibinfo{volume}{97},
+  \bibinfo{year}{2019}, pp. \bibinfo{pages}{5877--5886}.
+%Type = Inproceedings
+\bibitem[{Imamura and Sumita(2019)}]{Imamura19}
+\bibinfo{author}{K.~Imamura}, \bibinfo{author}{E.~Sumita},
+\newblock \bibinfo{title}{Recycling a pre-trained {BERT} encoder for neural
+  machine translation},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 3rd Workshop on Neural
+  Generation and Translation}, \bibinfo{year}{2019}, pp.
+  \bibinfo{pages}{23--31}. \DOIprefix\doi{10.18653/v1/D19-5603}.
+%Type = Inproceedings
+\bibitem[{Ma et~al.(2019)Ma, Zhou, Li, Neubig, and Hovy}]{Ma19}
+\bibinfo{author}{X.~Ma}, \bibinfo{author}{C.~Zhou}, \bibinfo{author}{X.~Li},
+  \bibinfo{author}{G.~Neubig}, \bibinfo{author}{E.~H. Hovy},
+\newblock \bibinfo{title}{Flowseq: Non-autoregressive conditional sequence
+  generation with generative flow},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 2019 Conference on
+  Empirical Methods in Natural Language Processing and the 9th International
+  Joint Conference on Natural Language Processing}, \bibinfo{year}{2019}, pp.
+  \bibinfo{pages}{4281--4291}. \DOIprefix\doi{10.18653/v1/D19-1437}.
+%Type = Inproceedings
+\bibitem[{Kalchbrenner and Blunsom(2013)}]{Kalchbrenner13}
+\bibinfo{author}{N.~Kalchbrenner}, \bibinfo{author}{P.~Blunsom},
+\newblock \bibinfo{title}{Recurrent continuous translation models},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 2013 Conference on
+  Empirical Methods in Natural Language Processing}, \bibinfo{year}{2013}, pp.
+  \bibinfo{pages}{1700--1709}.
+%Type = Inproceedings
+\bibitem[{Sutskever et~al.(2014)Sutskever, Vinyals, and Le}]{Sutskever14}
+\bibinfo{author}{I.~Sutskever}, \bibinfo{author}{O.~Vinyals},
+  \bibinfo{author}{Q.~V. Le},
+\newblock \bibinfo{title}{Sequence to sequence learning with neural networks},
+\newblock in: \bibinfo{booktitle}{Advances in Neural Information Processing
+  Systems 27}, \bibinfo{year}{2014}, pp. \bibinfo{pages}{3104--3112}.
+%Type = Inproceedings
+\bibitem[{Cho et~al.(2014)Cho, van Merrienboer, G{\"{u}}l{\c{c}}ehre, Bahdanau,
+  Bougares, Schwenk, and Bengio}]{Cho14a}
+\bibinfo{author}{K.~Cho}, \bibinfo{author}{B.~van Merrienboer},
+  \bibinfo{author}{{\c{C}}.~G{\"{u}}l{\c{c}}ehre},
+  \bibinfo{author}{D.~Bahdanau}, \bibinfo{author}{F.~Bougares},
+  \bibinfo{author}{H.~Schwenk}, \bibinfo{author}{Y.~Bengio},
+\newblock \bibinfo{title}{Learning phrase representations using {RNN}
+  encoder-decoder for statistical machine translation},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 2014 Conference on
+  Empirical Methods in Natural Language Processing}, \bibinfo{year}{2014}, pp.
+  \bibinfo{pages}{1724--1734}. \DOIprefix\doi{10.3115/v1/d14-1179}.
+%Type = Inproceedings
+\bibitem[{Luong et~al.(2015)Luong, Sutskever, Le, Vinyals, and
+  Zaremba}]{Luong15a}
+\bibinfo{author}{T.~Luong}, \bibinfo{author}{I.~Sutskever},
+  \bibinfo{author}{Q.~V. Le}, \bibinfo{author}{O.~Vinyals},
+  \bibinfo{author}{W.~Zaremba},
+\newblock \bibinfo{title}{Addressing the rare word problem in neural machine
+  translation},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 53rd Annual Meeting of the
+  Association for Computational Linguistics and the 7th International Joint
+  Conference on Natural Language Processing}, \bibinfo{year}{2015}, pp.
+  \bibinfo{pages}{11--19}. \DOIprefix\doi{10.3115/v1/p15-1002}.
+%Type = Inproceedings
+\bibitem[{Cho et~al.(2014)Cho, van Merrienboer, Bahdanau, and Bengio}]{Cho14b}
+\bibinfo{author}{K.~Cho}, \bibinfo{author}{B.~van Merrienboer},
+  \bibinfo{author}{D.~Bahdanau}, \bibinfo{author}{Y.~Bengio},
+\newblock \bibinfo{title}{On the properties of neural machine translation:
+  Encoder-decoder approaches},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 8th Workshop on Syntax,
+  Semantics and Structure in Statistical Translation}, \bibinfo{year}{2014},
+  pp. \bibinfo{pages}{103--111}. \DOIprefix\doi{10.3115/v1/W14-4012}.
+%Type = Inproceedings
+\bibitem[{Bahdanau et~al.(2015)Bahdanau, Cho, and Bengio}]{Bahdanau14}
+\bibinfo{author}{D.~Bahdanau}, \bibinfo{author}{K.~Cho},
+  \bibinfo{author}{Y.~Bengio},
+\newblock \bibinfo{title}{Neural machine translation by jointly learning to
+  align and translate},
+\newblock in: \bibinfo{booktitle}{3rd International Conference on Learning
+  Representations}, \bibinfo{year}{2015}.
+  \href{http://arxiv.org/abs/1409.0473}{{\tt arXiv:1409.0473}}.
+%Type = Article
+\bibitem[{Wu et~al.(2016)Wu, Schuster, Chen, Le, Norouzi, Macherey, Krikun,
+  Cao, Gao, Macherey, Klingner, Shah, Johnson, Liu, Kaiser, Gouws, Kato, Kudo,
+  Kazawa, Stevens, Kurian, Patil, Wang, Young, Smith, Riesa, Rudnick, Vinyals,
+  Corrado, Hughes, and Dean}]{Wu16}
+\bibinfo{author}{Y.~Wu}, \bibinfo{author}{M.~Schuster},
+  \bibinfo{author}{Z.~Chen}, \bibinfo{author}{Q.~V. Le},
+  \bibinfo{author}{M.~Norouzi}, \bibinfo{author}{W.~Macherey},
+  \bibinfo{author}{M.~Krikun}, \bibinfo{author}{Y.~Cao},
+  \bibinfo{author}{Q.~Gao}, \bibinfo{author}{K.~Macherey},
+  \bibinfo{author}{J.~Klingner}, \bibinfo{author}{A.~Shah},
+  \bibinfo{author}{M.~Johnson}, \bibinfo{author}{X.~Liu},
+  \bibinfo{author}{L.~Kaiser}, \bibinfo{author}{S.~Gouws},
+  \bibinfo{author}{Y.~Kato}, \bibinfo{author}{T.~Kudo},
+  \bibinfo{author}{H.~Kazawa}, \bibinfo{author}{K.~Stevens},
+  \bibinfo{author}{G.~Kurian}, \bibinfo{author}{N.~Patil},
+  \bibinfo{author}{W.~Wang}, \bibinfo{author}{C.~Young},
+  \bibinfo{author}{J.~Smith}, \bibinfo{author}{J.~Riesa},
+  \bibinfo{author}{A.~Rudnick}, \bibinfo{author}{O.~Vinyals},
+  \bibinfo{author}{G.~Corrado}, \bibinfo{author}{M.~Hughes},
+  \bibinfo{author}{J.~Dean},
+\newblock \bibinfo{title}{Google's neural machine translation system: Bridging
+  the gap between human and machine translation}  (\bibinfo{year}{2016}).
+  \href{http://arxiv.org/abs/1609.08144}{{\tt arXiv:1609.08144}}.
+%Type = Inproceedings
+\bibitem[{Luong et~al.(2015)Luong, Pham, and Manning}]{Luong15b}
+\bibinfo{author}{T.~Luong}, \bibinfo{author}{H.~Pham}, \bibinfo{author}{C.~D.
+  Manning},
+\newblock \bibinfo{title}{Effective approaches to attention-based neural
+  machine translation},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 2015 Conference on
+  Empirical Methods in Natural Language Processing}, \bibinfo{year}{2015}, pp.
+  \bibinfo{pages}{1412--1421}. \DOIprefix\doi{10.18653/v1/d15-1166}.
+%Type = Inproceedings
+\bibitem[{Jean et~al.(2015)Jean, Cho, Memisevic, and Bengio}]{Jean15}
+\bibinfo{author}{S.~Jean}, \bibinfo{author}{K.~Cho},
+  \bibinfo{author}{R.~Memisevic}, \bibinfo{author}{Y.~Bengio},
+\newblock \bibinfo{title}{On using very large target vocabulary for neural
+  machine translation},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 53rd Annual Meeting of the
+  Association for Computational Linguistics and the 7th International Joint
+  Conference on Natural Language Processing}, \bibinfo{year}{2015}, pp.
+  \bibinfo{pages}{1--10}.
+%Type = Inproceedings
+\bibitem[{Gehring et~al.(2017)Gehring, Auli, Grangier, Yarats, and
+  Dauphin}]{Gehring17}
+\bibinfo{author}{J.~Gehring}, \bibinfo{author}{M.~Auli},
+  \bibinfo{author}{D.~Grangier}, \bibinfo{author}{D.~Yarats},
+  \bibinfo{author}{Y.~N. Dauphin},
+\newblock \bibinfo{title}{Convolutional sequence to sequence learning},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 34th International
+  Conference on Machine Learning}, volume~\bibinfo{volume}{70},
+  \bibinfo{year}{2017}, pp. \bibinfo{pages}{1243--1252}.
+%Type = Inproceedings
+\bibitem[{Gu et~al.(2019)Gu, Wang, and Zhao}]{Gu19}
+\bibinfo{author}{J.~Gu}, \bibinfo{author}{C.~Wang}, \bibinfo{author}{J.~Zhao},
+\newblock \bibinfo{title}{Levenshtein transformer},
+\newblock in: \bibinfo{booktitle}{Advances in Neural Information Processing
+  Systems 32}, \bibinfo{year}{2019}, pp. \bibinfo{pages}{11179--11189}.
+%Type = Article
+\bibitem[{Fonollosa et~al.(2019)Fonollosa, Casas, and
+  Costa{-}juss{\`{a}}}]{Fonollosa19}
+\bibinfo{author}{J.~A.~R. Fonollosa}, \bibinfo{author}{N.~Casas},
+  \bibinfo{author}{M.~R. Costa{-}juss{\`{a}}},
+\newblock \bibinfo{title}{Joint source-target self attention with locality
+  constraints}  (\bibinfo{year}{2019}).
+  \href{http://arxiv.org/abs/1905.06596}{{\tt arXiv:1905.06596}}.
+%Type = Inproceedings
+\bibitem[{Indurthi et~al.(2019)Indurthi, Chung, and Kim}]{Indurthi19}
+\bibinfo{author}{S.~R. Indurthi}, \bibinfo{author}{I.~Chung},
+  \bibinfo{author}{S.~Kim},
+\newblock \bibinfo{title}{Look harder: {A} neural machine translation model
+  with hard attention},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 57th Conference of the
+  Association for Computational Linguistics}, \bibinfo{year}{2019}, pp.
+  \bibinfo{pages}{3037--3043}. \DOIprefix\doi{10.18653/v1/p19-1290}.
+%Type = Inproceedings
+\bibitem[{Clinchant et~al.(2019)Clinchant, Jung, and Nikoulina}]{Clinchant19}
+\bibinfo{author}{S.~Clinchant}, \bibinfo{author}{K.~W. Jung},
+  \bibinfo{author}{V.~Nikoulina},
+\newblock \bibinfo{title}{On the use of {BERT} for neural machine translation},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 3rd Workshop on Neural
+  Generation and Translation}, \bibinfo{year}{2019}, pp.
+  \bibinfo{pages}{108--117}. \DOIprefix\doi{10.18653/v1/D19-5611}.
+%Type = Inproceedings
+\bibitem[{He et~al.(2018)He, Tan, Xia, He, Qin, Chen, and Liu}]{He18}
+\bibinfo{author}{T.~He}, \bibinfo{author}{X.~Tan}, \bibinfo{author}{Y.~Xia},
+  \bibinfo{author}{D.~He}, \bibinfo{author}{T.~Qin}, \bibinfo{author}{Z.~Chen},
+  \bibinfo{author}{T.-Y. Liu},
+\newblock \bibinfo{title}{Layer-wise coordination between encoder and decoder
+  for neural machine translation},
+\newblock in: \bibinfo{booktitle}{Advances in Neural Information Processing
+  Systems}, volume~\bibinfo{volume}{31}, \bibinfo{year}{2018}, pp.
+  \bibinfo{pages}{7944--7954}.
+
+\end{thebibliography}

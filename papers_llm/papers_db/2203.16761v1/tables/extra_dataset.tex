@@ -1,0 +1,31 @@
+\begin{table*}[]
+    \centering
+    \small
+    \setlength\tabcolsep{4.5pt}
+    \begin{tabular}{l|cccccc}
+    \toprule[1.5pt]
+        \textbf{} &\textbf{\makecell{MOT17}}~\cite{milan2016mot16} &\textbf{\makecell{MOT20}}~\cite{dendorfer2020mot20} & \textbf{JTA}~\cite{fabbri2018learning} & \textbf{\makecell{CH val}}~\cite{shao2018crowdhuman} & \textbf{\makecell{CH train}}~\cite{shao2018crowdhuman} & \textbf{Mix}\dag\\\hline
+        \textbf{Number of Images} & 5.3k & 8.9k & 230.4k & 5k & 10k &44k \\\hline
+         \multicolumn{7}{c}{\textbf{MOT16/17} \cite{milan2016mot16}} \\\hline\hline
+         TubeTK \cite{pang2020tubetk}  & \checkmark & & \checkmark & & &  \\
+         FairMOT \cite{zhang2020fair}  & \checkmark & & &\checkmark & \checkmark& \checkmark\\
+         JDE \cite{wang2019towards} & \checkmark & & & & & \checkmark\\
+         TransCenter \cite{xu2021transcenter} & \checkmark & & & & \checkmark & \\
+         TransTrack \cite{sun2020transtrack} & \checkmark & & & & \checkmark & \\
+         Tracktor++ \cite{bergmann2019tracking} & \checkmark & & & & & \\
+         CTracker \cite{peng2020chained} & \checkmark & & & & & \\
+          \rowcolor{gray!20} TrackFormer \cite{meinhardt2021trackformer} & \checkmark & & & & & \\
+         \rowcolor{gray!20} MOTR \cite{zeng2021motr} & \checkmark & & &\checkmark & &\\
+         \rowcolor{gray!20} \textbf{MeMOT} (ours) & \checkmark & & &\checkmark & & \\\hline
+         \multicolumn{7}{c}{\textbf{MOT20} \cite{dendorfer2020mot20}} \\\hline\hline
+        FairMOT \cite{zhang2020fair} & & \checkmark& & & \checkmark& \checkmark \\
+        TransCenter \cite{xu2021transcenter} & & \checkmark & & & \checkmark &\\
+        TransTrack \cite{sun2020transtrack}  & & \checkmark & & & \checkmark & \\
+        \rowcolor{gray!20} \textbf{MeMOT} (ours)  & & \checkmark & & \checkmark& & \\
+    \bottomrule[1.5pt]
+    \end{tabular}
+    \vspace{-1.5mm}
+    \caption{Training data for competing methods and MeMOT. \dag: a mixed dataset containing CityPerson~\cite{zhang2017citypersons} (3k), ETH~\cite{ess2008mobile} (2k), CalTech~\cite{dollar2009pedestrian} (27k), CUHK-SYSU~\cite{xiao2016end} (11k), and PRW~\cite{zheng2017person} (6k). Grey background indicates that these methods work with an in-network association solver (IAS), and the white background are with post-network association solver (PAS).}
+    \label{tab:extra_data}
+    \vspace{2.5mm}
+\end{table*}

@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{reset}\PYG{p}{()} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{n}{S}
+\end{Verbatim}

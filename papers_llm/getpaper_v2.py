@@ -237,7 +237,7 @@ class GetPaper_v2:
         return pdf_content
 
     ### figure visualization part
-    def download_arxiv_source(self, arxiv_id):
+    def download_arxiv_source(self, arxiv_id, output_dir):
         """
         <figure download>
         figure가 포함되어 있는 source를 반환한다.
@@ -248,25 +248,23 @@ class GetPaper_v2:
 
         # 소스 파일 다운로드 링크
         source_url = paper.pdf_url.replace('pdf', 'e-print')
+        print(source_url)
         
         # 출력 디렉토리가 없으면 생성
-        if not os.path.exists(self.path_db):
-            os.makedirs(self.path_db)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir, mode=0o755, exist_ok=True)
 
         # 파일 다운로드
         response = requests.get(source_url)
-        output_path = os.path.join(self.path_db, f"{arxiv_id}.tar.gz")
+        output_path = os.path.join(output_dir, f"{arxiv_id}.tar.gz")
         with open(output_path, 'wb') as f:
             f.write(response.content)
         
         file_path = f'{output_path}'
         with tarfile.open(file_path, "r:gz") as tar:
-            tar.extractall(path=self.path_db)
+            tar.extractall(path=output_dir)
 
-        output_source = os.path.join(self.path_db, arxiv_id)
-
-        print(f"Source files downloaded to: {output_source}")
-        return output_source
+        print(f"Source files downloaded to: {output_path}")
 
     def find_pdf_files(self, root_folder):
         '''
@@ -283,7 +281,10 @@ class GetPaper_v2:
                 if filename.lower().endswith('.pdf'):
                     name = filename.replace('.pdf', '').split('/')[-1]
                     pdf_files[name] = os.path.join(dirpath, filename)
-        print('PDF files :', pdf_files)
+                if filename.lower().endswith('.png'):
+                    name = filename.replace('.png', '').split('/')[-1]
+                    pdf_files[name] = os.path.join(dirpath, filename)
+        print('figure files :', pdf_files)
         return pdf_files
     
     def query_name_matching(self, query, pdf_files):
@@ -353,31 +354,34 @@ class GetPaper_v2:
             title, header_list = self.get_header_from_soup(soup)
             if sections == None or sections == []:
                 sections_list = self.list_section(header_list)
-                instruction_for_agent = f'Here is the title and section of the paper in HTML\ntitle\n{title}\nsections\n{sections_list}\n\n Use the \'loadpaper\' tool again, specifying the section list you want to view in detail with keeping \'show_figure\' value same as before.'
+                instruction_for_agent = f'Here is the title and of the paper in HTML\ntitle\n{title}\nsections\n{sections_list}\n\n Use the \'loadpaper\' tool again, specifying the section list you want to view in detail with keeping \'show_figure\' value same as before.'
                 return instruction_for_agent
             else:
                 content = self.extract_text_under_headers(soup, sections)
                 if content == '': # Section list was incorrect
                     sections_list = self.list_section(header_list)
                     content = f'Section list was incorrect.\nHere is the title and section of the paper\ntitle\n{title}\nsections\n{sections_list}\n\n Use the \'loadpaper\' tool again, specifying the section list you want to view in detail with keeping \'show_figure\' value same as before.'
-                
-                try:
-                    if show_figure:
-                        output_source = self.download_arxiv_source(arxiv_id)
-                        print('OUTPUTPATH', output_source)
-                        pdf_files = self.find_pdf_files(root_folder=output_source)
-                        name = self.query_name_matching(content, pdf_files)
-                        self.display_figure(pdf_files, name)
-                        # print('Figure displayed')
-                        figure_path = pdf_files[name]
 
-                        content += f'Provide them in format in the end of the responses with the following keys: \n\n figure_path : {figure_path}'
-                        return content
-                    # else:
-                        # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
-                        # return instruction_for_agent2
-                except:
-                    pass
+                
+                if show_figure:
+                    output_dir = f'{self.path_db}/{arxiv_id}'
+                    self.download_arxiv_source(arxiv_id, output_dir)
+                    pdf_files = self.find_pdf_files(output_dir)
+                    name = self.query_name_matching(content, pdf_files)
+                    # self.display_figure(pdf_files, name)
+                    # print('Figure displayed')
+                    figure_path = pdf_files[name]
+
+                    content += f'Mentioned about the \'sections\' you used. And provide them in format in the end of the responses with the following keys: \n\n figure_path : {figure_path}'
+                    return content
+                # else:
+                    # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
+                    # return instruction_for_agent2
+                else:
+                    content += f'Mentioned about the \'sections\' you used'
+
+                    # Mentioned about the \'sections\' you used
+                    # Use up to three section in the \'sections\' list.
                 
                 return content
             
@@ -386,18 +390,20 @@ class GetPaper_v2:
                 download_path = self.download_pdf(arxiv_id)
                 pdf_content = self.read_pdf(arxiv_id)
 
-                if sections != None or sections != [] and show_figure:
-                    output_source = self.download_arxiv_source(arxiv_id)
-                    print('OUTPUTPATH', output_source)
-                    pdf_files = self.find_pdf_files(output_source)
+                output_dir = download_path.replace('.pdf', '')
+
+
+                if show_figure:
+                    self.download_arxiv_source(arxiv_id, output_dir)
+                    pdf_files = self.find_pdf_files(output_dir)
                     name = self.query_name_matching(pdf_content, pdf_files)
-                    self.display_figure(pdf_files, name) 
+                    # self.display_figure(pdf_files, name) 
                     figure_path = pdf_files[name]
                     # print(figure_path)
                 # else:
                     # instruction_for_agent2 = f'If the figure or Table has mentioned in {content}, you can set the \'show_figure\' parameter to True.'
                     # return instruction_for_agent2
-                return pdf_content, figure_path
+                return pdf_content
             except:
                 raise Exception(f'Error downloading PDF from arXiv using arxiv id {arxiv_id}')
 

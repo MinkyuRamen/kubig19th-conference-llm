@@ -1,0 +1,24 @@
+\begin{table}[t]
+
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+
+
+\bf bsz & \bf steps & \bf lr & \bf ppl & \bf MNLI-m & \bf SST-2 \\
+\midrule
+256 & 1M & 1e-4 & 3.99 & 84.7 & 92.7 \\
+2K & 125K & 7e-4 & \textbf{3.68} & \textbf{85.2} & \textbf{92.9} \\
+8K & 31K & 1e-3 & 3.77 & 84.6 & 92.8 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{
+Perplexity on held-out training data (\emph{ppl}) and development set accuracy for base models trained over \textsc{BookCorpus} and \textsc{Wikipedia} with varying batch sizes (\emph{bsz}).
+We tune the learning rate (\emph{lr}) for each setting.
+Models make the same number of passes over the data (epochs) and have the same computational cost.
+}
+
+\label{tab:large_batches}
+
+\end{table}

@@ -44,5 +44,13 @@ agent = create_openai_tools_agent(llm, tools, prompt=prompt)
 agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
 
-output = agent_executor.invoke({"input": "'ToolBench(2307.16789)' 논문에서 소개한 Pass Rate evaluation 방법에 대해서 그림과 함께 설명해줘' 한글로 말해줘"})
+# output = agent_executor.invoke({"input": "'Attention is All You Need(아카이브 id 1706.03762)' 의 논문에서 Encoder 파트 구조가 어떻게 구성돼는지 그림과 함께 설명해줘. 한글로 말해줘"})
+output = agent_executor.invoke({"input": "“An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale” 가 어떻게 구현되었는지 설명해줘. 한글로 말해줘"})
+
+# output = agent_executor.invoke({"input": "'Toolformer: Language Models Can Teach Themselves to Use Tools' 를 읽었는데 혹시 후속 논문 6편정도 추천해줄 수 있어?"})
+# output = agent_executor.invoke({"input": "'Toolformer: Language Models Can Teach Themselves to Use Tools' 를 읽기전에 도움되는 이전 논문 6편정도 추천해줄 수 있어?"})
+
+# output = agent_executor.invoke({"input": " ‘RoBERTa(1907.11692)’ 의 결론에 대해서 간단하게 설명해줘"})
+# output = agent_executor.invoke({'input': "'QLoRA'논문에서  'To summarize, QLORA has one storage data type (usually 4-bit NormalFloat)and a computation data type (16-bit BrainFloat). We dequantize the storage data type to the computation data type to perform the forward and backward pass, but we only compute weight gradients for the LoRA parameters which use 16-bit BrainFloat.' 이 부분이 실제로 어떻게 코드로 구현되어있어? github 주소는 다음과 같아."})
+
 print("OUTPUT",output)

@@ -1,0 +1,17 @@
+\vspace{-0.5mm}
+\section{Appendix}
+
+\subsection{Algorithm}
+\vspace{-2.5mm}
+\input{tables/algorithm}
+The workflow of our proposed MeMOT is shown in Algorithm~\ref{alg:memot}. 
+MeMOT takes a sequence of video frames $\mathbi{I} = \{I^0, I^1, \cdots, I^T\}$ as input, and outputs trajectories $\mathbfcal{T} = \{\mathcal{T}_0, \mathcal{T}_1, \cdots, \mathcal{T}_K\}$ for $K$ objects. The track states $\mathbi{X} = \{X_0, X_1, \cdots, X_K\}$, represented as embeddings for each object at its own active timestamps, are maintained and updated in a spatio-temporal memory buffer. 
+MeMOT contains three Transformer-based network modules: 1) a hypothesis generation module $\Theta_H$ for extracting the frame feature $z_1$ and producing the proposal embeddings $\mathbi{q}_{pro}$, 2) a memory encoding module $\Theta_E$ that aggregates the previous states to track embeddings $\mathbi{q}_{tck}$ for each object, and 3) a memory decoding module $\Theta_D$ that predicts the current states of tracked objects and initializes new objects. 
+
+Concretely, at time $t$, the encoder of $\Theta_H$ translates image $I^t$ to features $z_1^t \in \mathbb{R}^{d \times HW}$, which are then decoded to a set of proposal embeddings $\mathbi{Q}_{pro}^t$ by $\Theta_H$'s decoder.
+At the same time, the short-term aggregation module $f_{short}$ in $\Theta_E$ queries the past $T_s$ memory $\mathbi{X}^{t-1-T_s:t-1}$ with the latest observation $\mathbi{X}^{t-1}$ and obtains the aggregated short-term queries $\mathbi{Q}^t_{AST}$.
+The long-term aggregation module $f_{long}$ uses a set of learnable queries, called dynamic memory aggregation token (DMAT) $\mathbi{Q}_{dmat}^{t-1}$, and takes advantages of a longer time period $T_l$ to produce the aggregated long-term queries $\mathbi{Q}^t_{ALT}$. $\mathbi{Q}^t_{AST}$ and $\mathbi{Q}^t_{ALT}$ are fused by a self-attention module $f_{fuse}$, which outputs the track query $\mathbi{Q}_{tck}^t$ and updated $\mathbi{Q}_{dmat}^{t}$. 
+$\Theta_D$ takes the concatenated set of $\mathbi{Q}_{pro}^t$ and $\mathbi{Q}_{tck}^t$ as query set and the frame feature $z_1^t$ as key-value, generating the estimated states $\widehat{\mathbi{Q}}_{pro}^t$ and $\widehat{\mathbi{Q}}_{tck}^t$. 
+Object bounding boxes $\textbf{B}_{pro}^t$, $\textbf{B}_{tck}^t$ and confidence scores $\textbf{S}_{pro}^t$, $\textbf{S}_{tck}^t$ are obtained from $\widehat{\textbf{Q}}_{pro}^t$ and $\widehat{\textbf{Q}}_{tck}^t$ through FFN. 
+For all the tracked objects, the states will be updated if their confidence scores are above a threshold $\epsilon_{tck}$. Similarly, proposal queries will be initialized as new tracks if the confidence scores are higher than $\epsilon_{pro}$. 
+As discussed in the paper, $T_s$ is selected as 3 as an accuracy-efficiency trade-off; while $T_l$ is 24 frames due to hardware limitation. We select $\epsilon_{pro}$, $\epsilon_{tck}$ as 0.7 and 0.6, respectively.

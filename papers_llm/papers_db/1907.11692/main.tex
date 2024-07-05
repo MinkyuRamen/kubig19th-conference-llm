@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+\PassOptionsToPackage{hyphens}{url}\usepackage[hyperref]{acl2019}
+\usepackage{times}
+\aclfinalcopy
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\newcommand*{\round}[1]{\num[round-mode=places,round-precision=1]{#1}}
+\usepackage{arydshln}
+\usepackage{enumitem}
+
+\makeatletter
+\def\adl@drawiv#1#2#3{%
+        \hskip.5\tabcolsep
+        \xleaders#3{#2.5\@tempdimb #1{1}#2.5\@tempdimb}%
+                #2\z@ plus1fil minus1fil\relax
+        \hskip.5\tabcolsep}
+\newcommand{\cdashlinelr}[1]{%
+  \noalign{\vskip\aboverulesep
+           \global\let\@dashdrawstore\adl@draw
+           \global\let\adl@draw\adl@drawiv}
+  \cdashline{#1}
+  \noalign{\global\let\adl@draw\@dashdrawstore
+           \vskip\belowrulesep}}
+\makeatother
+
+\newcommand{\ourmodel}{RoBERTa}
+\newcommand{\ourmodelbase}{RoBERTa$_{\textsc{base}}$}
+\newcommand{\ourmodellarge}{RoBERTa$_{\textsc{large}}$}
+\newcommand{\bertbase}{BERT$_{\textsc{base}}$}
+\newcommand{\bertlarge}{BERT$_{\textsc{large}}$}
+\newcommand{\xlnetbase}{XLNet$_{\textsc{base}}$}
+\newcommand{\xlnetlarge}{XLNet$_{\textsc{large}}$}
+
+
+\newcommand{\omer}[1]{\textcolor{blue}{[Omer: #1]}}
+\newcommand{\danqi}[1]{\textcolor{magenta}{[Danqi: #1]}}
+\newcommand{\mandar}[1]{\textcolor{red}{[Mandar: #1]}}
+\newcommand{\ves}[1]{\textcolor{green}{[Ves: #1]}}
+\newcommand{\myle}[1]{\textcolor{cyan}{[Myle: #1]}}
+\newcommand{\yinhan}[1]{\textcolor{purple}{[Yinhan: #1]}}
+\newcommand{\jingfei}[1]{\textcolor{yellow}{[Jingfei: #1]}}
+\newcommand{\luke}[1]{\textcolor{orange}{[Luke: #1]}}
+\newcommand{\naman}[1]{\textcolor{brown}{[Naman: #1]}}
+
+
+\setlength\titlebox{7cm}
+
+\title{\ourmodel{}: A Robustly Optimized BERT Pretraining Approach}
+
+\author{Yinhan Liu\thanks{~~Equal contribution.} $^{\mathsection}$ \quad Myle Ott$^{*\mathsection}$ \quad Naman Goyal$^{* \mathsection}$ \quad Jingfei Du$^{* \mathsection}$ \quad Mandar Joshi$^{\dagger}$\\
+{ \bf Danqi Chen$^{\mathsection}$ \quad Omer Levy$^{\mathsection}$ \quad Mike Lewis$^{\mathsection}$ \quad Luke Zettlemoyer$^{\dagger\mathsection}$\quad Veselin Stoyanov$^{\mathsection}$} \\[8pt]
+$^{\dagger}$ Paul G. Allen School of Computer Science \& Engineering, \\ University of Washington, Seattle, WA \\
+{\tt \{mandar90,lsz\}@cs.washington.edu}\\[4pt]
+$^{\mathsection}$ Facebook AI \\
+{\tt \{yinhanliu,myleott,naman,jingfeidu,}\\
+{\tt \quad\quad\quad\quad danqi,omerlevy,mikelewis,lsz,ves\}@fb.com}
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\input{00-abstract.tex}
+\input{01-intro.tex}
+\input{02-background.tex}
+\input{03-exp_setup.tex}
+\input{04-design.tex}
+\input{05-roberta.tex}
+\input{06-related_work.tex}
+\input{07-conclusion.tex}
+
+\bibliography{main}
+\bibliographystyle{acl_natbib}
+
+\input{08-appendix.tex}
+
+\end{document}

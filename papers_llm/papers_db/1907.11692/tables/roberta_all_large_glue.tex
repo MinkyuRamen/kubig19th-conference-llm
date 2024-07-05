@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\begin{center}
+\begin{tabular}{lcccccccc}
+\toprule
+\bf  & \bf MNLI & \bf QNLI & \bf QQP & \bf RTE & \bf SST & \bf MRPC & \bf CoLA & \bf STS \\
+\midrule 
+\multicolumn{4}{l}{\ourmodelbase{}} \\
+\quad + all data + 500k steps & 87.6 & 92.8 & 91.9 & 78.7 & 94.8 & 90.2 & 63.6 & 91.2 \\
+\midrule
+\multicolumn{4}{l}{\ourmodellarge{}} \\
+\quad with \textsc{Books} + \textsc{Wiki} & 89.0 & 93.9 & 91.9 & 84.5 & 95.3 & 90.2 & 66.3 & 91.6 \\
+\quad + additional data (\textsection\ref{sec:data}) & 89.3 & 94.0 & 92.0 & 82.7 & 95.6 & \textbf{91.4} & 66.1 & 92.2 \\
+\quad + pretrain longer 300k & 90.0 & 94.5 & \textbf{92.2} & 83.3 & 96.1 & 91.1 & 67.4 & 92.3 \\
+\quad + pretrain longer 500k & \textbf{90.2} & \textbf{94.7} & \textbf{92.2} & \textbf{86.6} & \textbf{96.4} & 90.9 & \textbf{68.0} & \textbf{92.4} \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{
+Development set results on GLUE tasks for various configurations of \ourmodel{}.
+}
+\label{tab:roberta_all_large_glue}
+\end{table*}

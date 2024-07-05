@@ -1,0 +1,418 @@
+\begin{thebibliography}{10}\itemsep=-1pt
+
+\bibitem{arnab2021vivit}
+Anurag Arnab, Mostafa Dehghani, Georg Heigold, Chen Sun, Mario Lu{\v{c}}i{\'c},
+  and Cordelia Schmid.
+\newblock Vivit: A video vision transformer.
+\newblock {\em arXiv:2103.15691}, 2021.
+
+\bibitem{babenko2010robust}
+Boris Babenko, Ming-Hsuan Yang, and Serge Belongie.
+\newblock Robust object tracking with online multiple instance learning.
+\newblock {\em PAMI}, 2010.
+
+\bibitem{bergmann2019tracking}
+Philipp Bergmann, Tim Meinhardt, and Laura Leal-Taixe.
+\newblock Tracking without bells and whistles.
+\newblock In {\em ICCV}, 2019.
+
+\bibitem{bertasius2021space}
+Gedas Bertasius, Heng Wang, and Lorenzo Torresani.
+\newblock Is space-time attention all you need for video understanding?
+\newblock In {\em ICML}, 2021.
+
+\bibitem{braso2020learning}
+Guillem Bras{\'o} and Laura Leal-Taix{\'e}.
+\newblock Learning a neural solver for multiple object tracking.
+\newblock In {\em CVPR}, 2020.
+
+\bibitem{carion2020end}
+Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander
+  Kirillov, and Sergey Zagoruyko.
+\newblock End-to-end object detection with transformers.
+\newblock In {\em ECCV}, 2020.
+
+\bibitem{choi2010multiple}
+Wongun Choi and Silvio Savarese.
+\newblock Multiple target tracking in world coordinate with single, minimally
+  calibrated camera.
+\newblock In {\em ECCV}, 2010.
+
+\bibitem{chu2019famnet}
+Peng Chu and Haibin Ling.
+\newblock {FAMNet}: Joint learning of feature, affinity and multi-dimensional
+  assignment for online multiple object tracking.
+\newblock In {\em ICCV}, 2019.
+
+\bibitem{chu2021transmot}
+Peng Chu, Jiang Wang, Quanzeng You, Haibin Ling, and Zicheng Liu.
+\newblock {TransMOT}: Spatial-temporal graph transformer for multiple object
+  tracking.
+\newblock {\em arXiv:2104.00194}, 2021.
+
+\bibitem{dendorfer2020mot20}
+Patrick Dendorfer, Hamid Rezatofighi, Anton Milan, Javen Shi, Daniel Cremers,
+  Ian Reid, Stefan Roth, Konrad Schindler, and Laura Leal-Taix{\'e}.
+\newblock {MOT20}: A benchmark for multi object tracking in crowded scenes.
+\newblock {\em arXiv:2003.09003}, 2020.
+
+\bibitem{dosovitskiy2020image}
+Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn,
+  Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg
+  Heigold, Sylvain Gelly, et~al.
+\newblock An image is worth 16x16 words: Transformers for image recognition at
+  scale.
+\newblock {\em ICLR}, 2021.
+
+\bibitem{erhan2014scalable}
+Dumitru Erhan, Christian Szegedy, Alexander Toshev, and Dragomir Anguelov.
+\newblock Scalable object detection using deep neural networks.
+\newblock In {\em CVPR}, 2014.
+
+\bibitem{feichtenhofer2017detect}
+Christoph Feichtenhofer, Axel Pinz, and Andrew Zisserman.
+\newblock Detect to track and track to detect.
+\newblock In {\em ICCV}, 2017.
+
+\bibitem{felzenszwalb2009object}
+Pedro~F Felzenszwalb, Ross~B Girshick, David McAllester, and Deva Ramanan.
+\newblock Object detection with discriminatively trained part-based models.
+\newblock {\em TPAMI}, 2009.
+
+\bibitem{feng2019multi}
+Weitao Feng, Zhihao Hu, Wei Wu, Junjie Yan, and Wanli Ouyang.
+\newblock Multi-object tracking with multiple cues and switcher-aware
+  classification.
+\newblock {\em arXiv:1901.06129}, 2019.
+
+\bibitem{fu2021stmtrack}
+Zhihong Fu, Qingjie Liu, Zehua Fu, and Yunhong Wang.
+\newblock Stmtrack: Template-free visual tracking with space-time memory
+  networks.
+\newblock In {\em CVPR}, 2021.
+
+\bibitem{ge2021yolox}
+Zheng Ge, Songtao Liu, Feng Wang, Zeming Li, and Jian Sun.
+\newblock {YOLOX}: Exceeding yolo series in 2021.
+\newblock {\em arXiv:2107.08430}, 2021.
+
+\bibitem{giebel2004bayesian}
+Jan Giebel, Darin~M Gavrila, and Christoph Schn{\"o}rr.
+\newblock A bayesian framework for multi-cue 3d object tracking.
+\newblock In {\em ECCV}, 2004.
+
+\bibitem{graves2014neural}
+Alex Graves, Greg Wayne, and Ivo Danihelka.
+\newblock Neural turing machines.
+\newblock {\em arXiv:1410.5401}, 2014.
+
+\bibitem{gustafsson2002particle}
+Fredrik Gustafsson, Fredrik Gunnarsson, Niclas Bergman, Urban Forssell, Jonas
+  Jansson, Rickard Karlsson, and P-J Nordlund.
+\newblock Particle filters for positioning, navigation, and tracking.
+\newblock {\em TSP}, 2002.
+
+\bibitem{he2016deep}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Deep residual learning for image recognition.
+\newblock In {\em CVPR}, 2016.
+
+\bibitem{hue2001particle}
+Carine Hue, J-P Le~Cadre, and Patrick P{\'e}rez.
+\newblock A particle filter to track multiple objects.
+\newblock In {\em MOT Workshop}, 2001.
+
+\bibitem{isard1998condensation}
+Michael Isard and Andrew Blake.
+\newblock Condensation—conditional density propagation for visual tracking.
+\newblock {\em IJCV}, 1998.
+
+\bibitem{kristan2015visual}
+Matej Kristan, Jiri Matas, Ales Leonardis, Michael Felsberg, Luka Cehovin,
+  Gustavo Fernandez, Tomas Vojir, Gustav Hager, Georg Nebehay, and Roman
+  Pflugfelder.
+\newblock The visual object tracking vot2015 challenge results.
+\newblock In {\em ICCVW}, 2015.
+
+\bibitem{kumar2016ask}
+Ankit Kumar, Ozan Irsoy, Peter Ondruska, Mohit Iyyer, James Bradbury, Ishaan
+  Gulrajani, Victor Zhong, Romain Paulus, and Richard Socher.
+\newblock Ask me anything: Dynamic memory networks for natural language
+  processing.
+\newblock In {\em ICML}, 2016.
+
+\bibitem{li2021semi}
+Wei Li, Yuanjun Xiong, Shuo Yang, Mingze Xu, Yongxin Wang, and Wei Xia.
+\newblock {Semi-TCL}: Semi-supervised track contrastive representation
+  learning.
+\newblock {\em arXiv:2107.02396}, 2021.
+
+\bibitem{lin2014microsoft}
+Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva
+  Ramanan, Piotr Doll{\'a}r, and C~Lawrence Zitnick.
+\newblock Microsoft coco: Common objects in context.
+\newblock In {\em ECCV}, 2014.
+
+\bibitem{liu2016ssd}
+Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed,
+  Cheng-Yang Fu, and Alexander~C Berg.
+\newblock {SSD}: Single shot multibox detector.
+\newblock In {\em ECCV}, 2016.
+
+\bibitem{liu2021swin}
+Ze Liu, Yutong Lin, Yue Cao, Han Hu, Yixuan Wei, Zheng Zhang, Stephen Lin, and
+  Baining Guo.
+\newblock Swin transformer: Hierarchical vision transformer using shifted
+  windows.
+\newblock {\em arXiv:2103.14030}, 2021.
+
+\bibitem{liu2021video}
+Ze Liu, Jia Ning, Yue Cao, Yixuan Wei, Zheng Zhang, Stephen Lin, and Han Hu.
+\newblock Video swin transformer.
+\newblock {\em arXiv:2106.13230}, 2021.
+
+\bibitem{loshchilov2017decoupled}
+Ilya Loshchilov and Frank Hutter.
+\newblock Decoupled weight decay regularization.
+\newblock {\em arXiv:1711.05101}, 2017.
+
+\bibitem{lu2020video}
+Xiankai Lu, Wenguan Wang, Martin Danelljan, Tianfei Zhou, Jianbing Shen, and
+  Luc Van~Gool.
+\newblock Video object segmentation with episodic graph memory networks.
+\newblock In {\em ECCV}, 2020.
+
+\bibitem{luiten2021hota}
+Jonathon Luiten, Aljosa Osep, Patrick Dendorfer, Philip Torr, Andreas Geiger,
+  Laura Leal-Taix{\'e}, and Bastian Leibe.
+\newblock Hota: A higher order metric for evaluating multi-object tracking.
+\newblock {\em IJCV}, 2021.
+
+\bibitem{meinhardt2021trackformer}
+Tim Meinhardt, Alexander Kirillov, Laura Leal-Taixe, and Christoph
+  Feichtenhofer.
+\newblock Trackformer: Multi-object tracking with transformers.
+\newblock {\em arXiv:2101.02702}, 2021.
+
+\bibitem{milan2016mot16}
+Anton Milan, Laura Leal-Taix{\'e}, Ian Reid, Stefan Roth, and Konrad Schindler.
+\newblock {MOT16}: A benchmark for multi-object tracking.
+\newblock {\em arXiv:1603.00831}, 2016.
+
+\bibitem{oh2019video}
+Seoung~Wug Oh, Joon-Young Lee, Ning Xu, and Seon~Joo Kim.
+\newblock Video object segmentation using space-time memory networks.
+\newblock In {\em ICCV}, 2019.
+
+\bibitem{pang2020tubetk}
+Bo Pang, Yizhuo Li, Yifan Zhang, Muchen Li, and Cewu Lu.
+\newblock Tubetk: Adopting tubes to track multi-object in a one-step training
+  model.
+\newblock In {\em CVPR}, 2020.
+
+\bibitem{paszke2019pytorch}
+Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
+  Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, et~al.
+\newblock {PyTorch}: An imperative style, high-performance deep learning
+  library.
+\newblock In {\em NeurIPS}, 2019.
+
+\bibitem{peng2020chained}
+Jinlong Peng, Changan Wang, Fangbin Wan, Yang Wu, Yabiao Wang, Ying Tai,
+  Chengjie Wang, Jilin Li, Feiyue Huang, and Yanwei Fu.
+\newblock Chained-tracker: Chaining paired attentive regression results for
+  end-to-end joint multiple-object detection and tracking.
+\newblock In {\em ECCV}, 2020.
+
+\bibitem{perera2006multi}
+AG~Amitha Perera, Chukka Srinivas, Anthony Hoogs, Glen Brooksby, and Wensheng
+  Hu.
+\newblock Multi-object tracking through simultaneous long occlusions and
+  split-merge conditions.
+\newblock In {\em CVPR}, 2006.
+
+\bibitem{rangesh2021trackmpnn}
+Akshay Rangesh, Pranav Maheshwari, Mez Gebre, Siddhesh Mhatre, Vahid Ramezani,
+  and Mohan~M Trivedi.
+\newblock {TrackMPNN}: A message passing graph neural architecture for
+  multi-object tracking.
+\newblock {\em arXiv:2101.04206}, 2021.
+
+\bibitem{ren2015faster}
+Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun.
+\newblock Faster {R-CNN}: Towards real-time object detection with region
+  proposal networks.
+\newblock In {\em NeurIPS}, 2015.
+
+\bibitem{rezatofighi2019generalized}
+Hamid Rezatofighi, Nathan Tsoi, JunYoung Gwak, Amir Sadeghian, Ian Reid, and
+  Silvio Savarese.
+\newblock Generalized intersection over union: A metric and a loss for bounding
+  box regression.
+\newblock In {\em CVPR}, 2019.
+
+\bibitem{shao2018crowdhuman}
+Shuai Shao, Zijian Zhao, Boxun Li, Tete Xiao, Gang Yu, Xiangyu Zhang, and Jian
+  Sun.
+\newblock Crowdhuman: A benchmark for detecting human in a crowd.
+\newblock {\em arXiv:1805.00123}, 2018.
+
+\bibitem{sharir2021image}
+Gilad Sharir, Asaf Noy, and Lihi Zelnik-Manor.
+\newblock An image is worth 16x16 words, what is a video worth?
+\newblock {\em arXiv:2103.13915}, 2021.
+
+\bibitem{shen2003probabilistic}
+Chunhua Shen, Anton Van~den Hengel, and Anthony Dick.
+\newblock Probabilistic multiple cue integration for particle filter based
+  tracking.
+\newblock {\em Australian Pattern Recognition Society}, 2003.
+
+\bibitem{sukhbaatar2015end}
+Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, and Rob Fergus.
+\newblock End-to-end memory networks.
+\newblock In {\em NeurIPS}, 2015.
+
+\bibitem{sun2020transtrack}
+Peize Sun, Yi Jiang, Rufeng Zhang, Enze Xie, Jinkun Cao, Xinting Hu, Tao Kong,
+  Zehuan Yuan, Changhu Wang, and Ping Luo.
+\newblock Transtrack: Multiple-object tracking with transformer.
+\newblock {\em arXiv:2012.15460}, 2020.
+
+\bibitem{tokmakov2021learning}
+Pavel Tokmakov, Jie Li, Wolfram Burgard, and Adrien Gaidon.
+\newblock Learning to track with object permanence.
+\newblock In {\em ICCV}, 2021.
+
+\bibitem{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, {\L}ukasz Kaiser, and Illia Polosukhin.
+\newblock Attention is all you need.
+\newblock In {\em NeurIPS}, 2017.
+
+\bibitem{wang2019exploit}
+Gaoang Wang, Yizhou Wang, Haotian Zhang, Renshu Gu, and Jenq-Neng Hwang.
+\newblock Exploit the connectivity: Multi-object tracking with trackletnet.
+\newblock In {\em ACM MM}, 2019.
+
+\bibitem{wang2021multiple}
+Qiang Wang, Yun Zheng, Pan Pan, and Yinghui Xu.
+\newblock Multiple object tracking with correlation learning.
+\newblock In {\em CVPR}, 2021.
+
+\bibitem{wang2021joint}
+Yongxin Wang, Kris Kitani, and Xinshuo Weng.
+\newblock Joint object detection and multi-object tracking with graph neural
+  networks.
+\newblock In {\em ICRA}, 2021.
+
+\bibitem{wang2019towards}
+Zhongdao Wang, Liang Zheng, Yixuan Liu, Yali Li, and Shengjin Wang.
+\newblock Towards real-time multi-object tracking.
+\newblock {\em arXiv:1909.12605}, 2019.
+
+\bibitem{welch1995introduction}
+Greg Welch, Gary Bishop, et~al.
+\newblock An introduction to the kalman filter.
+\newblock 1995.
+
+\bibitem{weston2014memory}
+Jason Weston, Sumit Chopra, and Antoine Bordes.
+\newblock Memory networks.
+\newblock {\em arXiv:1410.3916}, 2014.
+
+\bibitem{wojke2017simple}
+Nicolai Wojke, Alex Bewley, and Dietrich Paulus.
+\newblock Simple online and realtime tracking with a deep association metric.
+\newblock In {\em ICIP}, 2017.
+
+\bibitem{wu2019global}
+Chien-Sheng Wu, Richard Socher, and Caiming Xiong.
+\newblock Global-to-local memory pointer networks for task-oriented dialogue.
+\newblock In {\em ICLR}, 2019.
+
+\bibitem{wu2019long}
+Chao-Yuan Wu, Christoph Feichtenhofer, Haoqi Fan, Kaiming He, Philipp
+  Krahenbuhl, and Ross Girshick.
+\newblock Long-term feature banks for detailed video understanding.
+\newblock In {\em CVPR}, 2019.
+
+\bibitem{wu2021track}
+Jialian Wu, Jiale Cao, Liangchen Song, Yu Wang, Ming Yang, and Junsong Yuan.
+\newblock Track to detect and segment: An online multi-object tracker.
+\newblock In {\em CVPR}, 2021.
+
+\bibitem{wu2013online}
+Yi Wu, Jongwoo Lim, and Ming-Hsuan Yang.
+\newblock Online object tracking: A benchmark.
+\newblock In {\em CVPR}, 2013.
+
+\bibitem{xing2009multi}
+Junliang Xing, Haizhou Ai, and Shihong Lao.
+\newblock Multi-object tracking through occlusions by local tracklets filtering
+  and global tracklets association with detection responses.
+\newblock In {\em CVPR}, 2009.
+
+\bibitem{xing2010multiple}
+Junliang Xing, Haizhou Ai, Liwei Liu, and Shihong Lao.
+\newblock Multiple player tracking in sports video: A dual-mode two-way
+  bayesian inference approach with progressive observation modeling.
+\newblock {\em TIP}, 2010.
+
+\bibitem{xiong2016dynamic}
+Caiming Xiong, Stephen Merity, and Richard Socher.
+\newblock Dynamic memory networks for visual and textual question answering.
+\newblock In {\em ICML}, 2016.
+
+\bibitem{xu2018joint}
+Mingze Xu, Chenyou Fan, Yuchen Wang, Michael~S Ryoo, and David~J Crandall.
+\newblock Joint person segmentation and identification in synchronized
+  first-and third-person videos.
+\newblock In {\em ECCV}, 2018.
+
+\bibitem{xu2021long}
+Mingze Xu, Yuanjun Xiong, Hao Chen, Xinyu Li, Wei Xia, Zhuowen Tu, and Stefano
+  Soatto.
+\newblock Long short-term transformer for online action detection.
+\newblock In {\em NeurIPS}, 2021.
+
+\bibitem{xu2021transcenter}
+Yihong Xu, Yutong Ban, Guillaume Delorme, Chuang Gan, Daniela Rus, and Xavier
+  Alameda-Pineda.
+\newblock {TransCenter}: Transformers with dense queries for multiple-object
+  tracking.
+\newblock {\em arXiv:2103.15145}, 2021.
+
+\bibitem{yang2018learning}
+Tianyu Yang and Antoni~B Chan.
+\newblock Learning dynamic memory networks for object tracking.
+\newblock In {\em ECCV}, 2018.
+
+\bibitem{zeng2021motr}
+Fangao Zeng, Bin Dong, Tiancai Wang, Cheng Chen, Xiangyu Zhang, and Yichen Wei.
+\newblock {MOTR}: End-to-end multiple-object tracking with transformer.
+\newblock {\em arXiv:2105.03247}, 2021.
+
+\bibitem{zhang2020fair}
+Yifu Zhang, Chunyu Wang, Xinggang Wang, Wenjun Zeng, and Wenyu Liu.
+\newblock {FairMOT}: On the fairness of detection and re-identification in
+  multiple object tracking.
+\newblock {\em arXiv:2004.01888}, 2020.
+
+\bibitem{zhou2020tracking}
+Xingyi Zhou, Vladlen Koltun, and Philipp Kr{\"a}henb{\"u}hl.
+\newblock Tracking objects as points.
+\newblock In {\em ECCV}, 2020.
+
+\bibitem{zhou2019objects}
+Xingyi Zhou, Dequan Wang, and Philipp Kr{\"a}henb{\"u}hl.
+\newblock Objects as points.
+\newblock {\em arXiv:1904.07850}, 2019.
+
+\bibitem{zhu2020deformable}
+Xizhou Zhu, Weijie Su, Lewei Lu, Bin Li, Xiaogang Wang, and Jifeng Dai.
+\newblock Deformable {DETR}: Deformable transformers for end-to-end object
+  detection.
+\newblock {\em arXiv:2010.04159}, 2020.
+
+\end{thebibliography}

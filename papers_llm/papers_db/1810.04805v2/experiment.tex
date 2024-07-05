@@ -1,0 +1,71 @@
+%auto-ignore
+\input{glue_official_tab}
+\section{Experiments}
+\label{sec:experiments}
+
+In this section, we present BERT fine-tuning results on 11 NLP tasks. 
+
+\subsection{GLUE}
+\label{sec:glue}
+
+The General Language Understanding Evaluation (GLUE) benchmark~\cite{wang-etal:2018:_glue} is a collection of diverse natural language understanding tasks.
+%Most of the GLUE datasets have already existed for a number of years, but the purpose of GLUE is to (1) distribute these datasets with canonical Train, Dev, and Test splits, and (2) set up an evaluation server to mitigate issues with evaluation inconsistencies and Test set overfitting. GLUE does not distribute labels for the Test set and users must upload their predictions to the GLUE server for evaluation, with limits on the number of submissions.
+Detailed descriptions of GLUE datasets are included in Appendix~\ref{appendix:sec:glue}.
+
+To fine-tune on GLUE, we represent the input sequence (for single sentence or sentence pairs) as described in Section~\ref{sec:bert}, and use the final hidden vector $C \in \mathbb{R}^{H}$ corresponding to the first input token ({\tt [CLS]}) as the aggregate representation.
+%This is demonstrated visually in Figure~\ref{fig:bert_fine_tune} (a) and (b).
+The only new parameters introduced during fine-tuning are  classification layer weights $W \in \mathbb{R}^{K \times H}$, where $K$ is the number of labels. We compute a standard classification loss with $C$ and $W$, i.e., $\log({\rm softmax}(CW^T))$.
+
+We use a batch size of 32 and fine-tune for 3 epochs over the data for all GLUE tasks. For each task, we selected the best fine-tuning learning rate (among 5e-5, 4e-5, 3e-5, and 2e-5) on the Dev set. Additionally, for \bertlarge we found that fine-tuning was sometimes unstable on small datasets, so we ran several random restarts and selected the best model on the Dev set. With random restarts, we use the same pre-trained checkpoint but perform different fine-tuning data shuffling and classifier layer initialization.\footnote{The GLUE data set distribution does not include the Test labels, and we only made a single GLUE evaluation server submission for each of \bertbase and \bertlarge.}
+
+Results are presented in Table~\ref{tab:glue_official}. Both \bertbase and \bertlarge outperform all systems on all tasks by a substantial margin, obtaining 4.5\% and 7.0\% respective average accuracy improvement over the prior state of the art. Note that \bertbase and OpenAI GPT are nearly identical in terms of model architecture apart from the attention masking. For the largest and most widely reported GLUE task, MNLI, BERT obtains a 4.6\% absolute accuracy improvement. On the official GLUE leaderboard\footnote{https://gluebenchmark.com/leaderboard},
+\bertlarge obtains a score of 80.5, compared to OpenAI GPT, which obtains 72.8 as of the date of writing.
+
+We find that \bertlarge significantly outperforms \bertbase across all tasks, especially those with very little training data. The effect of model size is explored more thoroughly in Section~\ref{sec:model_size_ablation}.
+
+\subsection{SQuAD v1.1}
+\label{sec:squad}
+
+The Stanford Question Answering Dataset (SQuAD v1.1) is a collection of 100k crowdsourced question/answer pairs~\cite{rajpurkar-etal:2016:_squad}. Given a question and a passage from Wikipedia containing the answer, the task is to predict the answer text span in the passage. 
+
+\eat{
+For example: 
+
+\begin{itemize}
+\item Input Question: \\{\tt {\scriptsize  Where do water droplets collide with ice crystals to form precipitation?}}
+\item Input Paragraph: \\{\tt {\scriptsize  ... Precipitation forms as smaller droplets coalesce via collision with other rain drops or ice crystals within a cloud. ...}}
+\item Output Answer: \\ {\tt {\scriptsize  within a cloud}}
+\end{itemize}
+}
+
+As shown in Figure~\ref{fig:bert_overall}, in the question answering task,
+we represent the input question and passage as a single packed sequence, with the question using the {\tt A} embedding and the passage using the {\tt B} embedding. We only introduce a start vector $S \in \mathbb{R}^H$ and an end vector $E \in \mathbb{R}^H$ during fine-tuning.
+The probability of word $i$ being the start of the answer span is computed as a dot product between $T_i$ and $S$ followed by a softmax over all of the words in the paragraph: $P_i = \frac{e^{S{\cdot}T_i}}{\sum_j e^{S{\cdot}T_j}}$. The analogous formula is used for the end of the answer span. The score of a candidate span from position $i$ to position $j$ is defined as  $S{\cdot}T_i + E{\cdot}T_j$, and the maximum scoring span where $j \geq i$ is used as a prediction. The training objective is the sum of the log-likelihoods of the correct start and end positions. We fine-tune for 3 epochs with a learning rate of 5e-5 and a batch size of 32. 
+
+\input{squad_tab}
+
+
+Table~\ref{tab:squad_results} shows top leaderboard entries as well as results from top published systems~\cite{bidaf,clark-gardner:2018:_simpl,peters-etal:2018:_deep,hu2017reinforced}.
+The top results from the SQuAD leaderboard do not have up-to-date public system descriptions available,\footnote{QANet is described in \newcite{yu-etal:2018:_qanet}, but the system has improved substantially after publication.} and are allowed to use any public data when training their systems. We therefore use modest data augmentation in our system by first fine-tuning on TriviaQA~\cite{joshi-etal:2017:_triviaq} befor fine-tuning on SQuAD.
+
+Our best performing system outperforms the top leaderboard system by +1.5 F1 in ensembling and +1.3 F1 as a single system. In fact, our single BERT model outperforms the top ensemble system in terms of F1 score. Without TriviaQA fine-tuning data, we only lose 0.1-0.4 F1, still outperforming all existing systems by a wide margin.\footnote{The TriviaQA data we used consists of paragraphs from TriviaQA-Wiki formed of the first 400 tokens in documents, that contain at least one of the provided possible answers.}
+
+\subsection{SQuAD v2.0}
+
+The SQuAD 2.0 task extends the SQuAD 1.1 problem definition by allowing for the possibility that no short answer exists in the provided paragraph, making the problem more realistic.
+
+We use a simple approach to extend the SQuAD v1.1 BERT model for this task. We treat questions that do not have an answer as having an answer span with start and end at the {\tt [CLS]} token. The probability space for the start and end answer span positions is extended to include the position of the {\tt [CLS]} token. For prediction, we compare the score of the no-answer span: $s_{\tt null} = S{\cdot}C + E{\cdot}C$ to the score of the best non-null span $\hat{s_{i,j}}$ =  $ {\tt max}_{j \geq i} S{\cdot}T_i + E{\cdot}T_j$. We predict a non-null answer when  $\hat{s_{i,j}} > s_{\tt null} + \tau $, where the threshold $\tau$ is selected on the dev set to maximize F1. We did not use TriviaQA data for this model. We fine-tuned for 2 epochs with a learning rate of 5e-5 and a batch size of 48.
+
+The results compared to prior leaderboard entries and top published work \cite{unet,slqa} are shown in Table~\ref{tab:squad2_results}, excluding systems that use BERT as one of their components. We observe a +5.1 F1 improvement over the previous best system.
+
+
+\subsection{SWAG}
+\label{sec:swag}
+The Situations With Adversarial Generations (SWAG) dataset contains 113k sentence-pair completion examples that evaluate grounded commonsense inference~\cite{zellers2018swag}. Given a sentence, the task is to choose the most plausible continuation among four choices.
+
+
+When fine-tuning on the SWAG dataset, we construct four input sequences, each containing the concatenation of the given sentence (sentence {\tt A}) and a possible continuation (sentence {\tt B}). The only task-specific parameters introduced is a vector whose dot product with the {\tt [CLS]} token representation $C$ denotes a score for each choice which is normalized with a softmax layer.
+
+We fine-tune the model for 3 epochs with a learning rate of 2e-5 and a batch size of 16. Results are presented in Table~\ref{tab:swag_official}. \bertlarge outperforms the authors' baseline ESIM+ELMo system by +27.1\% and OpenAI GPT by 8.3\%.
+
+\input{swag_official_tab}

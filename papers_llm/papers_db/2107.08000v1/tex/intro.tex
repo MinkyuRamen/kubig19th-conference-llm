@@ -1,0 +1,26 @@
+\section{Introduction}
+\label{sec:intro}
+
+%------------------------------------------------------------------------------
+\begin{figure*}
+\centering
+\input{tex/fig-glam}
+\caption{Our \emph{global-local attention module} (GLAM) involves both {\color{blue}channel} and {\color{red}spatial} attention, as well as both {\color{yellow!60!red}local} attention (channels/locations weighted independently, based on contextual information obtained by pooling) and {\color{green!60!black}global} attention (based on pairwise interaction between channels/locations). As a result, four attention maps are used: \emph{local channel} ($\vA_c^l$), \emph{local spatial} ($\vA_s^l$), \emph{global channel} ($\vA_c^g$) and \emph{global spatial} ($\vA_s^g$). The input feature map $\vF$ is weighted into local ($\vF^l$) and global ($\vF^g$) attention feature maps, which are fused with $\vF$ to yield the \emph{global-local attention feature map} $\vF^{gl}$. The diagram is abstract: The four attention modules are shown in more detail in Figures \ref{fig:fig4}, \ref{fig:fig3}, \ref{fig:fig6}, \ref{fig:fig5}.}
+\label{fig:glam}
+\end{figure*}
+%------------------------------------------------------------------------------
+
+Instance-level image retrieval is at the core of visual representation learning and is connected with many problems of visual recognition and machine learning, for instance \emph{metric learning}~\cite{oh2016deep,KKCK20}, \emph{few-shot learning}~\cite{SnellSZ17} and \emph{unsupervised learning}~\cite{chen2020simple}. Many large-scale open datasets~\cite{Babenko01, Radenovic01, Gordo01, Noh01, Weyand01}, and competitions\footnote{https://www.kaggle.com/c/landmark-retrieval-2020} have accelerated progress in instance-level image retrieval, which has been transformed by deep learning~\cite{Babenko01}.
+
+Many studies on instance-level image retrieval focus on learning features from \emph{convolutional neural networks} (CNN), while others focus on \emph{re-ranking}, for instance by graph-based methods~\cite{Donoser01}. The former can be distinguished according to feature types: \emph{local descriptors}, reminiscent of SIFT~\cite{Lowe01}, where an image is mapped to a few hundred vectors; and \emph{global descriptors}, where an image is mapped to a single vector. In fact, deep learning has brought global descriptors with astounding performance, while allowing efficient search. Our study belongs to this type.
+
+Studies on global descriptors have focused on \emph{spatial pooling}~\cite{Babenko03,Radenovic01}. The need for compact, discriminative representations that are resistant to clutter has naturally given rise to \emph{spatial attention} methods~\cite{Kalantidis01,Ng01}. Different kinds of attention have been studied in many areas of computer vision research. There is also \emph{channel attention}~\cite{Hu01,ChenKLYF18}; \emph{local attention}, applied independently to elements of the representation (feature map)~\cite{woo01,Kim01}; \emph{global attention}, based on interaction between elements~\cite{Wang02,ChenKLYF18}; and combinations thereof. Unfortunately, each study has been limited to one or two kinds of attention only; attention is not always learned; and applications vary.
+
+It is the objective of our work to perform a comprehensive study of all forms of attention above, apply them to instance-level image retrieval and provide a detailed account of their interaction and impact on performance. As shown in \autoref{fig:glam}, we collect contextual information from images with both \emph{local} and \emph{global} attention, giving rise to two parallel network streams. Importantly, each operates on both \emph{spatial locations} and \emph{feature channels}. Local attention is about individual locations and channels; global is about interaction between locations and between channels. The extracted information is separately embedded in local and global attention feature maps, which are combined in a \emph{global-local attention feature map} before pooling.
+
+Our contributions can be summarized as follows:
+\begin{enumerate}[itemsep=2pt, parsep=0pt, topsep=0pt]
+	 \item We propose a novel network that consists of both global and local attention for image retrieval. This is the first study that employs both mechanisms.
+	 \item Each of the global and local attention mechanisms comprises both spatial and channel attention.
+	 \item Focusing on global descriptors, we provide empirical evidence of the interaction of all forms of attention and improve the state of the art on standard benchmarks.
+\end{enumerate}

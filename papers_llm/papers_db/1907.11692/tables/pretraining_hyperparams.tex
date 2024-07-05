@@ -1,0 +1,31 @@
+\begin{table*}[t]
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\bf Hyperparam  & \bf \ourmodellarge{} & \bf \ourmodelbase{} \\
+\midrule 
+Number of Layers & 24 & 12 \\
+Hidden size & 1024 & 768 \\
+FFN inner hidden size & 4096 & 3072 \\
+Attention heads & 16 & 12 \\
+Attention head size & 64 & 64 \\
+Dropout & 0.1 & 0.1 \\
+Attention Dropout & 0.1 & 0.1 \\
+Warmup Steps & 30k & 24k \\
+Peak Learning Rate & 4e-4 & 6e-4 \\
+Batch Size & 8k & 8k\\
+Weight Decay & 0.01 & 0.01 \\
+Max Steps & 500k & 500k\\
+Learning Rate Decay & Linear & Linear \\
+Adam $\epsilon$ & 1e-6 & 1e-6 \\
+Adam $\beta_1$ & 0.9 & 0.9 \\
+Adam $\beta_2$ & 0.98 & 0.98 \\
+Gradient Clipping & 0.0 & 0.0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{
+Hyperparameters for pretraining \ourmodellarge{} and \ourmodelbase{}.
+}
+\label{tab:pretraining_hyperparams}
+\end{table*}

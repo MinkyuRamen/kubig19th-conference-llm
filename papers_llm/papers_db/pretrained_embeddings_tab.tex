@@ -1,0 +1,31 @@
+%auto-ignore
+
+\begin{table}[t]
+\small
+\centering
+ \begin{tabular}{@{}lcc@{}}
+\toprule
+System & Dev F1 & Test F1 \\
+\midrule
+ELMo~\cite{peters-etal:2018:_deep}& 95.7 & 92.2 \\
+CVT~\cite{clark2018semi} & - & 92.6 \\
+CSE~\cite{akbik2018contextual} & - & {\bf 93.1} \\
+\midrule
+Fine-tuning approach & & \\
+\;\;\;\bertlarge  & 96.6 & 92.8 \\
+\;\;\;\bertbase& 96.4 & 92.4 \\
+\midrule
+Feature-based approach (\bertbase) &  &  \\
+\;\;\;Embeddings & 91.0 &- \\
+\;\;\;Second-to-Last Hidden   & 95.6&- \\
+\;\;\;Last Hidden            & 94.9&- \\
+\;\;\;Weighted Sum Last Four Hidden        & 95.9&- \\
+\;\;\;Concat Last Four Hidden        & 96.1&- \\
+\;\;\;Weighted Sum All 12 Layers        & 95.5&- \\
+\bottomrule
+\end{tabular}
+\caption{CoNLL-2003 Named Entity Recognition results. Hyperparameters were selected using the Dev set. The reported Dev and Test scores are averaged over 5 random restarts using those hyperparameters.
+}
+\label{tab:ner_results}    
+\label{tab:pretrained_embeddings}    
+\end{table}

@@ -1,0 +1,20 @@
+\begin{table}
+\centering
+\footnotesize
+%\setlength\tabcolsep{5.0pt}
+\begin{tabular}{c|c|cccc}
+\toprule[1.5pt]
+        \textbf{Method} & \textbf{Parameter} &\textbf{IDF1} & \textbf{MOTA} & \textbf{HOTA} & \textbf{IDs} \\\hline
+        Ours & - &\textbf{73.15}& \textbf{68.08}& \textbf{59.75}& \textbf{93}\\\hline
+        \multirow{4}{*}{Pooling}& Average (T=3) & 25.04& 30.72 & 21.89 & 267\\
+        & Max (T=3) & 46.83& 41.28& 35.44& 235\\ 
+        & Average (T=24) & -& -7.29& -& -\\
+        & Max (T=24) & 25.78& 10.20& 6.54& 332\\
+\bottomrule[1.5pt]
+    \end{tabular}
+    \vspace{-2.0mm}
+\caption{Comparisons with heuristic memory aggregation design.}
+%\caption{Comparisons with heuristic memory aggregation design. The result shows simple heuristic aggregation methods are incapable of extracting instance features for tracking, even given the long-term memory. Our proposed memory aggregator yields significantly better tracking performance.}
+\label{tab:ablation:mem_structure_heuristic}
+\vspace{-2.0mm}
+\end{table}

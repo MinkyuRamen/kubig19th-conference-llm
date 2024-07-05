@@ -1,0 +1,151 @@
+\section{Global-local attention}
+\label{sec:method}
+
+We design a \emph{global-local attention module} (GLAM), which is attached at the end of a backbone network. \autoref{fig:glam} illustrates its main components. We are given a $c\times h \times w$ feature tensor $\vF$, where $c$ is the number of channels, and $h \times w$ is the spatial resolution. Local attention collects context from the image and applies pooling to obtain a $c \times 1 \times 1$ \emph{local channel attention map} $\vA_c^l$ and a $1 \times h \times w$ \emph{local spatial attention map} $\vA_s^l$. Global attention allows interaction between channels, resulting in a $c \times c$ \emph{global channel attention map} $\vA_c^g$, and between spatial locations, resulting in a $hw \times hw$ \emph{global spatial attention map} $\vA_s^g$. The feature maps produced by the two attention streams are combined with the original one by a learned fusion mechanism into the \emph{global-local attention feature map} $\vF^{gl}$ before being spatially pooled into a global image descriptor.
+
+%------------------------------------------------------------------------------
+\begin{figure}
+\centering
+\input{tex/fig-local-spatial}
+\caption{Local spatial attention. Convolutional layers in blue implemented by dilated convolutions with kernel size $3 \times 3$ and dilation factors $1,3,5$.}
+\label{fig:fig3}
+\end{figure}
+%------------------------------------------------------------------------------
+
+\subsection{Local attention}
+\label{sec:local}
+
+We extract an 1D channel and a 2D spatial attention map to weigh the feature map in the corresponding dimensions.
+
+\paragraph{Local channel attention}
+
+Following ECA-Net~\cite{wang01}, this attention captures local channel information. As shown in \autoref{fig:fig4}, we are given a $c\times h\times w$ feature tensor $\vF$ from our backbone. We first reduce it to a $c \times 1 \times 1$ tensor by \emph{global average pooling} (GAP). Channel attention is then captured by a 1D convolution of kernel size $k$ along the channel dimension, where $k$ controls the extent of cross-channel interaction. This is followed by a sigmoid function, resulting in the $c\times 1\times 1$ \emph{local channel attention map} $\vA_c^l$.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Local spatial attention}
+
+Inspired by the inception module~\cite{Szegedy01} and similar to~\cite{Kim01}, this attention map captures local spatial information at different scales. As shown in \autoref{fig:fig3},
+given the same $c\times h\times w$ feature tensor $\vF$ from our backbone, we obtain a new tensor $\vF'$ with channels reduced to $c'$, using a ${1 \times 1}$ convolution. We then extract local spatial contextual information using convolutional filters of kernel size ${3\times 3}$, ${5\times 5}$, and ${7\times 7}$, which are efficiently implemented by ${3\times 3}$ dilated convolutions~\cite{chen2017rethinking,Yu_2017_CVPR} with dilation parameter 1, 2, and 3 respectively. The resulting features, along with one obtained by ${1\times 1}$ convolution on $\vF'$, are concatenated into a $4c' \times h \times w$ tensor. Finally, we obtain the $1 \times h \times w$ \emph{local spatial attention map} $\vA_s^l$ by a ${1\times 1}$ convolution that reduces the channel dimension to $1$.
+
+The middle column of \autoref{fig:fig7} shows heat maps of local spatial attention, localizing target objects in images.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Local attention feature map}
+
+We use the local channel attention map $\vA_c^l$ to weigh $\vF$ in the channel dimension
+\begin{equation}
+	\vF_c^l \defn \vF \odot \vA_c^l + \vF.
+\label{eq:eq3}
+\end{equation}
+We then use local spatial attention map $\vA_s^l$ to weigh $\vF_c^l$ in the spatial dimensions, resulting in the $c \times h \times w$ \emph{local attention feature map}
+\begin{equation}
+	\vF^l = \vF_c^l \odot \vA_s^l + \vF_c^l.
+\label{eq:eq3-1}
+\end{equation}
+Here, $\vA \odot \vB$ denotes an element-wise multiplication of tensors $\vA$ and $\vB$, with broadcasting when one tensor is smaller. We adopt the choice of applying channel followed by spatial attention from \emph{convolutional block attention module} CBAM~\cite{woo01}. However, apart from computing $\vA_s^l$ at different scales, both attention maps are obtained from the original tensor $\vF$ rather than sequentially. In addition, both~\eq{eq3} and~\eq{eq3-1} include residual connections, while CBAM includes a single residual connection over both steps.
+
+%------------------------------------------------------------------------------
+\begin{figure}
+\centering
+\input{tex/fig-global-channel}
+\caption{Global channel attention.}
+\label{fig:fig6}
+\end{figure}
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+
+\subsection{Global attention}
+\label{sec:global}
+
+We extract two matrices capturing global pairwise channel and spatial interaction to weigh the feature map.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Global channel attention}
+
+We introduce a \emph{global channel attention} mechanism that captures global channel interaction. This mechanism is based on the non-local neural network~\cite{Wang02}, but with the idea of 1D convolution from ECA-Net~\cite{wang01}. As shown in \autoref{fig:fig6}, we are given the $c\times h\times w$ feature tensor $\vF$ from our backbone. We apply GAP and squeeze spatial dimensions, followed by a 1D convolution of kernel size $k$ and a sigmoid function, to obtain $1 \times c$ \emph{query} $\vQ_c$ and \emph{key} $\vK_c$ tensors. The \emph{value} tensor $\vV_c$ is obtained by mere reshaping of $\vF$ to $hw \times c$, without GAP. Next, we form the outer product of $\vK_c$ and $\vQ_c$, followed by softmax over channels to obtain a $c \times c$ \emph{global channel attention map}
+\begin{equation}
+	\vA_c^g = \softmax({\vK_c}\tran \vQ_c).
+\label{eq:eq6-1}
+\end{equation}
+Finally, this attention map is multiplied with $\vV_c$ and the matrix product $\vV_c \vA_c^g$ is reshaped back to $c \times h \times w$ to give the \emph{global channel attention feature map} $\vG_c$. In GSoP~\cite{Gao_2019_CVPR} and A$^2$-Net~\cite{ChenKLYF18}, a $c \times c$ global channel attention map is obtained by multiplication of $hw \times c$ matrices; \eq{eq6-1} is more efficient, using only an outer product of $1 \times c$ vectors.
+
+%------------------------------------------------------------------------------
+\begin{figure}
+\centering
+\input{tex/fig-global-spatial}
+\caption{Global spatial attention.}
+\label{fig:fig5}
+\end{figure}
+%------------------------------------------------------------------------------
+
+\paragraph{Global spatial attention}
+
+Since ordinary convolution applies only a local neighborhood at a time, it cannot capture global contextual information. Thus, we apply \emph{non-local filtering}~\cite{Wang02}, which is a form of \emph{self-attention}~\cite{Vaswani01} in the spatial dimensions. As shown in \autoref{fig:fig5}, we are given the same $c\times h\times w$ feature tensor $\vF$ from our backbone. By using three $1\times 1$ convolutions, which reduce channels to $c'$, and flattening spatial dimensions to $hw$, we obtain $c' \times hw$ \emph{query} $\vQ_s$, \emph{key} $\vK_s$, and \emph{value} $\vV_s$ tensors, where each column is a feature vector corresponding to a particular spatial location. We capture pairwise similarities of these vectors by matrix multiplication of $\vK_s$ and $\vQ_s$, followed by softmax over locations to obtain a $hw \times hw$ \emph{global spatial attention map}:
+\begin{equation}
+	\vA_s^g = \softmax(\vK_s\tran \vQ_s).
+\label{eq:eq4-1}
+\end{equation}
+This attention map is multiplied with $\vV_s$ and the matrix product $\vV_s \vA_s^g$ is reshaped back to $c' \times h \times w$ by expanding the spatial dimensions. Finally, using a ${1\times 1}$ convolution, which increases channels back to $c$, we obtain the $c \times h\times w$ \emph{global spatial attention feature map} $\vG_s$.
+
+The right column of \autoref{fig:fig7} shows heat maps for global spatial attention, localizing target objects in images.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Global attention feature map}
+
+We use the global channel attention feature map $\vF_c$ to weigh $\vF$ element-wise
+\begin{equation}
+	\vF_c^g = \vF \odot \vG_c.
+\label{eq:eq8}
+\end{equation}
+We then use global spatial attention feature map $\vG_s$ to weigh $\vF_c^g$ element-wise, resulting in the $c \times h \times w$ \emph{global attention feature map}
+\begin{equation}
+	\vF^g = \vF_c^g \odot \vG_s + \vF_c^g.
+\label{eq:eq8-1}
+\end{equation}
+Similarly to $\mathbf{F}^{l}$ in~\eq{eq3} and~\eq{eq3-1}, we apply channel attention first, followed by spatial attention. However, unlike \eq{eq3}, there is no residual connection in~\eq{eq8}. This choice is supported by early experiments.
+
+%------------------------------------------------------------------------------
+\begin{figure}
+\centering
+\small
+\setlength{\tabcolsep}{2pt}
+\newcommand{\heat}[1]{%
+	\fig[.28]{heatmap/#1/src.png} &
+	\fig[.28]{heatmap/#1/l.png} &
+	\fig[.28]{heatmap/#1/g.png} \\
+}
+\begin{tabular}{ccc}
+	\heat{1}
+	\heat{2}
+	\heat{4}
+	(a) input &
+	(b) local &
+	(c) global
+\end{tabular}
+\caption{\emph{Local and global spatial attention}. Left: input images. Middle: local spatial attention heat maps. Right: global spatial attention heat maps. Red (blue) means higher (lower) attention weight.}
+\label{fig:fig7}
+\end{figure}
+%------------------------------------------------------------------------------
+
+\subsection{Global-local attention}
+\label{sec:embed}
+
+\paragraph{Feature fusion}
+
+As shown in \autoref{fig:glam}, we combine the local and global attention feature maps, $\vF^l$ and $\vF^g$, with the original feature $\vF$. While concatenation and summation are common operations for feature combination, we use a weighted average with weights $w_l$, $w_g$, $w$ respectively, obtained by softmax over three learnable scalar parameters, to obtain a $c \times h \times w$ \emph{global-local attention feature map}
+\begin{equation}
+	\vF^{gl} = w_l \vF^l + w_g \vF^l + w \vF.
+\label{eq:eq10}
+\end{equation}
+EfficientDet~\cite{Tan01} has shown that this is the most effective, among a number of choices, for fusion of features across different scales.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Pooling}
+
+We apply GeM~\cite{Radenovic01}, a learnable spatial pooling mechanism, to feature map $\vF^{gl}$~\eq{eq10}, followed by a fully-connected (FC) layer with dropout and batch normalization. The final embedding is obtained by $\ell_2$-normalization.

@@ -1,0 +1,53 @@
+\section{Experiments}
+\label{sec:exp}
+
+%------------------------------------------------------------------------------
+\begin{figure*}
+\centering
+\fig{10_2}
+\caption{Examples of our ranking results. In each row, the first image on the left (pink dotted outline) is a query image with a target object (red crop box), and the following are the top ranking images for the query. Orange solid outline: positive images for the query; red solid outline: negative.}
+\label{fig:fig8}
+\end{figure*}
+%------------------------------------------------------------------------------
+
+\subsection{Datasets}
+
+\paragraph{Training set}
+
+There are a number of open landmark datasets commonly used for training in image retrieval studies, including \emph{neural code} (NC)~\cite{Babenko01}, \emph{neural code clean} (NC-clean)~\cite{Gordo01}, as well as Google Landmarks v1 (GLDv1)~\cite{Noh01} and v2 (GLDv2)~\cite{Weyand01}. \autoref{tab:table1} shows relevant statistics. These datasets can be categorized into noisy and clean. The clean sets were obtained from the original noisy sets for more effective training~\cite{Gordo01, Weyand01}. The original noisy datasets are much larger, but they have high intra-class variability. Each class can include visually dissimilar images such as exterior and interior views of a building or landmark, including floor plans and paintings inside. The clean datasets focus on views directly relevant to landmark recognition but have a much smaller number of images.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Evaluation set and metrics}
+
+We use four common evaluation datasets for landmark image retrieval: Oxford5k (\oxf5k)~\cite{Philbin01}, Paris6k (\paris6k)~\cite{Philbin02}, as well as Revisited Oxford (\roxf~or \rox) and Paris (\rpar~or \rpa)~\cite{RITAC18}. \roxf~and \rpar~are used with and without one million distractors (\r1m)~\cite{Ng01} and evaluated using the Medium and Hard protocols~\cite{RITAC18}. We evaluate using \emph{mean Average Precision} (mAP) and \emph{mean precision at} 10 (mP@10).
+
+%------------------------------------------------------------------------------
+
+\subsection{Implementation details}
+
+We train on 8 TITAN RTX 2080Ti GPUs. All models are pre-trained on ImageNet~\cite{Russakovsky01} and implemented in PyTorch \cite{Paszke01}. For fair comparisons, we set a training environment similar to the those  of compared studies~\cite{Yokoo01, Weyand01, Ng01, RITAC18}. We employ ResNet101~\cite{Zhang01} as a backbone model. The kernel size $k$ of ECANet in \autoref{sec:local} is set to 3. The parameter $p$ of GeM in \autoref{sec:embed} is set to 3 and the dimension $d$ of final embeddings to 512. We adopt ArcFace~\cite{Deng01}, a cosine-softmax based loss, with a margin of 0.3. We use stochastic gradient descent with initial learning rate $10^{-3}$, momentum 0.9 and weight decay $10^{-5}$.
+
+We adopt the batch sampling of Yokoo \etal~\cite{Yokoo01} where mini-batch samples with similar aspect ratios are resized to a particular size. Here, we use a batch size of 64. For image augmentation, we apply scaling, random cropping, and varied illumination. At inference, we apply a multi-resolution representation~\cite{Gordo01} to query and database images.
+
+Our method is denoted as GLAM (\emph{global-local attention module}). Using the backbone model alone is referred to as \emph{baseline}. It is compatible with recent models based on ResNet101-GeM trained with ArcFace~\cite{Weyand01, Ng01}. Adding our local attention (\autoref{sec:local}) to the baseline model is denoted \emph{+local}, while adding our global attention (\autoref{sec:global}) is denoted \emph{+global}. Since we focus on representation learning, we do not consider post-processing methods like geometry-based re-ranking \cite{Noh01, simeoni2019local, Weyand01} or graph-based re-ranking~\cite{Donoser01, iscen2017efficient, Yang01}.
+
+%------------------------------------------------------------------------------
+\begin{table}
+\centering
+\small
+\begin{tabular}{lcc} \toprule
+\Th{Train Set} & \Th{\#Images} & \Th{\#Classes} \\ \midrule
+NC-noisy &  213,678 & 672 \\
+NC-clean & 27,965 & 581 \\
+SfM-120k & 117,369 & 713 \\
+GLDv1-noisy & 1,225,029  &  14, 951 \\
+GLDv2-noisy & 4,132,914  &  203,094 \\
+GLDv2-clean & 1,580,470 & 81,313 \\
+\bottomrule
+\end{tabular}
+\caption{Statistics of different training sets.}
+\label{tab:table1}
+\end{table}
+%------------------------------------------------------------------------------
+

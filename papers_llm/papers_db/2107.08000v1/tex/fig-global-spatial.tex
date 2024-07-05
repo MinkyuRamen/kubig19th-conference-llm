@@ -1,0 +1,32 @@
+\begin{tikzpicture}[
+	font={\footnotesize},
+]
+\matrix[
+	row sep=15pt,column sep=10pt,cells={scale=1,},
+]{
+	\& \node[inp](i){feature map}; \\
+	\node[down](c1){conv $1 \times 1$}; \&
+	\node[down](c2){conv $1 \times 1$}; \&
+	\node[down](c3){conv $1 \times 1$}; \\
+	\& \node[op](m1){$\times$}; \\
+	\node[op](m2){$\times$}; \&
+	\node[fun](sm){$\softmax$}; \\
+	\node[up](up){conv $1 \times 1$}; \\
+	\node[outp](o){attention feature map}; \\
+};
+\coordinate(s) at($(i.south)!.5!(c2.north)$); % split
+\draw[->]
+	(i) edge (c2)
+	(c2) edge node[dim,midway,right]{$c' \times hw$} node[key,midway,left]{$\vQ_s$} (m1)
+	(m1) edge node[dim,midway,right]{$hw \times hw$} (sm)
+	(up) edge node[dim,midway,right]{$c \times h \times w$} (o)
+	(c1) edge node[dim,midway,right]{$c' \times hw$} node[key,midway,left]{$\vV_s$} (m2)
+	(m2) edge node[dim,midway,right]{$c' \times h \times w$} (up)
+	(sm) edge node[midway,above]{$\vA_s^g$} (m2)
+	;
+\draw[->] (s) -| (c1);
+\draw[->] (s) -| node[dim,midway,above]{$c \times h \times w$} (c3);
+\draw[->] (c3) |- node[dim,near start,right]{$c' \times hw$} node[key,near start,left]{$\vK_c$} (m1);
+\node[left=1pt of i]{$\vF$};
+\node[left=1pt of o]{$\vG_s$};
+\end{tikzpicture}

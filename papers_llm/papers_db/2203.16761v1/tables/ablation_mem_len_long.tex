@@ -1,0 +1,19 @@
+\begin{table}
+\centering
+\footnotesize
+%\setlength\tabcolsep{5.0pt}
+\begin{tabular}{cc|cccccc}
+\toprule[1.5pt]
+        \textbf{$T_s$} & \textbf{$T_l$} & \textbf{IDF1} & \textbf{MOTA} & \textbf{HOTA} & \textbf{IDsw} & \textbf{DetA} & \textbf{AssA} \\\hline
+        \multirow{5}{*}{3} & 3 & 71.27 & 67.14 & 59.09 & 136 &57.85& 61.41\\
+        & 5 & 71.70 & 67.94 & 59.31 & 136 & 58.24 & 61.50\\
+        & 10 & 71.66 & \textbf{68.29}& 59.53 & 117 & \textbf{58.35} & 59.49\\
+        & 20 & 72.83&  68.21 & \textbf{59.85} & 96& 58.03 & 63.00\\
+        & 24 & \textbf{73.15}& 68.08& 59.75 & \textbf{93} & 57.92 & \textbf{63.10}\\
+\bottomrule[1.5pt]
+    \end{tabular}
+\vspace{-2.0mm}
+\caption{Comparisons on different length of long-term memory.}
+\label{tab:ablation:memory_length_long}
+\vspace{-2.0mm}
+\end{table}
