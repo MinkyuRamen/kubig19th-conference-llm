@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{step}\PYG{p}{(}\PYG{n}{a}\PYG{p}{:} \PYG{n}{A}\PYG{p}{)} \PYG{o}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{n+nb}{float}\PYG{p}{,} \PYG{n+nb}{bool}\PYG{p}{)}
+\end{Verbatim}

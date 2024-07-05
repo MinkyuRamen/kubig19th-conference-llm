@@ -1,0 +1,27 @@
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+\multirow{2}{*}{\bf Model} & \multicolumn{2}{c}{\bf SQuAD 1.1} &\multicolumn{2}{c}{\bf SQuAD 2.0} \\
+&  EM &  F1 &  EM &  F1  \\
+\midrule
+\multicolumn{5}{l}{\textit{Single models on dev, w/o data augmentation}}\\
+\bertlarge{} &  84.1&90.9&79.0&81.8\\
+\xlnetlarge{} &\bf{89.0}& 94.5&86.1&88.8\\
+\ourmodel{} & 88.9 & \bf{94.6} & \bf{86.5} &\bf{89.4}\\
+\midrule
+\multicolumn{5}{l}{\textit{Single models on test (as of July 25, 2019)}}\\
+\multicolumn{3}{l}{\xlnetlarge{}} & 86.3$^{\dag}$ & 89.1$^{\dag}$ \\
+\multicolumn{3}{l}{\ourmodel{}} & 86.8 & 89.8 \\
+\multicolumn{3}{l}{XLNet + SG-Net Verifier} & \textbf{87.0}$^{\dag}$ & \textbf{89.9}$^{\dag}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{
+Results on SQuAD.
+$\dag$ indicates results that depend on additional external training data.
+\ourmodel{} uses only the provided SQuAD data in both dev and test settings.
+BERT$_{\textsc{large}}$ and XLNet$_{\textsc{large}}$ results are from \newcite{devlin2018bert} and \newcite{yang2019xlnet}, respectively.
+}
+\label{tab:roberta_squad}
+\end{table}

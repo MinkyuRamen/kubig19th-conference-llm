@@ -1,0 +1,81 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{nicefrac}
+\usepackage[frozencache,cachedir=.]{minted}
+\usepackage{pgfplots}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{booktabs}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+
+\graphicspath{{./figures/}}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+%\title{Accelerate Off-policy Reinforcement Learning on Multicore Shared Memory System*\\
+% {\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
+% should not be used}
+%\thanks{This work is supported by xxx under award xxx.}
+%}
+
+\title{Parallel Actors and Learners: A Framework for Generating Scalable RL Implementations*\\
+% {\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
+% should not be used}
+\thanks{This work has been sponsored by the U.S. Army Research Office (ARO) under award number W911NF1910362 and the U.S. National Science Foundation (NSF) under award numbers 2009057.}
+}
+
+\author{\IEEEauthorblockN{Chi Zhang}
+\IEEEauthorblockA{\textit{Department of Computer Science} \\
+\textit{University of Southern California}\\
+Los Angeles, USA \\
+zhan527@usc.edu}
+\and
+\IEEEauthorblockN{Sanmukh Rao Kuppannagari, Viktor K Prasanna}
+\IEEEauthorblockA{\textit{Department of Electrical and Computer Engineering} \\
+\textit{University of Southern California}\\
+Los Angeles, USA \\
+kuppanna@usc.edu, prasanna@usc.edu}
+}
+
+\maketitle
+
+\input{content/abstract.tex}
+
+\begin{IEEEkeywords}
+parallel reinforcement learning, prioritized replay buffer, parameter server
+\end{IEEEkeywords}
+
+\input{content/introduction.tex}
+
+\input{content/background.tex}
+
+\input{content/related_work.tex}
+
+\input{content/replay_buffer.tex}
+
+\input{content/overall_system.tex}
+
+\input{content/experiments.tex}
+
+\input{content/conclusion.tex}
+
+\bibliographystyle{IEEEtran}
+\bibliography{bib/chi_bib}
+
+\end{document}

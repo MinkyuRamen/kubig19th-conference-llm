@@ -1,0 +1,42 @@
+\section{Background} \label{sec:background}
+
+In this section, we give a brief overview of the BERT~\cite{devlin2018bert} pretraining approach and some of the training choices that we will examine experimentally in the following section.
+
+\subsection{Setup}
+BERT takes as input a concatenation of two segments (sequences of tokens), $x_1 , \ldots , x_N$ and $y_1 , \ldots , y_M$.
+Segments usually consist of more than one natural sentence.
+The two segments are presented as a single input sequence to BERT with special tokens delimiting them: $[\mathit{CLS}], x_1 , \ldots , x_N, [\mathit{SEP}], y_1 , \ldots , y_M, [\mathit{EOS}]$.
+$M$ and $N$ are constrained such that $M + N < T$, where $T$ is a parameter that controls the maximum sequence length during training.
+
+The model is first pretrained on a large unlabeled text corpus and subsequently finetuned using end-task labeled data.
+
+\subsection{Architecture}
+BERT uses the now ubiquitous transformer architecture \cite{vaswani2017attention}, which we will not review in detail. We use a transformer architecture with $L$ layers. Each block uses $A$ self-attention heads and hidden dimension $H$.
+
+\subsection{Training Objectives}
+
+During pretraining, BERT uses two objectives: masked language modeling and next sentence prediction. 
+
+\paragraph{Masked Language Model (MLM)} A random sample of the tokens in the input sequence is selected and replaced with the special token $[\mathit{MASK}]$. The MLM objective is a cross-entropy loss on predicting the masked tokens. BERT uniformly selects 15\% of the input tokens for possible replacement. Of the selected tokens, 80\% are replaced with $[\mathit{MASK}]$, 10\% are left unchanged, and 10\% are replaced by a randomly selected vocabulary token. 
+    
+In the original implementation, random masking and replacement is performed once in the beginning and saved for the duration of training, although in practice, data is duplicated so the mask is not always the same for every training sentence (see Section \ref{sec:dynamic_masking}).
+
+\paragraph{Next Sentence Prediction (NSP)} NSP is a binary classification loss for predicting whether two segments follow each other in the original text. Positive examples are created by taking consecutive sentences from the text corpus. Negative examples are created by pairing segments from different documents. Positive and negative examples are sampled with equal probability. 
+    
+The NSP objective was designed to improve performance on downstream tasks, such as Natural Language Inference \cite{bowman2015large}, which require reasoning about the relationships between pairs of sentences. 
+
+
+
+
+
+
+
+
+\subsection{Optimization}
+
+BERT is optimized with Adam \cite{kingma2014adam} using the following parameters: $\beta_1 = 0.9$, $\beta_2= 0.999$, $\epsilon = \text{1e-6}$ and $L_2$ weight decay of $0.01$. The learning rate is warmed up over the first 10,000 steps to a peak value of 1e-4, and then linearly decayed. BERT trains with a dropout of 0.1 on all layers and attention weights, and a GELU activation function~\cite{hendrycks2016gelu}. Models are pretrained for $S=\text{1,000,000}$ updates, with minibatches containing $B=\text{256}$ sequences of maximum length $T=\text{512}$ tokens.
+
+\subsection{Data}
+
+BERT is trained on a combination of \textsc{BookCorpus}~\cite{moviebook} plus English \textsc{Wikipedia}, which totals 16GB of uncompressed text.\footnote{\newcite{yang2019xlnet} use the same dataset but report having only 13GB of text after data cleaning. This is most likely due to subtle differences in cleaning of the Wikipedia data.}
+

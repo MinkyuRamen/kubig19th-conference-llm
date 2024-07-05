@@ -1,0 +1,346 @@
+\begin{thebibliography}{51}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Agirre et~al.(2007)Agirre, M`arquez, and
+  Wicentowski}]{agirre2007semantic}
+Eneko Agirre, Llu'{i}s M`arquez, and Richard Wicentowski, editors. 2007.
+\newblock \emph{Proceedings of the Fourth International Workshop on Semantic
+  Evaluations (SemEval-2007)}.
+
+\bibitem[{Baevski et~al.(2019)Baevski, Edunov, Liu, Zettlemoyer, and
+  Auli}]{baevski2019cloze}
+Alexei Baevski, Sergey Edunov, Yinhan Liu, Luke Zettlemoyer, and Michael Auli.
+  2019.
+\newblock Cloze-driven pretraining of self-attention networks.
+\newblock \emph{arXiv preprint arXiv:1903.07785}.
+
+\bibitem[{Bar-Haim et~al.(2006)Bar-Haim, Dagan, Dolan, Ferro, Giampiccolo,
+  Magnini, and Szpektor}]{bar2006second}
+Roy Bar-Haim, Ido Dagan, Bill Dolan, Lisa Ferro, Danilo Giampiccolo, Bernardo
+  Magnini, and Idan Szpektor. 2006.
+\newblock The second {PASCAL} recognising textual entailment challenge.
+\newblock In \emph{Proceedings of the second PASCAL challenges workshop on
+  recognising textual entailment}.
+
+\bibitem[{Bentivogli et~al.(2009)Bentivogli, Dagan, Dang, Giampiccolo, and
+  Magnini}]{bentivogli2009fifth}
+Luisa Bentivogli, Ido Dagan, Hoa~Trang Dang, Danilo Giampiccolo, and Bernardo
+  Magnini. 2009.
+\newblock The fifth {PASCAL} recognizing textual entailment challenge.
+
+\bibitem[{Bowman et~al.(2015)Bowman, Angeli, Potts, and
+  Manning}]{bowman2015large}
+Samuel~R Bowman, Gabor Angeli, Christopher Potts, and Christopher~D Manning.
+  2015.
+\newblock A large annotated corpus for learning natural language inference.
+\newblock In \emph{Empirical Methods in Natural Language Processing (EMNLP)}.
+
+\bibitem[{Chan et~al.(2019)Chan, Kitaev, Guu, Stern, and
+  Uszkoreit}]{chan2019kermit}
+William Chan, Nikita Kitaev, Kelvin Guu, Mitchell Stern, and Jakob Uszkoreit.
+  2019.
+\newblock {KERMIT}: Generative insertion-based modeling for sequences.
+\newblock \emph{arXiv preprint arXiv:1906.01604}.
+
+\bibitem[{Dagan et~al.(2006)Dagan, Glickman, and Magnini}]{dagan2006pascal}
+Ido Dagan, Oren Glickman, and Bernardo Magnini. 2006.
+\newblock The {PASCAL} recognising textual entailment challenge.
+\newblock In \emph{Machine learning challenges. evaluating predictive
+  uncertainty, visual object classification, and recognising tectual
+  entailment}.
+
+\bibitem[{Dai and Le(2015)}]{dai2015semi}
+Andrew~M Dai and Quoc~V Le. 2015.
+\newblock Semi-supervised sequence learning.
+\newblock In \emph{Advances in Neural Information Processing Systems (NIPS)}.
+
+\bibitem[{Devlin et~al.(2019)Devlin, Chang, Lee, and
+  Toutanova}]{devlin2018bert}
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019.
+\newblock {BERT}: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock In \emph{North American Association for Computational Linguistics
+  (NAACL)}.
+
+\bibitem[{Dolan and Brockett(2005)}]{dolan2005automatically}
+William~B Dolan and Chris Brockett. 2005.
+\newblock Automatically constructing a corpus of sentential paraphrases.
+\newblock In \emph{Proceedings of the International Workshop on Paraphrasing}.
+
+\bibitem[{Dong et~al.(2019)Dong, Yang, Wang, Wei, Liu, Wang, Gao, Zhou, and
+  Hon}]{dong2019unified}
+Li~Dong, Nan Yang, Wenhui Wang, Furu Wei, Xiaodong Liu, Yu~Wang, Jianfeng Gao,
+  Ming Zhou, and Hsiao-Wuen Hon. 2019.
+\newblock Unified language model pre-training for natural language
+  understanding and generation.
+\newblock \emph{arXiv preprint arXiv:1905.03197}.
+
+\bibitem[{Giampiccolo et~al.(2007)Giampiccolo, Magnini, Dagan, and
+  Dolan}]{giampiccolo2007third}
+Danilo Giampiccolo, Bernardo Magnini, Ido Dagan, and Bill Dolan. 2007.
+\newblock The third {PASCAL} recognizing textual entailment challenge.
+\newblock In \emph{Proceedings of the ACL-PASCAL workshop on textual entailment
+  and paraphrasing}.
+
+\bibitem[{Gokaslan and Cohen(2019)}]{gokaslan2019openwebtext}
+Aaron Gokaslan and Vanya Cohen. 2019.
+\newblock Openwebtext corpus.
+\newblock
+  \path{http://web.archive.org/save/http://Skylion007.github.io/OpenWebTextCorpus}.
+
+\bibitem[{Hamborg et~al.(2017)Hamborg, Meuschke, Breitinger, and
+  Gipp}]{hamborg2017newsplease}
+Felix Hamborg, Norman Meuschke, Corinna Breitinger, and Bela Gipp. 2017.
+\newblock news-please: A generic news crawler and extractor.
+\newblock In \emph{Proceedings of the 15th International Symposium of
+  Information Science}.
+
+\bibitem[{Hendrycks and Gimpel(2016)}]{hendrycks2016gelu}
+Dan Hendrycks and Kevin Gimpel. 2016.
+\newblock Gaussian error linear units (gelus).
+\newblock \emph{arXiv preprint arXiv:1606.08415}.
+
+\bibitem[{Honnibal and Montani(2017)}]{spacy2}
+Matthew Honnibal and Ines Montani. 2017.
+\newblock {spaCy 2}: Natural language understanding with {B}loom embeddings,
+  convolutional neural networks and incremental parsing.
+\newblock To appear.
+
+\bibitem[{Howard and Ruder(2018)}]{howard2018universal}
+Jeremy Howard and Sebastian Ruder. 2018.
+\newblock Universal language model fine-tuning for text classification.
+\newblock \emph{arXiv preprint arXiv:1801.06146}.
+
+\bibitem[{Iyer et~al.(2016)Iyer, Dandekar, and Csernai}]{iyer2016quora}
+Shankar Iyer, Nikhil Dandekar, and Kornél Csernai. 2016.
+\newblock First quora dataset release: Question pairs.
+\newblock
+  \path{https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs}.
+
+\bibitem[{Joshi et~al.(2019)Joshi, Chen, Liu, Weld, Zettlemoyer, and
+  Levy}]{joshi2019spanbert}
+Mandar Joshi, Danqi Chen, Yinhan Liu, Daniel~S. Weld, Luke Zettlemoyer, and
+  Omer Levy. 2019.
+\newblock {SpanBERT}: Improving pre-training by representing and predicting
+  spans.
+\newblock \emph{arXiv preprint arXiv:1907.10529}.
+
+\bibitem[{Kingma and Ba(2015)}]{kingma2014adam}
+Diederik Kingma and Jimmy Ba. 2015.
+\newblock Adam: A method for stochastic optimization.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}.
+
+\bibitem[{Kocijan et~al.(2019)Kocijan, Cretu, Camburu, Yordanov, and
+  Lukasiewicz}]{kocijan2019surprisingly}
+Vid Kocijan, Ana-Maria Cretu, Oana-Maria Camburu, Yordan Yordanov, and Thomas
+  Lukasiewicz. 2019.
+\newblock A surprisingly robust trick for winograd schema challenge.
+\newblock \emph{arXiv preprint arXiv:1905.06290}.
+
+\bibitem[{Lai et~al.(2017)Lai, Xie, Liu, Yang, and Hovy}]{lai2017large}
+Guokun Lai, Qizhe Xie, Hanxiao Liu, Yiming Yang, and Eduard Hovy. 2017.
+\newblock Race: Large-scale reading comprehension dataset from examinations.
+\newblock \emph{arXiv preprint arXiv:1704.04683}.
+
+\bibitem[{Lample and Conneau(2019)}]{lample2019cross}
+Guillaume Lample and Alexis Conneau. 2019.
+\newblock Cross-lingual language model pretraining.
+\newblock \emph{arXiv preprint arXiv:1901.07291}.
+
+\bibitem[{Levesque et~al.(2011)Levesque, Davis, and
+  Morgenstern}]{levesque2011winograd}
+Hector~J Levesque, Ernest Davis, and Leora Morgenstern. 2011.
+\newblock The {W}inograd schema challenge.
+\newblock In \emph{{AAAI} Spring Symposium: Logical Formalizations of
+  Commonsense Reasoning}.
+
+\bibitem[{Liu et~al.(2019{\natexlab{a}})Liu, He, Chen, and
+  Gao}]{liu2019improving}
+Xiaodong Liu, Pengcheng He, Weizhu Chen, and Jianfeng Gao. 2019{\natexlab{a}}.
+\newblock Improving multi-task deep neural networks via knowledge distillation
+  for natural language understanding.
+\newblock \emph{arXiv preprint arXiv:1904.09482}.
+
+\bibitem[{Liu et~al.(2019{\natexlab{b}})Liu, He, Chen, and Gao}]{liu2019mtdnn}
+Xiaodong Liu, Pengcheng He, Weizhu Chen, and Jianfeng Gao. 2019{\natexlab{b}}.
+\newblock Multi-task deep neural networks for natural language understanding.
+\newblock \emph{arXiv preprint arXiv:1901.11504}.
+
+\bibitem[{McCann et~al.(2017)McCann, Bradbury, Xiong, and
+  Socher}]{mccann2017learned}
+Bryan McCann, James Bradbury, Caiming Xiong, and Richard Socher. 2017.
+\newblock Learned in translation: Contextualized word vectors.
+\newblock In \emph{Advances in Neural Information Processing Systems (NIPS)},
+  pages 6297--6308.
+
+\bibitem[{Micikevicius et~al.(2018)Micikevicius, Narang, Alben, Diamos, Elsen,
+  Garcia, Ginsburg, Houston, Kuchaiev, Venkatesh, and
+  Wu}]{micikevicius2018mixed}
+Paulius Micikevicius, Sharan Narang, Jonah Alben, Gregory Diamos, Erich Elsen,
+  David Garcia, Boris Ginsburg, Michael Houston, Oleksii Kuchaiev, Ganesh
+  Venkatesh, and Hao Wu. 2018.
+\newblock Mixed precision training.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Nagel(2016)}]{nagel2016ccnews}
+Sebastian Nagel. 2016.
+\newblock Cc-news.
+\newblock
+  \path{http://web.archive.org/save/http://commoncrawl.org/2016/10/news-dataset-available}.
+
+\bibitem[{Ott et~al.(2019)Ott, Edunov, Baevski, Fan, Gross, Ng, Grangier, and
+  Auli}]{ott2019fairseq}
+Myle Ott, Sergey Edunov, Alexei Baevski, Angela Fan, Sam Gross, Nathan Ng,
+  David Grangier, and Michael Auli. 2019.
+\newblock \textsc{fairseq}: A fast, extensible toolkit for sequence modeling.
+\newblock In \emph{North American Association for Computational Linguistics
+  (NAACL): System Demonstrations}.
+
+\bibitem[{Ott et~al.(2018)Ott, Edunov, Grangier, and Auli}]{ott2018scaling}
+Myle Ott, Sergey Edunov, David Grangier, and Michael Auli. 2018.
+\newblock Scaling neural machine translation.
+\newblock In \emph{Proceedings of the Third Conference on Machine Translation
+  (WMT)}.
+
+\bibitem[{Paszke et~al.(2017)Paszke, Gross, Chintala, Chanan, Yang, DeVito,
+  Lin, Desmaison, Antiga, and Lerer}]{paszke2017automatic}
+Adam Paszke, Sam Gross, Soumith Chintala, Gregory Chanan, Edward Yang, Zachary
+  DeVito, Zeming Lin, Alban Desmaison, Luca Antiga, and Adam Lerer. 2017.
+\newblock Automatic differentiation in {PyTorch}.
+\newblock In \emph{NIPS Autodiff Workshop}.
+
+\bibitem[{Peters et~al.(2018)Peters, Neumann, Iyyer, Gardner, Clark, Lee, and
+  Zettlemoyer}]{peters2018deep}
+Matthew Peters, Mark Neumann, Mohit Iyyer, Matt Gardner, Christopher Clark,
+  Kenton Lee, and Luke Zettlemoyer. 2018.
+\newblock Deep contextualized word representations.
+\newblock In \emph{North American Association for Computational Linguistics
+  (NAACL)}.
+
+\bibitem[{Radford et~al.(2018)Radford, Narasimhan, Salimans, and
+  Sutskever}]{radford2018gpt}
+Alec Radford, Karthik Narasimhan, Time Salimans, and Ilya Sutskever. 2018.
+\newblock Improving language understanding with unsupervised learning.
+\newblock Technical report, OpenAI.
+
+\bibitem[{Radford et~al.(2019)Radford, Wu, Child, Luan, Amodei, and
+  Sutskever}]{radford2019language}
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya
+  Sutskever. 2019.
+\newblock Language models are unsupervised multitask learners.
+\newblock Technical report, OpenAI.
+
+\bibitem[{Rajpurkar et~al.(2018)Rajpurkar, Jia, and Liang}]{rajpurkar2018know}
+Pranav Rajpurkar, Robin Jia, and Percy Liang. 2018.
+\newblock Know what you don't know: Unanswerable questions for squad.
+\newblock In \emph{Association for Computational Linguistics (ACL)}.
+
+\bibitem[{Rajpurkar et~al.(2016)Rajpurkar, Zhang, Lopyrev, and
+  Liang}]{rajpurkar2016squad}
+Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and Percy Liang. 2016.
+\newblock {SQuAD}: 100,000+ questions for machine comprehension of text.
+\newblock In \emph{Empirical Methods in Natural Language Processing (EMNLP)}.
+
+\bibitem[{Sennrich et~al.(2016)Sennrich, Haddow, and
+  Birch}]{sennrich2016neural}
+Rico Sennrich, Barry Haddow, and Alexandra Birch. 2016.
+\newblock Neural machine translation of rare words with subword units.
+\newblock In \emph{Association for Computational Linguistics (ACL)}, pages
+  1715--1725.
+
+\bibitem[{Socher et~al.(2013)Socher, Perelygin, Wu, Chuang, Manning, Ng, and
+  Potts}]{socher2013recursive}
+Richard Socher, Alex Perelygin, Jean Wu, Jason Chuang, Christopher~D Manning,
+  Andrew Ng, and Christopher Potts. 2013.
+\newblock Recursive deep models for semantic compositionality over a sentiment
+  treebank.
+\newblock In \emph{Empirical Methods in Natural Language Processing (EMNLP)}.
+
+\bibitem[{Song et~al.(2019)Song, Tan, Qin, Lu, and Liu}]{song2019mass}
+Kaitao Song, Xu~Tan, Tao Qin, Jianfeng Lu, and Tie-Yan Liu. 2019.
+\newblock {MASS}: Masked sequence to sequence pre-training for language
+  generation.
+\newblock In \emph{International Conference on Machine Learning (ICML)}.
+
+\bibitem[{Sun et~al.(2019)Sun, Wang, Li, Feng, Chen, Zhang, Tian, Zhu, Tian,
+  and Wu}]{sun2019ernie}
+Yu~Stephanie Sun, Shuohuan Wang, Yukun Li, Shikun Feng, Xuyi Chen, Han Zhang,
+  Xinlun Tian, Danxiang Zhu, Hao Tian, and Hua Wu. 2019.
+\newblock {ERNIE}: Enhanced representation through knowledge integration.
+\newblock \emph{arXiv preprint arXiv:1904.09223}.
+
+\bibitem[{Trinh and Le(2018)}]{trinh2018simple}
+Trieu~H Trinh and Quoc~V Le. 2018.
+\newblock A simple method for commonsense reasoning.
+\newblock \emph{arXiv preprint arXiv:1806.02847}.
+
+\bibitem[{Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones,
+  Gomez, Kaiser, and Polosukhin}]{vaswani2017attention}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, {\L}ukasz Kaiser, and Illia Polosukhin. 2017.
+\newblock Attention is all you need.
+\newblock In \emph{Advances in neural information processing systems}.
+
+\bibitem[{Wang et~al.(2019{\natexlab{a}})Wang, Pruksachatkun, Nangia, Singh,
+  Michael, Hill, Levy, and Bowman}]{wang2019superglue}
+Alex Wang, Yada Pruksachatkun, Nikita Nangia, Amanpreet Singh, Julian Michael,
+  Felix Hill, Omer Levy, and Samuel~R. Bowman. 2019{\natexlab{a}}.
+\newblock Super{GLUE}: A stickier benchmark for general-purpose language
+  understanding systems.
+\newblock \emph{arXiv preprint 1905.00537}.
+
+\bibitem[{Wang et~al.(2019{\natexlab{b}})Wang, Singh, Michael, Hill, Levy, and
+  Bowman}]{wang2019glue}
+Alex Wang, Amanpreet Singh, Julian Michael, Felix Hill, Omer Levy, and
+  Samuel~R. Bowman. 2019{\natexlab{b}}.
+\newblock {GLUE}: A multi-task benchmark and analysis platform for natural
+  language understanding.
+\newblock In \emph{International Conference on Learning Representations
+  (ICLR)}.
+
+\bibitem[{Warstadt et~al.(2018)Warstadt, Singh, and
+  Bowman}]{warstadt2018neural}
+Alex Warstadt, Amanpreet Singh, and Samuel~R. Bowman. 2018.
+\newblock Neural network acceptability judgments.
+\newblock \emph{arXiv preprint 1805.12471}.
+
+\bibitem[{Williams et~al.(2018)Williams, Nangia, and
+  Bowman}]{williams2018broad}
+Adina Williams, Nikita Nangia, and Samuel Bowman. 2018.
+\newblock A broad-coverage challenge corpus for sentence understanding through
+  inference.
+\newblock In \emph{North American Association for Computational Linguistics
+  (NAACL)}.
+
+\bibitem[{Yang et~al.(2019)Yang, Dai, Yang, Carbonell, Salakhutdinov, and
+  Le}]{yang2019xlnet}
+Zhilin Yang, Zihang Dai, Yiming Yang, Jaime Carbonell, Ruslan Salakhutdinov,
+  and Quoc~V Le. 2019.
+\newblock Xlnet: Generalized autoregressive pretraining for language
+  understanding.
+\newblock \emph{arXiv preprint arXiv:1906.08237}.
+
+\bibitem[{You et~al.(2019)You, Li, Hseu, Song, Demmel, and
+  Hsieh}]{you2019reducing}
+Yang You, Jing Li, Jonathan Hseu, Xiaodan Song, James Demmel, and Cho-Jui
+  Hsieh. 2019.
+\newblock Reducing bert pre-training time from 3 days to 76 minutes.
+\newblock \emph{arXiv preprint arXiv:1904.00962}.
+
+\bibitem[{Zellers et~al.(2019)Zellers, Holtzman, Rashkin, Bisk, Farhadi,
+  Roesner, and Choi}]{zellers2019neuralfakenews}
+Rowan Zellers, Ari Holtzman, Hannah Rashkin, Yonatan Bisk, Ali Farhadi,
+  Franziska Roesner, and Yejin Choi. 2019.
+\newblock Defending against neural fake news.
+\newblock \emph{arXiv preprint arXiv:1905.12616}.
+
+\bibitem[{Zhu et~al.(2015)Zhu, Kiros, Zemel, Salakhutdinov, Urtasun, Torralba,
+  and Fidler}]{moviebook}
+Yukun Zhu, Ryan Kiros, Richard Zemel, Ruslan Salakhutdinov, Raquel Urtasun,
+  Antonio Torralba, and Sanja Fidler. 2015.
+\newblock Aligning books and movies: Towards story-like visual explanations by
+  watching movies and reading books.
+\newblock In \emph{arXiv preprint arXiv:1506.06724}.
+
+\end{thebibliography}

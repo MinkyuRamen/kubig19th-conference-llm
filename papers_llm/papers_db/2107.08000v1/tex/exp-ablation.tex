@@ -1,0 +1,122 @@
+\subsection{Ablation study}
+\label{sec:Ablation}
+
+%------------------------------------------------------------------------------
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{1.5pt}
+\begin{tabular}{l*{6}{c}} \toprule
+\mr{2}{\Th{Method}} & \mr{2}{\Th{Oxf5k}} & \mr{2}{\Th{Par6k}} & \mc{2}{\Th{$\cR$Medium}} & \mc{2}{\Th{$\cR$Hard}} \\ \cmidrule(l){4-7}
+ & & & \rox & \rpa & \rox & \rpa \\ \midrule
+GLAM baseline  & 91.9 & 94.5 & 72.8 &  84.2 & 49.9 & 69.7 \\
++local-channel & 91.3 & 95.3 & 72.2 & 85.8 & 48.3 & 73.1 \\
++local-spatial & 91.0 & 95.1 & 72.1 & 85.3 & 48.3 &  71.9 \\
++local & 91.2 & 95.4 & 73.7 & 86.5 & 52.6 & 75.0 \\
++global-channel & 92.5 & 94.4 & 73.3 & 84.4 & 49.8 & 70.1 \\
++global-spatial & 92.4 & 95.1 & 73.2 & 86.3 & 50.0 & 72.7 \\
++global & 92.3 & 95.3 & 77.2 & 86.7 & 57.4 & 75.0 \\
++global+local  & \tb{94.2} & \tb{95.6} & \tb{78.6}  & \tb{88.5}  & \tb{60.2} & \tb{76.8} \\ \bottomrule
+\end{tabular}
+\caption{mAP comparison of spatial and channel variants of our local (+local, \autoref{sec:local}) and global (+global, \autoref{sec:local}) attention modules to the baseline.}
+\label{tab:table10}
+\end{table}
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{3.4pt}
+\begin{tabular}{l*{6}{c}} \toprule
+\mr{2}{\Th{Method}} & \mr{2}{\Th{Oxf5k}} & \mr{2}{\Th{Par6k}} & \mc{2}{\Th{$\cR$Medium}} & \mc{2}{\Th{$\cR$Hard}} \\ \cmidrule(l){4-7}
+ & & & \rox & \rpa & \rox & \rpa \\ \midrule
+CBAM style  & 93.8 & \tb{95.7} & 75.6 &  88.4 & 53.3 & \tb{76.8} \\
+GLAM (Ours)  & \tb{94.2} & 95.6 & \tb{78.6}  & \tb{88.5}  & \tb{60.2} & \tb{76.8} \\ \bottomrule
+\end{tabular}
+\caption{mAP comparison between CBAM style and our local spatial attention.}
+\label{tab:table7}
+\end{table}
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{4.2pt}
+\begin{tabular}{l*{6}{c}} \toprule
+\mr{2}{\Th{Method}} & \mr{2}{\Th{Oxf5k}} & \mr{2}{\Th{Par6k}} & \mc{2}{\Th{$\cR$Medium}} & \mc{2}{\Th{$\cR$Hard}} \\ \cmidrule(l){4-7}
+ & & & \rox & \rpa & \rox & \rpa \\ \midrule
+Concatenate  & 89.5 & 95.1 & 73.6 & 86.5 & 54.0 & 73.7 \\
+Sum (Ours) & \tb{94.2} & \tb{95.6} & \tb{78.6}  & \tb{88.5}  & \tb{60.2} & \tb{76.8} \\ \bottomrule
+\end{tabular}
+\caption{mAP comparison between weighted concatenation and weighted average for feature fusion.}
+\label{tab:table5}
+\end{table}
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{l*{6}{c}} \toprule
+\mr{2}{\Th{Method}} & \mr{2}{\Th{Oxf5k}} & \mr{2}{\Th{Par6k}} & \mc{2}{\Th{$\cR$Medium}} & \mc{2}{\Th{$\cR$Hard}} \\ \cmidrule(l){4-7}
+ & & & \rox & \rpa & \rox & \rpa \\ \midrule
+Fixed-size  & 76.1 & 82.6 & 55.7 & 68.4 & 29.2 & 47.5 \\
+Group-size (Ours) & \tb{94.2} & \tb{95.6} & \tb{78.6}  & \tb{88.5}  & \tb{60.2} & \tb{76.8} \\ \bottomrule
+\end{tabular}
+\caption{mAP comparison between fixed-size ($224 \times 224$) and group-size sampling methods.}
+\label{tab:table4}
+\end{table}
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+\begin{table}
+\centering
+\small
+\setlength{\tabcolsep}{1.9pt}
+\begin{tabular}{l*{7}{c}} \toprule
+\mr{2}{\Th{Query}} & \mr{2}{\Th{Database}} & \mr{2}{\Th{Oxf5k}} & \mr{2}{\Th{Par6k}} & \mc{2}{\Th{$\cR$Medium}} & \mc{2}{\Th{$\cR$Hard}} \\ \cmidrule(l){5-8}
+ & & & & \rox & \rpa & \rox & \rpa \\ \midrule
+Single & Single & 93.3 & 95.2 & 76.9 & 87.1 & 58.6 & 74.7 \\
+Multi & Single & 93.9 & 95.4 & 78.0 & 87.7 & 59.0 & 75.5 \\
+Single & Multi & 93.6 & \tb{95.6} & 77.0 & 87.8 & 57.1 & 76.0 \\
+Multi & Multi & \tb{94.2} & \tb{95.6} & \tb{78.6}  & \tb{88.5}  & \tb{60.2} & \tb{76.8} \\ \bottomrule
+\end{tabular}
+\caption{mAP comparison of using multiresolution representation (Multi) or not (Single) on query or database.}
+\label{tab:table6}
+\end{table}
+%------------------------------------------------------------------------------
+
+Our ablation study uses the Google Landmark v2 clean dataset (GLDv2-clean)~\cite{Weyand01} for training, which is shown to be the most effective in \autoref{tab:table11}.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Effect of attention modules}
+
+We ablate the effect of our local and global attention networks as well as their combination. \autoref{tab:table10} shows the results, which are more fine-grained than those of \autoref{tab:table_exp_all}. In particular, it shows the effect of the channel and spatial variants of both local and global attention. We observe that, when used alone, the channel and spatial variants of local attention are harmful in most cases. Even the combination, baseline+local, is not always effective. By contrast, when used alone, the channel and spatial variants of global attention are mostly beneficial, especially the latter. Their combination, baseline+global, is impressive, bringing gain of up to 7.5\%. Importantly, the combination baseline+global+local improves further by up to another 2.8\%. This result shows the necessity of local attention in the final model.
+
+%------------------------------------------------------------------------------
+
+\paragraph{CBAM \vs our local spatial attention}
+
+We experiment with the local spatial attention of CBAM~\cite{woo01}. CBAM applies average and max-pooling to input features and concatenates the two for spatial attention. We apply this variant to our local spatial attention module for comparison. For the CBAM style module, we keep the overall design of our module as shown in \autoref{fig:fig3}, but apply average and max-pooling to each of the four convolutional layer outputs before concatenation. \autoref{tab:table7} shows that the CBAM style module is considerably worse than ours on all benchmarks except Paris6k, where it is only slightly better.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Concatenation \vs sum for feature fusion}
+
+We use a softmax-based weighted average of local and global attention feature maps with the original feature map~\eq{eq10}. Here, we compare this weighted average with weighted concatenation, where concatenation replaces the sum operation in~\eq{eq10}. As shown in \autoref{tab:table5}, the weighted average outperforms the weighted concatenation.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Fixed-size \vs group-size sampling}
+
+Numerous studies have proposed methods for constructing batches according to image size for efficient training. For instance, Gordo \etal~\cite{Gordo01}, DELF~\cite{Noh01}, and Yokoo~\etal\cite{Yokoo01} employed different image sizes per batch for training instead of a single fixed size. We adopt the method of Yokoo \etal, which constructs a batch with images of similar aspect ratio, so that the images can be resized to a size with an aspect ratio that is similar to their own. We call this method \emph{group-size sampling}. \autoref{tab:table4} compares fixed-size ($224 \times 224$) with group-size sampling. We observe that maintaining aspect ratios by using dynamic input sizes is much more effective.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Multi-resolution}
+
+We use the multi-resolution representation~\cite{Gordo01} for the final feature of an image at inference time. This method: (1) resizes an image into multiple scales; (2) extracts features from the resized images; and (3) averages the features to obtain the final feature of the image. The method is applied to both query and database images to enhance ranking results, especially for small target objects. \autoref{tab:table6} compares the four cases of applying this method or not to query or database images.

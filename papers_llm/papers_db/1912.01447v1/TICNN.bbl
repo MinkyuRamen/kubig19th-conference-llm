@@ -1,0 +1,225 @@
+\begin{thebibliography}{10}
+
+\bibitem{fuse-cnn}
+J.~M. Alvarez, Y.~LeCun, T.~Gevers, and A.~M. Lopez.
+\newblock Semantic road segmentation via multi-scale ensembles of learned
+  features.
+\newblock {\em ECCV Workshop on Computer Vision in Vehicle Technology: From
+  Earth to Mars}, 2012.
+
+\bibitem{pami-invariant}
+J.~Bruna and S.~Mallat.
+\newblock Invariant scattering convolution networks.
+\newblock {\em IEEE Trans. Pattern Anal. Mach. Intell.}, 35:1872--1886, 2013.
+
+\bibitem{iclr-invest-inva}
+T.~S. Cohen and M.~Welling.
+\newblock Transformation properties of learned visual representations.
+\newblock {\em ICLR}, 2015.
+
+\bibitem{Jeff-Image-Cap}
+J.~Donahue, L.~A. Hendricks, S.~Guadarrama, M.~Rohrbach, S.~Venugopalan,
+  K.~Saenko, and T.~Darrell.
+\newblock Long-term recurrent convolutional networks for visual recognition and
+  description.
+\newblock {\em CVPR}, 2015.
+
+\bibitem{MS-Image-Cap}
+H.~Fang, S.~Gupta, F.~Iandola, R.~Srivastava, L.~Deng, P.~Dollar, J.~Gao,
+  X.~He, M.~Mitchell, J.~C. Platt, L.~Zitnick, and G.~Zweig.
+\newblock From captions to visual concepts and back.
+\newblock {\em CVPR}, 2015.
+
+\bibitem{lecun-hier-cnn}
+C.~Farabet, C.~Couprie, L.~Najman, , and Y.~LeCun.
+\newblock Learning hierarchical features for scene labeling.
+\newblock {\em IEEE Trans. Pattern Anal. Mach. Intell}, 2013.
+
+\bibitem{gan2015devnet}
+C.~Gan, N.~Wang, Y.~Yang, D.-Y. Yeung, and A.~G. Hauptmann.
+\newblock Devnet: A deep event network for multimedia event detection and
+  evidence recounting.
+\newblock In {\em CVPR}, pages 2568--2577, 2015.
+
+\bibitem{gan2016learning}
+C.~Gan, T.~Yang, and B.~Gong.
+\newblock Learning attributes equals multi-source domain generalization.
+\newblock {\em CVPR}, 2016.
+
+\bibitem{gan2016you}
+C.~Gan, T.~Yao, K.~Yang, Y.~Yang, and T.~Mei.
+\newblock You lead, we exceed: Labor-free video concept learning by jointly
+  exploiting web videos and images.
+\newblock {\em CVPR}, 2016.
+
+\bibitem{nips-invest-inva}
+R.~Gens and P.~M. Domingos.
+\newblock Deep symmetry networks.
+\newblock {\em NIPS}, 2014.
+
+\bibitem{action-rcnn}
+R.~G. Georgia~Gkioxari and J.~Malik.
+\newblock Contextual action recognition with r*cnn.
+\newblock {\em ICCV}, 2015.
+
+\bibitem{invariance-measure}
+I.~J. Goodfellow, Q.~V. Le, A.~M. Saxe, H.~Lee, and A.~Y. Ng.
+\newblock Measuring invariances in deep networks.
+\newblock {\em NIPS}, 2009.
+
+\bibitem{huiskes08}
+M.~J. Huiskes and M.~S. Lew.
+\newblock The mir flickr retrieval evaluation.
+\newblock In {\em MIR}. ACM, 2008.
+
+\bibitem{FCNN}
+E.~S. J.~Long and T.~Darrell.
+\newblock Fully convolutional networks for semantic segmentation.
+\newblock {\em CVPR}, 2015.
+
+\bibitem{spatial-trans-cnn}
+M.~Jaderberg, K.~Simonyan, A.~Zisserman, and K.~Kavukcuoglu.
+\newblock Spatial transformer networks.
+\newblock {\em NIPS}, 2015.
+
+\bibitem{caffe}
+Y.~Jia, E.~Shelhamer, J.~Donahue, S.~Karayev, J.~Long, R.~Girshick,
+  S.~Guadarrama, and T.~Darrell.
+\newblock Caffe: Convolutional architecture for fast feature embedding.
+\newblock {\em arXiv preprint arXiv:1408.5093}, 2014.
+
+\bibitem{ResNet}
+S.~R. Kaiming~He, Xiangyu~Zhang and J.~Sun.
+\newblock Deep residual learning for image recognition.
+\newblock {\em CVPR}, 2016.
+
+\bibitem{sci-cnn}
+A.~Kanazawa and A.~Sharma.
+\newblock Locally scale-invariant convolutional neural networks.
+\newblock {\em NIPS}, 2014.
+
+\bibitem{Feifei-Image-Cap}
+A.~Karpathy and L.~Fei-Fei.
+\newblock Deep visual-semantic alignments for generating image description.
+\newblock {\em CVPR}, 2015.
+
+\bibitem{inva-rbm}
+J.~J. Kivinen and C.~K.~I. Williams.
+\newblock Transformation equivariant boltzmann machines.
+\newblock In {\em Artificial Neural Networks and Machine Learning}, pages 1--9,
+  2011.
+
+\bibitem{AlexNet}
+A.~Krizhevsky, I.~Sutskever, and G.~E. Hinton.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock {\em NIPS}, pages 1097--1105, 2012.
+
+\bibitem{ti-pooling}
+D.~Laptev, N.~Savinov, J.~M. Buhmann, and M.~Pollefeys.
+\newblock Ti-pooling: transformation-invariant pooling for feature learning in
+  convolutional neural networks.
+\newblock In {\em CVPR}, 2016.
+
+\bibitem{tiled-cnn}
+Q.~V. Le, J.~Ngiam, Z.~Chen, D.~J. hao Chia, P.~W. Koh, and A.~Y. Ng.
+\newblock Tiled convolutional neural networks.
+\newblock {\em NIPS}, 2010.
+
+\bibitem{Lecun-cnn}
+Y.~Lecun, L.~Bottou, Y.~Bengio, and P.~Haffner.
+\newblock Gradient-based learning applied to document recognition.
+\newblock In {\em Proceedings of the IEEE}, pages 2278--2324, 1998.
+
+\bibitem{cnn-invariance}
+K.~Lenc and A.~Vedaldi.
+\newblock Understanding image representations by measuring their equivariance
+  and equivalence.
+\newblock {\em CVPR}, 2015.
+
+\bibitem{uk-bench}
+D.~Nister and H.~Stewenius.
+\newblock Scalable recognition with a vocabulary tree.
+\newblock In {\em CVPR}, pages 2161--2168, 2006.
+
+\bibitem{dropout}
+S.~Nitish, H.~Geoffrey, K.~Alex, S.~Ilya, and S.~Ruslan.
+\newblock Dropout: A simple way to prevent neural networks from overfitting.
+\newblock {\em Journal of Machine Learning Research}, pages 1929--1958, 2014.
+
+\bibitem{msra-video-caption}
+Y.~Pan, T.~Mei, T.~Yao, H.~Li, and Y.~Rui.
+\newblock Joint modeling embedding and translation to bridge video and
+  language.
+\newblock {\em CVPR}, 2016.
+
+\bibitem{computer-vision}
+S.~Richard.
+\newblock {\em Computer Vision: Algorithms and Applications}.
+\newblock 2010.
+
+\bibitem{multi-scale-cnn}
+P.~Sermanet and Y.~LeCun.
+\newblock Traffic sign recognition with multi-scale convolutional networks.
+\newblock {\em IJCNN}, 2011.
+
+\bibitem{action-two-stream}
+K.~Simonyan and A.~Zisserman.
+\newblock Two-stream convolutional networks for action recognition in videos.
+\newblock {\em NIPS}, 2014.
+
+\bibitem{VGG}
+K.~Simonyan and A.~Zisserman.
+\newblock Very deep convolutional networks for large-scale image recognition.
+\newblock {\em CoRR}, abs/1409.1556, 2014.
+
+\bibitem{icml-local-trans}
+K.~Sohn and H.~Lee.
+\newblock Learning invariant representations with local transformations.
+\newblock In {\em ICML}, 2012.
+
+\bibitem{cvpr-invest-inva}
+K.~Sohn and H.~Lee.
+\newblock Understanding image representations by measuring their equivariance
+  and equivalence.
+\newblock {\em CVPR}, 2015.
+
+\bibitem{GoogleNet}
+C.~Szegedy, W.~Liu, Y.~Jia, P.~Sermanet, S.~Reed, D.~Anguelov, D.~Erhan,
+  V.~Vanhoucke, and A.~Rabinovich.
+\newblock Going deeper with convolution.
+\newblock {\em CVPR}, 2015.
+
+\bibitem{zhangyang-mm}
+Z.~Wang, J.~Yang, H.~Jin, E.~Shechtman, A.~Agarwala, J.~Brandt, and T.~S.
+  Huang.
+\newblock Deepfont: Identify your font from an image.
+\newblock In {\em {ACM} {MM} , 2015}, pages 451--459, 2015.
+
+\bibitem{interactive}
+L.~Xie, L.~Zheng, J.~Wang, A.~Yuille, and Q.~Tian.
+\newblock Interactive: Inter-layer activeness propagation.
+\newblock In {\em CVPR}, 2016.
+
+\bibitem{yaoli-video-caption}
+L.~Yao, A.~Torabi, K.~Cho, N.~Ballas, C.~Pal, H.~Larochelle, and A.~Courville.
+\newblock Describing videos by exploiting temporal structure.
+\newblock {\em ICCV}, 2015.
+
+\bibitem{zheng2014packing}
+L.~Zheng, S.~Wang, Z.~Liu, and Q.~Tian.
+\newblock Packing and padding: Coupled multi-index for accurate image
+  retrieval.
+\newblock In {\em CVPR}, pages 1939--1946, 2014.
+
+\bibitem{zhengliang-cvpr}
+L.~Zheng, S.~Wang, L.~Tian, F.~He, Z.~Liu, and Q.~Tian.
+\newblock Query-adaptive late fusion for image search and person
+  re-identification.
+\newblock In {\em CVPR}, pages 1741--1750, 2015.
+
+\bibitem{Zheng2016}
+L.~Zheng, S.~Wang, J.~Wang, and Q.~Tian.
+\newblock Accurate image search with multi-scale contextual evidences.
+\newblock {\em International Journal of Computer Vision}, pages 1--13, 2016.
+
+\end{thebibliography}

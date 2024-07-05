@@ -1,0 +1,336 @@
+\begin{thebibliography}{40}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abramson et~al.(2020)Abramson, Ahuja, Barr, Brussee, Carnevale,
+  Cassin, Chhaparia, Clark, Damoc, Dudzik, Georgiev, Guy, Harley, Hill, Hung,
+  Kenton, Landon, Lillicrap, Mathewson, Mokrá, Muldal, Santoro, Savinov,
+  Varma, Wayne, Williams, Wong, Yan, and Zhu]{abramson2020imitating}
+Josh Abramson, Arun Ahuja, Iain Barr, Arthur Brussee, Federico Carnevale, Mary
+  Cassin, Rachita Chhaparia, Stephen Clark, Bogdan Damoc, Andrew Dudzik, Petko
+  Georgiev, Aurelia Guy, Tim Harley, Felix Hill, Alden Hung, Zachary Kenton,
+  Jessica Landon, Timothy Lillicrap, Kory Mathewson, Soňa Mokrá, Alistair
+  Muldal, Adam Santoro, Nikolay Savinov, Vikrant Varma, Greg Wayne, Duncan
+  Williams, Nathaniel Wong, Chen Yan, and Rui Zhu.
+\newblock Imitating interactive intelligence, 2020.
+\newblock URL \url{https://arxiv.org/abs/2012.05672}.
+
+\bibitem[Ahn et~al.(2022)Ahn, Brohan, Brown, Chebotar, Cortes, David, Finn, Fu,
+  Gopalakrishnan, Hausman, Herzog, Ho, Hsu, Ibarz, Ichter, Irpan, Jang, Ruano,
+  Jeffrey, Jesmonth, Joshi, Julian, Kalashnikov, Kuang, Lee, Levine, Lu, Luu,
+  Parada, Pastor, Quiambao, Rao, Rettinghouse, Reyes, Sermanet, Sievers, Tan,
+  Toshev, Vanhoucke, Xia, Xiao, Xu, Xu, Yan, and Zeng]{ahn2022do}
+Michael Ahn, Anthony Brohan, Noah Brown, Yevgen Chebotar, Omar Cortes, Byron
+  David, Chelsea Finn, Chuyuan Fu, Keerthana Gopalakrishnan, Karol Hausman,
+  Alex Herzog, Daniel Ho, Jasmine Hsu, Julian Ibarz, Brian Ichter, Alex Irpan,
+  Eric Jang, Rosario~Jauregui Ruano, Kyle Jeffrey, Sally Jesmonth, Nikhil~J
+  Joshi, Ryan Julian, Dmitry Kalashnikov, Yuheng Kuang, Kuang-Huei Lee, Sergey
+  Levine, Yao Lu, Linda Luu, Carolina Parada, Peter Pastor, Jornell Quiambao,
+  Kanishka Rao, Jarek Rettinghouse, Diego Reyes, Pierre Sermanet, Nicolas
+  Sievers, Clayton Tan, Alexander Toshev, Vincent Vanhoucke, Fei Xia, Ted Xiao,
+  Peng Xu, Sichun Xu, Mengyuan Yan, and Andy Zeng.
+\newblock Do as i can, not as i say: Grounding language in robotic affordances,
+  2022.
+\newblock URL \url{https://arxiv.org/abs/2204.01691}.
+
+\bibitem[Alderson-Day \& Fernyhough(2015)Alderson-Day and
+  Fernyhough]{alderson2015inner}
+Ben Alderson-Day and Charles Fernyhough.
+\newblock Inner speech: development, cognitive functions, phenomenology, and
+  neurobiology.
+\newblock \emph{Psychological bulletin}, 141\penalty0 (5):\penalty0 931, 2015.
+
+\bibitem[Baddeley(1992)]{baddeley1992working}
+Alan Baddeley.
+\newblock Working memory.
+\newblock \emph{Science}, 255\penalty0 (5044):\penalty0 556--559, 1992.
+
+\bibitem[Brown et~al.(2020)Brown, Mann, Ryder, Subbiah, Kaplan, Dhariwal,
+  Neelakantan, Shyam, Sastry, Askell, et~al.]{brown2020language}
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared~D Kaplan, Prafulla
+  Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell,
+  et~al.
+\newblock Language models are few-shot learners.
+\newblock \emph{Advances in neural information processing systems},
+  33:\penalty0 1877--1901, 2020.
+
+\bibitem[Chowdhery et~al.(2022)Chowdhery, Narang, Devlin, Bosma, Mishra,
+  Roberts, Barham, Chung, Sutton, Gehrmann, et~al.]{chowdhery2022palm}
+Aakanksha Chowdhery, Sharan Narang, Jacob Devlin, Maarten Bosma, Gaurav Mishra,
+  Adam Roberts, Paul Barham, Hyung~Won Chung, Charles Sutton, Sebastian
+  Gehrmann, et~al.
+\newblock Palm: Scaling language modeling with pathways.
+\newblock \emph{arXiv preprint arXiv:2204.02311}, 2022.
+
+\bibitem[Creswell \& Shanahan(2022)Creswell and Shanahan]{creswell2022faithful}
+Antonia Creswell and Murray Shanahan.
+\newblock Faithful reasoning using large language models, 2022.
+\newblock URL \url{https://arxiv.org/abs/2208.14271}.
+
+\bibitem[Creswell et~al.(2022)Creswell, Shanahan, and
+  Higgins]{creswell2022selection}
+Antonia Creswell, Murray Shanahan, and Irina Higgins.
+\newblock Selection-inference: Exploiting large language models for
+  interpretable logical reasoning, 2022.
+\newblock URL \url{https://arxiv.org/abs/2205.09712}.
+
+\bibitem[Fan et~al.(2019)Fan, Jernite, Perez, Grangier, Weston, and
+  Auli]{fan-etal-2019-eli5}
+Angela Fan, Yacine Jernite, Ethan Perez, David Grangier, Jason Weston, and
+  Michael Auli.
+\newblock {ELI}5: Long form question answering.
+\newblock In \emph{Proceedings of the 57th Annual Meeting of the Association
+  for Computational Linguistics}, pp.\  3558--3567, Florence, Italy, July 2019.
+  Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/P19-1346}.
+\newblock URL \url{https://aclanthology.org/P19-1346}.
+
+\bibitem[Fernyhough(2010)]{fernyhough2010vygotsky}
+Charles Fernyhough.
+\newblock Vygotsky, luria, and the social brain.
+\newblock \emph{Self and social regulation: Social interaction and the
+  development of social understanding and executive functions}, pp.\  56--79,
+  2010.
+
+\bibitem[Glaese et~al.(2022)Glaese, McAleese, Trebacz, Aslanides, Firoiu,
+  Ewalds, Rauh, Weidinger, Chadwick, Thacker, Campbell-Gillingham, Uesato,
+  Huang, Comanescu, Yang, See, Dathathri, Greig, Chen, Fritz, Elias, Green,
+  Mokrá, Fernando, Wu, Foley, Young, Gabriel, Isaac, Mellor, Hassabis,
+  Kavukcuoglu, Hendricks, and Irving]{amelia2022improving}
+Amelia Glaese, Nat McAleese, Maja Trebacz, John Aslanides, Vlad Firoiu, Timo
+  Ewalds, Maribeth Rauh, Laura Weidinger, Martin Chadwick, Phoebe Thacker, Lucy
+  Campbell-Gillingham, Jonathan Uesato, Po-Sen Huang, Ramona Comanescu, Fan
+  Yang, Abigail See, Sumanth Dathathri, Rory Greig, Charlie Chen, Doug Fritz,
+  Jaume~Sanchez Elias, Richard Green, Soňa Mokrá, Nicholas Fernando, Boxi Wu,
+  Rachel Foley, Susannah Young, Iason Gabriel, William Isaac, John Mellor,
+  Demis Hassabis, Koray Kavukcuoglu, Lisa~Anne Hendricks, and Geoffrey Irving.
+\newblock Improving alignment of dialogue agents via targeted human judgements,
+  2022.
+\newblock URL
+  \url{https://storage.googleapis.com/deepmind-media/DeepMind.com/Authors-Notes/sparrow/sparrow-final.pdf}.
+
+\bibitem[Hosseini-Asl et~al.(2020)Hosseini-Asl, McCann, Wu, Yavuz, and
+  Socher]{hosseini2020simple}
+Ehsan Hosseini-Asl, Bryan McCann, Chien-Sheng Wu, Semih Yavuz, and Richard
+  Socher.
+\newblock A simple language model for task-oriented dialogue.
+\newblock \emph{Advances in Neural Information Processing Systems},
+  33:\penalty0 20179--20191, 2020.
+
+\bibitem[Huang et~al.(2022{\natexlab{a}})Huang, Abbeel, Pathak, and
+  Mordatch]{huang2022language}
+Wenlong Huang, Pieter Abbeel, Deepak Pathak, and Igor Mordatch.
+\newblock Language models as zero-shot planners: Extracting actionable
+  knowledge for embodied agents.
+\newblock \emph{arXiv preprint arXiv:2201.07207}, 2022{\natexlab{a}}.
+
+\bibitem[Huang et~al.(2022{\natexlab{b}})Huang, Xia, Xiao, Chan, Liang,
+  Florence, Zeng, Tompson, Mordatch, Chebotar, et~al.]{huang2022inner}
+Wenlong Huang, Fei Xia, Ted Xiao, Harris Chan, Jacky Liang, Pete Florence, Andy
+  Zeng, Jonathan Tompson, Igor Mordatch, Yevgen Chebotar, et~al.
+\newblock Inner monologue: Embodied reasoning through planning with language
+  models.
+\newblock \emph{arXiv preprint arXiv:2207.05608}, 2022{\natexlab{b}}.
+
+\bibitem[Karamcheti et~al.(2021)Karamcheti, Srivastava, Liang, and
+  Sadigh]{siddaharth2021lila}
+Siddharth Karamcheti, Megha Srivastava, Percy Liang, and Dorsa Sadigh.
+\newblock Lila: Language-informed latent actions.
+\newblock In \emph{CoRL}, pp.\  1379--1390, 2021.
+\newblock URL \url{https://proceedings.mlr.press/v164/karamcheti22a.html}.
+
+\bibitem[Kojima et~al.(2022)Kojima, Gu, Reid, Matsuo, and
+  Iwasawa]{kojima2022large}
+Takeshi Kojima, Shixiang~Shane Gu, Machel Reid, Yutaka Matsuo, and Yusuke
+  Iwasawa.
+\newblock Large language models are zero-shot reasoners.
+\newblock \emph{arXiv preprint arXiv:2205.11916}, 2022.
+
+\bibitem[Lazaridou et~al.(2022)Lazaridou, Gribovskaya, Stokowiec, and
+  Grigorev]{lazaridou2022internet}
+Angeliki Lazaridou, Elena Gribovskaya, Wojciech Stokowiec, and Nikolai
+  Grigorev.
+\newblock Internet-augmented language models through few-shot prompting for
+  open-domain question answering.
+\newblock \emph{arXiv preprint arXiv:2203.05115}, 2022.
+
+\bibitem[Lewis et~al.(2020)Lewis, Perez, Piktus, Petroni, Karpukhin, Goyal,
+  K{\"u}ttler, Lewis, Yih, Rockt{\"a}schel, et~al.]{lewis2020retrieval}
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
+  Karpukhin, Naman Goyal, Heinrich K{\"u}ttler, Mike Lewis, Wen-tau Yih, Tim
+  Rockt{\"a}schel, et~al.
+\newblock Retrieval-augmented generation for knowledge-intensive nlp tasks.
+\newblock \emph{Advances in Neural Information Processing Systems},
+  33:\penalty0 9459--9474, 2020.
+
+\bibitem[Li et~al.(2022)Li, Puig, Paxton, Du, Wang, Fan, Chen, Huang, Akyürek,
+  Anandkumar, Andreas, Mordatch, Torralba, and Zhu]{li2022pretrained}
+Shuang Li, Xavier Puig, Chris Paxton, Yilun Du, Clinton Wang, Linxi Fan, Tao
+  Chen, De-An Huang, Ekin Akyürek, Anima Anandkumar, Jacob Andreas, Igor
+  Mordatch, Antonio Torralba, and Yuke Zhu.
+\newblock Pre-trained language models for interactive decision-making, 2022.
+\newblock URL \url{https://arxiv.org/abs/2202.01771}.
+
+\bibitem[Luria(1965)]{luria1965ls}
+Aleksandr~Romanovich Luria.
+\newblock Ls vygotsky and the problem of localization of functions.
+\newblock \emph{Neuropsychologia}, 3\penalty0 (4):\penalty0 387--392, 1965.
+
+\bibitem[Madaan \& Yazdanbakhsh(2022)Madaan and Yazdanbakhsh]{madaan2022text}
+Aman Madaan and Amir Yazdanbakhsh.
+\newblock Text and patterns: For effective chain of thought, it takes two to
+  tango, 2022.
+\newblock URL \url{https://arxiv.org/abs/2209.07686}.
+
+\bibitem[Micheli \& Fleuret(2021)Micheli and Fleuret]{micheli2021language}
+Vincent Micheli and Fran{\c{c}}ois Fleuret.
+\newblock Language models are few-shot butlers.
+\newblock \emph{arXiv preprint arXiv:2104.07972}, 2021.
+
+\bibitem[Nakano et~al.(2021)Nakano, Hilton, Balaji, Wu, Ouyang, Kim, Hesse,
+  Jain, Kosaraju, Saunders, Jiang, Cobbe, Eloundou, Krueger, Button, Knight,
+  Chess, and Schulman]{nakano2021webgpt}
+Reiichiro Nakano, Jacob Hilton, Suchir Balaji, Jeff Wu, Long Ouyang, Christina
+  Kim, Christopher Hesse, Shantanu Jain, Vineet Kosaraju, William Saunders,
+  Xu~Jiang, Karl Cobbe, Tyna Eloundou, Gretchen Krueger, Kevin Button, Matthew
+  Knight, Benjamin Chess, and John Schulman.
+\newblock Webgpt: Browser-assisted question-answering with human feedback,
+  2021.
+\newblock URL \url{https://arxiv.org/abs/2112.09332}.
+
+\bibitem[Nye et~al.(2021)Nye, Andreassen, Gur-Ari, Michalewski, Austin, Bieber,
+  Dohan, Lewkowycz, Bosma, Luan, Sutton, and Odena]{nye2021show}
+Maxwell Nye, Anders~Johan Andreassen, Guy Gur-Ari, Henryk Michalewski, Jacob
+  Austin, David Bieber, David Dohan, Aitor Lewkowycz, Maarten Bosma, David
+  Luan, Charles Sutton, and Augustus Odena.
+\newblock Show your work: Scratchpads for intermediate computation with
+  language models, 2021.
+\newblock URL \url{https://arxiv.org/abs/2112.00114}.
+
+\bibitem[Reed et~al.(2022)Reed, Zolna, Parisotto, Colmenarejo, Novikov,
+  Barth-Maron, Gimenez, Sulsky, Kay, Springenberg, Eccles, Bruce, Razavi,
+  Edwards, Heess, Chen, Hadsell, Vinyals, Bordbar, and
+  de~Freitas]{reed2022gato}
+Scott Reed, Konrad Zolna, Emilio Parisotto, Sergio~Gomez Colmenarejo, Alexander
+  Novikov, Gabriel Barth-Maron, Mai Gimenez, Yury Sulsky, Jackie Kay,
+  Jost~Tobias Springenberg, Tom Eccles, Jake Bruce, Ali Razavi, Ashley Edwards,
+  Nicolas Heess, Yutian Chen, Raia Hadsell, Oriol Vinyals, Mahyar Bordbar, and
+  Nando de~Freitas.
+\newblock A generalist agent, 2022.
+\newblock URL \url{https://arxiv.org/abs/2205.06175}.
+
+\bibitem[Shridhar et~al.(2020{\natexlab{a}})Shridhar, Thomason, Gordon, Bisk,
+  Han, Mottaghi, Zettlemoyer, and Fox]{shridhar2020alfred}
+Mohit Shridhar, Jesse Thomason, Daniel Gordon, Yonatan Bisk, Winson Han,
+  Roozbeh Mottaghi, Luke Zettlemoyer, and Dieter Fox.
+\newblock Alfred: A benchmark for interpreting grounded instructions for
+  everyday tasks.
+\newblock In \emph{Proceedings of the IEEE/CVF conference on computer vision
+  and pattern recognition}, pp.\  10740--10749, 2020{\natexlab{a}}.
+
+\bibitem[Shridhar et~al.(2020{\natexlab{b}})Shridhar, Yuan, C{\^o}t{\'e}, Bisk,
+  Trischler, and Hausknecht]{shridhar2020alfworld}
+Mohit Shridhar, Xingdi Yuan, Marc-Alexandre C{\^o}t{\'e}, Yonatan Bisk, Adam
+  Trischler, and Matthew Hausknecht.
+\newblock Alfworld: Aligning text and embodied environments for interactive
+  learning.
+\newblock \emph{arXiv preprint arXiv:2010.03768}, 2020{\natexlab{b}}.
+
+\bibitem[Shuster et~al.(2022{\natexlab{a}})Shuster, Komeili, Adolphs, Roller,
+  Szlam, and Weston]{shuster2022language}
+Kurt Shuster, Mojtaba Komeili, Leonard Adolphs, Stephen Roller, Arthur Szlam,
+  and Jason Weston.
+\newblock Language models that seek for knowledge: Modular search \& generation
+  for dialogue and prompt completion.
+\newblock \emph{arXiv preprint arXiv:2203.13224}, 2022{\natexlab{a}}.
+
+\bibitem[Shuster et~al.(2022{\natexlab{b}})Shuster, Xu, Komeili, Ju, Smith,
+  Roller, Ung, Chen, Arora, Lane, Behrooz, Ngan, Poff, Goyal, Szlam, Boureau,
+  Kambadur, and Weston]{shuster2022blenderbot3}
+Kurt Shuster, Jing Xu, Mojtaba Komeili, Da~Ju, Eric~Michael Smith, Stephen
+  Roller, Megan Ung, Moya Chen, Kushal Arora, Joshua Lane, Morteza Behrooz,
+  William Ngan, Spencer Poff, Naman Goyal, Arthur Szlam, Y-Lan Boureau, Melanie
+  Kambadur, and Jason Weston.
+\newblock Blenderbot 3: a deployed conversational agent that continually learns
+  to responsibly engage, 2022{\natexlab{b}}.
+\newblock URL \url{https://arxiv.org/abs/2208.03188}.
+
+\bibitem[Thorne et~al.(2018)Thorne, Vlachos, Christodoulopoulos, and
+  Mittal]{thorne2018fever}
+James Thorne, Andreas Vlachos, Christos Christodoulopoulos, and Arpit Mittal.
+\newblock Fever: a large-scale dataset for fact extraction and verification.
+\newblock \emph{arXiv preprint arXiv:1803.05355}, 2018.
+
+\bibitem[Vygotsky(1987)]{vygotsky1987thinking}
+Lev~S Vygotsky.
+\newblock Thinking and speech.
+\newblock \emph{The collected works of LS Vygotsky}, 1:\penalty0 39--285, 1987.
+
+\bibitem[Wang et~al.(2022{\natexlab{a}})Wang, Wei, Schuurmans, Le, Chi, Narang,
+  Chowdhery, and Zhou]{wang2022self-consistency}
+Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed~Chi, Sharan Narang,
+  Aakanksha Chowdhery, and Denny Zhou.
+\newblock Self-consistency improves chain of thought reasoning in language
+  models, 2022{\natexlab{a}}.
+\newblock URL \url{https://arxiv.org/abs/2203.11171}.
+
+\bibitem[Wang et~al.(2022{\natexlab{b}})Wang, Wei, Schuurmans, Le, Chi, and
+  Zhou]{wang2022rationale}
+Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed~Chi, and Denny Zhou.
+\newblock Rationale-augmented ensembles in language models.
+\newblock \emph{arXiv preprint arXiv:2207.00747}, 2022{\natexlab{b}}.
+
+\bibitem[Wei et~al.(2022)Wei, Wang, Schuurmans, Bosma, Chi, Le, and
+  Zhou]{wei2022chain}
+Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Ed~Chi, Quoc Le, and
+  Denny Zhou.
+\newblock Chain of thought prompting elicits reasoning in large language
+  models.
+\newblock \emph{arXiv preprint arXiv:2201.11903}, 2022.
+
+\bibitem[Yang et~al.(2018)Yang, Qi, Zhang, Bengio, Cohen, Salakhutdinov, and
+  Manning]{yang2018hotpotqa}
+Zhilin Yang, Peng Qi, Saizheng Zhang, Yoshua Bengio, William~W Cohen, Ruslan
+  Salakhutdinov, and Christopher~D Manning.
+\newblock Hotpotqa: A dataset for diverse, explainable multi-hop question
+  answering.
+\newblock \emph{arXiv preprint arXiv:1809.09600}, 2018.
+
+\bibitem[Yao et~al.(2020)Yao, Rao, Hausknecht, and Narasimhan]{yao2020keep}
+Shunyu Yao, Rohan Rao, Matthew Hausknecht, and Karthik Narasimhan.
+\newblock Keep {CALM} and explore: Language models for action generation in
+  text-based games.
+\newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pp.\  8736--8754, Online, November
+  2020. Association for Computational Linguistics.
+\newblock \doi{10.18653/v1/2020.emnlp-main.704}.
+\newblock URL \url{https://aclanthology.org/2020.emnlp-main.704}.
+
+\bibitem[Yao et~al.(2022)Yao, Chen, Yang, and Narasimhan]{yao2022webshop}
+Shunyu Yao, Howard Chen, John Yang, and Karthik Narasimhan.
+\newblock Webshop: Towards scalable real-world web interaction with grounded
+  language agents.
+\newblock \emph{arXiv preprint arXiv:2207.01206}, 2022.
+
+\bibitem[Zelikman et~al.(2022)Zelikman, Wu, Mu, and Goodman]{zelikman2022star}
+Eric Zelikman, Yuhuai Wu, Jesse Mu, and Noah~D. Goodman.
+\newblock Star: Bootstrapping reasoning with reasoning, 2022.
+\newblock URL \url{https://arxiv.org/abs/2203.14465}.
+
+\bibitem[Zhou et~al.(2022)Zhou, Schärli, Hou, Wei, Scales, Wang, Schuurmans,
+  Bousquet, Le, and Chi]{zhou2022least}
+Denny Zhou, Nathanael Schärli, Le~Hou, Jason Wei, Nathan Scales, Xuezhi Wang,
+  Dale Schuurmans, Olivier Bousquet, Quoc Le, and Ed~Chi.
+\newblock Least-to-most prompting enables complex reasoning in large language
+  models, 2022.
+\newblock URL \url{https://arxiv.org/abs/2205.10625}.
+
+\bibitem[Zhu et~al.(2021)Zhu, Pang, Lan, Shen, and Cheng]{zhu2021adaptive}
+Yunchang Zhu, Liang Pang, Yanyan Lan, Huawei Shen, and Xueqi Cheng.
+\newblock Adaptive information seeking for open-domain question answering.
+\newblock \emph{arXiv preprint arXiv:2109.06747}, 2021.
+
+\end{thebibliography}

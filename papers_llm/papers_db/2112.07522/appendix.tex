@@ -1,0 +1,303 @@
+\section{Reproducibility Checklist}
+\seclabel{appendix:checklist}
+\subsection{Computing infrastructure}
+We use four Tesla V100 GPUs to prompt
+each of the \mdrs, and
+a single Tesla V100 GPU
+is used when finetuning the small model
+$\mathcal{S}$.
+
+\subsection{Datasets}
+For SST2, CoLA, and RTE, we use the official datasets
+available on the benchmark website
+\url{gluebenchmark.com}.
+We download
+SST5 dataset from
+\url{nlp.stanford.edu/sentiment}
+and AGNews
+from the link provided by \citet{agdataset}.
+
+The number of testing examples of each dataset
+is shown in \tabref{appendix:numtestegs}.
+Note that for SST2, CoLA, and RTE,
+$\mathcal{G}^{dev}$ is sampled from
+the training set, and the dev set is used as the test set.
+
+\begin{table}[h]
+\small\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+CoLA & SST5 & RTE & AGNews & SST2 \\ \hline
+1042 & 2210 & 277 & 7600   & 872  \\ \hline
+\end{tabular}
+\caption{Number of testing examples.}
+\tablabel{appendix:numtestegs}
+\end{table}
+
+\input{initres.tex}
+
+\section{Numerical Results}
+\seclabel{appendix:numeric}
+\tabref{appendix:fewshotnumeric}
+reports the numerical
+value of \figref{fewshotperf}.
+
+
+\section{Prompting Details}
+\seclabel{appendix:promptingdetails}
+For each task, 
+we list the five prompts
+employed to adapt a PLM  to a \mdr.
+``[v]'' is a prompting token whose
+trainable embedding vector is 
+randomly initialized.
+
+For \textbf{SST5}, we use following prompts:
+\begin{itemize}
+\item ``[v] \textbf{x} It is [MASK].''
+\item ``[v] \textbf{x} Such a [MASK] movie.''
+\item ``\textbf{x} [v] It is pretty [MASK].''
+\item ``It is [MASK] because \textbf{x} [v]''
+\item ``\textbf{x} So it is [MASK]. [v]''
+\end{itemize}
+and the PLM picks a word from
+\{``crap'', ``bad'', ``normal'', ``good'', ``perfect''\}.
+to fill the position of ``[MASK]''.
+The mapping
+\{``crap''$\,\to\,$1,
+``bad''$\,\to\,$2,
+``normal''$\,\to\,$3,
+``good''$\,\to\,$4,
+``perfect''$\,\to\,$5
+\} is used to convert
+model predictions to numerical values.
+
+
+For \textbf{SST2}, we use following prompts:
+\begin{itemize}
+\item ``[v] \textbf{x} It is [MASK].''
+\item ``[v] \textbf{x} Such a [MASK] movie.''
+\item ``\textbf{x} [v] It is pretty [MASK].''
+\item ``It is [MASK] because \textbf{x} [v]''
+\item ``\textbf{x} So it is [MASK]. [v]''
+\end{itemize}
+and the PLM picks a word from
+\{``bad'', ``good''\}
+to fill the position of ``[MASK]''.
+The mapping
+\{``bad''$\,\to\,$0, ``good''$\,\to\,$1\}
+is used.
+
+
+
+For \textbf{AGNews}, we use following prompts:
+\begin{itemize}
+\item ``[v] \textbf{x} It is about [MASK].''
+\item ``\textbf{x} [v] Topic: [MASK].''
+\item ``\textbf{x} [v] The text is about [MASK].''
+\item ``\textbf{x} Topic: [MASK]. [v]''
+\item ``\textbf{x} [v] [MASK].''
+\end{itemize}
+and the PLM picks a word from
+\{``world'', ``sports'', ``economy'', ``technology''\}
+to fill the position of ``[MASK]''.
+The mapping
+\{``world''$\,\to\,$1,
+``sports''$\,\to\,$2,
+``economy''$\,\to\,$3,
+``technology''$\,\to\,$4
+\} is used.
+
+
+For \textbf{CoLA}, we use following prompts:
+\begin{itemize}
+\item ``[v] \textbf{x} It sounds [MASK].''
+\item ``[v] \textbf{x} The sentence is [MASK].''
+\item ``[v] \textbf{x} It is a [MASK] sentence.''
+\item ``\textbf{x} [v] [MASK].''
+\item ``[v] \textbf{x} [MASK].''
+\end{itemize}
+and the PLM picks a word from
+\{``wrong'', ``ok''\}
+to fill the position of ``[MASK]''.
+The mapping
+\{``wrong''$\,\to\,$0,
+``okay''$\,\to\,$1\}
+is used.
+
+
+For \textbf{RTE}, we use following prompts:
+\begin{itemize}
+\item ``\textbf{p} Question: \textbf{h}? [v] Answer: [MASK].''
+\item ``\textbf{p} [SEP] \textbf{h}? [MASK]. [v]''
+\item ``\textbf{p} [SEP] \textbf{h}? [v] answer: [MASK].''
+\item ``\textbf{p} [SEP] In short \textbf{h}. [MASK]. [v]''
+\item ``[v] \textbf{p} [SEP] In short \textbf{h}. [MASK].''
+\end{itemize}
+where \textbf{p} and \textbf{h}
+refer to premise and hypothesis.
+The PLM picks a word from
+\{``No'', ``Yes''\}
+to fill the position of ``[MASK]''.
+The mapping
+\{``No''$\,\to\,$0,
+``Yes''$\,\to\,$1\}
+is used.
+
+\begin{figure}[t]
+\centering
+\vspace{-.25cm}\subfloat{
+\includegraphics[width=.5\linewidth,height=0.18\textwidth]{imgs/IW,ag,8,100.pdf}
+}
+\vspace{-.25cm}\subfloat{
+\hspace{-.25cm}
+\includegraphics[width=.5\linewidth,height=0.18\textwidth]{imgs/IW,ag,32,400.pdf}
+}
+\\
+\vspace{-.25cm}\subfloat{
+\includegraphics[width=.5\linewidth,height=0.18\textwidth]{imgs/IW,sst5,8,100.pdf}
+}
+\vspace{-.25cm}\subfloat{
+\hspace{-.25cm}    
+\includegraphics[width=.5\linewidth,height=0.18\textwidth]{imgs/IW,sst5,32,400.pdf}
+}
+\\
+\vspace{-.25cm}\subfloat{
+\includegraphics[width=.5\linewidth,height=0.18\textwidth]{imgs/IW,sst2,8,100.pdf}
+}
+\vspace{-.25cm}\subfloat{
+\hspace{-.25cm}  
+\includegraphics[width=.5\linewidth,height=0.18\textwidth]{imgs/IW,sst2,32,400.pdf}
+}
+\caption{
+Weighting the training instances from \mdrs.
+}
+\figlabel{instanceweighting}
+\end{figure}
+
+
+
+
+\section{More Visualizations}
+\seclabel{appendix:morevisualization}
+\figref{appendix:completeiteratives} visualizes the performance
+of $\mathcal{S}$ when different $|\mathcal{G}|$ and
+$|\mathcal{B}|$ are used.
+
+
+\begin{figure*}[t]
+\centering
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_ag,MV,8,400.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_ag,MV,16,100.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_ag,MV,16,400.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_ag,MV,32,100.pdf}
+}
+\\
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_sst2,MV,8,400.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_sst2,MV,16,100.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_sst2,MV,16,400.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_sst2,MV,32,100.pdf}
+}
+\\
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_sst5,MV,8,400.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_sst5,MV,16,100.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_sst5,MV,16,400.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_sst5,MV,32,100.pdf}
+}
+\\
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_cola,MV,8,400.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_cola,MV,16,100.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_cola,MV,16,400.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_cola,MV,32,100.pdf}
+}
+\\
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_rte,MV,8,100.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_rte,MV,16,20.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_rte,MV,16,100.pdf}
+}
+\hspace{-.2cm}\subfloat{
+\includegraphics[width=.25\linewidth,height=0.2\textwidth]{imgs/appendix/_rte,MV,32,20.pdf}
+}
+
+\caption{
+  Improving $\mathcal{S}$ with
+  \textcolor{blue}{active learning (blue)},
+  \textcolor{orange}{self training (orange)},
+  and
+  \textcolor{green}{\md (green)}.
+  Free markers at step zero show \mdr performances;
+  colors distinguish random seeds.
+  Three acquisition functions are:
+  Entropy ($\bullet$),
+  LeastConfident (\tiny$\blacksquare$\normalsize),
+  random sampling (\tiny\XSolidBold\normalsize).
+  At iteration $j$, each experiment is repeated
+  three times; we show
+  mean and standard deviation.
+  We evaluate different $|\mathcal{G}|$ and $|\mathcal{B}|$.
+}
+\figlabel{appendix:completeiteratives}
+\end{figure*}
+
+
+
+
+\section{Instance Weighting}
+\seclabel{appendix:instanceweighting}
+Following \citet{wang-etal-2017-instance},
+we associate each example
+$(\textbf{x}, \hat{y}, \textbf{l}) \in \mathcal{D}^{j}$
+with weight
+1-$entropy(\textbf{l})$ when
+computing the loss during
+training $\mathcal{S}^{j}$.
+We can interpret this weight as a measure
+of the certainty of the \mdrs ensemble.
+
+
+\figref{instanceweighting} reports
+the performance of $\mathcal{S}$
+when using instance weighting,
+however, the impacts are less noticeable.
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "acl_latex"
+%%% End:

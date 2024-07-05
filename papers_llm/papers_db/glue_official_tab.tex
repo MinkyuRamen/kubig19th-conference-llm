@@ -1,0 +1,27 @@
+%auto-ignore
+\begin{table*}[t]
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+ \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}cccccccc c}
+    \toprule
+System             &  MNLI-(m/mm)    & QQP        & QNLI       & SST-2      & CoLA       & STS-B      & MRPC       & RTE        & {\bf Average} \\
+                  & 392k            & 363k       & 108k       & 67k        & 8.5k       & 5.7k       & 3.5k       & 2.5k       & -          \\ 
+\hline
+Pre-OpenAI SOTA    & 80.6/80.1       & 66.1       & 82.3       & 93.2       & 35.0       & 81.0       & 86.0       & 61.7       & 74.0       \\
+BiLSTM+ELMo+Attn   & 76.4/76.1       & 64.8       & 79.8       & 90.4       & 36.0       & 73.3       & 84.9       & 56.8       & 71.0       \\
+OpenAI GPT         & 82.1/81.4       & 70.3       & 87.4       & 91.3       & 45.4       & 80.0       & 82.3       & 56.0       & 75.1       \\
+
+\hline
+\bertbase          & 84.6/83.4       & 71.2       & 90.5       & 93.5       & 52.1       & 85.8       & 88.9       & 66.4       & 79.6       \\
+\bertlarge         & {\bf 86.7/85.9} & {\bf 72.1} & {\bf 92.7} & {\bf 94.9} & {\bf 60.5} & {\bf 86.5} & {\bf 89.3} & {\bf 70.1} & {\bf 82.1} \\
+    \bottomrule
+   \end{tabular*}
+   \caption{GLUE Test results, scored by the evaluation server ({\small \url{https://gluebenchmark.com/leaderboard}}). The number below each task denotes the number of training examples. The ``Average'' column is slightly different than the official GLUE score, since we exclude the problematic WNLI set.\footnote{See question 10 in \url{https://gluebenchmark.com/faq}.} 
+   %OpenAI GPT = (L=12, H=768, A=12); \bertbase = (L=12, H=768, A=12); \bertlarge = (L=24, H=1024, A=16). 
+   BERT and OpenAI GPT are single-model, single task. F1 scores are reported for QQP and MRPC, Spearman correlations are reported for STS-B, and accuracy scores are reported for
+   the other tasks. We exclude entries that use BERT as one of their components.}
+   \label{tab:glue_official}
+\end{center}
+\end{table*}
+\footnotetext{See (10) in \url{https://gluebenchmark.com/faq}.}

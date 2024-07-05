@@ -1,0 +1,217 @@
+\begin{thebibliography}{10}\itemsep=-1pt
+
+\bibitem{abadi2015tensorflow}
+M.~Abadi, A.~Agarwal, P.~Barham, E.~Brevdo, Z.~Chen, C.~Citro, G.~S. Corrado,
+  A.~Davis, J.~Dean, M.~Devin, et~al.
+\newblock Tensorflow: Large-scale machine learning on heterogeneous systems,
+  2015.
+\newblock {\em Software available from tensorflow. org}, 1, 2015.
+
+\bibitem{chen2015compressing}
+W.~Chen, J.~T. Wilson, S.~Tyree, K.~Q. Weinberger, and Y.~Chen.
+\newblock Compressing neural networks with the hashing trick.
+\newblock {\em CoRR, abs/1504.04788}, 2015.
+
+\bibitem{chollet2016deep}
+F.~Chollet.
+\newblock Xception: Deep learning with depthwise separable convolutions.
+\newblock {\em arXiv preprint arXiv:1610.02357v2}, 2016.
+
+\bibitem{courbariaux2014training}
+M.~Courbariaux, J.-P. David, and Y.~Bengio.
+\newblock Training deep neural networks with low precision multiplications.
+\newblock {\em arXiv preprint arXiv:1412.7024}, 2014.
+
+\bibitem{han2015deep}
+S.~Han, H.~Mao, and W.~J. Dally.
+\newblock Deep compression: Compressing deep neural network with pruning,
+  trained quantization and huffman coding.
+\newblock {\em CoRR, abs/1510.00149}, 2, 2015.
+
+\bibitem{hays2008im2gps}
+J.~Hays and A.~Efros.
+\newblock {IM2GPS: estimating geographic information from a single image}.
+\newblock In {\em {Proceedings of the IEEE International Conference on Computer
+  Vision and Pattern Recognition}}, 2008.
+
+\bibitem{hays2014large}
+J.~Hays and A.~Efros.
+\newblock {Large-Scale Image Geolocalization}.
+\newblock In J.~Choi and G.~Friedland, editors, {\em {Multimodal Location
+  Estimation of Videos and Images}}. Springer, 2014.
+
+\bibitem{he2015deep}
+K.~He, X.~Zhang, S.~Ren, and J.~Sun.
+\newblock Deep residual learning for image recognition.
+\newblock {\em arXiv preprint arXiv:1512.03385}, 2015.
+
+\bibitem{hinton2015distilling}
+G.~Hinton, O.~Vinyals, and J.~Dean.
+\newblock Distilling the knowledge in a neural network.
+\newblock {\em arXiv preprint arXiv:1503.02531}, 2015.
+
+\bibitem{cocodetection2016}
+J.~Huang, V.~Rathod, C.~Sun, M.~Zhu, A.~Korattikara, A.~Fathi, I.~Fischer,
+  Z.~Wojna, Y.~Song, S.~Guadarrama, et~al.
+\newblock Speed/accuracy trade-offs for modern convolutional object detectors.
+\newblock {\em arXiv preprint arXiv:1611.10012}, 2016.
+
+\bibitem{hubara2016quantized}
+I.~Hubara, M.~Courbariaux, D.~Soudry, R.~El-Yaniv, and Y.~Bengio.
+\newblock Quantized neural networks: Training neural networks with low
+  precision weights and activations.
+\newblock {\em arXiv preprint arXiv:1609.07061}, 2016.
+
+\bibitem{iandola2016squeezenet}
+F.~N. Iandola, M.~W. Moskewicz, K.~Ashraf, S.~Han, W.~J. Dally, and K.~Keutzer.
+\newblock Squeezenet: Alexnet-level accuracy with 50x fewer parameters and< 1mb
+  model size.
+\newblock {\em arXiv preprint arXiv:1602.07360}, 2016.
+
+\bibitem{ioffe2015batch}
+S.~Ioffe and C.~Szegedy.
+\newblock Batch normalization: Accelerating deep network training by reducing
+  internal covariate shift.
+\newblock {\em arXiv preprint arXiv:1502.03167}, 2015.
+
+\bibitem{jaderberg2014speeding}
+M.~Jaderberg, A.~Vedaldi, and A.~Zisserman.
+\newblock Speeding up convolutional neural networks with low rank expansions.
+\newblock {\em arXiv preprint arXiv:1405.3866}, 2014.
+
+\bibitem{jia2014caffe}
+Y.~Jia, E.~Shelhamer, J.~Donahue, S.~Karayev, J.~Long, R.~Girshick,
+  S.~Guadarrama, and T.~Darrell.
+\newblock Caffe: Convolutional architecture for fast feature embedding.
+\newblock {\em arXiv preprint arXiv:1408.5093}, 2014.
+
+\bibitem{jin2014flattened}
+J.~Jin, A.~Dundar, and E.~Culurciello.
+\newblock Flattened convolutional neural networks for feedforward acceleration.
+\newblock {\em arXiv preprint arXiv:1412.5474}, 2014.
+
+\bibitem{KhoslaYaoJayadevaprakashFeiFei_FGVC2011}
+A.~Khosla, N.~Jayadevaprakash, B.~Yao, and L.~Fei-Fei.
+\newblock Novel dataset for fine-grained image categorization.
+\newblock In {\em First Workshop on Fine-Grained Visual Categorization, IEEE
+  Conference on Computer Vision and Pattern Recognition}, Colorado Springs, CO,
+  June 2011.
+
+\bibitem{krause2015unreasonable}
+J.~Krause, B.~Sapp, A.~Howard, H.~Zhou, A.~Toshev, T.~Duerig, J.~Philbin, and
+  L.~Fei-Fei.
+\newblock The unreasonable effectiveness of noisy data for fine-grained
+  recognition.
+\newblock {\em arXiv preprint arXiv:1511.06789}, 2015.
+
+\bibitem{krizhevsky2012imagenet}
+A.~Krizhevsky, I.~Sutskever, and G.~E. Hinton.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1097--1105, 2012.
+
+\bibitem{lebedev2014speeding}
+V.~Lebedev, Y.~Ganin, M.~Rakhuba, I.~Oseledets, and V.~Lempitsky.
+\newblock Speeding-up convolutional neural networks using fine-tuned
+  cp-decomposition.
+\newblock {\em arXiv preprint arXiv:1412.6553}, 2014.
+
+\bibitem{liu2015ssd}
+W.~Liu, D.~Anguelov, D.~Erhan, C.~Szegedy, and S.~Reed.
+\newblock Ssd: Single shot multibox detector.
+\newblock {\em arXiv preprint arXiv:1512.02325}, 2015.
+
+\bibitem{rastegari2016xnor}
+M.~Rastegari, V.~Ordonez, J.~Redmon, and A.~Farhadi.
+\newblock Xnor-net: Imagenet classification using binary convolutional neural
+  networks.
+\newblock {\em arXiv preprint arXiv:1603.05279}, 2016.
+
+\bibitem{ren2015faster}
+S.~Ren, K.~He, R.~Girshick, and J.~Sun.
+\newblock Faster r-cnn: Towards real-time object detection with region proposal
+  networks.
+\newblock In {\em Advances in neural information processing systems}, pages
+  91--99, 2015.
+
+\bibitem{russakovsky2015imagenet}
+O.~Russakovsky, J.~Deng, H.~Su, J.~Krause, S.~Satheesh, S.~Ma, Z.~Huang,
+  A.~Karpathy, A.~Khosla, M.~Bernstein, et~al.
+\newblock Imagenet large scale visual recognition challenge.
+\newblock {\em International Journal of Computer Vision}, 115(3):211--252,
+  2015.
+
+\bibitem{schroff2015facenet}
+F.~Schroff, D.~Kalenichenko, and J.~Philbin.
+\newblock Facenet: A unified embedding for face recognition and clustering.
+\newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}, pages 815--823, 2015.
+
+\bibitem{sifre2014rigid}
+L.~Sifre.
+\newblock {\em Rigid-motion scattering for image classification}.
+\newblock PhD thesis, Ph. D. thesis, 2014.
+
+\bibitem{simonyan2014very}
+K.~Simonyan and A.~Zisserman.
+\newblock Very deep convolutional networks for large-scale image recognition.
+\newblock {\em arXiv preprint arXiv:1409.1556}, 2014.
+
+\bibitem{sindhwani2015structured}
+V.~Sindhwani, T.~Sainath, and S.~Kumar.
+\newblock Structured transforms for small-footprint deep learning.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  3088--3096, 2015.
+
+\bibitem{szegedy2016inception}
+C.~Szegedy, S.~Ioffe, and V.~Vanhoucke.
+\newblock Inception-v4, inception-resnet and the impact of residual connections
+  on learning.
+\newblock {\em arXiv preprint arXiv:1602.07261}, 2016.
+
+\bibitem{szegedy2015going}
+C.~Szegedy, W.~Liu, Y.~Jia, P.~Sermanet, S.~Reed, D.~Anguelov, D.~Erhan,
+  V.~Vanhoucke, and A.~Rabinovich.
+\newblock Going deeper with convolutions.
+\newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}, pages 1--9, 2015.
+
+\bibitem{szegedy2015rethinking}
+C.~Szegedy, V.~Vanhoucke, S.~Ioffe, J.~Shlens, and Z.~Wojna.
+\newblock Rethinking the inception architecture for computer vision.
+\newblock {\em arXiv preprint arXiv:1512.00567}, 2015.
+
+\bibitem{thomee2016yfcc100m}
+B.~Thomee, D.~A. Shamma, G.~Friedland, B.~Elizalde, K.~Ni, D.~Poland, D.~Borth,
+  and L.-J. Li.
+\newblock Yfcc100m: The new data in multimedia research.
+\newblock {\em Communications of the ACM}, 59(2):64--73, 2016.
+
+\bibitem{tieleman2012lecture}
+T.~Tieleman and G.~Hinton.
+\newblock Lecture 6.5-rmsprop: Divide the gradient by a running average of its
+  recent magnitude.
+\newblock {\em COURSERA: Neural Networks for Machine Learning}, 4(2), 2012.
+
+\bibitem{wang2016factorized}
+M.~Wang, B.~Liu, and H.~Foroosh.
+\newblock Factorized convolutional neural networks.
+\newblock {\em arXiv preprint arXiv:1608.04337}, 2016.
+
+\bibitem{weyand2016planet}
+T.~Weyand, I.~Kostrikov, and J.~Philbin.
+\newblock {PlaNet - Photo Geolocation with Convolutional Neural Networks}.
+\newblock In {\em {European Conference on Computer Vision (ECCV)}}, 2016.
+
+\bibitem{wu2015quantized}
+J.~Wu, C.~Leng, Y.~Wang, Q.~Hu, and J.~Cheng.
+\newblock Quantized convolutional neural networks for mobile devices.
+\newblock {\em arXiv preprint arXiv:1512.06473}, 2015.
+
+\bibitem{yang2015deep}
+Z.~Yang, M.~Moczulski, M.~Denil, N.~de~Freitas, A.~Smola, L.~Song, and Z.~Wang.
+\newblock Deep fried convnets.
+\newblock In {\em Proceedings of the IEEE International Conference on Computer
+  Vision}, pages 1476--1483, 2015.
+
+\end{thebibliography}

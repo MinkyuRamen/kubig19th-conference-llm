@@ -1,0 +1,29 @@
+\begin{table*}[t]
+\begin{center}
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{\bf Model} & \bf \multirow{2}{*}{data} & \bf \multirow{2}{*}{bsz} & \bf \multirow{2}{*}{steps} & \bf SQuAD & \bf \multirow{2}{*}{MNLI-m} & \bf \multirow{2}{*}{SST-2} \\
+& & & & (v1.1/2.0) & & \\
+\midrule
+\multicolumn{4}{l}{\ourmodel{}} \\
+\quad with \textsc{Books} + \textsc{Wiki} & 16GB & 8K & 100K & 93.6/87.3 & 89.0 & 95.3 \\
+\quad + additional data (\textsection\ref{sec:data}) & 160GB & 8K & 100K & 94.0/87.7 & 89.3 & 95.6 \\
+\quad + pretrain longer & 160GB & 8K & 300K & 94.4/88.7 & 90.0 & 96.1 \\
+\quad + pretrain even longer & 160GB & 8K & 500K & \textbf{94.6}/\textbf{89.4} & \textbf{90.2} & \textbf{96.4} \\
+\midrule
+\multicolumn{4}{l}{\bertlarge{}} \\
+\quad with \textsc{Books} + \textsc{Wiki} & 13GB & 256 & 1M & 90.9/81.8 & 86.6 & 93.7 \\
+\multicolumn{4}{l}{\xlnetlarge{}} \\
+\quad with \textsc{Books} + \textsc{Wiki} & 13GB & 256 & 1M & 94.0/87.8 & 88.4 & 94.4 \\
+\quad + additional data & 126GB & 2K & 500K & 94.5/88.8 & 89.8 & 95.6 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{Development set results for \ourmodel{} as we pretrain over more data (16GB $\rightarrow$ 160GB of text) and pretrain for longer (100K $\rightarrow$ 300K $\rightarrow$ 500K steps).
+Each row accumulates improvements from the rows above.
+\ourmodel{} matches the architecture and training objective of \bertlarge{}.
+Results for \bertlarge{} and \xlnetlarge{} are from \newcite{devlin2018bert} and \newcite{yang2019xlnet}, respectively.
+Complete results on all GLUE tasks can be found in the Appendix.
+}
+\label{tab:ablation}
+\end{table*}

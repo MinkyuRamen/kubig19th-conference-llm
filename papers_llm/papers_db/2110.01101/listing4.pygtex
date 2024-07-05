@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{learn}\PYG{p}{(}\PYG{n}{data}\PYG{p}{:} \PYG{n}{Data}\PYG{p}{)}
+\end{Verbatim}

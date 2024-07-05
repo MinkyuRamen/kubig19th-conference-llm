@@ -1,0 +1,61 @@
+\begin{thebibliography}{1}
+
+\bibitem{im2col}
+Xu~Han.
+\newblock Implement convolution in cnn.
+\newblock {\em http://xuhan.me/2016/09/09/conv/}, 2016.
+
+\bibitem{tschopp2016efficient}
+Fabian Tschopp, Julien~NP Martel, Srinivas~C Turaga, Matthew Cook, and Jan
+  Funke.
+\newblock Efficient convolutional neural networks for pixelwise classification
+  on heterogeneous hardware systems.
+\newblock In {\em 2016 IEEE 13th International Symposium on Biomedical Imaging
+  (ISBI)}, pages 1225--1228. IEEE, 2016.
+
+\bibitem{Tschoppgithub}
+Tschopp.
+\newblock Opencl caffe.
+\newblock \url{https://github.com/BVLC/caffe/tree/opencl}, 2018.
+
+\bibitem{lavin2016fast}
+Andrew Lavin and Scott Gray.
+\newblock Fast algorithms for convolutional neural networks.
+\newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}, pages 4013--4021, 2016.
+
+\bibitem{krizhevsky2012cuda}
+Alex Krizhevsky.
+\newblock cuda-convnet: High-performance c++/cuda implementation of
+  convolutional neural networks.
+\newblock {\em Source code available at https://github.
+  com/akrizhevsky/cuda-convnet2 [March, 2017]}, 7, 2012.
+
+\bibitem{perrot2016optimized}
+Gilles Perrot, St{\'e}phane Domas, and Rapha{\"e}l Couturier.
+\newblock An optimized gpu-based 2d convolution implementation.
+\newblock {\em Concurrency and Computation: Practice and Experience},
+  28(16):4291--4304, 2016.
+
+\bibitem{iandola2013communication}
+Forrest~N Iandola, David Sheffield, Michael~J Anderson, Phitchaya~Mangpo
+  Phothilimthana, and Kurt Keutzer.
+\newblock Communication-minimizing 2d convolution in gpu registers.
+\newblock In {\em 2013 IEEE International Conference on Image Processing},
+  pages 2116--2120. IEEE, 2013.
+
+\bibitem{chen2017optimizing}
+Xiaoming Chen, Jianxu Chen, Danny~Z Chen, and Xiaobo~Sharon Hu.
+\newblock Optimizing memory efficiency for convolution kernels on kepler gpus.
+\newblock In {\em 2017 54th ACM/EDAC/IEEE Design Automation Conference (DAC)},
+  pages 1--6. IEEE, 2017.
+
+\bibitem{li2015fast}
+Shigang Li, Yunquan Zhang, Chunyang Xiang, and Lei Shi.
+\newblock Fast convolution operations on many-core architectures.
+\newblock In {\em 2015 IEEE 17th International Conference on High Performance
+  Computing and Communications, 2015 IEEE 7th International Symposium on
+  Cyberspace Safety and Security, and 2015 IEEE 12th International Conference
+  on Embedded Software and Systems}, pages 316--323. IEEE, 2015.
+
+\end{thebibliography}

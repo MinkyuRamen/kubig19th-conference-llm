@@ -1,0 +1,17 @@
+\begin{table}
+\footnotesize
+%\setlength\tabcolsep{5.0pt}
+\begin{tabular}{c|c|cccc}
+\toprule[1.5pt]
+        \textbf{Method} & \textbf{Parameter} &\textbf{IDF1} & \textbf{MOTA} & \textbf{HOTA} & \textbf{IDs} \\\hline
+        Ours & - &\textbf{73.15}& 68.08& \textbf{59.75}& \textbf{93}\\\hline
+        \multirow{2}{*}{Single}& T=3 & 72.64 & \textbf{68.74} & 58.94 & 137\\
+        & T=24 & 72.81 & 66.25 & 58.73 & 99\\\hline
+        \makecell{Long-after-short} & - & 70.30 & 65.39& 57.03 & 101\\
+\bottomrule[1.5pt]
+\end{tabular}
+\vspace{-2.0mm}
+\caption{Comparisons on adaptive memory aggregation design.}
+\label{tab:ablation:mem_structure_attn}
+\vspace{-2.0mm}
+\end{table}

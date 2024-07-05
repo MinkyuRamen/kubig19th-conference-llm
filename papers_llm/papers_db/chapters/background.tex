@@ -1,0 +1,168 @@
+\section{Background Denoising Diffusion Probabilistic Models} \label{sec:background}
+In this section we provide the mathematical foundation on denoising diffusion probabilistic models including recent advances. We will not cover continuous time score-based models nor latent diffusion models.
+
+As stated in the introduction, diffusion models are generative deep learning models. In general, generative models are likelihood-based models, meaning they learn a data distribution that, ideally, maximizes the likelihood that the learned distribution matches the real data distribution. Specifically, diffusion models are latent variable models that learn to generate data, by sampling from a latent space distribution in a Markovian process, usually a Gaussian distribution due to its convenient closed form representation. This process is the reverse diffusion process the model must learn. The forward diffusion process, also a Markovian process, is applied during training to learn the reverse diffusion process.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Forward Diffusion Process
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Forward Diffusion Process} \label{sec:forward_diffusion_process}
+In the forward diffusion process, Gaussian noise $\mathcal{N}$ is repeatedly added to a input data sample $x_0$ for $t$ time steps with $\{t \in \mathbb{R} | 1 \le t \le T\}$ in a Markovian process, such that $p\left(x_T\right)=\mathcal{N}\left(x_T;0,\boldsymbol{I}\right)$.
+A sample $x_t$ only depends on a sample $x_{t-1}$ and a fixed noise schedule $\beta_t$ and is defined by the forward diffusion kernel:
+\begin{equation}
+\label{eq:diffusion_kernel}
+q\left(x_t|x_{t-1}\right) = \mathcal{N}\left(x_t;\sqrt{1-\beta x_{t-1}},\beta_t \boldsymbol{I}\right)
+\end{equation}
+
+The joint distribution $q\left(x_{1:T}|x_{0}\right)$ of all samples generated on the trajectory of the Markovian forward diffusion process is defined as the product of the diffusion kernel at each time step $t$:
+\begin{equation}
+q\left(x_{1:T}|x_{0}\right) = \prod_{t=1}^{T} q\left(x_t|x_{t-1}\right)
+\end{equation}
+
+Equation \eqref{eq:diffusion_kernel} can be simplified to be able to generate a noisy sample at any given time step $t$ only conditioned on $x_0$:
+\begin{equation}
+\label{eq:diffusion_kernel_simplified}
+\begin{aligned}
+q\left(x_{t}|x_{0}\right) &= \mathcal{N}\left(x_t;\sqrt{\bar{\alpha}_t}x_0,\left(1-\bar{\alpha}_t \right) \boldsymbol{I}\right) \\
+\bar{\alpha}_t &= \prod_{s=1}^{t} \left(1-\beta_t\right)
+\end{aligned}
+\end{equation}
+
+The noise schedule $\beta_{t}$ is selected in such a way, that for $T$ time steps, $\bar{\alpha_T}$ approaches 0, which, according to \eqref{eq:diffusion_kernel_simplified}, results in a standard normal distribution $\mathcal{N}\left(0,\boldsymbol{I}\right)$ for $q\left(x_{T}|x_{0}\right)$. The shape of the noise schedule is a hyperparameter to be selected. While \cite{ho_denoising_2020} uses a linear schedule, \cite{nichol_improved_2021} proposes a cosine schedule.
+
+To be able to calculate gradients of a stochastic variable in the back-propagation step during training, it is required to apply the reparameterization trick for sampling from a Gaussian distribution. A sample $x_t$ at a given time step $t$ can be formulated as:
+\begin{equation}
+x_{t} = \sqrt{\bar{\alpha}_t}x_0 + \sqrt{\left(1-\bar{\alpha}_t\right)}\epsilon, \;  where \: \epsilon \sim \mathcal{N}\left(0,\boldsymbol{I}\right)
+\end{equation}
+
+The data distribution $q\left(x_{t}\right)$ at any time step $t$ is the joint probability of all distributions of previous time steps. Using ancestral sampling it can be reformulated to:
+\begin{equation}
+q\left(x_{t}\right) = \int q\left(x_{0},x_{t}\right) dx_0 = \int q\left(x_{0}\right) q\left(x_{t}|x_{0}\right) dx_0
+\end{equation}
+In other words, to draw a sample $x_t \sim q\left(x_{t}\right)$, one can first draw $x_0 \sim q\left(x_{0}\right)$, which is basically drawing a sample from the input dataset, and then draw a sample $x_t$ from $q\left(x_{t}|x_0\right)$, which is the forward diffusion from equation \eqref{eq:diffusion_kernel_simplified}. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Reverse Diffusion Process
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Reverse Diffusion Process} \label{sec:reverse_diffusion_process}
+
+For DDPMs, the reverse diffusion process is Markovian, similar to that of the forward diffusion process. 
+The naive approach is to draw the initial sample $x_T \sim \mathcal{N}\left(x_T;\boldsymbol{0},\boldsymbol{I}\right)$ and then iteratively draw a less noisy sample $x_{t-1} \sim q\left(x_{t-1}|x_{t}\right)$. The issue is that $q\left(x_{t-1}|x_{t}\right)$ is intractable, meaning there is no closed form solution. Diffusion models solve this issue by learning the intractable posterior distribution parameterized by $\theta$ given as:
+\begin{equation}
+\label{eq:intractable_posterior_distribution}
+p_{\theta}\left(x_{t-1}|x_t\right) = \mathcal{N}\left(x_{t-1};\mu_{\theta}\left(x_t,t\right),\Sigma_{\theta}\left(x_t,t\right)\right)
+\end{equation}
+
+and its corresponding joint distribution
+\begin{equation}
+\label{eq:joint_reverse_distribution}
+p_{\theta}\left(x_{1:T}|x_{0}\right) = p\left(x_{T}\right)\prod_{t=1}^{T} p_{\theta}\left(x_{t-1}|x_{t}\right)
+\end{equation}
+
+The diffusion model is trained by optimizing the variational bound of the negative log-likelihood: 
+\begin{equation}
+\begin{aligned}
+L & := \mathbb{E}_{q\left(x_{0}\right)}\left[-log\, p_{\theta}\left(x_{0}\right)\right] \\
+  & \le \mathbb{E}_{q\left(x_{0}\right)q\left(x_{1:T}|x_0\right)}\left[-log\frac{p_{\theta}\left(x_{0:T}\right)}{q\left(x_{1:T}|x_0\right)}\right]
+\end{aligned}
+\end{equation}
+
+which can be rewritten as
+\begin{equation}
+\label{eq:variational_lower_bound}
+\begin{aligned}
+L_{VLB} & := \mathbb{E}_{q}\left[L_{0} + L_{t-1} + L_{T}\right] \\
+L_{0} & := -log\, p_{\theta}\left(x_{0}|x_{1}\right)\\
+L_{t-1} & := \sum_{t<1}D_{KL}\left(q\left(x_{t-1}|x_t,x_0\right)\|p_{\theta}\left(x_{t-1}|x_t\right)\right)\\
+L_{T} & := D_{KL}\left(q\left(x_{T}|x_0\right)\|p\left(x_{T}\right)\right)
+\end{aligned}
+\end{equation}
+where $D_{KL}\left(\|\right)$ is the Kullback-Leibler(KL)-Divergence between two distributions and $q\left(x_{t-1}|x_t,x_0\right)$ is the tractable posterior distribution
+\begin{equation}
+q\left(x_{t-1}|x_t,x_0\right) = \mathcal{N}\left(x_{t-1};\Tilde{\mu}_t\left(x_t,x_0\right),\Tilde{\beta}_t\boldsymbol{I}\right)
+\end{equation}
+where
+\begin{equation}
+\begin{aligned}
+\Tilde{\mu}_t\left(x_t,x_0\right) & := \frac{\sqrt{\bar{\alpha}_{t-1}}\beta_t}{1-\bar{\alpha}_{t}}x_0 + \frac{\sqrt{1-\beta_t}\left(1-\bar{\alpha}_{t-1}\right)}{1-\bar{\alpha}_{t}}x_t \\
+\Tilde{\beta}_t & := \frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_{t}}\beta_t
+\end{aligned}
+\end{equation}
+
+In other words, $\Tilde{\mu}_t\left(x_t,x_0\right)$ is the weighted sum of an unnoisy sample $x_0$ and a noisy sample $x_t$ at time step $t$.
+
+Equation \eqref{eq:variational_lower_bound} can be further simplified by setting $L_T=0$, since the Kullback-Leibler-Divergence of two Gaussians is zero under the assumption that $q\left(x_{T}|x_0\right) \approx \mathcal{N}\left(\boldsymbol{0},\boldsymbol{I}\right)$ and $p\left(x_{T}\right) \approx \mathcal{N}\left(\boldsymbol{0},\boldsymbol{I}\right)$, which previously has been defined to be the case.
+
+The better the model learns to approximate the parameterized denoising posterior distribution $p_{\theta}\left(x_{t-1}|x_t\right)$ with the real tractable denoising posterior distribution $q\left(x_{t-1}|x_t,x_0\right)$, the smaller the KL-divergence and hence the smaller $L_{VLB}$.
+Since all distributions in \eqref{eq:variational_lower_bound} are tractable and all KL-Divergences are comparisons of Gaussians, they can be calculated in closed form:
+\begin{equation}
+\label{eq:closed_form_lt-1}
+\begin{aligned}
+L_{t-1} & = D_{KL}\left(q\left(x_{T}|x_0\right)\|p\left(x_{T}\right)\right) \\
+        & = \mathbb{E}_{q}\left[\frac{1}{2\sigma^2_t}\|\Tilde{\mu}_t\left(x_t,x_0\right)-\Tilde{\mu}_{\theta}\left(x_t,t\right)\|^2\right] + const
+\end{aligned}
+\end{equation}
+
+\cite{ho_denoising_2020} found that predicting the noise $\epsilon$ that was applied in the forward diffusion to reverse the diffusion process by using a noise predictor $\epsilon_{\theta}$ works best and modified \eqref{eq:closed_form_lt-1} to:
+\begin{equation}
+\begin{aligned}
+L_{t-1} = \mathbb{E}_{q}\left[\lambda_t\frac{\beta_t}{\left(1-\beta_t\right)\left(1-\alpha_t\right)}\|\epsilon-\epsilon_{\theta}\left(x_t,t\right)\|^2\right] + const
+\end{aligned}
+\end{equation}
+
+\cite{ho_denoising_2020} further observed that setting the time dependent scalar $\lambda_t=\left(1-\beta_t\right)\left(1-\alpha_t\right)/\beta_t$, improves sample quality and simplifies the training objective to:
+\begin{equation}
+\label{eq:loss_simple}
+\begin{aligned}
+L_{simple} = \mathbb{E}_{q}\left[\|\epsilon-\epsilon_{\theta}\left(x_t,t\right)\|^2\right].
+\end{aligned}
+\end{equation}
+
+In contrast to \cite{ho_denoising_2020}, \cite{choi_perception_2022} proposes a more sophisticated choice of $\lambda_t$, namely P2 weighting, to prioritizes different noise levels to improve the sample quality:
+\begin{equation}
+\lambda'_t = \frac{\lambda_t}{\left(k+SNR(t)\right)^{\gamma}}
+\end{equation}
+where $k$ is a hyper parameter to prevent exploding weights, $\gamma$ controls the strength of down weighting and the signal-to-noise ratio $SNR(t)=\alpha_t/(1-\alpha_t)$ is a simplified expression for the noise schedule by \cite{kingma_variational_2022}.
+
+While \cite{ho_denoising_2020} only predicts the mean of the added noise and sets the variance to be either $\beta_t$ or $\Tilde{\beta}_t$ the upper and lower variational bound respectively, \cite{nichol_improved_2021} found that learning the variance $\Sigma_{\theta}\left(x_t,t\right)$ from equation \eqref{eq:intractable_posterior_distribution} improves sample quality and allows sampling with a reduced number of time steps with little change in sample quality. Instead of predicting $\Sigma_{\theta}\left(x_t,t\right)$ directly, they propose to learn the variance as a weighted sum of the upper and lower bound using a neuronal network's output $v$:
+\begin{equation}
+\Sigma_{\theta}\left(x_t,t\right) = exp\left(v\,log\,\beta_t+\left(1-v\right)log\,\beta_t\right)
+\end{equation}
+
+Since $L_{simple}$ does not provide a learning signal for $\Sigma_{\theta}\left(x_t,t\right)$, \cite{nichol_improved_2021} proposes a hybrid loss function:
+\begin{equation}
+L_{hybrid} = L_{simple} + \lambda L_{VLB}
+\end{equation}
+
+To sample a less noisy sample $x_{t-1}\sim p_{\theta}\left(x_{t-1}|x_t\right)$ the trained diffusion model $\epsilon_{\theta}$ estimates the noise that was added from time step $t-1$ to $t$ and subtracts that noise from $x_t$.
+\begin{equation}
+x_{t-1} = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_{\theta}(x_t,t)\right) + \sigma_t z
+\end{equation}
+%where $ z \sim \mathcal{N}\left(\boldsymbol{0},\boldsymbol{I}\right) $
+where $ z \sim \mathcal{N}\left(\boldsymbol{0},\boldsymbol{I}\right) $
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Conditional Diffusion Process
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Conditional Diffusion Process} \label{sec:conditional_diffusion_process}
+All previous formulations describe the unconditional case, where unconditional means no extra condition beside the Markovian process. The ultimate goal of a generative model is to control the sampling process by incorporating a condition $c$ to obtain a desired output.
+
+The reverse process from equations \eqref{eq:intractable_posterior_distribution} and \eqref{eq:joint_reverse_distribution} can be extended as follows:
+\begin{equation}
+\begin{aligned}
+p_{\theta}\left(x_{t-1}|x_t, c\right) & = \mathcal{N}\left(x_{t-1};\mu_{\theta}\left(x_t,t,c\right),\Sigma_{\theta}\left(x_t,t,c\right)\right) \\
+p_{\theta}\left(x_{0:T}|c\right) & = p\left(x_{T}\right)\prod_{t=1}^{T} p_{\theta}\left(x_{t-1}|x_{t},c\right)
+\end{aligned}
+\end{equation}
+
+Similarly, the variational lower bound from equation \eqref{eq:variational_lower_bound} is extends to:
+\begin{equation}
+\label{eq:variational_lower_bound_conditional}
+\begin{aligned}
+L_{VLB} & := \mathbb{E}_{q}\left[L_{0} + L_{t-1} + L_{T}\right] \\
+L_{0} & := -log\, p_{\theta}\left(x_{0}|x_{1},c\right)\\
+L_{t-1} & := \sum_{t<1}D_{KL}\left(q\left(x_{t-1}|x_t,x_0\right)\|p_{\theta}\left(x_{t-1}|x_t,c\right)\right)\\
+L_{T} & := D_{KL}\left(q\left(x_{T}|x_0,c\right)\|p\left(x_{T}\right)\right)
+\end{aligned}
+\end{equation}

@@ -1,0 +1,192 @@
+\tikzfading[
+	name=fade out,
+	inner color=transparent!90,
+	outer color=transparent!10,
+]
+
+%------------------------------------------------------------------------------
+\begin{tikzpicture}[
+	scale=.3,
+	font={\footnotesize},
+	node distance=.5,
+	ovr/.style={fill=white,fill opacity=.9},
+	ten/.style={draw,ovr},
+	ops/.style={op,ovr},
+	rec/.style args={(#1/#2)}{draw,rectc,minimum width=#1cm,minimum height=#2cm,preaction={ovr}},
+	att/.style={fill,path fading=fade out},
+	atth/.style={att,fading transform={yscale=10}},
+	dim/.style={text opacity=.5,inner sep=2pt,below=2pt of #1},
+	sym/.style={above=3pt of #1},
+	symt/.style={above=8pt of #1-northwest},
+	key/.style={red,left,near end},
+	back/.style={draw=#1!60,fill=#1!30,fill opacity=.5,inner sep=4},
+	xback/.style={back=#1,inner xsep=8},
+	yback/.style={back=#1,inner ysep=8},
+]
+\matrix[
+	tight,
+	row sep={38,between origins},column sep=12,
+	cells={scale=.3,},
+	nodes={node distance=.5},
+] {
+	\&[4]\&
+% 	local channel
+	\node[rec=(4/1),atth] (lc) {};
+	\node[sym=lc] {$\vA_c^l$};
+	\node[dim=lc] {$c \times 1 \times 1$};
+	\&
+	\node[ops] (lc1) {$\times$};
+	\&
+	\node[ops] (lc2) {$+$};
+	\&
+	\para[ten]{lcf}{0,-2.5,-2}{1,5,4};
+	\node[symt=lcf] {$\vF_c^l$};
+	\&\&
+% 	local spatial
+	\node[rec=(4/4),att] (ls) {};
+	\node[sym=ls] {$\vA_s^l$};
+	\node[dim=ls] {$1 \times h \times w$};
+	\node[ops,right=of ls] (ls1) {$\times$};
+	\&
+	\node[ops] (ls2) {$+$};
+	\&
+	\para[ten]{lsf}{0,-2.5,-2}{1,5,4};
+	\node[symt=lsf] {$\vF^l$};
+	\&[5]
+% 	local output
+	\node[ops] (l1) {$\times$};
+	\\
+% 	backbone
+	\para[ten]{if}{0,-2.5,-2}{1,5,4};
+	\node[ovr,dim=if-south] {$c \times h \times w$};
+	\node[symt=if] {$\vF$};
+	\&
+	\node[dot](s) at(0,0){};
+	\&\&\&\&\&
+	\node[dot] (c){};
+	\&\&\&\&
+% 	skip
+	\node[ops] (f1) {$\times$};
+	\&
+	\node[ops] (f) {$+$};
+	\&
+% 	glam output
+	\para[ten]{of}{0,-2.5,-2}{1,5,4};
+	\node[dim=of-south] {$c \times h \times w$};
+	\node[symt=of] {$\vF^{gl}$};
+	\\
+	\&\&
+% 	global channel
+	\node[rec=(4/4),att] (gc) {};
+	\node[sym=gc] {$\vA_c^g$};
+	\node[dim=gc] {$c \times c$};
+	\&
+	\node[ops] (gc1) {$\times$};
+	\&\&
+	\para[ten]{gcf}{0,-2.5,-2}{1,5,4};
+	\node[symt=gcf] {$\vF_c^g$};
+	\&\&
+% 	global spatial
+	\node[rec=(5/5),att] (gs) {};
+	\node[sym=gs] {$\vA_s^g$};
+	\node[dim=gs] {$hw \times hw$};
+	\node[ops,right=of gs] (gs1) {$\times$};
+	\&
+	\node[ops] (gs2) {$+$};
+	\&
+	\para[ten]{gsf}{0,-2.5,-2}{1,5,4};
+	\node[symt=gsf] {$\vF^g$};
+	\&
+% 	global output
+	\node[ops] (g1) {$\times$};
+	\\
+};
+
+% weights
+\node[above=of l1] (wl) {$w_l$};
+\node[above=of f1] (w)  {$w$};
+\node[above=of g1] (wg) {$w_g$};
+
+% input / output
+\draw (if-east)--(s);
+\draw[->] (s) |- (lc);
+\draw[->] (s) |- (gc);
+\draw[->] (l1) -| (f);
+\draw[->] (g1) -| (f);
+
+% local stream
+\draw[->]
+	(lc) edge (lc1)
+	(lc1) edge (lc2)
+	(lc2) edge (lcf-west)
+	(ls) edge (ls1)
+	(ls1) edge (ls2)
+	(ls2) edge (lsf-west)
+	(lsf-east)--(l1)
+	;
+
+% skip stream
+\draw[->]
+	(s)--(f1)
+	(f1) edge (f)
+	(f) edge (of-west)
+	;
+
+% center connections
+\draw[->] (c) |- (ls);
+\draw[->] (c) |- (gs);
+
+% global stream
+\draw[->]
+	(gc) edge (gc1)
+	(gc1) edge (gcf-west)
+	(gs) edge (gs1)
+	(gs1) edge (gs2)
+	(gs2) edge (gsf-west)
+	(gsf-east)--(g1)
+	;
+
+% local skips
+\draw (lcf-north) -- +(0,.6) coordinate (lcf-n);
+\draw[->] (lcf-n) -| (ls1);
+\draw[->] (lcf-n) -| (ls2);
+
+% global skips
+\draw (gcf-south) -- +(0,-.6) coordinate (gcf-s);
+\draw[->] (gcf-s) -| (gs1);
+\draw[->] (gcf-s) -| (gs2);
+
+% input skips
+\path
+	(s |- lcf-n) coordinate(s-n)
+	(s |- gcf-s) coordinate(s-s)
+	;
+\draw[->] (s-n) -| (lc1);
+\draw[->] (if-north) |- (s-n) -| (lc2);
+\begin{pgfonlayer}{bg1}
+	\draw[->] (if-south) |- (s-s) -| (gc1);
+\end{pgfonlayer}
+
+% weighting
+\draw[->]
+	(wl) edge (l1)
+	(w) edge (f1)
+	(wg) edge (g1)
+	;
+
+\begin{pgfonlayer}{bg2}
+	\node[yback=blue,fit=(s-n) (s-s) (lc2)] (channel) {};
+	\node[yback=red,fit=(lcf-n -| ls1) (gcf-s -| gs1) (c) (gs2)] (spatial) {};
+	\node[back=black,fit=(l1) (g1) (f)] (fusion) {};
+	\node[xback=yellow,fit=(s-n) (lcf-n) (lcf-south) (lsf-east)] (local) {};
+	\node[xback=green,fit=(s-s) (gcf-north) (gcf-s) (gsf-east)] (global) {};
+\end{pgfonlayer}
+
+\node[blue,below=1pt of channel]{channel attention};
+\node[red,below=1pt of spatial]{spatial attention};
+\node[black,below=1pt of fusion]{fusion};
+\node[yellow!60!red,above=1pt of local.north east]{local attention};
+\node[green!60!black,below=1pt of global.south east]{global attention};
+
+\end{tikzpicture}
+%------------------------------------------------------------------------------

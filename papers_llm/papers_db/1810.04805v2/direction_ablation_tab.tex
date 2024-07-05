@@ -1,0 +1,19 @@
+%auto-ignore
+\begin{table}[t]
+\small
+ \begin{tabular}{@{}lccccc@{}}
+    \toprule
+              & \multicolumn{5}{c}{Dev Set} \\
+   Tasks & MNLI-m & QNLI & MRPC & SST-2 & SQuAD     \\
+         & (Acc) & (Acc) & (Acc) & (Acc) & (F1)     \\
+     \midrule
+\bertbase       & 84.4 & 88.4 & 86.7 & 92.7 & 88.5 \\
+No NSP          & 83.9 & 84.9 & 86.5 & 92.6 & 87.9 \\
+LTR \& No NSP   & 82.1 & 84.3 & 77.5 & 92.1 & 77.8 \\
+\quad + BiLSTM  & 82.1 & 84.1 & 75.7 & 91.6 & 84.9 \\
+     \bottomrule
+   \end{tabular}
+   \caption{Ablation over the pre-training tasks using the \bertbase architecture. ``No NSP'' is trained without the next sentence prediction task. ``LTR \& No NSP'' is trained as a left-to-right LM without the next sentence prediction, like OpenAI GPT. ``+ BiLSTM'' adds a randomly initialized BiLSTM on top of the ``LTR + No NSP'' model during fine-tuning.
+   }
+   \label{tab:task_ablation}    
+\end{table}

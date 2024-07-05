@@ -1,0 +1,102 @@
+\section{Training Procedure Analysis} \label{sec:design}
+
+This section explores and quantifies which choices are important for successfully pretraining BERT models.
+We keep the model architecture fixed.\footnote{Studying architectural changes, including larger architectures, is an important area for future work.} 
+Specifically, we begin by training BERT models with the same configuration as BERT$_{\textsc{base}}$ ($L=12$,
+$H=768$, $A=12$, 110M params).
+
+
+
+\subsection{Static vs. Dynamic Masking} \label{sec:dynamic_masking}
+
+As discussed in Section \ref{sec:background}, BERT relies on randomly masking and predicting tokens. 
+The original BERT implementation performed masking once during data preprocessing, resulting in a single \emph{static} mask.
+To avoid using the same mask for each training instance in every epoch, training data was duplicated 10 times so that each sequence is masked in 10 different ways over the 40 epochs of training.
+Thus, each training sequence was seen with the same mask four times during training.
+
+We compare this strategy with \emph{dynamic masking} where we generate the masking pattern every time we feed a sequence to the model.
+This becomes crucial when pretraining for more steps or with larger datasets.
+
+\paragraph{Results}
+
+\input{tables/static_vs_dynamic_masking.tex}
+
+Table~\ref{tab:static_vs_dynamic_masking} compares the published \bertbase{} results from \newcite{devlin2018bert} to our reimplementation with either static or dynamic masking.
+We find that our reimplementation with static masking performs similar to the original BERT model, and dynamic masking is comparable or slightly better than static masking.
+
+Given these results and the additional efficiency benefits of dynamic masking, we use dynamic masking in the remainder of the experiments.
+
+
+
+\subsection{Model Input Format and Next Sentence Prediction} \label{sec:model_input_nsp}
+
+\input{tables/base_apples_to_apples.tex}
+
+In the original BERT pretraining procedure, the model observes two concatenated document segments, which are either sampled contiguously from the same document (with $p=0.5$) or from distinct documents.
+In addition to the masked language modeling objective, the model is trained to predict whether the observed document segments come from the same or distinct documents via an auxiliary Next Sentence Prediction (NSP) loss.
+
+The NSP loss was hypothesized to be an important factor in training the original BERT model. \newcite{devlin2018bert} observe that removing NSP hurts performance, with significant performance degradation on QNLI, MNLI, and SQuAD 1.1.
+However, some recent work has questioned the necessity of the NSP loss~\cite{lample2019cross,yang2019xlnet,joshi2019spanbert}.
+
+
+To better understand this discrepancy, we compare several alternative training formats:
+\begin{itemize}[leftmargin=*]
+\setlength\itemsep{0em}
+\item \textsc{segment-pair+nsp}: This follows the original input format used in BERT~\cite{devlin2018bert}, with the NSP loss. Each input has a pair of segments, which can each contain multiple natural sentences, but the total combined length must be less than 512 tokens.
+\item \textsc{sentence-pair+nsp}: Each input contains a pair of natural \emph{sentences}, either sampled from a contiguous portion of one document or from separate documents. Since these inputs are significantly shorter than 512 tokens, we increase the batch size so that the total number of tokens remains similar to \textsc{segment-pair+nsp}. We retain the NSP loss.
+\item \textsc{full-sentences}: Each input is packed with full sentences sampled contiguously from one or more documents, such that the total length is at most 512 tokens. Inputs may cross document boundaries. When we reach the end of one document, we begin sampling sentences from the next document and add an extra separator token between documents. We remove the NSP loss.
+\item \textsc{doc-sentences}: Inputs are constructed similarly to \textsc{full-sentences}, except that they may not cross document boundaries. Inputs sampled near the end of a document may be shorter than 512 tokens, so we dynamically increase the batch size in these cases to achieve a similar number of total tokens as \textsc{full-sentences}. We remove the NSP loss.
+\end{itemize}
+
+\paragraph{Results}
+
+Table~\ref{tab:base_apples_to_apples} shows results for the four different settings.
+We first compare the original \textsc{segment-pair} input format from \newcite{devlin2018bert} to the \textsc{sentence-pair} format; both formats retain the NSP loss, but the latter uses single sentences.
+We find that \textbf{using individual sentences hurts performance on downstream tasks}, which we hypothesize is because the model is not able to learn long-range dependencies.
+
+We next compare training without the NSP loss and training with blocks of text from a single document (\textsc{doc-sentences}).
+We find that this setting outperforms the originally published \bertbase{} results and that \textbf{removing the NSP loss matches or slightly improves downstream task performance}, in contrast to \newcite{devlin2018bert}.
+It is possible that the original BERT implementation may only have removed the loss term while still retaining the \textsc{segment-pair} input format.
+
+Finally we find that restricting sequences to come from a single document (\textsc{doc-sentences}) performs slightly better than packing sequences from multiple documents (\textsc{full-sentences}).
+However, because the \textsc{doc-sentences} format results in variable batch sizes, we use \textsc{full-sentences} in the remainder of our experiments for easier comparison with related work.
+
+
+\subsection{Training with large batches}
+\label{sec:large_batches}
+
+Past work in Neural Machine Translation has shown that training with very large mini-batches can both improve optimization speed and end-task performance when the learning rate is increased appropriately~\cite{ott2018scaling}.
+Recent work has shown that BERT is also amenable to large batch training~\cite{you2019reducing}.
+
+\newcite{devlin2018bert} originally trained \bertbase{} for 1M steps with a batch size of 256 sequences.
+This is equivalent in computational cost, via gradient accumulation, to training for 125K steps with a batch size of 2K sequences, or for 31K steps with a batch size of 8K.
+
+\input{tables/large_batches.tex}
+
+In Table~\ref{tab:large_batches} we compare perplexity and end-task performance of \bertbase{} as we increase the batch size, controlling for the number of passes through the training data.
+We observe that training with large batches improves perplexity for the masked language modeling objective, as well as end-task accuracy.
+Large batches are also easier to parallelize via distributed data parallel training,\footnote{Large batch training can improve training efficiency even without large scale parallel hardware through \emph{gradient accumulation}, whereby gradients from multiple mini-batches are accumulated locally before each optimization step. This functionality is supported natively in \textsc{fairseq}~\cite{ott2019fairseq}.} and in later experiments we train with batches of 8K sequences.
+
+Notably \newcite{you2019reducing} train BERT with even larger batche sizes, up to 32K sequences.
+We leave further exploration of the limits of large batch training to future work.
+
+
+
+
+\subsection{Text Encoding}
+\label{sec:bpe}
+
+Byte-Pair Encoding (BPE)~\cite{sennrich2016neural} is a hybrid between character- and word-level representations that allows handling the large vocabularies common in natural language corpora.
+Instead of full words, BPE relies on subwords units, which are extracted by performing statistical analysis of the training corpus.
+
+BPE vocabulary sizes typically range from 10K-100K subword units. However, unicode characters can account for a sizeable portion of this vocabulary when modeling large and diverse corpora, such as the ones considered in this work.
+\newcite{radford2019language} introduce a clever implementation of BPE that uses \emph{bytes} instead of unicode characters as the base subword units.
+Using bytes makes it possible to learn a subword vocabulary of a modest size (50K units) that can still encode any input text without introducing any ``unknown" tokens.
+
+The original BERT implementation~\cite{devlin2018bert} uses a character-level BPE vocabulary of size 30K, which is learned after preprocessing the input with heuristic tokenization rules.
+Following \newcite{radford2019language}, we instead consider training BERT with a larger byte-level BPE vocabulary containing 50K subword units, without any additional preprocessing or tokenization of the input.
+This adds approximately 15M and 20M additional parameters for \bertbase{} and \bertlarge{}, respectively.
+
+Early experiments revealed only slight differences between these encodings, with the \newcite{radford2019language} BPE achieving slightly worse end-task performance on some tasks.
+Nevertheless, we believe the advantages of a universal encoding scheme outweighs the minor degredation in performance and use this encoding in the remainder of our experiments.
+A more detailed comparison of these encodings is left to future work.

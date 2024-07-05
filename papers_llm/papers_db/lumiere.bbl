@@ -1,0 +1,400 @@
+\begin{thebibliography}{56}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Akbik et~al.(2018)Akbik, Blythe, and Vollgraf}]{akbik2018contextual}
+Alan Akbik, Duncan Blythe, and Roland Vollgraf. 2018.
+\newblock Contextual string embeddings for sequence labeling.
+\newblock In \emph{Proceedings of the 27th International Conference on
+  Computational Linguistics}, pages 1638--1649.
+
+\bibitem[{Al-Rfou et~al.(2018)Al-Rfou, Choe, Constant, Guo, and
+  Jones}]{alrfou:2018}
+Rami Al-Rfou, Dokook Choe, Noah Constant, Mandy Guo, and Llion Jones. 2018.
+\newblock Character-level language modeling with deeper self-attention.
+\newblock \emph{arXiv preprint arXiv:1808.04444}.
+
+\bibitem[{Ando and Zhang(2005)}]{ando-zhang:2005}
+Rie~Kubota Ando and Tong Zhang. 2005.
+\newblock A framework for learning predictive structures from multiple tasks
+  and unlabeled data.
+\newblock \emph{Journal of Machine Learning Research}, 6(Nov):1817--1853.
+
+\bibitem[{Bentivogli et~al.(2009)Bentivogli, Magnini, Dagan, Dang, and
+  Giampiccolo}]{bentivogli-etal:2009}
+Luisa Bentivogli, Bernardo Magnini, Ido Dagan, Hoa~Trang Dang, and Danilo
+  Giampiccolo. 2009.
+\newblock The fifth {PASCAL} recognizing textual entailment challenge.
+\newblock In \emph{{TAC}}. {NIST}.
+
+\bibitem[{Blitzer et~al.(2006)Blitzer, McDonald, and
+  Pereira}]{blitzer-mcdonald-pereira:2006:_domain}
+John Blitzer, Ryan McDonald, and Fernando Pereira. 2006.
+\newblock Domain adaptation with structural correspondence learning.
+\newblock In \emph{Proceedings of the 2006 conference on empirical methods in
+  natural language processing}, pages 120--128. Association for Computational
+  Linguistics.
+
+\bibitem[{Bowman et~al.(2015)Bowman, Angeli, Potts, and
+  Manning}]{bowman-etal:2015}
+Samuel~R. Bowman, Gabor Angeli, Christopher Potts, and Christopher~D. Manning.
+  2015.
+\newblock A large annotated corpus for learning natural language inference.
+\newblock In \emph{EMNLP}. Association for Computational Linguistics.
+
+\bibitem[{Brown et~al.(1992)Brown, Desouza, Mercer, Pietra, and
+  Lai}]{brown-etal:1992:_class}
+Peter~F Brown, Peter~V Desouza, Robert~L Mercer, Vincent J~Della Pietra, and
+  Jenifer~C Lai. 1992.
+\newblock Class-based n-gram models of natural language.
+\newblock \emph{Computational linguistics}, 18(4):467--479.
+
+\bibitem[{Cer et~al.(2017)Cer, Diab, Agirre, Lopez-Gazpio, and
+  Specia}]{cer-etal:2017}
+Daniel Cer, Mona Diab, Eneko Agirre, Inigo Lopez-Gazpio, and Lucia Specia.
+  2017.
+\newblock \href {https://doi.org/10.18653/v1/S17-2001} {Semeval-2017 task 1:
+  Semantic textual similarity multilingual and crosslingual focused
+  evaluation}.
+\newblock In \emph{Proceedings of the 11th International Workshop on Semantic
+  Evaluation (SemEval-2017)}, pages 1--14, Vancouver, Canada. Association for
+  Computational Linguistics.
+
+\bibitem[{Chelba et~al.(2013)Chelba, Mikolov, Schuster, Ge, Brants, Koehn, and
+  Robinson}]{chelba-etal:2013:_one}
+Ciprian Chelba, Tomas Mikolov, Mike Schuster, Qi~Ge, Thorsten Brants, Phillipp
+  Koehn, and Tony Robinson. 2013.
+\newblock One billion word benchmark for measuring progress in statistical
+  language modeling.
+\newblock \emph{arXiv preprint arXiv:1312.3005}.
+
+\bibitem[{Chen et~al.(2018)Chen, Zhang, Zhang, and
+  Zhao}]{chen-etal:2018:_quora}
+Z.~Chen, H.~Zhang, X.~Zhang, and L.~Zhao. 2018.
+\newblock \href
+  {https://data.quora.com/First-Quora-Dataset-Release-Question-Pairs} {Quora
+  question pairs}.
+
+\bibitem[{Clark and Gardner(2018)}]{clark-gardner:2018:_simpl}
+Christopher Clark and Matt Gardner. 2018.
+\newblock Simple and effective multi-paragraph reading comprehension.
+\newblock In \emph{ACL}.
+
+\bibitem[{Clark et~al.(2018)Clark, Luong, Manning, and Le}]{clark2018semi}
+Kevin Clark, Minh-Thang Luong, Christopher~D Manning, and Quoc Le. 2018.
+\newblock Semi-supervised sequence modeling with cross-view training.
+\newblock In \emph{Proceedings of the 2018 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1914--1925.
+
+\bibitem[{Collobert and Weston(2008)}]{collobert-weston:2008}
+Ronan Collobert and Jason Weston. 2008.
+\newblock A unified architecture for natural language processing: Deep neural
+  networks with multitask learning.
+\newblock In \emph{Proceedings of the 25th international conference on Machine
+  learning}, pages 160--167. ACM.
+
+\bibitem[{Conneau et~al.(2017)Conneau, Kiela, Schwenk, Barrault, and
+  Bordes}]{conneau-EtAl:2017:EMNLP2017}
+Alexis Conneau, Douwe Kiela, Holger Schwenk, Lo\"{i}c Barrault, and Antoine
+  Bordes. 2017.
+\newblock \href {https://www.aclweb.org/anthology/D17-1070} {Supervised
+  learning of universal sentence representations from natural language
+  inference data}.
+\newblock In \emph{Proceedings of the 2017 Conference on Empirical Methods in
+  Natural Language Processing}, pages 670--680, Copenhagen, Denmark.
+  Association for Computational Linguistics.
+
+\bibitem[{Dai and Le(2015)}]{dai-le:2015:_semi}
+Andrew~M Dai and Quoc~V Le. 2015.
+\newblock Semi-supervised sequence learning.
+\newblock In \emph{Advances in neural information processing systems}, pages
+  3079--3087.
+
+\bibitem[{Deng et~al.(2009)Deng, Dong, Socher, Li, Li, and
+  Fei-Fei}]{imagenet_cvpr09}
+J.~Deng, W.~Dong, R.~Socher, L.-J. Li, K.~Li, and L.~Fei-Fei. 2009.
+\newblock {ImageNet: A Large-Scale Hierarchical Image Database}.
+\newblock In \emph{CVPR09}.
+
+\bibitem[{Dolan and Brockett(2005)}]{dolan-brockett:2005:_autom}
+William~B Dolan and Chris Brockett. 2005.
+\newblock Automatically constructing a corpus of sentential paraphrases.
+\newblock In \emph{Proceedings of the Third International Workshop on
+  Paraphrasing (IWP2005)}.
+
+\bibitem[{Fedus et~al.(2018)Fedus, Goodfellow, and Dai}]{fedus2018maskgan}
+William Fedus, Ian Goodfellow, and Andrew~M Dai. 2018.
+\newblock Maskgan: Better text generation via filling in the\_.
+\newblock \emph{arXiv preprint arXiv:1801.07736}.
+
+\bibitem[{Hendrycks and Gimpel(2016)}]{hendrycks:2016}
+Dan Hendrycks and Kevin Gimpel. 2016.
+\newblock \href {http://arxiv.org/abs/1606.08415} {Bridging nonlinearities and
+  stochastic regularizers with gaussian error linear units}.
+\newblock \emph{CoRR}, abs/1606.08415.
+
+\bibitem[{Hill et~al.(2016)Hill, Cho, and Korhonen}]{hill16}
+Felix Hill, Kyunghyun Cho, and Anna Korhonen. 2016.
+\newblock Learning distributed representations of sentences from unlabelled
+  data.
+\newblock In \emph{Proceedings of the 2016 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}. Association for Computational Linguistics.
+
+\bibitem[{Howard and Ruder(2018)}]{howard-ruder:2018}
+Jeremy Howard and Sebastian Ruder. 2018.
+\newblock \href {http://arxiv.org/abs/1801.06146} {Universal language model
+  fine-tuning for text classification}.
+\newblock In \emph{ACL}. Association for Computational Linguistics.
+
+\bibitem[{Hu et~al.(2018)Hu, Peng, Huang, Qiu, Wei, and
+  Zhou}]{hu2017reinforced}
+Minghao Hu, Yuxing Peng, Zhen Huang, Xipeng Qiu, Furu Wei, and Ming Zhou. 2018.
+\newblock Reinforced mnemonic reader for machine reading comprehension.
+\newblock In \emph{IJCAI}.
+
+\bibitem[{Jernite et~al.(2017)Jernite, Bowman, and
+  Sontag}]{DBLP:journals/corr/JerniteBS17}
+Yacine Jernite, Samuel~R. Bowman, and David Sontag. 2017.
+\newblock \href {http://arxiv.org/abs/1705.00557} {Discourse-based objectives
+  for fast unsupervised sentence representation learning}.
+\newblock \emph{CoRR}, abs/1705.00557.
+
+\bibitem[{Joshi et~al.(2017)Joshi, Choi, Weld, and
+  Zettlemoyer}]{joshi-etal:2017:_triviaq}
+Mandar Joshi, Eunsol Choi, Daniel~S Weld, and Luke Zettlemoyer. 2017.
+\newblock Triviaqa: A large scale distantly supervised challenge dataset for
+  reading comprehension.
+\newblock In \emph{ACL}.
+
+\bibitem[{Kiros et~al.(2015)Kiros, Zhu, Salakhutdinov, Zemel, Urtasun,
+  Torralba, and Fidler}]{kiros-etal:2015:_skip}
+Ryan Kiros, Yukun Zhu, Ruslan~R Salakhutdinov, Richard Zemel, Raquel Urtasun,
+  Antonio Torralba, and Sanja Fidler. 2015.
+\newblock Skip-thought vectors.
+\newblock In \emph{Advances in neural information processing systems}, pages
+  3294--3302.
+
+\bibitem[{Le and Mikolov(2014)}]{le-mikolov:2014:_distr}
+Quoc Le and Tomas Mikolov. 2014.
+\newblock Distributed representations of sentences and documents.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  1188--1196.
+
+\bibitem[{Levesque et~al.(2011)Levesque, Davis, and
+  Morgenstern}]{levesque-davis-morgenstern:2011:_winog}
+Hector~J Levesque, Ernest Davis, and Leora Morgenstern. 2011.
+\newblock The winograd schema challenge.
+\newblock In \emph{Aaai spring symposium: Logical formalizations of commonsense
+  reasoning}, volume~46, page~47.
+
+\bibitem[{Logeswaran and Lee(2018)}]{logeswaran2018an}
+Lajanugen Logeswaran and Honglak Lee. 2018.
+\newblock \href {https://openreview.net/forum?id=rJvJXZb0W} {An efficient
+  framework for learning sentence representations}.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{McCann et~al.(2017)McCann, Bradbury, Xiong, and
+  Socher}]{mccann-etal:2017:_learn_trans}
+Bryan McCann, James Bradbury, Caiming Xiong, and Richard Socher. 2017.
+\newblock Learned in translation: Contextualized word vectors.
+\newblock In \emph{NIPS}.
+
+\bibitem[{Melamud et~al.(2016)Melamud, Goldberger, and
+  Dagan}]{melamud2016context2vec}
+Oren Melamud, Jacob Goldberger, and Ido Dagan. 2016.
+\newblock context2vec: Learning generic context embedding with bidirectional
+  {LSTM}.
+\newblock In \emph{CoNLL}.
+
+\bibitem[{Mikolov et~al.(2013)Mikolov, Sutskever, Chen, Corrado, and
+  Dean}]{mikolov-etal:2013}
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg~S Corrado, and Jeff Dean. 2013.
+\newblock Distributed representations of words and phrases and their
+  compositionality.
+\newblock In \emph{Advances in Neural Information Processing Systems 26}, pages
+  3111--3119. Curran Associates, Inc.
+
+\bibitem[{Mnih and Hinton(2009)}]{minh09}
+Andriy Mnih and Geoffrey~E Hinton. 2009.
+\newblock \href
+  {http://papers.nips.cc/paper/3583-a-scalable-hierarchical-distributed-language-model.pdf}
+  {A scalable hierarchical distributed language model}.
+\newblock In D.~Koller, D.~Schuurmans, Y.~Bengio, and L.~Bottou, editors,
+  \emph{Advances in Neural Information Processing Systems 21}, pages
+  1081--1088. Curran Associates, Inc.
+
+\bibitem[{Parikh et~al.(2016)Parikh, T{\"a}ckstr{\"o}m, Das, and
+  Uszkoreit}]{parikh-etal:2016}
+Ankur~P Parikh, Oscar T{\"a}ckstr{\"o}m, Dipanjan Das, and Jakob Uszkoreit.
+  2016.
+\newblock A decomposable attention model for natural language inference.
+\newblock In \emph{EMNLP}.
+
+\bibitem[{Pennington et~al.(2014)Pennington, Socher, and
+  Manning}]{pennington-socher-manning:2014:_glove}
+Jeffrey Pennington, Richard Socher, and Christopher~D. Manning. 2014.
+\newblock \href {http://www.aclweb.org/anthology/D14-1162} {Glove: Global
+  vectors for word representation}.
+\newblock In \emph{Empirical Methods in Natural Language Processing (EMNLP)},
+  pages 1532--1543.
+
+\bibitem[{Peters et~al.(2017)Peters, Ammar, Bhagavatula, and
+  Power}]{peters-etal:2017:_semi}
+Matthew Peters, Waleed Ammar, Chandra Bhagavatula, and Russell Power. 2017.
+\newblock Semi-supervised sequence tagging with bidirectional language models.
+\newblock In \emph{ACL}.
+
+\bibitem[{Peters et~al.(2018{\natexlab{a}})Peters, Neumann, Iyyer, Gardner,
+  Clark, Lee, and Zettlemoyer}]{peters-etal:2018:_deep}
+Matthew Peters, Mark Neumann, Mohit Iyyer, Matt Gardner, Christopher Clark,
+  Kenton Lee, and Luke Zettlemoyer. 2018{\natexlab{a}}.
+\newblock Deep contextualized word representations.
+\newblock In \emph{NAACL}.
+
+\bibitem[{Peters et~al.(2018{\natexlab{b}})Peters, Neumann, Zettlemoyer, and
+  Yih}]{peters2018dissecting}
+Matthew Peters, Mark Neumann, Luke Zettlemoyer, and Wen-tau Yih.
+  2018{\natexlab{b}}.
+\newblock Dissecting contextual word embeddings: Architecture and
+  representation.
+\newblock In \emph{Proceedings of the 2018 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1499--1509.
+
+\bibitem[{Radford et~al.(2018)Radford, Narasimhan, Salimans, and
+  Sutskever}]{radford-etal:2018}
+Alec Radford, Karthik Narasimhan, Tim Salimans, and Ilya Sutskever. 2018.
+\newblock Improving language understanding with unsupervised learning.
+\newblock Technical report, OpenAI.
+
+\bibitem[{Rajpurkar et~al.(2016)Rajpurkar, Zhang, Lopyrev, and
+  Liang}]{rajpurkar-etal:2016:_squad}
+Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and Percy Liang. 2016.
+\newblock Squad: 100,000+ questions for machine comprehension of text.
+\newblock In \emph{Proceedings of the 2016 Conference on Empirical Methods in
+  Natural Language Processing}, pages 2383--2392.
+
+\bibitem[{Seo et~al.(2017)Seo, Kembhavi, Farhadi, and Hajishirzi}]{bidaf}
+Minjoon Seo, Aniruddha Kembhavi, Ali Farhadi, and Hannaneh Hajishirzi. 2017.
+\newblock Bidirectional attention flow for machine comprehension.
+\newblock In \emph{ICLR}.
+
+\bibitem[{Socher et~al.(2013)Socher, Perelygin, Wu, Chuang, Manning, Ng, and
+  Potts}]{socher-etal:2013:_recur}
+Richard Socher, Alex Perelygin, Jean Wu, Jason Chuang, Christopher~D Manning,
+  Andrew Ng, and Christopher Potts. 2013.
+\newblock Recursive deep models for semantic compositionality over a sentiment
+  treebank.
+\newblock In \emph{Proceedings of the 2013 conference on empirical methods in
+  natural language processing}, pages 1631--1642.
+
+\bibitem[{Sun et~al.(2018)Sun, Li, Qiu, and Liu}]{unet}
+Fu~Sun, Linyang Li, Xipeng Qiu, and Yang Liu. 2018.
+\newblock U-net: Machine reading comprehension with unanswerable questions.
+\newblock \emph{arXiv preprint arXiv:1810.06638}.
+
+\bibitem[{Taylor(1953)}]{taylor:1953:_cloze}
+Wilson~L Taylor. 1953.
+\newblock “{C}loze procedure”: A new tool for measuring readability.
+\newblock \emph{Journalism Bulletin}, 30(4):415--433.
+
+\bibitem[{Tjong Kim~Sang and De~Meulder(2003)}]{tjong-de:2003}
+Erik~F Tjong Kim~Sang and Fien De~Meulder. 2003.
+\newblock Introduction to the conll-2003 shared task: Language-independent
+  named entity recognition.
+\newblock In \emph{CoNLL}.
+
+\bibitem[{Turian et~al.(2010)Turian, Ratinov, and
+  Bengio}]{turian-ratinov-bengio:2010:_word_repres}
+Joseph Turian, Lev Ratinov, and Yoshua Bengio. 2010.
+\newblock Word representations: A simple and general method for semi-supervised
+  learning.
+\newblock In \emph{Proceedings of the 48th Annual Meeting of the Association
+  for Computational Linguistics}, ACL '10, pages 384--394.
+
+\bibitem[{Vaswani et~al.(2017)Vaswani, Shazeer, Parmar, Uszkoreit, Jones,
+  Gomez, Kaiser, and Polosukhin}]{vaswani-etal:2017:_atten}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N Gomez, {L}ukasz Kaiser, and Illia Polosukhin. 2017.
+\newblock Attention is all you need.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  6000--6010.
+
+\bibitem[{Vincent et~al.(2008)Vincent, Larochelle, Bengio, and
+  Manzagol}]{vincent:2008}
+Pascal Vincent, Hugo Larochelle, Yoshua Bengio, and Pierre-Antoine Manzagol.
+  2008.
+\newblock Extracting and composing robust features with denoising autoencoders.
+\newblock In \emph{Proceedings of the 25th international conference on Machine
+  learning}, pages 1096--1103. ACM.
+
+\bibitem[{Wang et~al.(2018{\natexlab{a}})Wang, Singh, Michael, Hill, Levy, and
+  Bowman}]{wang-etal:2018:_glue}
+Alex Wang, Amanpreet Singh, Julian Michael, Felix Hill, Omer Levy, and Samuel
+  Bowman. 2018{\natexlab{a}}.
+\newblock Glue: A multi-task benchmark and analysis platform for natural
+  language understanding.
+\newblock In \emph{Proceedings of the 2018 EMNLP Workshop BlackboxNLP:
+  Analyzing and Interpreting Neural Networks for NLP}, pages 353--355.
+
+\bibitem[{Wang et~al.(2018{\natexlab{b}})Wang, Yan, and Wu}]{slqa}
+Wei Wang, Ming Yan, and Chen Wu. 2018{\natexlab{b}}.
+\newblock Multi-granularity hierarchical attention fusion networks for reading
+  comprehension and question answering.
+\newblock In \emph{Proceedings of the 56th Annual Meeting of the Association
+  for Computational Linguistics (Volume 1: Long Papers)}. Association for
+  Computational Linguistics.
+
+\bibitem[{Warstadt et~al.(2018)Warstadt, Singh, and
+  Bowman}]{warstadt-singh-bowman:2018:_corpus}
+Alex Warstadt, Amanpreet Singh, and Samuel~R Bowman. 2018.
+\newblock Neural network acceptability judgments.
+\newblock \emph{arXiv preprint arXiv:1805.12471}.
+
+\bibitem[{Williams et~al.(2018)Williams, Nangia, and
+  Bowman}]{williams-nangia-bowman:2018}
+Adina Williams, Nikita Nangia, and Samuel~R Bowman. 2018.
+\newblock A broad-coverage challenge corpus for sentence understanding through
+  inference.
+\newblock In \emph{NAACL}.
+
+\bibitem[{Wu et~al.(2016)Wu, Schuster, Chen, Le, Norouzi, Macherey, Krikun,
+  Cao, Gao, Macherey et~al.}]{wu-etal:2016:_googl}
+Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc~V Le, Mohammad Norouzi, Wolfgang
+  Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, et~al. 2016.
+\newblock Google's neural machine translation system: Bridging the gap between
+  human and machine translation.
+\newblock \emph{arXiv preprint arXiv:1609.08144}.
+
+\bibitem[{Yosinski et~al.(2014)Yosinski, Clune, Bengio, and
+  Lipson}]{yosinski2014transferable}
+Jason Yosinski, Jeff Clune, Yoshua Bengio, and Hod Lipson. 2014.
+\newblock How transferable are features in deep neural networks?
+\newblock In \emph{Advances in neural information processing systems}, pages
+  3320--3328.
+
+\bibitem[{Yu et~al.(2018)Yu, Dohan, Luong, Zhao, Chen, Norouzi, and
+  Le}]{yu-etal:2018:_qanet}
+Adams~Wei Yu, David Dohan, Minh-Thang Luong, Rui Zhao, Kai Chen, Mohammad
+  Norouzi, and Quoc~V Le. 2018.
+\newblock {QAN}et: Combining local convolution with global self-attention for
+  reading comprehension.
+\newblock In \emph{ICLR}.
+
+\bibitem[{Zellers et~al.(2018)Zellers, Bisk, Schwartz, and
+  Choi}]{zellers2018swag}
+Rowan Zellers, Yonatan Bisk, Roy Schwartz, and Yejin Choi. 2018.
+\newblock Swag: A large-scale adversarial dataset for grounded commonsense
+  inference.
+\newblock In \emph{Proceedings of the 2018 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}.
+
+\bibitem[{Zhu et~al.(2015)Zhu, Kiros, Zemel, Salakhutdinov, Urtasun, Torralba,
+  and Fidler}]{zhu:2015}
+Yukun Zhu, Ryan Kiros, Rich Zemel, Ruslan Salakhutdinov, Raquel Urtasun,
+  Antonio Torralba, and Sanja Fidler. 2015.
+\newblock Aligning books and movies: Towards story-like visual explanations by
+  watching movies and reading books.
+\newblock In \emph{Proceedings of the IEEE international conference on computer
+  vision}, pages 19--27.
+
+\end{thebibliography}

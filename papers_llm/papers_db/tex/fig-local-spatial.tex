@@ -1,0 +1,37 @@
+%------------------------------------------------------------------------------
+\begin{tikzpicture}[
+	font={\footnotesize},
+]
+\matrix[
+	row sep=15pt,column sep=10pt,cells={scale=1,},
+]{
+	\& \node[inp](i){feature map}; \\
+	\& \node[down](d1){conv $1 \times 1$}; \\
+	\node[fix](c3){conv $3 \times 3$}; \&
+	\node[fix](c5){conv $5 \times 5$}; \&
+	\node[fix](c7){conv $7 \times 7$}; \\
+	\& \node[cat](ca){concat}; \\
+	\& \node[down](d2){conv $1 \times 1$}; \\
+	\& \node[outp](o){attention map}; \\
+};
+\coordinate(s) at($(d1.south)!.5!(c5.north)$); % split
+\coordinate(m) at($(c5.south)!.5!(ca.north)$); % merge
+\node(left)[left=5pt of c3.west]{};
+\coordinate(l) at(left.center);
+\draw[->]
+	(i) edge node[dim,midway,right]{$c \times h \times w$} (d1)
+	(d1) edge (c5)
+	(c5) edge (ca)
+	(ca) edge node[dim,midway,right]{$4c' \times h \times w$} (d2)
+	(d2) edge node[dim,midway,right]{$1 \times h \times w$} (o)
+	;
+\draw[->] (s) -| (c3);
+\draw[->] (s) -| node[dim,midway,above]{$c' \times h \times w$} (c7);
+\draw (s) -| (l) (l) |- (m);
+\draw (c3) |- (m) (c7) |- (m);
+\node[dim,below right=2pt of c7.south](dil) {\emph{dilated} \\ \emph{conv}};
+\node[left=1pt of i] {$\vF$};
+\node[left=1pt of d1] {$\vF'$};
+\node[left=1pt of o] {$\vA_s^l$};
+\end{tikzpicture}
+%------------------------------------------------------------------------------

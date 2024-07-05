@@ -1,0 +1,26 @@
+%auto-ignore
+\begin{table}[tb]
+\begin{center}
+{
+\small
+ \begin{tabular}{lcc}
+    \toprule
+System             &  Dev    & Test\\ 
+\midrule
+ESIM+GloVe   & 51.9       & 52.7 \\
+ESIM+ELMo    & 59.1       & 59.2 \\
+OpenAI GPT    & -       & 78.0 \\
+\midrule
+\bertbase    & 81.6       &  - \\
+\bertlarge   & {\bf 86.6} & {\bf 86.3} \\
+\midrule
+Human (expert)$^\dagger$ & - & 85.0 \\
+Human (5 annotations)$^\dagger$        & -          & 88.0 \\
+\bottomrule
+\end{tabular}
+}
+\caption{SWAG Dev and Test accuracies. 
+$^\dagger$Human performance is measured with 100 samples, as reported in the SWAG paper.}
+\label{tab:swag_official}
+\end{center}
+\end{table}

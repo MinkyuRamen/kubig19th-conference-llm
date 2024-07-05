@@ -1,0 +1,8 @@
+\section{Conclusion} \label{sec:conclusion}
+
+We carefully evaluate a number of design decisions when pretraining BERT models.
+We find that performance can be substantially improved by training the model longer, with bigger batches over more data; removing the next sentence prediction objective; training on longer sequences; and dynamically changing the masking pattern applied to the training data.
+Our improved pretraining procedure, which we call \ourmodel{}, achieves state-of-the-art results on GLUE, RACE and SQuAD, without multi-task finetuning for GLUE or additional data for SQuAD.
+These results illustrate the importance of these previously overlooked design decisions and suggest that BERT's pretraining objective remains competitive with recently proposed alternatives.
+
+We additionally use a novel dataset, \textsc{CC-News}, and release our models and code for pretraining and finetuning at: \url{https://github.com/pytorch/fairseq}.

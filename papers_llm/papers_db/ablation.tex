@@ -1,0 +1,56 @@
+%auto-ignore
+\section{Ablation Studies}
+\label{sec:ablation}
+In this section, we perform ablation experiments over a number of facets of BERT in order to better understand their relative importance. Additional ablation studies can be found in Appendix~\ref{appendix:sec:more_ablation_studies}.
+
+\subsection{Effect of Pre-training Tasks}
+
+\label{sec:task_ablation}
+We demonstrate the importance of the deep bidirectionality of BERT by evaluating two pre-training objectives using exactly the same pre-training data, fine-tuning scheme, and hyperparameters as \bertbase:
+\vspace{0.3cm}
+\\
+\noindent\textbf{No NSP}: A bidirectional model which is trained using the ``masked LM'' (MLM) but without the ``next sentence prediction'' (NSP) task.\\
+\noindent\textbf{LTR \& No NSP}: A left-context-only model which is trained using a standard Left-to-Right (LTR) LM, rather than an MLM. The left-only constraint was also applied at fine-tuning, because  removing it introduced a pre-train/fine-tune mismatch that degraded downstream performance. Additionally, this model was pre-trained without the NSP task. This is directly comparable to OpenAI GPT, but using our larger training dataset, our input representation, and our fine-tuning scheme.
+\input{direction_ablation_tab}
+
+We first examine the impact brought by the NSP task. In Table~\ref{tab:task_ablation}, we show that removing NSP hurts performance significantly on QNLI, MNLI, and SQuAD 1.1. Next, we evaluate the impact of training bidirectional representations by comparing ``No NSP'' to ``LTR \& No NSP''. The LTR model performs worse than the MLM model on all tasks, with large drops on MRPC and SQuAD.
+
+For SQuAD it is intuitively clear that a LTR model will perform poorly at token predictions, since the token-level hidden states have no right-side context.
+In order to make a good faith attempt at strengthening the LTR system, we added a randomly initialized BiLSTM on top. This does significantly improve results on SQuAD, but the results are still far worse than those of the pre-trained bidirectional models. The BiLSTM hurts performance on the GLUE tasks. 
+
+We recognize that it would also be possible to train separate LTR and RTL models and represent each token as the concatenation of the two models, as ELMo does. However: (a) this is twice as expensive as a single bidirectional model; (b) this is non-intuitive for tasks like QA, since the RTL model would not be able to condition the answer on the question; (c) this it is strictly less powerful than a deep bidirectional model, since it can use both left and right context at every layer.
+
+
+\subsection{Effect of Model Size}
+\label{sec:model_size_ablation}
+
+In this section, we explore the effect of model size on fine-tuning task accuracy. We trained a number of BERT models with a differing number of layers, hidden units, and attention heads, while otherwise using the same hyperparameters and training procedure as described previously.
+
+Results on selected GLUE tasks are shown in Table~\ref{tab:size_ablation}. In this table, we report the average Dev Set accuracy from 5 random restarts of fine-tuning. We can see that larger models lead to a strict accuracy improvement across all four datasets, even for MRPC which only has 3,600 labeled training examples, and is substantially different from the pre-training tasks. It is also perhaps surprising that we are able to achieve such significant improvements on top of models which are already quite large relative to the existing literature. For example, the largest Transformer explored in \citet{vaswani-etal:2017:_atten} is (L=6, H=1024, A=16) with 100M parameters for the encoder, and the largest Transformer we have found in the literature is (L=64, H=512, A=2) with 235M parameters \cite{alrfou:2018}. By contrast, \bertbase contains 110M parameters and \bertlarge contains 340M parameters.
+
+\input{size_ablation_tab}
+
+It has long been known that increasing the model size will lead to continual improvements on large-scale tasks such as machine translation and language modeling, which is demonstrated by the LM perplexity of held-out training data shown in Table~\ref{tab:size_ablation}. However, we believe that this is the first work to demonstrate convincingly that scaling to extreme model sizes also leads to large improvements on very small scale tasks, provided that the model has been sufficiently pre-trained. \citet{peters2018dissecting} presented mixed results on the downstream task impact of increasing the pre-trained bi-LM size from two to four layers and \citet{melamud2016context2vec} mentioned in passing that increasing hidden dimension size from 200 to 600 helped, but increasing further to 1,000 did not bring further improvements. Both of these prior works used a feature-based approach --- we hypothesize that when the model is fine-tuned directly on the downstream tasks and uses only a very small number of randomly initialized additional parameters, the task-specific models can benefit from the larger, more expressive pre-trained representations even when downstream task data is very small. 
+
+
+
+\subsection{Feature-based Approach with BERT}
+\label{sec:ner}
+All of the BERT results presented so far have used the fine-tuning approach, where a simple classification layer is added to the pre-trained model, and all parameters are jointly fine-tuned on a downstream task. However, the feature-based approach, where fixed features are extracted from the pre-trained model, has certain advantages. First, not all
+%NLP 
+tasks can be easily represented by a Transformer encoder architecture, and therefore require a task-specific model architecture to be added. Second, there are major computational benefits to
+%being able to 
+pre-compute an expensive representation of the training data once and then run many experiments with 
+%less expensive 
+cheaper
+models on top of this representation. 
+
+In this section, we compare the two approaches by applying BERT to the CoNLL-2003 Named Entity Recognition (NER) task~\cite{tjong-de:2003}. In the input to BERT, we use a case-preserving WordPiece model, and we include the maximal document context provided by the data. Following standard practice, we formulate this as a tagging task but do not use a CRF layer in the output. We use the representation of the first sub-token as the input to the token-level classifier over the NER label set.
+
+
+To ablate the fine-tuning approach, we apply the feature-based approach by extracting the activations from one or more layers {\it without} fine-tuning any parameters of BERT. These contextual embeddings are used as input to a randomly initialized two-layer 768-dimensional BiLSTM before the classification layer.
+
+Results are presented in Table~\ref{tab:pretrained_embeddings}. \bertlarge performs competitively with state-of-the-art methods. The best performing method concatenates the token representations from the top four hidden layers of the pre-trained Transformer, which is only 0.3 F1 behind fine-tuning the entire model. This demonstrates that BERT is effective for both fine-tuning and feature-based approaches.
+
+
+\input{pretrained_embeddings_tab}

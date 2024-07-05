@@ -1,0 +1,23 @@
+%auto-ignore
+\begin{table}[b]
+\begin{center}
+{\small
+\begin{tabular}{@{}rrrcccc@{}}
+  \toprule
+  \multicolumn{3}{c}{Hyperparams}      &      & \multicolumn{3}{c}{Dev Set Accuracy} \\
+  \midrule
+  \#L & \#H &\#A & LM (ppl) & MNLI-m & MRPC &SST-2               \\
+  \midrule
+  \
+   3 &  768 & 12 & 5.84 & 77.9 & 79.8 & 88.4 \\
+   6 &  768 &  3 & 5.24 & 80.6 & 82.2 & 90.7 \\
+   6 &  768 & 12 & 4.68 & 81.9 & 84.8 & 91.3 \\
+  12 &  768 & 12 & 3.99 & 84.4 & 86.7 & 92.9 \\
+  12 & 1024 & 16 & 3.54 & 85.7 & 86.9 & 93.3 \\
+  24 & 1024 & 16 & 3.23 & 86.6 & 87.8 & 93.7 \\
+\bottomrule
+\end{tabular}
+} % small
+\end{center}
+\caption{\label{tab:size_ablation} Ablation over BERT model size. \#L = the number of layers; \#H = hidden size; \#A = number of attention heads. ``LM (ppl)'' is the masked LM perplexity of held-out training data.}
+\end{table}

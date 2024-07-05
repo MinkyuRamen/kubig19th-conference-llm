@@ -1,0 +1,28 @@
+%auto-ignore
+\begin{table}[ht]
+\begin{center}
+{\small
+\begin{tabular}{@{}rrrccc@{}}
+  \toprule
+  \multicolumn{3}{c}{Masking Rates} & \multicolumn{3}{c}{Dev Set Results} \\
+  \cmidrule(r{0.2cm}){1-3}
+  \cmidrule(l{0.2cm}){4-6}
+  \textsc{Mask} &	\textsc{Same}&	\textsc{Rnd}	& {MNLI} &	\multicolumn{2}{c}{NER}\\
+   &  & & {\footnotesize Fine-tune} &   {\footnotesize Fine-tune}	& {\footnotesize Feature-based}\\
+    \cmidrule(r{0.2cm}){1-3}
+  \cmidrule(l{0.1cm}r{0.1cm}){4-4}
+  \cmidrule(l{0.2cm}){5-6}
+  
+  80\%	&10\%	&10\%	&84.2	&95.4	&94.9\\
+100\%	&0\%	&0\%	&84.3	&94.9	&94.0\\
+80\%	&0\%	&20\%	&84.1	&95.2	&94.6\\
+80\%	&20\%	&0\%	&84.4	&95.2	&94.7\\
+0\%	&20\%	&80\%	&83.7	&94.8	&94.6 \\
+0\%	&0\%	&100\%	&83.6	&94.9	&94.6\\
+\bottomrule
+\end{tabular}
+} % small
+\end{center}
+\caption{\label{tab:mask_ablation} Ablation over different masking strategies.}
+\end{table}
+

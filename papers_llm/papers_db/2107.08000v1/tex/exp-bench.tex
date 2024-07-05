@@ -1,0 +1,76 @@
+\subsection{Benchmarking}
+\label{sec:SOTA}
+
+%------------------------------------------------------------------------------
+\begin{table}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{0.6pt}
+\begin{tabular}{l*{8}{c}} \toprule
+\mr{2}{\Th{Method}} & \mr{2}{\Th{Train Set}} & \mr{2}{\Th{dim}} & \mr{2}{\Th{Oxf5k}} & \mr{2}{\Th{Par6k}} & \mc{2}{\Th{$\cR$Medium}} & \mc{2}{\Th{$\cR$Hard}} \\ \cmidrule(l){6-9}
+ & & & & & \rox & \rpa & \rox & \rpa \\ \midrule
+GeM-Siamese \cite{Radenovic01, RITAC18} & SfM-120k    & 2048 & 87.8 & 92.7 & 64.7 & 77.2 & 38.5 & 56.3 \\
+SOLAR~\cite{Ng01}                       & GLDv1-noisy & 2048 & --   & --   & 69.9 & 81.6 & 47.9 & 64.5 \\
+GLDv2~\cite{Weyand01}                   & GLDv2-clean & 2048 & --   & --   & 74.2 & 84.9 & 51.6 & 70.3 \\
+\midrule
+GLAM (Ours) &  NC-clean & 512 &  77.8 & 85.8 & 51.6 &  68.1 &  20.9 & 44.7 \\
+ &  GLDv1-noisy & 512 & 92.8 & 95.0 & \ok{\tb{73.7}}  &  \ok{\tb{83.5}}  &  \ok{\tb{49.8}} & \ok{\tb{69.4}} \\
+ &  GLDv2-noisy & 512 & 93.3 & 95.3 & 75.7 & 86.0 & 53.1 & 73.8 \\
+ &  GLDv2-clean & 512 & \red{\tb{94.2}} & \red{\tb{95.6}} & \red{\tb{78.6}} & \red{\tb{88.5}} & \red{\tb{60.2}} & \red{\tb{76.8}} \\ \bottomrule
+\end{tabular}
+\caption{mAP comparison of our best model (baseline+local+global) trained on different \emph{training sets} against \cite{Weyand01,Ng01}. All models use ResNet101-GeM. Red: best results. Blue: GLAM higher than SOLAR~\cite{Ng01} on GLDv1-noisy.}
+\label{tab:table11}
+\end{table}
+%------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------
+\begin{table*}
+\centering
+\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{l|cc|cc|cccccccc|cccccccc} \toprule
+	\mr{3}{\Th{Method}} & \mr{3}{\Th{Train Set}} & \mr{3}{\Th{Dim}} & \mca{2}{c|}{\Th{Base}} & \mca{8}{c|}{\Th{Medium}} & \mc{8}{\Th{Hard}} \\
+	                                                   &             &          & \oxf5k & \paris6k & \mc{2}{\rox} & \mc{2}{+\r1m} & \mc{2}{\rpa} & \multicolumn{2}{c|}{+\r1m} & \mc{2}{\rox} & \mc{2}{+\r1m} & \mc{2}{\rpa} & \mc{2}{+\r1m} \\
+	                                                   &             &          & mAP &  mAP & mAP & mP & mAP & mP & mAP & mP & mAP & mP & mAP & mP & mAP & mP & mAP & mP & mAP & mP \\ \midrule
+	SPoC-V16 \cite{Babenko03, RITAC18}                 & [O]         & 512      & 53.1$^*$ & -- & 38.0 & 54.6 & 17.1 & 33.3 & 59.8 & 93.0 & 30.3 & 83.0 & 11.4 & 20.9 & 0.9 & 2.9 & 32.4 & 69.7 & 7.6 & 30.6 \\
+	SPoC-R101 \cite{RITAC18}                           & [O]         & 2048     & -- & -- & 39.8 & 61.0 & 21.5 & 40.4 & 69.2 & 96.7 & 41.6 & 92.0 & 12.4 & 23.8 & 2.8 & 5.6 & 44.7 & 78.0 & 15.3 & 54.4 \\
+	CroW-V16 \cite{Kalantidis01,RITAC18}               & [O]         & 512      & 70.8 & 79.7 & 41.4 & 58.8 & 22.5 & 40.5 & 62.9 & 94.4 & 34.1 & 87.1 & 13.9 & 25.7 & 3.0 & 6.6 & 36.9 & 77.9 & 10.3 & 45.1 \\
+	CroW-R101 \cite{RITAC18}                           & [O]         & 2048     & -- & -- & 42.4 & 61.9 & 21.2 & 39.4 & 70.4 & 97.1 & 42.7 & 92.9 & 13.3 & 27.7 & 3.3 & 9.3 & 47.2 & 83.6 & 16.3 & 61.6 \\
+	MAC-V16-Siamese \cite{Radenovi01, RITAC18}         & [O]         & 512      & 80.0 & 82.9 & 37.8 & 57.8  & 21.8  & 39.7 & 59.2 & 93.3  & 33.6 & 87.1 & 14.6  & 27.0  & 7.4  & 11.9 & 35.9  & 78.4  & 13.2 & 54.7 \\
+	MAC-R101-Siamese \cite{RITAC18}                    & [O]         & 2048     & -- & -- & 41.7 & 65.0 & 24.2 & 43.7 & 66.2 & 96.4 & 40.8 & 93.0 & 18.0 & 32.9 & 5.7 & 14.4 & 44.1 & 86.3 & 18.2 & 67.7 \\
+	RMAC-V16-Siamese \cite{Radenovi01, RITAC18}        & [O]         & 512      & 80.1 & 85.0 & 42.5 & 62.8 & 21.7 & 40.3 & 66.2 & 95.4 & 39.9 & 88.9 & 12.0 & 26.1 & 1.7 & 5.8 & 40.9 & 77.1 & 14.8 & 54.0 \\
+	RMAC-R101-Siamese \cite{RITAC18}                   & [O]         & 2048     & -- & -- & 49.8 & 68.9 &  29.2 &  48.9 &  74.0 &  97.7 &  49.3 &  93.7 &  18.5 & 32.2 &  4.5 &  13.0 &  52.1 &  87.1 &  21.3 &  67.4 \\
+	RMAC-R101-Triplet \cite{Gordo01, RITAC18}          & NC-clean    & 2048     & 86.1 & \tb{94.5} & 60.9 & 78.1 & 39.3 & 62.1 & 78.9 & 96.9 & 54.8 & 93.9 & 32.4 & 50.0 & 12.5 & 24.9 & 59.4 & 86.1 & 28.0 & 70.0 \\
+	GeM-R101-Siamese \cite{Radenovic01, RITAC18}       & SfM-120k    & 2048     & \tb{87.8} & 92.7 & 64.7 & 84.7 & 45.2 & 71.7 & 77.2 & \red{\tb{98.1}} & 52.3 & \red{\tb{95.3}} & 38.5 & 53.0 & 19.9 & 34.9 & 56.3 & 89.1 & 24.7 & 73.3 \\
+	AGeM-R101-Siamese \cite{gu2018attention}           & SfM-120k    & 2048     & -- & -- & 67.0 & -- & -- & -- & 78.1 & --  & -- & -- & 40.7 & -- & -- & -- & 57.3 & -- & -- & -- \\
+	SOLAR-GeM-R101-Triplet/SOS \cite{Ng01}             & GLDv1-noisy & 2048     & -- & -- & 69.9 & \tb{86.7} & 53.5 & \tb{76.7} & 81.6  & 97.1 & 59.2 & 94.9 & 47.9 & \tb{63.0} & 29.9 & \tb{48.9} &  64.5 & \tb{93.0} & 33.4 & \tb{81.6} \\
+	DELG-GeM-R101-ArcFace \cite{ECCV2020_912}          & GLDv1-noisy & 2048     & -- & -- & 73.2 & -- & \tb{54.8} & -- & 82.4 & --  & \tb{61.8} & -- & 51.2 & -- & \tb{30.3} & -- & 64.7 & -- & \tb{35.5} & -- \\
+	GeM-R101-ArcFace \cite{Weyand01}                   & GLDv2-clean & 2048     & -- & -- & \tb{74.2} & -- & -- & -- & \tb{84.9} & --  & -- & -- &  \tb{51.6}  & -- & -- & -- &  \tb{70.3} & -- & -- & -- \\
+	\midrule
+	GLAM-GeM-R101-ArcFace baseline   & GLDv2-clean & 512 & \ok{\tb{91.9}} & \ok{\tb{94.5}} & 72.8 & \ok{\tb{86.7}} &  \ok{\tb{58.1}} & \ok{\tb{78.2}} & 84.2 & 95.9 &  \ok{\tb{63.9}} &  93.3 &  49.9 & 62.1 & \ok{\tb{31.6}} & \ok{\tb{49.7}} & 69.7 & 88.4 & \ok{\tb{37.7}} & 73.7  \\
+	+local                           & GLDv2-clean & 512 & \ok{\tb{91.2}} & \ok{\tb{95.4}} & 73.7 & \ok{\tb{86.2}} & \ok{\tb{60.5}} & \ok{\tb{77.4}} & \ok{\tb{86.5}} & 95.6 & \ok{\tb{68.0}} & 93.9  &  \ok{\tb{52.6}} & \ok{\tb{65.3}} & \ok{\tb{36.1}} & \ok{\tb{55.6}} & \ok{\tb{73.7}} & 89.3 & \ok{\tb{44.7}} & 79.1  \\
+	+global                          & GLDv2-clean & 512 & \ok{\tb{92.3}} & \ok{\tb{95.3}} & \ok{\tb{77.2}} & \ok{\tb{87.0}} & \ok{\tb{63.8}} & \ok{\tb{79.3}} & \ok{\tb{86.7}} & 95.4 & \ok{\tb{67.8}} & 93.7  & \ok{\tb{57.4}} & \ok{\tb{69.6}} & \ok{\tb{38.7}} & \ok{\tb{57.9}} & \ok{\tb{75.0}} & 89.4 & \ok{\tb{45.0}} & 77.0  \\
+	+global+local                    & GLDv2-clean & 512 & \red{\tb{94.2}} & \red{\tb{95.6}} & \red{\tb{78.6}} & \red{\tb{88.2}} & \red{\tb{68.0}} & \red{\tb{82.4}} & \red{\tb{88.5}}  & 97.0 &  \red{\tb{73.5}} & 94.9 & \red{\tb{60.2}} & \red{\tb{72.9}} & \red{\tb{43.5}} & \red{\tb{62.1}} & \red{\tb{76.8}} & \red{\tb{93.4}} & \red{\tb{53.1}} & \red{\tb{84.0}} \\
+	\bottomrule
+\end{tabular}
+\caption{mAP comparison of our GLAM against SOTA methods based on global descriptors without re-ranking. V16: VGG16; R101: ResNet101. [O]: Off-the-shelf (pre-trained on ImageNet). $^*$: dimension $d=256$~\cite{Babenko03}. mP: mP@10. Red: best results. Black bold: best previous methods. Blue: GLAM higher than previous methods. Weyand \etal~\cite{Weyand01} is the only model other than ours trained on GLDv2-clean, while~\cite{Ng01} is trained on GLDv1-noisy and compared in \autoref{tab:table11}.}
+\label{tab:table_exp_all}
+\end{table*}
+%------------------------------------------------------------------------------
+
+\paragraph{Noisy \vs clean training sets}
+
+We begin by training our best model (baseline+local+global)
+on all training sets of \autoref{tab:table1}, except NC-noisy because some images are currently unavailable. As shown in \autoref{tab:table11}, even though GLDv2-noisy has 2.6 times more images than GLDv2-clean, the latter is superior by a large margin. This shows that, in training, a cleaner dataset can be more important than a larger one. By contrast, NC-clean has the worst performance despite being clean, aparently because it is too small. To achieve best possible performance, we use GLDv2-clean as a training set in the remaining experiments.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Comparisons on same training set}
+
+It is common to compare methods regardless of training sets as more become available, \eg,~\cite{RITAC18, Ng01}. Since GLDv2-clean is relatively new, Weyand \etal~\cite{Weyand01}, which introduced the dataset, is the only study that has trained the same backbone with the same settings (ResNet101-GeM with ArcFace) on GLDv2-clean. Our baseline is lower than~\cite{Weyand01}, because our dimensinality is 512, while other models based on ResNet101 use 2048. Yet, \autoref{tab:table11} shows that our best model trained on GLDv2-clean outperforms~\cite{Weyand01} by a large margin. But the most important comparison is with SOLAR~\cite{Ng01}, also based on self-attention, which has trained ResNet101-GeM on GLDv1-noisy. On this training set, our best model clearly outperforms~\cite{Ng01} despite lower dimensionality.
+
+%------------------------------------------------------------------------------
+
+\paragraph{Comparison with state of the art}
+
+\autoref{tab:table_exp_all} shows the performance of four variants of our model, \ie baseline with or without local/global attention, and compares them against state-of-the-art (SOTA) methods based on global descriptors without re-ranking on the complete set of benchmarks, including distractors. Both local and global attention bring significant gain over the baseline. The effect of global is stronger, while the gain of the two is additive in the combination. The best results are achieved by the global-local attention network (baseline+global+local). With this model, we outperform previous best methods on most benchmarks except mP@10 on \rpar~(medium) and \rpar$+$\r1m~(medium), where we are outperformed by~\cite{Radenovic01, RITAC18}. These results demonstrate that our approach is effective for landmark image retrieval. \autoref{fig:fig8} shows some examples of our ranking results.

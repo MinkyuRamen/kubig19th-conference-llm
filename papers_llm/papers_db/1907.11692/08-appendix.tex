@@ -1,0 +1,25 @@
+\appendix
+
+\input{tables/roberta_all_large_glue.tex}
+\input{tables/pretraining_hyperparams.tex}
+\input{tables/roberta_glue_finetune_hyperparams.tex}
+
+\section*{Appendix for ``RoBERTa: A Robustly Optimized BERT Pretraining Approach"}
+
+\section{Full results on GLUE}
+
+In Table~\ref{tab:roberta_all_large_glue} we present the full set of development set results for \ourmodel{}.
+We present results for a $\textsc{large}$ configuration that follows \bertlarge{}, as well as a $\textsc{base}$ configuration that follows \bertbase{}.
+
+\section{Pretraining Hyperparameters}
+Table~\ref{tab:pretraining_hyperparams} describes the hyperparameters for pretraining of \ourmodellarge{} and \ourmodelbase{} 
+
+\section{Finetuning Hyperparameters}
+\label{app:hyperparams}
+
+Finetuning hyperparameters for RACE, SQuAD and GLUE are given in  Table~\ref{tab:roberta_glue_finetune_hyperparams}.
+We select the best hyperparameter values based on the median of 5 random seeds for each task.
+
+
+
+

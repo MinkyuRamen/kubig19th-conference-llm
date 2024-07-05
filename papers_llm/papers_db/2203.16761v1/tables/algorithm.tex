@@ -1,0 +1,74 @@
+\begin{algorithm}
+    \small
+    \caption{MeMOT Algorithm}
+    \hspace*{\algorithmicindent} \textbf{Input}: A sequence of video frames $\mathbi{I} = \{I^0, I^1, \cdots, I^T\}$.\\
+    \hspace*{\algorithmicindent} \textbf{Memory}: A set of track states $\mathbi{X} = \{X_0, X_1, \cdots, X_K\}$ with $X_k = \{\widehat{\mathbi{q}}_k^{t_0}, \widehat{\mathbi{q}}_k^{t_1}, \cdots, \widehat{\mathbi{q}}_k^{t_N}\}$ of identity embeddings $\widehat{\mathbi{q}}_k^t \in \mathbb{R}^d$.\\
+    % $\widehat{\mathbi{q}}_k^t \leftarrow \mathbi{0}$ if object $k$ does not appear in $I^t$. \\
+    \hspace*{\algorithmicindent} \textbf{Output}: A set of trajectories $\mathbfcal{T} = \{\mathcal{T}_0, \mathcal{T}_1, \cdots, \mathcal{T}_K\}$ with $\mathcal{T}_k = \{\mathbi{b}_k^{t_0}, \mathbi{b}_k^{t_1}, \cdots, \mathbi{b}_k^{t_N}\}$ of bounding boxes $\mathbi{b}_k^{t} = (x, y, w, h)$.
+    \begin{algorithmic}[1]
+    \State $\mathbi{X} \leftarrow \O$
+    \For{$I^t \in \mathbi{I}$}
+        \State $\mathbfcal{T}_{new}, \mathbi{X}_{new} \leftarrow \O, \O$
+        
+        % hypothesis generation
+        \State $z_1^t \leftarrow \Theta_H$.encoder($I^t$)
+        \State $\mathbi{Q}_{pro}^t \leftarrow \Theta_H$.decoder($z_1^t$)
+        
+        % encoding
+        \State $\mathbi{Q}^t_{AST} \leftarrow \Theta_E$.$f_{short}(\mathbi{X}^{t-1}, \mathbi{X}^{t-1-T_s:t-1})$
+        \State $\mathbi{Q}^t_{ALT} \leftarrow \Theta_E$.$f_{long}(\mathbi{Q}_{dmat}^{t-1}, \mathbi{X}^{t-1-T_l:t-1})$
+        \State $[\mathbi{Q}_{tck}^t, \mathbi{Q}_{dmat}^{t}] \leftarrow \Theta_E$.$f_{fuse}([\mathbi{Q}^t_{AST}, \mathbi{Q}^t_{ALT}])$
+        
+        % decoding
+        \State $[\widehat{\mathbi{Q}}_{pro}^t, \widehat{\mathbi{Q}}_{tck}^t] \leftarrow \Theta_D$.association\_solver$([\mathbi{Q}_{pro}^t, \mathbi{Q}_{tck}^{t}], z_1^t)$
+        \State $[\mathbi{B}^t_{pro}, \mathbi{B}^t_{tck}], [\mathbi{S}^t_{pro}, \mathbi{S}^t_{tck}] \leftarrow \Theta_D$.predictor$([\widehat{\mathbi{Q}}_{pro}^t, \widehat{\mathbi{Q}}_{tck}^t])$
+        
+        % update
+        \For{$\mathbi{b}^t_{k} \in \mathbi{B}^t_{tck}$, $\mathbi{s}^t_{k} \in \mathbi{S}^t_{tck}$, $\widehat{\mathbi{q}}^t_{k} \in \widehat{\mathbi{Q}}^t_{tck}$}
+            \If{$\mathbi{s}^t_{k} \ge$ $\epsilon_{tck}$}
+                \State $\mathcal{T}_k \leftarrow \mathcal{T}_k + \{\mathbi{b}^t_{k}\}$
+                \State $X_k \leftarrow X_k + \{\widehat{\mathbi{q}}^t_{k}\}$
+            \EndIf
+        \EndFor
+        \For{$\mathbi{b}^t_{k} \in \mathbi{B}^t_{pro}$, $\mathbi{s}^t_{k} \in \mathbi{S}^t_{pro}$, $\widehat{\mathbi{q}}^t_{k} \in \widehat{\mathbi{Q}}^t_{pro}$}
+            \If{$\mathbi{s}^t_{k} \ge$ $\epsilon_{pro}$}
+                \State $\mathbfcal{T}_{new} \leftarrow \mathbfcal{T}_{new} + \{\{\mathbi{b}^t_{k}\}\}$
+                \State $\mathbi{X}_{new} \leftarrow \mathbi{X}_{new} + \{\{\widehat{\mathbi{q}}^t_{k}\}\}$
+            \EndIf
+        \EndFor
+        \State $\mathbfcal{T} \leftarrow \mathbfcal{T} + \mathbfcal{T}_{new}$
+        \State $\mathbi{X} \leftarrow \mathbi{X} + \mathbi{X}_{new}$
+    \EndFor
+    \end{algorithmic}
+    \label{alg:memot}
+\end{algorithm}
+
+% \begin{algorithm}
+%     \small
+%     \caption{Workflow of MeMOT}
+%     \hspace*{\algorithmicindent} \textbf{Input}: input video frame $I^t$, external spatio-temporal memory $\mathbi{X}^{t-1-T:t-1} \in \mathbb{R}^{N^t_{tck} \times T \times d}$, and DMAT $\mathbi{Q}_{dmat}^{t-1} \in \mathbb{R}^{N^t_{tck} \times d}$ \\
+%     \hspace*{\algorithmicindent} \textbf{Output}: bounding boxes $[\mathbi{B}^t_{pro}, \mathbi{B}^t_{tck}]$ and confidence scores $[\mathbi{S}^t_{pro}, \mathbi{S}^t_{tck}]$ for new and tracked objects
+%     \begin{algorithmic}[1]
+%         \FUNCDO{$\Theta_H$ generates proposal embeddings}
+%             \State Extract image feature $z_0^t$ using $I^t$
+%             \State Encode image feature $z_1^t$ using $z_0^t$
+%             \State Decode proposal embeddings $\mathbi{Q}_{pro}^t \in \mathbb{R}^{N^t_{pro} \times d}$
+%         \ENDFUNCDO
+        
+%         \FUNCDO{$\Theta_E$ aggregates embeddings for each track}
+%             \State Compute AST $q^t_{AST}$ using $\mathbi{X}^{t-1-T_s:t-1}$ and $\mathbi{X}^{t-1}$
+%             \State Compute ALT $q^t_{ALT}$ using $\mathbi{X}^{t-1-T_l:t-1}$ and $\mathbi{Q}_{dmat}^{t-1}$
+%             \State Compute track embeddings $\mathbi{Q}_{tck}^t$ and new DMAT $\mathbi{Q}_{dmat}^{t}$ using $f_{fuse}([q^t_{AST}, q^t_{ALT}])$ as in Eq.~\ref{eq:memory}
+%             \State Update DMAT with $\mathbi{Q}_{dmat}^{t}$ for next step $t+1$
+%         \ENDFUNCDO
+        
+%         \FUNCDO{$\Theta_D$ updates tracked objects and initiates new objects}
+%             \State Compute $[\widehat{\mathbi{Q}}_{pro}^t, \widehat{\mathbi{Q}}_{tck}^t]$ using $[\mathbi{Q}_{pro}^t, \mathbi{Q}_{tck}^t]$ and $z_1^t$
+%             \State Compute bounding boxes $[\mathbi{B}^t_{pro}, \mathbi{B}^t_{tck}]$ and confidence scores $[\mathbi{S}^t_{pro}, \mathbi{S}^t_{tck}]$ for $[\widehat{\mathbi{Q}}_{pro}^t, \widehat{\mathbi{Q}}_{tck}^t]$ using MLPs
+%             \State Update $\mathbi{X}^{t-T:t}$ with $\widehat{\mathbi{Q}}_{pro}^t$ for $t+1$
+%             \State Update $\mathbi{X}^{t-T:t}$ with $\mathbi{X}^{t-1-T:t-1}$ and $\widehat{\mathbi{Q}}_{tck}^t$ for $t+1$
+%         \ENDFUNCDO
+        
+%     \end{algorithmic}
+%     \label{alg:memot}
+% \end{algorithm}

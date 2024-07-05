@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\bf Hyperparam  & \bf RACE & \bf SQuAD & \bf GLUE \\
+\midrule 
+Learning Rate & 1e-5 & 1.5e-5 & \{1e-5, 2e-5, 3e-5\}\\
+Batch Size & 16 & 48  & \{16, 32\}\\
+Weight Decay & 0.1 & 0.01 & 0.1 \\
+Max Epochs & 4 & 2 & 10 \\
+Learning Rate Decay & Linear &Linear & Linear \\
+Warmup ratio & 0.06 & 0.06 & 0.06 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\caption{
+Hyperparameters for finetuning \ourmodellarge{} on RACE, SQuAD and GLUE.
+}
+\label{tab:roberta_glue_finetune_hyperparams}
+\end{table*}

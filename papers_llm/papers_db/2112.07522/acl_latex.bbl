@@ -1,0 +1,914 @@
+\begin{thebibliography}{105}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Abney(2004)}]{abney-2004-understanding}
+Steven Abney. 2004.
+\newblock \href {https://doi.org/10.1162/0891201041850876} {Understanding the
+  {Y}arowsky algorithm}.
+\newblock \emph{Computational Linguistics}, 30(3):365--395.
+
+\bibitem[{Adelani et~al.(2021)Adelani, Abbott, Neubig, D’souza, Kreutzer,
+  Lignos, Palen-Michel, Buzaaba, Rijhwani, Ruder, Mayhew, Azime, Muhammad,
+  Emezue, Nakatumba-Nabende, Ogayo, Anuoluwapo, Gitau, Mbaye, Alabi, Yimam,
+  Gwadabe, Ezeani, Niyongabo, Mukiibi, Otiende, Orife, David, Ngom, Adewumi,
+  Rayson, Adeyemi, Muriuki, Anebi, Chukwuneke, Odu, Wairagala, Oyerinde, Siro,
+  Bateesa, Oloyede, Wambui, Akinode, Nabagereka, Katusiime, Awokoya, MBOUP,
+  Gebreyohannes, Tilaye, Nwaike, Wolde, Faye, Sibanda, Ahia, Dossou, Ogueji,
+  DIOP, Diallo, Akinfaderin, Marengereke, and Osei}]{tacl_a_00416}
+David~Ifeoluwa Adelani, Jade Abbott, Graham Neubig, Daniel D’souza, Julia
+  Kreutzer, Constantine Lignos, Chester Palen-Michel, Happy Buzaaba, Shruti
+  Rijhwani, Sebastian Ruder, Stephen Mayhew, Israel~Abebe Azime, Shamsuddeen~H.
+  Muhammad, Chris~Chinenye Emezue, Joyce Nakatumba-Nabende, Perez Ogayo, Aremu
+  Anuoluwapo, Catherine Gitau, Derguene Mbaye, Jesujoba Alabi, Seid~Muhie
+  Yimam, Tajuddeen~Rabiu Gwadabe, Ignatius Ezeani, Rubungo~Andre Niyongabo,
+  Jonathan Mukiibi, Verrah Otiende, Iroro Orife, Davis David, Samba Ngom, Tosin
+  Adewumi, Paul Rayson, Mofetoluwa Adeyemi, Gerald Muriuki, Emmanuel Anebi,
+  Chiamaka Chukwuneke, Nkiruka Odu, Eric~Peter Wairagala, Samuel Oyerinde,
+  Clemencia Siro, Tobius~Saul Bateesa, Temilola Oloyede, Yvonne Wambui, Victor
+  Akinode, Deborah Nabagereka, Maurice Katusiime, Ayodele Awokoya, Mouhamadane
+  MBOUP, Dibora Gebreyohannes, Henok Tilaye, Kelechi Nwaike, Degaga Wolde,
+  Abdoulaye Faye, Blessing Sibanda, Orevaoghene Ahia, Bonaventure F.~P. Dossou,
+  Kelechi Ogueji, Thierno~Ibrahima DIOP, Abdoulaye Diallo, Adewale Akinfaderin,
+  Tendai Marengereke, and Salomey Osei. 2021.
+\newblock \href {https://doi.org/10.1162/tacl_a_00416} {{MasakhaNER: Named
+  Entity Recognition for African Languages}}.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  9:1116--1131.
+
+\bibitem[{Alonso et~al.(2008)Alonso, Rose, and Stewart}]{crowdsourcingagg}
+Omar Alonso, Daniel~E. Rose, and Benjamin Stewart. 2008.
+\newblock \href {https://doi.org/10.1145/1480506.1480508} {Crowdsourcing for
+  relevance evaluation}.
+\newblock \emph{SIGIR Forum}, 42(2):9–15.
+
+\bibitem[{Bai et~al.(2021)Bai, Ritter, and Xu}]{bai2021pre}
+Fan Bai, Alan Ritter, and Wei Xu. 2021.
+\newblock \href {https://aclanthology.org/2021.emnlp-main.409} {Pre-train or
+  annotate? domain adaptation with a constrained budget}.
+\newblock In \emph{Proceedings of the 2021 Conference on Empirical Methods in
+  Natural Language Processing}, pages 5002--5015, Online and Punta Cana,
+  Dominican Republic. Association for Computational Linguistics.
+
+\bibitem[{Belinkov and Glass(2019)}]{belinkov-glass-2019-analysis}
+Yonatan Belinkov and James Glass. 2019.
+\newblock \href {https://doi.org/10.1162/tacl_a_00254} {Analysis methods in
+  neural language processing: A survey}.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  7:49--72.
+
+\bibitem[{Bhardwaj et~al.(2019)Bhardwaj, Aggarwal, and
+  Mausam}]{bhardwaj-etal-2019-carb}
+Sangnie Bhardwaj, Samarth Aggarwal, and Mausam Mausam. 2019.
+\newblock \href {https://doi.org/10.18653/v1/D19-1651} {{C}a{RB}: A
+  crowdsourced benchmark for open {IE}}.
+\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in
+  Natural Language Processing and the 9th International Joint Conference on
+  Natural Language Processing (EMNLP-IJCNLP)}, pages 6262--6267, Hong Kong,
+  China. Association for Computational Linguistics.
+
+\bibitem[{Bommasani et~al.(2021)Bommasani, Hudson, Adeli, Altman, Arora, von
+  Arx, Bernstein, Bohg, Bosselut, Brunskill et~al.}]{Fundationmodelpaper}
+Rishi Bommasani, Drew~A Hudson, Ehsan Adeli, Russ Altman, Simran Arora, Sydney
+  von Arx, Michael~S Bernstein, Jeannette Bohg, Antoine Bosselut, Emma
+  Brunskill, et~al. 2021.
+\newblock On the opportunities and risks of foundation models.
+\newblock \emph{arXiv preprint arXiv:2108.07258}.
+
+\bibitem[{Brown et~al.(2020)Brown, Mann, Ryder, Subbiah, Kaplan, Dhariwal,
+  Neelakantan, Shyam, Sastry, Askell, Agarwal, Herbert-Voss, Krueger, Henighan,
+  Child, Ramesh, Ziegler, Wu, Winter, Hesse, Chen, Sigler, Litwin, Gray, Chess,
+  Clark, Berner, McCandlish, Radford, Sutskever, and Amodei}]{GPT3paper}
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared~D Kaplan, Prafulla
+  Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell,
+  Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon
+  Child, Aditya Ramesh, Daniel Ziegler, Jeffrey Wu, Clemens Winter, Chris
+  Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess,
+  Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever,
+  and Dario Amodei. 2020.
+\newblock \href
+  {https://proceedings.neurips.cc/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf}
+  {Language models are few-shot learners}.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~33, pages 1877--1901. Curran Associates, Inc.
+
+\bibitem[{Callison-Burch(2009)}]{callison-burch-2009-fast}
+Chris Callison-Burch. 2009.
+\newblock \href {https://aclanthology.org/D09-1030} {Fast, cheap, and creative:
+  Evaluating translation quality using {A}mazon{'}s {M}echanical {T}urk}.
+\newblock In \emph{Proceedings of the 2009 Conference on Empirical Methods in
+  Natural Language Processing}, pages 286--295, Singapore. Association for
+  Computational Linguistics.
+
+\bibitem[{Callison-Burch and Dredze(2010)}]{crowdsourws}
+Chris Callison-Burch and Mark Dredze, editors. 2010.
+\newblock \href {https://aclanthology.org/W10-0700} {\emph{Proceedings of the
+  {NAACL} {HLT} 2010 Workshop on Creating Speech and Language Data with
+  {A}mazon{'}s Mechanical Turk}}. Association for Computational Linguistics,
+  Los Angeles.
+
+\bibitem[{Cohn et~al.(1994)Cohn, Atlas, and Ladner}]{cohn1994improving}
+David Cohn, Les Atlas, and Richard Ladner. 1994.
+\newblock Improving generalization with active learning.
+\newblock \emph{Machine learning}, 15(2):201--221.
+
+\bibitem[{Cohn et~al.(1996)Cohn, Ghahramani, and Jordan}]{cohn1996active}
+David~A Cohn, Zoubin Ghahramani, and Michael~I Jordan. 1996.
+\newblock Active learning with statistical models.
+\newblock \emph{Journal of artificial intelligence research}, 4:129--145.
+
+\bibitem[{Dagan et~al.(2006)Dagan, Glickman, and Magnini}]{rtedata}
+Ido Dagan, Oren Glickman, and Bernardo Magnini. 2006.
+\newblock The pascal recognising textual entailment challenge.
+\newblock In \emph{Machine Learning Challenges. Evaluating Predictive
+  Uncertainty, Visual Object Classification, and Recognising Tectual
+  Entailment}, pages 177--190, Berlin, Heidelberg. Springer Berlin Heidelberg.
+
+\bibitem[{Devlin et~al.(2019)Devlin, Chang, Lee, and
+  Toutanova}]{devlin-etal-2019-bert}
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019.
+\newblock \href {https://doi.org/10.18653/v1/N19-1423} {{BERT}: Pre-training of
+  deep bidirectional transformers for language understanding}.
+\newblock In \emph{Proceedings of the 2019 Conference of the North {A}merican
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies, Volume 1 (Long and Short Papers)}, pages 4171--4186,
+  Minneapolis, Minnesota. Association for Computational Linguistics.
+
+\bibitem[{Dumitrache et~al.(2021)Dumitrache, Inel, Timmermans, Ortiz, Sips,
+  Aroyo, and Welty}]{dumitrache2021empirical}
+Anca Dumitrache, Oana Inel, Benjamin Timmermans, Carlos Ortiz, Robert-Jan Sips,
+  Lora Aroyo, and Chris Welty. 2021.
+\newblock Empirical methodology for crowdsourcing ground truth.
+\newblock \emph{Semantic Web}, 12(3):1--19.
+
+\bibitem[{Ein-Dor et~al.(2020)Ein-Dor, Halfon, Gera, Shnarch, Dankin, Choshen,
+  Danilevsky, Aharonov, Katz, and Slonim}]{ein-dor-etal-2020-active}
+Liat Ein-Dor, Alon Halfon, Ariel Gera, Eyal Shnarch, Lena Dankin, Leshem
+  Choshen, Marina Danilevsky, Ranit Aharonov, Yoav Katz, and Noam Slonim. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.emnlp-main.638} {{A}ctive
+  {L}earning for {BERT}: {A}n {E}mpirical {S}tudy}.
+\newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 7949--7962, Online. Association
+  for Computational Linguistics.
+
+\bibitem[{Felder and Brent(2009)}]{felder2009active}
+Richard~M Felder and Rebecca Brent. 2009.
+\newblock Active learning: An introduction.
+\newblock \emph{ASQ higher education brief}, 2(4):1--5.
+
+\bibitem[{Gao et~al.(2021)Gao, Fisch, and Chen}]{gao-etal-2021-making}
+Tianyu Gao, Adam Fisch, and Danqi Chen. 2021.
+\newblock \href {https://doi.org/10.18653/v1/2021.acl-long.295} {Making
+  pre-trained language models better few-shot learners}.
+\newblock In \emph{Proceedings of the 59th Annual Meeting of the Association
+  for Computational Linguistics and the 11th International Joint Conference on
+  Natural Language Processing (Volume 1: Long Papers)}, pages 3816--3830,
+  Online. Association for Computational Linguistics.
+
+\bibitem[{Guo et~al.(2017)Guo, Pleiss, Sun, and
+  Weinberger}]{guo2017calibration}
+Chuan Guo, Geoff Pleiss, Yu~Sun, and Kilian~Q Weinberger. 2017.
+\newblock On calibration of modern neural networks.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  1321--1330. PMLR.
+
+\bibitem[{Hachey et~al.(2005)Hachey, Alex, and
+  Becker}]{hachey-etal-2005-investigating}
+Ben Hachey, Beatrice Alex, and Markus Becker. 2005.
+\newblock \href {https://aclanthology.org/W05-0619} {Investigating the effects
+  of selective sampling on the annotation task}.
+\newblock In \emph{Proceedings of the Ninth Conference on Computational Natural
+  Language Learning ({C}o{NLL}-2005)}, pages 144--151, Ann Arbor, Michigan.
+  Association for Computational Linguistics.
+
+\bibitem[{He et~al.(2015)He, Lewis, and Zettlemoyer}]{he-etal-2015-question}
+Luheng He, Mike Lewis, and Luke Zettlemoyer. 2015.
+\newblock \href {https://doi.org/10.18653/v1/D15-1076} {Question-answer driven
+  semantic role labeling: Using natural language to annotate natural language}.
+\newblock In \emph{Proceedings of the 2015 Conference on Empirical Methods in
+  Natural Language Processing}, pages 643--653, Lisbon, Portugal. Association
+  for Computational Linguistics.
+
+\bibitem[{Hewitt and Liang(2019)}]{hewitt-liang-2019-designing}
+John Hewitt and Percy Liang. 2019.
+\newblock \href {https://doi.org/10.18653/v1/D19-1275} {Designing and
+  interpreting probes with control tasks}.
+\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in
+  Natural Language Processing and the 9th International Joint Conference on
+  Natural Language Processing (EMNLP-IJCNLP)}, pages 2733--2743, Hong Kong,
+  China. Association for Computational Linguistics.
+
+\bibitem[{Hewitt and Manning(2019)}]{hewitt-manning-2019-structural}
+John Hewitt and Christopher~D. Manning. 2019.
+\newblock \href {https://doi.org/10.18653/v1/N19-1419} {{A} structural probe
+  for finding syntax in word representations}.
+\newblock In \emph{Proceedings of the 2019 Conference of the North {A}merican
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies, Volume 1 (Long and Short Papers)}, pages 4129--4138,
+  Minneapolis, Minnesota. Association for Computational Linguistics.
+
+\bibitem[{Hinton et~al.(2015)Hinton, Vinyals, and Dean}]{hinton2015distilling}
+Geoffrey Hinton, Oriol Vinyals, and Jeff Dean. 2015.
+\newblock Distilling the knowledge in a neural network.
+\newblock \emph{arXiv preprint arXiv:1503.02531}.
+
+\bibitem[{Houlsby et~al.(2019)Houlsby, Giurgiu, Jastrzebski, Morrone,
+  De~Laroussilhe, Gesmundo, Attariyan, and Gelly}]{adapterpaper}
+Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin
+  De~Laroussilhe, Andrea Gesmundo, Mona Attariyan, and Sylvain Gelly. 2019.
+\newblock Parameter-efficient transfer learning for nlp.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  2790--2799. PMLR.
+
+\bibitem[{Howe(2008)}]{howe2008crowdsourcing}
+Jeff Howe. 2008.
+\newblock \emph{Crowdsourcing: How the power of the crowd is driving the future
+  of business}.
+\newblock Random House.
+
+\bibitem[{Howe et~al.(2006)}]{howe2006rise}
+Jeff Howe et~al. 2006.
+\newblock The rise of crowdsourcing.
+\newblock \emph{Wired magazine}, 14(6):1--4.
+
+\bibitem[{Hu et~al.(2020)Hu, Ruder, Siddhant, Neubig, Firat, and
+  Johnson}]{pmlr-v119-hu20b}
+Junjie Hu, Sebastian Ruder, Aditya Siddhant, Graham Neubig, Orhan Firat, and
+  Melvin Johnson. 2020.
+\newblock \href {https://proceedings.mlr.press/v119/hu20b.html} {{XTREME}: A
+  massively multilingual multi-task benchmark for evaluating cross-lingual
+  generalisation}.
+\newblock In \emph{Proceedings of the 37th International Conference on Machine
+  Learning}, volume 119 of \emph{Proceedings of Machine Learning Research},
+  pages 4411--4421. PMLR.
+
+\bibitem[{Jamison and Gurevych(2015)}]{jamison-gurevych-2015-noise}
+Emily Jamison and Iryna Gurevych. 2015.
+\newblock \href {https://doi.org/10.18653/v1/D15-1035} {Noise or additional
+  information? leveraging crowdsource annotation item agreement for natural
+  language tasks.}
+\newblock In \emph{Proceedings of the 2015 Conference on Empirical Methods in
+  Natural Language Processing}, pages 291--297, Lisbon, Portugal. Association
+  for Computational Linguistics.
+
+\bibitem[{Jiao et~al.(2020)Jiao, Yin, Shang, Jiang, Chen, Li, Wang, and
+  Liu}]{jiao-etal-2020-tinybert}
+Xiaoqi Jiao, Yichun Yin, Lifeng Shang, Xin Jiang, Xiao Chen, Linlin Li, Fang
+  Wang, and Qun Liu. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.findings-emnlp.372}
+  {{T}iny{BERT}: Distilling {BERT} for natural language understanding}.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2020}, pages 4163--4174, Online. Association for Computational
+  Linguistics.
+
+\bibitem[{Kaplan et~al.(2020)Kaplan, McCandlish, Henighan, Brown, Chess, Child,
+  Gray, Radford, Wu, and Amodei}]{kaplan2020scaling}
+Jared Kaplan, Sam McCandlish, Tom Henighan, Tom~B Brown, Benjamin Chess, Rewon
+  Child, Scott Gray, Alec Radford, Jeffrey Wu, and Dario Amodei. 2020.
+\newblock Scaling laws for neural language models.
+\newblock \emph{arXiv preprint arXiv:2001.08361}.
+
+\bibitem[{Kassner et~al.(2021)Kassner, Dufter, and
+  Sch{\"u}tze}]{kassner-etal-2021-multilingual}
+Nora Kassner, Philipp Dufter, and Hinrich Sch{\"u}tze. 2021.
+\newblock \href {https://aclanthology.org/2021.eacl-main.284} {Multilingual
+  {LAMA}: Investigating knowledge in multilingual pretrained language models}.
+\newblock In \emph{Proceedings of the 16th Conference of the European Chapter
+  of the Association for Computational Linguistics: Main Volume}, pages
+  3250--3258, Online. Association for Computational Linguistics.
+
+\bibitem[{Khashabi et~al.(2021)Khashabi, Cohan, Shakeri, Hosseini, Pezeshkpour,
+  Alikhani, Aminnaseri, Bitaab, Brahman, Ghazarian, Gheini, Kabiri, Mahabagdi,
+  Memarrast, Mosallanezhad, Noury, Raji, Rasooli, Sadeghi, Azer, Samghabadi,
+  Shafaei, Sheybani, Tazarv, and Yaghoobzadeh}]{Khashabi2020ParsiNLUAS}
+Daniel Khashabi, Arman Cohan, Siamak Shakeri, Pedram Hosseini, Pouya
+  Pezeshkpour, Malihe Alikhani, Moin Aminnaseri, Marzieh Bitaab, Faeze Brahman,
+  Sarik Ghazarian, Mozhdeh Gheini, Arman Kabiri, Rabeeh~Karimi Mahabagdi, Omid
+  Memarrast, Ahmadreza Mosallanezhad, Erfan Noury, Shahab Raji, Mohammad~Sadegh
+  Rasooli, Sepideh Sadeghi, Erfan~Sadeqi Azer, Niloofar~Safi Samghabadi, Mahsa
+  Shafaei, Saber Sheybani, Ali Tazarv, and Yadollah Yaghoobzadeh. 2021.
+\newblock \href {https://doi.org/10.1162/tacl_a_00419} {{P}arsi{NLU}: A suite
+  of language understanding challenges for {P}ersian}.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  9:1147--1162.
+
+\bibitem[{Kingma and Ba(2015)}]{adampaper}
+Diederik~P. Kingma and Jimmy Ba. 2015.
+\newblock \href {http://arxiv.org/abs/1412.6980} {Adam: A method for stochastic
+  optimization}.
+\newblock In \emph{ICLR}.
+
+\bibitem[{Lan et~al.(2020)Lan, Chen, Goodman, Gimpel, Sharma, and
+  Soricut}]{albert}
+Zhenzhong Lan, Mingda Chen, Sebastian Goodman, Kevin Gimpel, Piyush Sharma, and
+  Radu Soricut. 2020.
+\newblock \href {https://openreview.net/forum?id=H1eA7AEtvS} {Albert: A lite
+  bert for self-supervised learning of language representations}.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Laws et~al.(2011)Laws, Scheible, and
+  Sch{\"u}tze}]{laws-etal-2011-activeb}
+Florian Laws, Christian Scheible, and Hinrich Sch{\"u}tze. 2011.
+\newblock \href {https://aclanthology.org/D11-1143} {Active learning with
+  {A}mazon {M}echanical {T}urk}.
+\newblock In \emph{Proceedings of the 2011 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1546--1556, Edinburgh, Scotland, UK.
+  Association for Computational Linguistics.
+
+\bibitem[{Lee et~al.(2013)}]{lee2013pseudo}
+Dong-Hyun Lee et~al. 2013.
+\newblock Pseudo-label: The simple and efficient semi-supervised learning
+  method for deep neural networks.
+\newblock In \emph{Workshop on challenges in representation learning, ICML},
+  volume~3, page 896.
+
+\bibitem[{Lee et~al.(2021)Lee, Klie, and Gurevych}]{lee2021annotation}
+Ji-Ung Lee, Jan-Christoph Klie, and Iryna Gurevych. 2021.
+\newblock Annotation curricula to implicitly train non-expert annotators.
+\newblock \emph{arXiv preprint arXiv:2106.02382}.
+
+\bibitem[{Lee et~al.(2020)Lee, Meyer, and Gurevych}]{lee-etal-2020-empowering}
+Ji-Ung Lee, Christian~M. Meyer, and Iryna Gurevych. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.acl-main.390} {{E}mpowering
+  {A}ctive {L}earning to {J}ointly {O}ptimize {S}ystem and {U}ser {D}emands}.
+\newblock In \emph{Proceedings of the 58th Annual Meeting of the Association
+  for Computational Linguistics}, pages 4233--4247, Online. Association for
+  Computational Linguistics.
+
+\bibitem[{Lester et~al.(2021)Lester, Al-Rfou, and Constant}]{Prompttuningpaper}
+Brian Lester, Rami Al-Rfou, and Noah Constant. 2021.
+\newblock \href {https://aclanthology.org/2021.emnlp-main.243} {The power of
+  scale for parameter-efficient prompt tuning}.
+\newblock In \emph{Proceedings of the 2021 Conference on Empirical Methods in
+  Natural Language Processing}, pages 3045--3059, Online and Punta Cana,
+  Dominican Republic. Association for Computational Linguistics.
+
+\bibitem[{Lewis and Gale(1994)}]{lewis1994sequential}
+David~D Lewis and William~A Gale. 1994.
+\newblock A sequential algorithm for training text classifiers.
+\newblock In \emph{SIGIR’94}, pages 3--12. Springer.
+
+\bibitem[{Li and Liang(2021)}]{lisaprefix}
+Xiang~Lisa Li and Percy Liang. 2021.
+\newblock \href {https://doi.org/10.18653/v1/2021.acl-long.353} {Prefix-tuning:
+  Optimizing continuous prompts for generation}.
+\newblock In \emph{Proceedings of the 59th Annual Meeting of the Association
+  for Computational Linguistics and the 11th International Joint Conference on
+  Natural Language Processing (Volume 1: Long Papers)}, pages 4582--4597,
+  Online. Association for Computational Linguistics.
+
+\bibitem[{Liang et~al.(2020)Liang, Zou, and Yu}]{liang-etal-2020-alice}
+Weixin Liang, James Zou, and Zhou Yu. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.emnlp-main.355} {{ALICE}:
+  Active learning with contrastive natural language explanations}.
+\newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 4380--4391, Online. Association
+  for Computational Linguistics.
+
+\bibitem[{Lin et~al.(2021)Lin, Mihaylov, Artetxe, Wang, Chen, Simig, Ott,
+  Goyal, Bhosale, Du et~al.}]{lin2021few}
+Xi~Victoria Lin, Todor Mihaylov, Mikel Artetxe, Tianlu Wang, Shuohui Chen,
+  Daniel Simig, Myle Ott, Naman Goyal, Shruti Bhosale, Jingfei Du, et~al. 2021.
+\newblock Few-shot learning with multilingual language models.
+\newblock \emph{arXiv preprint arXiv:2112.10668}.
+
+\bibitem[{Liu et~al.(2019)Liu, Gardner, Belinkov, Peters, and
+  Smith}]{liulinguistic}
+Nelson~F. Liu, Matt Gardner, Yonatan Belinkov, Matthew~E. Peters, and Noah~A.
+  Smith. 2019.
+\newblock \href {https://doi.org/10.18653/v1/N19-1112} {Linguistic knowledge
+  and transferability of contextual representations}.
+\newblock In \emph{Proceedings of the 2019 Conference of the North {A}merican
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies, Volume 1 (Long and Short Papers)}, pages 1073--1094,
+  Minneapolis, Minnesota. Association for Computational Linguistics.
+
+\bibitem[{Liu et~al.(2021{\natexlab{a}})Liu, Yuan, Fu, Jiang, Hayashi, and
+  Neubig}]{liu2021pre}
+Pengfei Liu, Weizhe Yuan, Jinlan Fu, Zhengbao Jiang, Hiroaki Hayashi, and
+  Graham Neubig. 2021{\natexlab{a}}.
+\newblock Pre-train, prompt, and predict: A systematic survey of prompting
+  methods in natural language processing.
+\newblock \emph{arXiv preprint arXiv:2107.13586}.
+
+\bibitem[{Liu et~al.(2021{\natexlab{b}})Liu, Zheng, Du, Ding, Qian, Yang, and
+  Tang}]{Ptuningpaper}
+Xiao Liu, Yanan Zheng, Zhengxiao Du, Ming Ding, Yujie Qian, Zhilin Yang, and
+  Jie Tang. 2021{\natexlab{b}}.
+\newblock {GPT} understands, too.
+\newblock \emph{arXiv preprint arXiv:2103.10385}.
+
+\bibitem[{Loshchilov and Hutter(2019)}]{adamw}
+Ilya Loshchilov and Frank Hutter. 2019.
+\newblock \href {https://openreview.net/forum?id=Bkg6RiCqY7} {Decoupled weight
+  decay regularization}.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Marcus et~al.(1993)Marcus, Santorini, and
+  Marcinkiewicz}]{marcus-etal-1993-building}
+Mitchell~P. Marcus, Beatrice Santorini, and Mary~Ann Marcinkiewicz. 1993.
+\newblock \href {https://aclanthology.org/J93-2004} {Building a large annotated
+  corpus of {E}nglish: The {P}enn {T}reebank}.
+\newblock \emph{Computational Linguistics}, 19(2):313--330.
+
+\bibitem[{Margatina et~al.(2021)Margatina, Vernikos, Barrault, and
+  Aletras}]{margatina2021active}
+Katerina Margatina, Giorgos Vernikos, Lo{\"\i}c Barrault, and Nikolaos Aletras.
+  2021.
+\newblock \href {https://aclanthology.org/2021.emnlp-main.51} {Active learning
+  by acquiring contrastive examples}.
+\newblock In \emph{Proceedings of the 2021 Conference on Empirical Methods in
+  Natural Language Processing}, pages 650--663, Online and Punta Cana,
+  Dominican Republic. Association for Computational Linguistics.
+
+\bibitem[{Mi et~al.(2021{\natexlab{a}})Mi, Li, Wang, Jiang, and
+  Liu}]{mi2021cins}
+Fei Mi, Yitong Li, Yasheng Wang, Xin Jiang, and Qun Liu. 2021{\natexlab{a}}.
+\newblock Cins: Comprehensive instruction for few-shot learning in
+  task-oriented dialog systems.
+\newblock \emph{arXiv preprint arXiv:2109.04645}.
+
+\bibitem[{Mi et~al.(2021{\natexlab{b}})Mi, Zhou, Kong, Cai, Huang, and
+  Faltings}]{mi2021self}
+Fei Mi, Wanhao Zhou, Lingjing Kong, Fengyu Cai, Minlie Huang, and Boi Faltings.
+  2021{\natexlab{b}}.
+\newblock Self-training improves pre-training for few-shot learning in
+  task-oriented dialog systems.
+\newblock In \emph{Proceedings of the 2021 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1887--1898.
+
+\bibitem[{Miller et~al.(1993)Miller, Leacock, Tengi, and
+  Bunker}]{miller-etal-1993-semantic}
+George~A. Miller, Claudia Leacock, Randee Tengi, and Ross~T. Bunker. 1993.
+\newblock \href {https://aclanthology.org/H93-1061} {A semantic concordance}.
+\newblock In \emph{{H}uman {L}anguage {T}echnology: Proceedings of a Workshop
+  Held at Plainsboro, New Jersey, March 21-24, 1993}.
+
+\bibitem[{Monarch(2021)}]{monarch2021human}
+Robert~Munro Monarch. 2021.
+\newblock \emph{Human-in-the-Loop Machine Learning: Active learning and
+  annotation for human-centered AI}.
+\newblock Simon and Schuster.
+
+\bibitem[{Nangia et~al.(2021)Nangia, Sugawara, Trivedi, Warstadt, Vania, and
+  Bowman}]{nangia-etal-2021-ingredients}
+Nikita Nangia, Saku Sugawara, Harsh Trivedi, Alex Warstadt, Clara Vania, and
+  Samuel~R. Bowman. 2021.
+\newblock \href {https://doi.org/10.18653/v1/2021.acl-long.98} {What
+  ingredients make for an effective crowdsourcing protocol for difficult {NLU}
+  data collection tasks?}
+\newblock In \emph{Proceedings of the 59th Annual Meeting of the Association
+  for Computational Linguistics and the 11th International Joint Conference on
+  Natural Language Processing (Volume 1: Long Papers)}, pages 1221--1235,
+  Online. Association for Computational Linguistics.
+
+\bibitem[{Park et~al.(2021)Park, Moon, Kim, Cho, Han, Park, Song, Kim, Song,
+  Oh, Lee, Oh, Lyu, kuk Jeong, Lee, gyu Seo, Lee, Kim, Lee, Jang, Do, Kim, Lim,
+  Lee, Park, Shin, Kim, Park, Oh, Ha, and Cho}]{Park2021KLUEKL}
+Sungjoon Park, Jihyung Moon, Sung-Dong Kim, Won~Ik Cho, Jiyoon Han, Jangwon
+  Park, Chisung Song, Junseong Kim, Yongsook Song, Tae~Hwan Oh, Joohong Lee,
+  Juhyun Oh, Sungwon Lyu, Young kuk Jeong, Inkwon Lee, Sang gyu Seo, Dongjun
+  Lee, Hyunwoo Kim, Myeonghwa Lee, Seongbo Jang, Seungwon Do, Sunkyoung Kim,
+  Kyungtae Lim, Jongwon Lee, Kyumin Park, Jamin Shin, Seonghyun Kim, Lucy Park,
+  Alice~H. Oh, Jung-Woo Ha, and Kyunghyun Cho. 2021.
+\newblock {KLUE}: Korean language understanding evaluation.
+\newblock \emph{ArXiv}, abs/2105.09680.
+
+\bibitem[{Paszke et~al.(2019)Paszke, Gross, Massa, Lerer, Bradbury, Chanan,
+  Killeen, Lin, Gimelshein, Antiga, Desmaison, Kopf, Yang, DeVito, Raison,
+  Tejani, Chilamkurthy, Steiner, Fang, Bai, and Chintala}]{torch}
+Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory
+  Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, Alban
+  Desmaison, Andreas Kopf, Edward Yang, Zachary DeVito, Martin Raison, Alykhan
+  Tejani, Sasank Chilamkurthy, Benoit Steiner, Lu~Fang, Junjie Bai, and Soumith
+  Chintala. 2019.
+\newblock \href
+  {https://proceedings.neurips.cc/paper/2019/file/bdbca288fee7f92f2bfa9f7012727740-Paper.pdf}
+  {Py{T}orch: An imperative style, high-performance deep learning library}.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~32. Curran Associates, Inc.
+
+\bibitem[{Patterson et~al.(2021)Patterson, Gonzalez, Le, Liang, Munguia,
+  Rothchild, So, Texier, and Dean}]{patterson2021carbon}
+David Patterson, Joseph Gonzalez, Quoc Le, Chen Liang, Lluis-Miquel Munguia,
+  Daniel Rothchild, David So, Maud Texier, and Jeff Dean. 2021.
+\newblock Carbon emissions and large neural network training.
+\newblock \emph{arXiv preprint arXiv:2104.10350}.
+
+\bibitem[{Paun et~al.(2018)Paun, Carpenter, Chamberlain, Hovy, Kruschwitz, and
+  Poesio}]{paun-etal-2018-comparing}
+Silviu Paun, Bob Carpenter, Jon Chamberlain, Dirk Hovy, Udo Kruschwitz, and
+  Massimo Poesio. 2018.
+\newblock \href {https://doi.org/10.1162/tacl_a_00040} {Comparing {B}ayesian
+  models of annotation}.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  6:571--585.
+
+\bibitem[{Paun and Hovy(2019)}]{emnlp-2019-aggregating}
+Silviu Paun and Dirk Hovy, editors. 2019.
+\newblock \href {https://aclanthology.org/D19-5900} {\emph{Proceedings of the
+  First Workshop on Aggregating and Analysing Crowdsourced Annotations for
+  NLP}}. Association for Computational Linguistics, Hong Kong, China.
+
+\bibitem[{Peters et~al.(2018)Peters, Neumann, Iyyer, Gardner, Clark, Lee, and
+  Zettlemoyer}]{ELMopaper}
+Matthew~E. Peters, Mark Neumann, Mohit Iyyer, Matt Gardner, Christopher Clark,
+  Kenton Lee, and Luke Zettlemoyer. 2018.
+\newblock \href {https://doi.org/10.18653/v1/N18-1202} {Deep contextualized
+  word representations}.
+\newblock In \emph{Proceedings of the 2018 Conference of the North {A}merican
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies, Volume 1 (Long Papers)}, pages 2227--2237, New Orleans,
+  Louisiana. Association for Computational Linguistics.
+
+\bibitem[{Petroni et~al.(2019)Petroni, Rockt{\"a}schel, Riedel, Lewis, Bakhtin,
+  Wu, and Miller}]{petroni-etal-2019-language}
+Fabio Petroni, Tim Rockt{\"a}schel, Sebastian Riedel, Patrick Lewis, Anton
+  Bakhtin, Yuxiang Wu, and Alexander Miller. 2019.
+\newblock \href {https://doi.org/10.18653/v1/D19-1250} {Language models as
+  knowledge bases?}
+\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in
+  Natural Language Processing and the 9th International Joint Conference on
+  Natural Language Processing (EMNLP-IJCNLP)}, pages 2463--2473, Hong Kong,
+  China. Association for Computational Linguistics.
+
+\bibitem[{Poerner et~al.(2020)Poerner, Waltinger, and
+  Sch{\"u}tze}]{poerner-etal-2020-e}
+Nina Poerner, Ulli Waltinger, and Hinrich Sch{\"u}tze. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.findings-emnlp.71}
+  {{E}-{BERT}: Efficient-yet-effective entity embeddings for {BERT}}.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2020}, pages 803--818, Online. Association for Computational
+  Linguistics.
+
+\bibitem[{Raffel et~al.(2020)Raffel, Shazeer, Roberts, Lee, Narang, Matena,
+  Zhou, Li, and Liu}]{t5paper}
+Colin Raffel, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael
+  Matena, Yanqi Zhou, Wei Li, and Peter~J. Liu. 2020.
+\newblock \href {http://jmlr.org/papers/v21/20-074.html} {Exploring the limits
+  of transfer learning with a unified text-to-text transformer}.
+\newblock \emph{Journal of Machine Learning Research}, 21(140):1--67.
+
+\bibitem[{Roemmele et~al.(2011)Roemmele, Bejan, and
+  Gordon}]{roemmele2011choice}
+Melissa Roemmele, Cosmin~Adrian Bejan, and Andrew~S Gordon. 2011.
+\newblock Choice of plausible alternatives: An evaluation of commonsense causal
+  reasoning.
+\newblock In \emph{2011 AAAI Spring Symposium Series}.
+
+\bibitem[{Rogers et~al.(2020)Rogers, Kovaleva, and Rumshisky}]{BERTologypaper}
+Anna Rogers, Olga Kovaleva, and Anna Rumshisky. 2020.
+\newblock \href {https://doi.org/10.1162/tacl_a_00349} {A primer in
+  {BERT}ology: What we know about how {BERT} works}.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  8:842--866.
+
+\bibitem[{Roit et~al.(2020)Roit, Klein, Stepanov, Mamou, Michael, Stanovsky,
+  Zettlemoyer, and Dagan}]{roit-etal-2020-controlled}
+Paul Roit, Ayal Klein, Daniela Stepanov, Jonathan Mamou, Julian Michael,
+  Gabriel Stanovsky, Luke Zettlemoyer, and Ido Dagan. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.acl-main.626} {Controlled
+  crowdsourcing for high-quality {QA}-{SRL} annotation}.
+\newblock In \emph{Proceedings of the 58th Annual Meeting of the Association
+  for Computational Linguistics}, pages 7008--7013, Online. Association for
+  Computational Linguistics.
+
+\bibitem[{Roy and McCallum(2001)}]{roy2001toward}
+Nicholas Roy and Andrew McCallum. 2001.
+\newblock Toward optimal active learning through monte carlo estimation of
+  error reduction.
+\newblock \emph{ICML, Williamstown}, 2:441--448.
+
+\bibitem[{Schick and Sch{\"u}tze(2021{\natexlab{a}})}]{PETpaper}
+Timo Schick and Hinrich Sch{\"u}tze. 2021{\natexlab{a}}.
+\newblock \href {https://aclanthology.org/2021.eacl-main.20} {Exploiting
+  cloze-questions for few-shot text classification and natural language
+  inference}.
+\newblock In \emph{Proceedings of the 16th Conference of the European Chapter
+  of the Association for Computational Linguistics: Main Volume}, pages
+  255--269, Online. Association for Computational Linguistics.
+
+\bibitem[{Schick and Sch{\"u}tze(2021{\natexlab{b}})}]{schick2020s}
+Timo Schick and Hinrich Sch{\"u}tze. 2021{\natexlab{b}}.
+\newblock \href {https://doi.org/10.18653/v1/2021.naacl-main.185} {It{'}s not
+  just size that matters: Small language models are also few-shot learners}.
+\newblock In \emph{Proceedings of the 2021 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 2339--2352, Online. Association for Computational
+  Linguistics.
+
+\bibitem[{Schr{\"o}der and Niekler(2020)}]{schroder2020survey}
+Christopher Schr{\"o}der and Andreas Niekler. 2020.
+\newblock A survey of active learning for text classification using deep neural
+  networks.
+\newblock \emph{arXiv preprint arXiv:2008.07267}.
+
+\bibitem[{Schwartz et~al.(2020)Schwartz, Dodge, Smith, and
+  Etzioni}]{schwartz2020green}
+Roy Schwartz, Jesse Dodge, Noah~A Smith, and Oren Etzioni. 2020.
+\newblock Green {AI}.
+\newblock \emph{Communications of the ACM}, 63(12):54--63.
+
+\bibitem[{Settles(2009)}]{settles2009active}
+Burr Settles. 2009.
+\newblock Active learning literature survey.
+
+\bibitem[{Settles and Craven(2008)}]{settles-craven-2008-analysis}
+Burr Settles and Mark Craven. 2008.
+\newblock \href {https://aclanthology.org/D08-1112} {An analysis of active
+  learning strategies for sequence labeling tasks}.
+\newblock In \emph{Proceedings of the 2008 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1070--1079, Honolulu, Hawaii. Association
+  for Computational Linguistics.
+
+\bibitem[{Shen et~al.(2017)Shen, Yun, Lipton, Kronrod, and
+  Anandkumar}]{shen-etal-2017-deep}
+Yanyao Shen, Hyokun Yun, Zachary Lipton, Yakov Kronrod, and Animashree
+  Anandkumar. 2017.
+\newblock \href {https://doi.org/10.18653/v1/W17-2630} {Deep active learning
+  for named entity recognition}.
+\newblock In \emph{Proceedings of the 2nd Workshop on Representation Learning
+  for {NLP}}, pages 252--256, Vancouver, Canada. Association for Computational
+  Linguistics.
+
+\bibitem[{Siddhant and Lipton(2018)}]{siddhant-lipton-2018-deep}
+Aditya Siddhant and Zachary~C. Lipton. 2018.
+\newblock \href {https://doi.org/10.18653/v1/D18-1318} {Deep {B}ayesian active
+  learning for natural language processing: Results of a large-scale empirical
+  study}.
+\newblock In \emph{Proceedings of the 2018 Conference on Empirical Methods in
+  Natural Language Processing}, pages 2904--2909, Brussels, Belgium.
+  Association for Computational Linguistics.
+
+\bibitem[{Simpson and Gurevych(2018)}]{simpson-gurevych-2018-finding}
+Edwin Simpson and Iryna Gurevych. 2018.
+\newblock \href {https://doi.org/10.1162/tacl_a_00026} {Finding convincing
+  arguments using scalable {B}ayesian preference learning}.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  6:357--371.
+
+\bibitem[{Snow et~al.(2008)Snow, O{'}Connor, Jurafsky, and
+  Ng}]{snow-etal-2008-cheap}
+Rion Snow, Brendan O{'}Connor, Daniel Jurafsky, and Andrew Ng. 2008.
+\newblock \href {https://aclanthology.org/D08-1027} {Cheap and fast {--} but is
+  it good? evaluating non-expert annotations for natural language tasks}.
+\newblock In \emph{Proceedings of the 2008 Conference on Empirical Methods in
+  Natural Language Processing}, pages 254--263, Honolulu, Hawaii. Association
+  for Computational Linguistics.
+
+\bibitem[{Socher et~al.(2013)Socher, Perelygin, Wu, Chuang, Manning, Ng, and
+  Potts}]{socher-etal-2013-recursive}
+Richard Socher, Alex Perelygin, Jean Wu, Jason Chuang, Christopher~D. Manning,
+  Andrew Ng, and Christopher Potts. 2013.
+\newblock \href {https://aclanthology.org/D13-1170} {Recursive deep models for
+  semantic compositionality over a sentiment treebank}.
+\newblock In \emph{Proceedings of the 2013 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1631--1642, Seattle, Washington, USA.
+  Association for Computational Linguistics.
+
+\bibitem[{Strubell et~al.(2019)Strubell, Ganesh, and
+  McCallum}]{strubell-etal-2019-energy}
+Emma Strubell, Ananya Ganesh, and Andrew McCallum. 2019.
+\newblock \href {https://doi.org/10.18653/v1/P19-1355} {Energy and policy
+  considerations for deep learning in {NLP}}.
+\newblock In \emph{Proceedings of the 57th Annual Meeting of the Association
+  for Computational Linguistics}, pages 3645--3650, Florence, Italy.
+  Association for Computational Linguistics.
+
+\bibitem[{Swayamdipta et~al.(2020)Swayamdipta, Schwartz, Lourie, Wang,
+  Hajishirzi, Smith, and Choi}]{datasetmap}
+Swabha Swayamdipta, Roy Schwartz, Nicholas Lourie, Yizhong Wang, Hannaneh
+  Hajishirzi, Noah~A. Smith, and Yejin Choi. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.emnlp-main.746} {Dataset
+  cartography: Mapping and diagnosing datasets with training dynamics}.
+\newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 9275--9293, Online. Association
+  for Computational Linguistics.
+
+\bibitem[{Tam et~al.(2021)Tam, R.~Menon, Bansal, Srivastava, and
+  Raffel}]{Tam2021ImprovingAS}
+Derek Tam, Rakesh R.~Menon, Mohit Bansal, Shashank Srivastava, and Colin
+  Raffel. 2021.
+\newblock \href {https://aclanthology.org/2021.emnlp-main.407} {Improving and
+  simplifying pattern exploiting training}.
+\newblock In \emph{Proceedings of the 2021 Conference on Empirical Methods in
+  Natural Language Processing}, pages 4980--4991, Online and Punta Cana,
+  Dominican Republic. Association for Computational Linguistics.
+
+\bibitem[{Tenney et~al.(2019)Tenney, Xia, Chen, Wang, Poliak, McCoy, Kim,
+  Durme, Bowman, Das, and Pavlick}]{tenney2018what}
+Ian Tenney, Patrick Xia, Berlin Chen, Alex Wang, Adam Poliak, R~Thomas McCoy,
+  Najoung Kim, Benjamin~Van Durme, Sam Bowman, Dipanjan Das, and Ellie Pavlick.
+  2019.
+\newblock \href {https://openreview.net/forum?id=SJzSgnRcKX} {What do you learn
+  from context? probing for sentence structure in contextualized word
+  representations}.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Trautmann et~al.(2020)Trautmann, Daxenberger, Stab, Schütze, and
+  Gurevych}]{trautmann2020fine}
+Dietrich Trautmann, Johannes Daxenberger, Christian Stab, Hinrich Schütze, and
+  Iryna Gurevych. 2020.
+\newblock \href {https://doi.org/10.1609/aaai.v34i05.6438} {Fine-grained
+  argument unit recognition and classification}.
+\newblock \emph{Proceedings of the AAAI Conference on Artificial Intelligence},
+  34(05):9048--9056.
+
+\bibitem[{Tsimpoukelli et~al.(2021)Tsimpoukelli, Menick, Cabi, Eslami, Vinyals,
+  and Hill}]{Tsimpoukelli2021MultimodalFL}
+Maria Tsimpoukelli, Jacob Menick, Serkan Cabi, S.~M.~Ali Eslami, Oriol Vinyals,
+  and Felix Hill. 2021.
+\newblock \href {https://openreview.net/forum?id=WtmMyno9Tq2} {Multimodal
+  few-shot learning with frozen language models}.
+\newblock In \emph{Advances in Neural Information Processing Systems}.
+
+\bibitem[{Wang et~al.(2019)Wang, Pruksachatkun, Nangia, Singh, Michael, Hill,
+  Levy, and Bowman}]{superglue}
+Alex Wang, Yada Pruksachatkun, Nikita Nangia, Amanpreet Singh, Julian Michael,
+  Felix Hill, Omer Levy, and Samuel Bowman. 2019.
+\newblock \href
+  {https://proceedings.neurips.cc/paper/2019/file/4496bf24afe7fab6f046bf4923da8de6-Paper.pdf}
+  {Super{GLUE}: A stickier benchmark for general-purpose language understanding
+  systems}.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~32. Curran Associates, Inc.
+
+\bibitem[{Wang et~al.(2018)Wang, Singh, Michael, Hill, Levy, and
+  Bowman}]{wang-etal-2018-glue}
+Alex Wang, Amanpreet Singh, Julian Michael, Felix Hill, Omer Levy, and Samuel
+  Bowman. 2018.
+\newblock \href {https://doi.org/10.18653/v1/W18-5446} {{GLUE}: A multi-task
+  benchmark and analysis platform for natural language understanding}.
+\newblock In \emph{Proceedings of the 2018 {EMNLP} Workshop {B}lackbox{NLP}:
+  Analyzing and Interpreting Neural Networks for {NLP}}, pages 353--355,
+  Brussels, Belgium. Association for Computational Linguistics.
+
+\bibitem[{Wang et~al.(2017)Wang, Utiyama, Liu, Chen, and
+  Sumita}]{wang-etal-2017-instance}
+Rui Wang, Masao Utiyama, Lemao Liu, Kehai Chen, and Eiichiro Sumita. 2017.
+\newblock \href {https://doi.org/10.18653/v1/D17-1155} {Instance weighting for
+  neural machine translation domain adaptation}.
+\newblock In \emph{Proceedings of the 2017 Conference on Empirical Methods in
+  Natural Language Processing}, pages 1482--1488, Copenhagen, Denmark.
+  Association for Computational Linguistics.
+
+\bibitem[{Wang et~al.(2021)Wang, Liu, Xu, Zhu, and Zeng}]{wang2021want}
+Shuohang Wang, Yang Liu, Yichong Xu, Chenguang Zhu, and Michael Zeng. 2021.
+\newblock \href {https://aclanthology.org/2021.findings-emnlp.354} {Want to
+  reduce labeling cost? {GPT}-3 can help}.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2021}, pages 4195--4205, Punta Cana, Dominican Republic. Association
+  for Computational Linguistics.
+
+\bibitem[{Warstadt et~al.(2019)Warstadt, Singh, and
+  Bowman}]{warstadt-etal-2019-neural}
+Alex Warstadt, Amanpreet Singh, and Samuel~R. Bowman. 2019.
+\newblock \href {https://doi.org/10.1162/tacl_a_00290} {Neural network
+  acceptability judgments}.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  7:625--641.
+
+\bibitem[{Winata et~al.(2021)Winata, Madotto, Lin, Liu, Yosinski, and
+  Fung}]{winata2021language}
+Genta~Indra Winata, Andrea Madotto, Zhaojiang Lin, Rosanne Liu, Jason Yosinski,
+  and Pascale Fung. 2021.
+\newblock Language models are few-shot multilingual learners.
+\newblock \emph{arXiv preprint arXiv:2109.07684}.
+
+\bibitem[{Wolf et~al.(2020)Wolf, Debut, Sanh, Chaumond, Delangue, Moi, Cistac,
+  Rault, Louf, Funtowicz, Davison, Shleifer, von Platen, Ma, Jernite, Plu, Xu,
+  Le~Scao, Gugger, Drame, Lhoest, and Rush}]{wolf-etal-2020-transformers}
+Thomas Wolf, Lysandre Debut, Victor Sanh, Julien Chaumond, Clement Delangue,
+  Anthony Moi, Pierric Cistac, Tim Rault, Remi Louf, Morgan Funtowicz, Joe
+  Davison, Sam Shleifer, Patrick von Platen, Clara Ma, Yacine Jernite, Julien
+  Plu, Canwen Xu, Teven Le~Scao, Sylvain Gugger, Mariama Drame, Quentin Lhoest,
+  and Alexander Rush. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.emnlp-demos.6} {Transformers:
+  State-of-the-art natural language processing}.
+\newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing: System Demonstrations}, pages 38--45, Online.
+  Association for Computational Linguistics.
+
+\bibitem[{Xu et~al.(2020)Xu, Hu, Zhang, Li, Cao, Li, Xu, Sun, Yu, Yu, Tian,
+  Dong, Liu, Shi, Cui, Li, Zeng, Wang, Xie, Li, Patterson, Tian, Zhang, Zhou,
+  Liu, Zhao, Zhao, Yue, Zhang, Yang, Richardson, and Lan}]{xu-etal-2020-clue}
+Liang Xu, Hai Hu, Xuanwei Zhang, Lu~Li, Chenjie Cao, Yudong Li, Yechen Xu, Kai
+  Sun, Dian Yu, Cong Yu, Yin Tian, Qianqian Dong, Weitang Liu, Bo~Shi, Yiming
+  Cui, Junyi Li, Jun Zeng, Rongzhao Wang, Weijian Xie, Yanting Li, Yina
+  Patterson, Zuoyu Tian, Yiwen Zhang, He~Zhou, Shaoweihua Liu, Zhe Zhao, Qipeng
+  Zhao, Cong Yue, Xinrui Zhang, Zhengliang Yang, Kyle Richardson, and Zhenzhong
+  Lan. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.coling-main.419} {{CLUE}: A
+  {C}hinese language understanding evaluation benchmark}.
+\newblock In \emph{Proceedings of the 28th International Conference on
+  Computational Linguistics}, pages 4762--4772, Barcelona, Spain (Online).
+  International Committee on Computational Linguistics.
+
+\bibitem[{Yang et~al.(2019)Yang, Dai, Yang, Carbonell, Salakhutdinov, and
+  Le}]{XLNetpaper}
+Zhilin Yang, Zihang Dai, Yiming Yang, Jaime Carbonell, Russ~R Salakhutdinov,
+  and Quoc~V Le. 2019.
+\newblock \href
+  {https://proceedings.neurips.cc/paper/2019/file/dc6a7e655d7e5840e66733e9ee67cc69-Paper.pdf}
+  {{XLN}et: Generalized autoregressive pretraining for language understanding}.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~32. Curran Associates, Inc.
+
+\bibitem[{Yarowsky(1995)}]{yarowsky-1995-unsupervised}
+David Yarowsky. 1995.
+\newblock \href {https://doi.org/10.3115/981658.981684} {Unsupervised word
+  sense disambiguation rivaling supervised methods}.
+\newblock In \emph{33rd Annual Meeting of the Association for Computational
+  Linguistics}, pages 189--196, Cambridge, Massachusetts, USA. Association for
+  Computational Linguistics.
+
+\bibitem[{Yin et~al.(2020)Yin, Rajani, Radev, Socher, and
+  Xiong}]{yin-etal-2020-universal}
+Wenpeng Yin, Nazneen~Fatema Rajani, Dragomir Radev, Richard Socher, and Caiming
+  Xiong. 2020.
+\newblock \href {https://doi.org/10.18653/v1/2020.emnlp-main.660} {Universal
+  natural language processing with limited annotations: Try few-shot textual
+  entailment as a start}.
+\newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 8229--8239, Online. Association
+  for Computational Linguistics.
+
+\bibitem[{Yoo et~al.(2021)Yoo, Park, Kang, Lee, and Park}]{yoo2021gpt3mix}
+Kang~Min Yoo, Dongju Park, Jaewook Kang, Sang-Woo Lee, and Woomyoung Park.
+  2021.
+\newblock \href {https://aclanthology.org/2021.findings-emnlp.192}
+  {{GPT}3{M}ix: Leveraging large-scale language models for text augmentation}.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2021}, pages 2225--2239, Punta Cana, Dominican Republic. Association
+  for Computational Linguistics.
+
+\bibitem[{Yuen et~al.(2011)Yuen, King, and Leung}]{crowdsourcingsurvey}
+Man-Ching Yuen, Irwin King, and Kwong-Sak Leung. 2011.
+\newblock \href {https://doi.org/10.1109/PASSAT/SocialCom.2011.203} {A survey
+  of crowdsourcing systems}.
+\newblock In \emph{2011 IEEE Third International Conference on Privacy,
+  Security, Risk and Trust and 2011 IEEE Third International Conference on
+  Social Computing}, pages 766--773.
+
+\bibitem[{Zhang and Plank(2021)}]{zhang-plank-2021-cartography-active}
+Mike Zhang and Barbara Plank. 2021.
+\newblock \href {https://aclanthology.org/2021.findings-emnlp.36} {Cartography
+  active learning}.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2021}, pages 395--406, Punta Cana, Dominican Republic. Association for
+  Computational Linguistics.
+
+\bibitem[{Zhang et~al.(2015)Zhang, Zhao, and LeCun}]{agdataset}
+Xiang Zhang, Junbo Zhao, and Yann LeCun. 2015.
+\newblock \href
+  {https://proceedings.neurips.cc/paper/2015/file/250cf8b51c773f3f8dc8b4be867a9a02-Paper.pdf}
+  {Character-level convolutional networks for text classification}.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~28. Curran Associates, Inc.
+
+\bibitem[{Zhang et~al.(2017)Zhang, Lease, and Wallace}]{ALCNN}
+Ye~Zhang, Matthew Lease, and Byron~C. Wallace. 2017.
+\newblock Active discriminative text representation learning.
+\newblock In \emph{Proceedings of the Thirty-First AAAI Conference on
+  Artificial Intelligence}, AAAI'17, page 3386–3392. AAAI Press.
+
+\bibitem[{Zhao et~al.(2020{\natexlab{a}})Zhao, Dufter, Yaghoobzadeh, and
+  Sch{\"u}tze}]{zhao-etal-2020-quantifying}
+Mengjie Zhao, Philipp Dufter, Yadollah Yaghoobzadeh, and Hinrich Sch{\"u}tze.
+  2020{\natexlab{a}}.
+\newblock \href {https://doi.org/10.18653/v1/2020.findings-emnlp.109}
+  {Quantifying the contextualization of word representations with semantic
+  class probing}.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2020}, pages 1219--1234, Online. Association for Computational
+  Linguistics.
+
+\bibitem[{Zhao et~al.(2020{\natexlab{b}})Zhao, Lin, Mi, Jaggi, and
+  Sch{\"u}tze}]{maskingpaper}
+Mengjie Zhao, Tao Lin, Fei Mi, Martin Jaggi, and Hinrich Sch{\"u}tze.
+  2020{\natexlab{b}}.
+\newblock \href {https://doi.org/10.18653/v1/2020.emnlp-main.174} {Masking as
+  an efficient alternative to finetuning for pretrained language models}.
+\newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing (EMNLP)}, pages 2226--2241, Online. Association
+  for Computational Linguistics.
+
+\bibitem[{Zhao and Sch{\"u}tze(2021)}]{xlmrprompting}
+Mengjie Zhao and Hinrich Sch{\"u}tze. 2021.
+\newblock \href {https://aclanthology.org/2021.emnlp-main.672} {Discrete and
+  soft prompting for multilingual models}.
+\newblock In \emph{Proceedings of the 2021 Conference on Empirical Methods in
+  Natural Language Processing}, pages 8547--8555, Online and Punta Cana,
+  Dominican Republic. Association for Computational Linguistics.
+
+\bibitem[{Zhao et~al.(2021)Zhao, Zhu, Shareghi, Vuli{\'c}, Reichart, Korhonen,
+  and Sch{\"u}tze}]{zhao-etal-2021-closer}
+Mengjie Zhao, Yi~Zhu, Ehsan Shareghi, Ivan Vuli{\'c}, Roi Reichart, Anna
+  Korhonen, and Hinrich Sch{\"u}tze. 2021.
+\newblock \href {https://doi.org/10.18653/v1/2021.acl-long.447} {A closer look
+  at few-shot crosslingual transfer: The choice of shots matters}.
+\newblock In \emph{Proceedings of the 59th Annual Meeting of the Association
+  for Computational Linguistics and the 11th International Joint Conference on
+  Natural Language Processing (Volume 1: Long Papers)}, pages 5751--5767,
+  Online. Association for Computational Linguistics.
+
+\end{thebibliography}

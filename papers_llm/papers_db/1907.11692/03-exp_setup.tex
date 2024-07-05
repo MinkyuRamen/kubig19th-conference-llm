@@ -1,0 +1,63 @@
+\section{Experimental Setup} \label{sec:exp}
+
+In this section, we describe the experimental setup for our replication study of BERT.
+
+\subsection{Implementation} \label{sec:implementation}
+
+We reimplement BERT in \textsc{fairseq}~\cite{ott2019fairseq}.
+We primarily follow the original BERT optimization hyperparameters, given in Section~\ref{sec:background}, except for the peak learning rate and number of warmup steps, which are tuned separately for each setting.
+We additionally found training to be very sensitive to the Adam epsilon term, and in some cases we obtained better performance or improved stability after tuning it.
+Similarly, we found setting $\beta_2 = 0.98$ to improve stability when training with large batch sizes.
+
+We pretrain with sequences of at most $T=512$ tokens.
+Unlike \newcite{devlin2018bert}, we do not randomly inject short sequences, and we do not train with a reduced sequence length for the first 90\% of updates.
+We train only with full-length sequences.
+
+We train with mixed precision floating point arithmetic on DGX-1 machines, each with 8 $\times$ 32GB Nvidia V100 GPUs interconnected by Infiniband~\cite{micikevicius2018mixed}.
+
+\subsection{Data} \label{sec:data}
+
+BERT-style pretraining crucially relies on large quantities of text. \newcite{baevski2019cloze} demonstrate that increasing data size can result in improved end-task performance. Several efforts have trained on datasets larger and more diverse than the original BERT~\cite{radford2019language,yang2019xlnet,zellers2019neuralfakenews}.
+Unfortunately, not all of the additional datasets can be publicly released. For our study, we focus on gathering as much data as possible for experimentation, allowing us to match the overall quality and quantity of data as appropriate for each comparison. 
+
+We consider five English-language corpora of varying sizes and domains, totaling over 160GB of uncompressed text. We use the following text corpora:
+\begin{itemize}[leftmargin=*]
+\setlength\itemsep{0em}
+\item \textsc{BookCorpus}~\cite{moviebook} plus English \textsc{Wikipedia}. This is the original data used to train BERT. (16GB).
+\item \textsc{CC-News}, which we collected from the English portion of the CommonCrawl News dataset~\cite{nagel2016ccnews}. The data contains 63 million English news articles crawled between September 2016 and February 2019. (76GB after filtering).\footnote{We use \texttt{news-please}~\cite{hamborg2017newsplease} to collect and extract \textsc{CC-News}. \textsc{CC-News} is similar to the \textsc{RealNews} dataset described in~\newcite{zellers2019neuralfakenews}.}
+\item \textsc{OpenWebText}~\cite{gokaslan2019openwebtext}, an open-source recreation of the WebText corpus described in~\newcite{radford2019language}. The text is web content extracted from URLs shared on Reddit with at least three upvotes. (38GB).\footnote{The authors and their affiliated institutions are not in any way affiliated with the creation of the OpenWebText dataset.}
+\item \textsc{Stories}, a dataset introduced in~\newcite{trinh2018simple} containing a subset of CommonCrawl data filtered to match the story-like style of Winograd schemas. (31GB).
+\end{itemize}
+
+
+
+
+
+\subsection{Evaluation} \label{sec:evaluation}
+
+Following previous work, we evaluate our pretrained models on downstream tasks using the following three benchmarks.
+
+\paragraph{GLUE} \label{sec:glue}
+
+The General Language Understanding Evaluation (GLUE) benchmark \cite{wang2019glue} is a collection of 9 datasets for evaluating natural language understanding systems.\footnote{The datasets are: CoLA~\cite{warstadt2018neural}, Stanford Sentiment Treebank (SST)~\cite{socher2013recursive}, Microsoft Research Paragraph Corpus (MRPC)~\cite{dolan2005automatically}, Semantic Textual Similarity Benchmark (STS)~\cite{agirre2007semantic}, Quora Question Pairs (QQP)~\cite{iyer2016quora}, Multi-Genre NLI (MNLI)~\cite{williams2018broad}, Question NLI (QNLI)~\cite{rajpurkar2016squad}, Recognizing Textual Entailment (RTE)~\cite{dagan2006pascal,bar2006second,giampiccolo2007third,bentivogli2009fifth} and Winograd NLI (WNLI)~\cite{levesque2011winograd}.}
+Tasks are framed as either single-sentence classification or sentence-pair classification tasks.
+The GLUE organizers provide training and development data splits as well as a submission server and leaderboard that allows participants to evaluate and compare their systems on private held-out test data.
+
+For the replication study in Section~\ref{sec:design}, we report results on the development sets after finetuning the pretrained models on the corresponding single-task training data (i.e., without multi-task training or ensembling).
+Our finetuning procedure follows the original BERT paper~\cite{devlin2018bert}.
+
+In Section~\ref{sec:roberta} we additionally report test set results obtained from the public leaderboard. These results depend on a several task-specific modifications, which we describe in Section~\ref{sec:results_glue}.
+
+\paragraph{SQuAD} \label{sec:squad}
+The Stanford Question Answering Dataset (SQuAD) provides a paragraph of context and a  question.
+The task is to answer the question by extracting the relevant span from the context.
+We evaluate on two versions of SQuAD: V1.1 and V2.0~\cite{rajpurkar2016squad,rajpurkar2018know}.
+In V1.1 the context always contains an answer, whereas in V2.0 some questions are not answered in the provided context, making the task more challenging.
+
+For SQuAD V1.1 we adopt the same span prediction method as BERT~\cite{devlin2018bert}.
+For SQuAD V2.0, we add an additional binary classifier to predict whether the question is answerable, which we train jointly by summing the classification and span loss terms.
+During evaluation, we only predict span indices on pairs that are classified as answerable.
+
+\paragraph{RACE} \label{sec:race}
+The ReAding Comprehension from Examinations (RACE)~\cite{lai2017large} task is a large-scale reading comprehension dataset with more than 28,000 passages and nearly 100,000 questions. The dataset is collected from English examinations in China, which are designed for middle and high school students. In RACE, each passage is associated with multiple questions. For every question, the task is to select one correct answer from four options. RACE has significantly longer context than other popular reading comprehension datasets and the proportion of questions
+that requires reasoning is very large.

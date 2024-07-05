@@ -1,0 +1,20 @@
+\begin{table}
+\footnotesize
+%\setlength\tabcolsep{5.0pt}
+\begin{tabular}{cc|cccccc}
+\toprule[1.5pt]
+        \textbf{$T_s$} & \textbf{$T_l$} & \textbf{IDF1} & \textbf{MOTA} & \textbf{HOTA} & \textbf{IDsw} & \textbf{IDFN} & \textbf{IDFP} \\\hline
+         3 & 24 & 74.06& 65.77& \textbf{60.17} & \textbf{70} & 4878 & \textbf{7463}\\\hline
+        \multirow{5}{*}{3}& 20 &73.87&  64.92 & 59.71 & 75& 4836 & 7588\\
+        & 10 & 72.55 & \textbf{66.33}& 59.40 & 88 & 5142 &7991\\
+        & 5 & 69.62 & 60.74 & 57.09 & 100 & 5939 & 8508\\
+        & 3 & 69.60 & 60.39 & 57.00 & 101 & 5903 & 8591\\\hline
+        2 & \multirow{3}{*}{24} & 70.32& 61.57& 58.74& 93& \textbf{4365} & 8177\\
+        4 & &\textbf{74.45} & 64.87& 60.06 & 73& 4755& 7523\\
+        5 & &74.32 & 64.27 & 59.62& 73& 4620& 7712\\
+        
+\bottomrule[1.5pt]
+    \end{tabular}
+\caption{Comparisons on different length of short-term $T_s$ and long-term $T_l$ memory.}
+\label{tab:ablation:memory_length}
+\end{table}

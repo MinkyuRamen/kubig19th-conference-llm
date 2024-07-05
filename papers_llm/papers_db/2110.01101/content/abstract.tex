@@ -1,0 +1,24 @@
+\begin{abstract}
+Reinforcement Learning (RL) has achieved significant success in application domains such as robotics, games and health care. However, training RL agents is very time consuming. Current implementations exhibit poor performance due to challenges such as irregular memory accesses and thread-level synchronization overheads on CPU.
+In this work, we propose a framework for generating scalable reinforcement learning implementations on multi-core systems. Replay Buffer is a key component of RL algorithms which facilitates storage of samples obtained from environmental interactions and data sampling for the learning process. We define a new data structure for Prioritized Replay Buffer based on $K$-ary sum tree that supports asynchronous parallel insertions, sampling, and priority updates. To address the challenge of irregular memory accesses, we propose a novel data layout to store the nodes of the sum tree that reduces the number of cache misses. Additionally, we propose \textit{lazy writing} mechanism to reduce thread-level synchronization overheads of the Replay Buffer operations. Our framework employs parallel actors to concurrently collect data via environmental interactions, and parallel learners to perform stochastic gradient descent using the collected data. Our framework supports a wide range of reinforcement learning algorithms including DQN, DDPG, etc. We demonstrate the effectiveness of our framework in accelerating RL algorithms by performing experiments on CPU + GPU platform using OpenAI benchmarks. 
+Our results show that the performance of our $K$-ary sum tree based Prioritized Replay Buffer improves the baseline implementations by around 4x$\sim$100x. Our proposed synchronization optimizations improve the performance by around 2x$\sim$4.4x compared with using a global lock. 
+By plugging our Replay Buffer implementation into existing open source reinforcement learning frameworks, we achieve 1.19x$\sim$1.75x speedup for various algorithms.
+
+    % Reinforcement Learning (RL) has achieved significant success application domains such as robotics, games, health care and others. 
+    % However, training RL agents is very time consuming, e.g it takes weeks to train AlphaZero on hundreds of GPUs.
+    % Prior works focus on parallelizing reinforcement learning on clusters while the acceleration on multicore platforms is left unexplored.
+    % Replay Buffer is a key component of off-policy RL algorithms which facilitates storage of samples obtained from environmental interactions and their sampling for the learning process. 
+    % However, its current implementations exhibit poor performance due to challenges such as irregular memory accesses and synchronization overheads. 
+    % In this work, we propose a framework for generating scalable reinforcement learning implementations on multicore systems.
+    % % Compared with clusters, data communication is significantly reduced due to the benefit of shared memory.
+    % We define a new data structure for prioritized replay buffer based on K-ary sum tree that supports asynchronous parallel insertion, sampling, and priority update.
+    % To address the challenge of irregular memory accesses, we propose a novel data layout to store the nodes of the sum tree that reduces the number of cache misses.
+    % Additionally, we propose \textit{lazy writing} mechanism to reduce synchronization overheads of the replay buffer: only lightweight bookkeeping is performed when acquiring the lock and heavyweight workloads such as data writing are postponed after releasing the lock.
+    % Our framework employs parallel actors to collect the data in the environment concurrently and parallel learners to perform stochastic gradient descent. 
+    % Given hardware configurations, our framework automatically allocates the number of threads for actors and learners such that the desired ratio between the throughput of the data collection and the throughput of the learning is satisfied.
+    % Our framework supports a wide range of reinforcement learning algorithms including DQN, DDPG, TD3, SAC and so on.
+    % We demonstrate the effectiveness of our framework in accelerating off-policy RL algorithms by performing experiments on xxx platform using Atari benchmarks.
+    % Our results shows that the performance of our approach scales in linear with the number of cores. 
+    % Compared with the baseline approaches, we reduce the convergence time by $x\%\sim x\%$. 
+    % By plugging our replay buffer implementation into existing open source reinforcement learning frameworks, we achieve $x\%\sim x\%$ speedup.
+\end{abstract}
