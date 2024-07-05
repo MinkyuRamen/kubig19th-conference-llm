@@ -10,6 +10,7 @@ import feedparser
 import fitz  # PyMuPDF
 import re
 import subprocess
+import tiktoken
 from urllib.parse import urlparse
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -306,52 +307,85 @@ class CodeAnalysis:
 
         return normalized_score
     
-    def code_analysis(self, title:str, contents:str, github_link:str = None):
+    def count_tokens(self, text):
+        tokenizer = tiktoken.encoding_for_model("gpt-3.5-turbo")
+
+        tokens = tokenizer.encode(text)
+        token_count = len(tokens)
+        return token_count    
+    
+    def code_analysis(self, title:str, contents:str, github_link:str):
         """
         input : title of paper,
                 contents in paper,
                 generated code by GPT (response)
         output : explanation about how to implement based on contents
         """
-
         if not github_link : 
             raise Exception("Github 링크가 필요합니다.")
-
+        # Generate code from paper content
         self.Git_cloning(title, github_link) # Git clone하는 과정
 
         llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
+        # Extracted code from the repository
+        repo_code_files = self.extract_code_from_repo(self.repo_path)
+        instruction = f"""
+I have two variables that I need help with:\n
+code_files: A dictionary where keys are file paths and values are strings of actual code.\n
+contents: A string containing a section from a paper that describes a particular implementation detail.\n
+
+I need to achieve the following:\n\n
+
+1.Compare the contents against the values in code_files to find the most similar code snippet.\n
+2.Determine which code snippet in code_files best matches the implementation described in contents.\n
+3.Provide the file path and the actual code of the selected code snippet.\n
+4.Provide an explanation of how the described implementation detail from the paper is realized in the actual code snippet.\n\n
+
+Here are the variables:\n\n
+code_files : {repo_code_files}\n\n
+contents : {contents}\n\n
+
+Please provide:\n
+
+1.The file path and the most similar code snippet from code_files to the implementation described in contents.\n
+2.A detailed explanation of how the selected code snippet implements the concept described in contents.\n
+3.The actual code of the selected code snippet in code_files. Please start your response with the following sentence :  "위의 내용들을 기반으로 구현한 예시 코드는 다음과 같습니다." \n\n
+
+Please explain in korean.
+"""        
+        tokens = self.count_tokens(instruction)
         first_question = f"""Based on the following content from a research paper, write the corresponding Python code that implements the described concept. Provide only the Python code without any additional text or explanation.\n\n
                         Paper Content: \"{contents}\" \n\n
                         """
 
         generated_code = llm.predict(first_question)
+        # 토큰 개수 확인
+        if tokens <= 60000:
+            return instruction
+        
+        else:
+            # Calculate cosine similarity for each file in the repository
+            similarity_scores = {}
+            for file_path, code in repo_code_files.items():
+                functions = self.split_code_into_functions(code)
+                for func_name, func_code in functions.items():
+                    similarity = self.calculate_cosine_similarity(generated_code, func_code) # Vectorizer를 이용한 단순한 유사도 측정
+                    # similarity = self.answer_quality_score(generated_code, func_code) # Sentence transformer를 이용한 유사도 측정
+                    # similarity = self.calculate_similarity_codet5(generated_code, func_code) # CodeT5 모델을 사용한 유사도 측정
+                    similarity_scores[(file_path, func_name)] = similarity
 
-        # Repository에서 code 추출
-        repo_code_files = self.extract_code_from_repo(self.repo_path)
+            # max_score = max(similarity_scores.values())
+            # most_relevant_file, most_relevant_function = [(file_path, func_name) for (file_path, func_name), score in similarity_scores.items() if score == max_score][0]
+            # highest_similarity_score = max_score
 
-        # Cosine similarity 계산
-        similarity_scores = {}
-        for file_path, code in repo_code_files.items():
-            functions = self.split_code_into_functions(code)
-            for func_name, func_code in functions.items():
-                # similarity = self.calculate_cosine_similarity(generated_code, func_code) # Vectorizer를 이용한 단순한 유사도 측정
-                similarity = self.answer_quality_score(generated_code, func_code) # Sentence transformer를 이용한 유사도 측정
-                # similarity = self.calculate_similarity_codet5(generated_code, func_code) # CodeT5 모델을 사용한 유사도 측정
-                similarity_scores[(file_path, func_name)] = similarity
+            most_relevant_file, most_relevant_function = max(similarity_scores, key=similarity_scores.get)
+            highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
 
-        # max_score = max(similarity_scores.values())
-        # most_relevant_file, most_relevant_function = [(file_path, func_name) for (file_path, func_name), score in similarity_scores.items() if score == max_score][0]
-        # highest_similarity_score = max_score
-
-        most_relevant_file, most_relevant_function = max(similarity_scores, key=similarity_scores.get)
-        highest_similarity_score = similarity_scores[(most_relevant_file, most_relevant_function)]
-
-        # 관련 있는 함수가 존재하는 py 파일의 경로 + 함수 + 유사도 제시, 이후 부가적인 설명을 요청하는 prompt
-        instruction = f""" First, Please start your response with the following sentence : ["Based on the cosine similarity calculations, the most relevant code in the repository to the part of the paper presented is in the file: {most_relevant_file}, function: {most_relevant_function} with a similarity score of {highest_similarity_score}."] \n\n
-        Then, explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. 한국말로 설명해. \n
-        contents: \"{contents}\" \n
-        most relevant code: \"{most_relevant_function}\" \n
-        """
-
-        return instruction
+            # 관련 있는 함수가 존재하는 py 파일의 경로 + 함수 + 유사도 제시, 이후 부가적인 설명을 요청하는 prompt
+            instruction = f""" First, Please start your response with the following sentence : "Cosine similarity를 기반으로 Github 내에서 논문의 내용과 가장 유사한 함수와 파일 경로는 다음과 같습니다. \n file path : {most_relevant_file}\n , function: {most_relevant_function} \n 더불어 실제로 구현하기 위한 예시 코드는 다음과 같습니다. \n {generated_code}." \n\n\n
+            Then, explain in detail how the implementation in the code reflects the theoretical framework or experimental setup described in the paper. Identify any key algorithms or processes in the code that are particularly significant and discuss their importance in the context of the research. 한국말로 설명해. \n
+            contents: \"{contents}\" \n
+            most relevant code: \"{most_relevant_function}\" \n
+            """
+            return instruction
