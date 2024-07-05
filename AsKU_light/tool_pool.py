@@ -20,7 +20,7 @@ from code_analysis import CodeAnalysis
 ss_api_key = os.getenv("SEMANTIC_SCHOLAR_API_KEY")
 openai_key = os.getenv("OPENAI_API_KEY")
 
-getpapermodule_v2 = GetPaper_v2(ss_api_key, ar5iv_mode = True, path_db = '/root/limlab/lim_helper_v2/kubig19th-conference-llm/papers_llm/papers_db', page_limit = 5)
+getpapermodule_v2 = GetPaper_v2(ss_api_key, ar5iv_mode = True, path_db = './papers_db', page_limit = 5)
 
 class load_paper_input(BaseModel):
     title: str = Field(description="target paper title")
@@ -115,7 +115,7 @@ recommendpaper = StructuredTool.from_function(
     args_schema=recommend_paper_input
 )
 
-codeanalysismodule = CodeAnalysis(ss_api_key, openai_key, path_db = '/root/limlab/lim_helper_v2/kubig19th-conference-llm/papers_llm/papers_db', code_db = '/root/limlab/lim_helper_v2/kubig19th-conference-llm/papers_llm/code_db')
+codeanalysismodule = CodeAnalysis(ss_api_key, openai_key, path_db = './code_db')
 
 class code_analysis_inputs(BaseModel):
     title: str = Field(description="target paper title")
