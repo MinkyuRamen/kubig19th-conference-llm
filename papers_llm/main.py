@@ -126,9 +126,10 @@ def handle_message_events(event, message, say):
             )
 
 
-def send_guideline_message(channel_id):
+def send_guideline_message(channel_id, user_id):
     app.client.chat_postEphemeral(
         channel=channel_id,
+        
         blocks=[
             {
                 "type": "section",
