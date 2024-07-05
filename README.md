@@ -1,7 +1,8 @@
 # kubig19th-conference-llm
-![asku](/uploads/fe89e8ae-a4c8-4415-913c-1c2c3e22cff1)
 
-![overview](https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/5854ddc1-4f61-4042-96b8-dbff31b0a7b5)
+<img width="100" alt="getpaper" src="https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/fe89e8ae-a4c8-4415-913c-1c2c3e22cff1">
+logo
+<img width="300" alt="getpaper" src="https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/5854ddc1-4f61-4042-96b8-dbff31b0a7b5">
 
 ### MOTIVATION
 Al 연구자들은 논문을 이해하고 정리하는데 LLM을 보조 도구로 사용 하고 있다. 그러나 LLM이 논문과 관련한 구체적인 질의응답을 더 잘 수행하기 위해서는 다음과 같은 한계점을 극복할 필요가 있다.
