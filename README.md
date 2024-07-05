@@ -1,4 +1,8 @@
 # kubig19th-conference-llm
+![asku](/uploads/fe89e8ae-a4c8-4415-913c-1c2c3e22cff1)
+
+![overview](https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/5854ddc1-4f61-4042-96b8-dbff31b0a7b5)
+
 ### MOTIVATION
 Al 연구자들은 논문을 이해하고 정리하는데 LLM을 보조 도구로 사용 하고 있다. 그러나 LLM이 논문과 관련한 구체적인 질의응답을 더 잘 수행하기 위해서는 다음과 같은 한계점을 극복할 필요가 있다.
 
@@ -31,9 +35,7 @@ recommend paper는 (1) user query에 따라 citation paper(target paper를 인�
 ![codematching](https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/506c0f88-056f-46f0-a304-2d464d0dd22b)
 codeanalysis는 (1) LLM이 user query를 보고 이에 맞는 code를 생성한 후 (2) 실제 github code와 이를 비교하여 실제로 어떻게 구현되어 있는지 찾는 phase로 구성
 
-### AsKU
-![overview](https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/5854ddc1-4f61-4042-96b8-dbff31b0a7b5)
-
+### AsKU Lite
 
 ### HOW TO USE
 1) `.env` 파일에 다음 정보를 채운다.
