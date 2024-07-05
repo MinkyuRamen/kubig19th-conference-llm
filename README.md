@@ -6,7 +6,9 @@ logo
 **전체 개요**
 
 <img width="500" alt="overview" src="https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/5854ddc1-4f61-4042-96b8-dbff31b0a7b5">
+
 **ppt**
+
 [Uploading TEAM_LLM_PPT_Full.pptx…]()
 
 
