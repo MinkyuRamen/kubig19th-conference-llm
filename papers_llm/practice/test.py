@@ -45,7 +45,7 @@ agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
 
 # output = agent_executor.invoke({"input": "'Attention is All You Need(아카이브 id 1706.03762)' 의 논문에서 Encoder 파트 구조가 어떻게 구성돼는지 그림과 함께 설명해줘. 한글로 말해줘"})
-output = agent_executor.invoke({"input": "“An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale” 가 어떻게 구현되었는지 설명해줘. 한글로 말해줘"})
+output = agent_executor.invoke({"input": "'An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale'에서 method 파트에 대해 수식과 함께 자세히 설명해줘"})
 
 # output = agent_executor.invoke({"input": "'Toolformer: Language Models Can Teach Themselves to Use Tools' 를 읽었는데 혹시 후속 논문 6편정도 추천해줄 수 있어?"})
 # output = agent_executor.invoke({"input": "'Toolformer: Language Models Can Teach Themselves to Use Tools' 를 읽기전에 도움되는 이전 논문 6편정도 추천해줄 수 있어?"})

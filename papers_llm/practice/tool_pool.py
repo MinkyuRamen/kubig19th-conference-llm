@@ -55,7 +55,7 @@ loadpaper = StructuredTool.from_function(
     description="""
         The `loadPaper` tool is designed to facilitate the process of retrieving and reading academic papers based on a given search title. \
         The `title` parameter is a string representing the title of the paper. The 'sections' parameter is a list representing the list of the sections in the paper. \
-        The 'arxiv_id' parameter is a unique identifier for preprints on the Arxiv repository, formatted as `YYMM.NNNNN`. \
+        The 'arxiv_id' parameter is a unique identifier for preprints on the Arxiv repository, formatted as `YYMM.NNNNN`. ex) title(arxiv_id) \
         The 'show_figure' parameter is a boolean value that determines whether to display the figures in the paper. \
         If the sections parameter is none, you can get the section list of the paper. If the sections parameter get the section list, you can load the paper's content. \
         Use this tool several times to get the section first and then get the detail content of each section. \

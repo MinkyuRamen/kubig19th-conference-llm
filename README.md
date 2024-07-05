@@ -1,34 +1,66 @@
 # kubig19th-conference-llm
-## 목표 (수정가능)
-1. Llama-3-8b로 (아카이브, Semantic Scholoar)를 function call로 넣어서 data generation 후 huggingface에 저장 (original data)
-2. 저장된 original data를 stream으로 불러와 정의된 tool (wikipedia search, google search, wolfram alpha, calendar 등)을 이용하여 data augmented (augmented data)
-3. [training] augmented data를 이용하여 LoRA fine-tuning (ToolLLaMA)
-4. [inference] ToolLLaMA에다가 (아카이브, Semantic Scholoar)를 function call하여 output 생성
-## 진행사항
-### 16기 박민규
-(세부목표) target paper를 공부하기 전 봐야할 premiminaries & target paper 이후에 나온  future works 들에 대한 정보 생성(ft llama) + 시각화 진행
-  - semantic scholar api와 sentence transformer를 이용하여 data preprocessing ✅
-  - semantic scholar api를 이용하여 preminiaries visualization ✅ >> 조금 더 고급지게 시각화 🏃(보류)
-  - semantic scholar & archive api를 tool로 사용 >> langchain으로 생성 🏃
-  - semantic scholar & archive api 사용하여 llama로 orginal dataset generate 🏃
+### MOTIVATION
+Al 연구자들은 논문을 이해하고 정리하는데 LLM을 보조 도구로 사용 하고 있다. 그러나 LLM이 논문과 관련한 구체적인 질의응답을 더 잘 수행하기 위해서는 다음과 같은 한계점을 극복할 필요가 있다.
+
+1. 전체 논문을 직접 다운로드한 후 프롬프트로 입력해야 함
+
+2. 전체 논문을 입력 후 질의응답 시 물필요한 정보가 많아 정확성 (Needle in a Haystack)
+
+3. 현재 사용되는 Tool은 Web Search, PDF Reader 등 제한적이기 때문에 유사 논문 추천 등의 고도화된 요청 처리 불가 우리는 이러한 한계를 극복한 새로운 LLM Agent ASKU을 제안한다.
+### Function
+1. Load Paper
+
+-반복 호출 방식으로 필요한 부분만 불러올 수 있도록  LLM 의 행동 제어
+
+2. Recommend Paper
+
+-Semantic Scholar API / Cosine similarity  기반 자체 알고리즘 이용
+
+3. Code Match
+
+-논문의  Github  링크로부터 코드 다운  / Cosine similarity  기반 알고리즘 이용
+
+### SPEC
+1. **getpaper_v2**
+
+getpaper는 (1) user query에게 제공될 section 선정하고, (2) section들의 context 불러와서 질문에 대한 대답을 하며 (3) optionary하게 generated answer에 가장 알맞는 그림을 visualization하는 크게 3가지 phase으로 구성
+
+2. **recommendpaper**
+
+recommend paper는 (1) user query에 따라 citation paper(target paper를 인용한 논문)/reference paper(target paper가 인용한 논문) 중 어느것을 추천할지 결정 후 semantic scolar api로 context를 불러와서 (2) user가 원하는 개수의 paper를 추천해주는 phase로 구성
 
 
-### 16기 이영노
-- ToolFormer 구현
+3. **code_analysis**
 
-  🏃 `EleutherAI/gpt-j-6B` GPU에 Model Load 이후 ToolFormer `data_generator.py` 실행시, `retrieval_data_{self.num_device}.json` 파일 stack 하는 과정에서 GRAM OOM error 문제 발생 
-  --> json 파일 저장 코드 수정
+codeanalysis는 (1) LLM이 user query를 보고 이에 맞는 code를 생성한 후 (2) 실제 github code와 이를 비교하여 실제로 어떻게 구현되어 있는지 찾는 phase로 구성
 
-  🏃 차후 `deepspeed` 통한 FT 진행 (`deepspeed` 사용법 공부)
+### AsKU light
 
-- ToolFormer 개선
-  - 배경 : `conceptofmind` huggingface 모델의 Mathematical Reasoning 능력 부족
-  - 개선방안 : `from prompts import retrieval_prompt` : prompt 수정
-    - e.g. CoT, step-by-step 으로 쪼개는 prompt search 해서 넣어보기 ,tool documentation 넣어주고 zero-shot 으로 시도
-    - Sequential Tool Calling 이 가능해야 하는데, 이걸 기존 Toolformer 코드에서 어떻게 수행할지 고민 (LangChain?)
-    
-### 18기 최유민
-- Langchain을 이용한 Tool 사용 Language model 구현
 
-- 목표
-  Tool 사용한 모델과 사용하지 않는 기본 모델 사이의 성능 정량적 측정 및 정성적 차이 분석
+### HOW TO USE
+1) `.env` 파일에 다음 정보를 채운다.
+
+```
+MODEL_ID=''
+BOT_NAME="lim helper2"
+SEMANTIC_SCHOLAR_API_KEY=''
+OPENAI_API_KEY=''
+
+SLACK_BOT_TOKEN=''
+SLACK_APP_TOKEN=''
+signing_secret=''
+CHANNEL_ID_beta=''
+CHANNEL_ID =''
+```
+
+2) `papers_llm/main.py` 를 실행
+
+
+### Contribution
+• Slack에서 배포할 수 있는 형태라 활용성 큼
+
+• 논문 호출 시, 전체 논문 중 사용자 유철에 필요한 Section (figure 포함)만 불러오기 때문에 매우 효율적
+
+• 유사 논문 추천 시, 자체 개발한 유사도 기반 필터링 알고리증을 사용하여 실제로 인용되거나 참조된 논문을 중심으로 추천
+
+• 관련 코드 요청 시, 논문에서 제안된 로직을 기반으로 코드른 검 색하여 호출함으로써 더 정확한 구현 가능

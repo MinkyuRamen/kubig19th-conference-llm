@@ -129,7 +129,7 @@ def handle_message_events(event, message, say):
 def send_guideline_message(channel_id, user_id):
     app.client.chat_postEphemeral(
         channel=channel_id,
-        
+        user=user_id,
         blocks=[
             {
                 "type": "section",
@@ -191,7 +191,7 @@ def send_guideline_message(channel_id, user_id):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "*[예시 질문 모음]* \n\n • 'DDIM'을 읽기 전에 읽을만한 논문 4편을 추천해줘 \n\n • 'MobileNets'(1704.04861) 의 논문에서 아키텍쳐가 어떻게 구성되어 있는지 그림과 함께 설명해줘 \n\n • 'Attention is all you need'(아카이브 id 1706.03762)에서 positional encoding에 대해 그림과 함께 설명해줘 \n\n • 'Attention is All You Need'(아카이브 id 1706.03762) 의 논문에서 'To the best of our knowledge, however, the Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence aligned RNNs or convolution.' 이 내용을 어떻게 구현할 수 있어? 깃허브 코드는 다음과 같아. https://github.com/nawnoes/pytorch-transformer"
+                    "text": "*[예시 질문 모음]* \n\n • 'DDIM'을 읽기 전에 읽을만한 논문 4편을 추천해줘 \n\n • 'MobileNets'(1704.04861) 의 논문에서 아키텍쳐가 어떻게 구성되어 있는지 그림과 함께 설명해줘 \n\n • 'Attention is all you need'(1706.03762)에서 positional encoding에 대해 그림과 함께 설명해줘 \n\n • 'Attention is All You Need'(1706.03762) 의 논문에서 'To the best of our knowledge, however, the Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence aligned RNNs or convolution.' 이 내용을 어떻게 구현할 수 있어? 깃허브 코드는 다음과 같아. https://github.com/nawnoes/pytorch-transformer"
                 }
             },
             {
@@ -221,6 +221,45 @@ def handle_view_guide(ack, body):
     ack()
     user_id = body["user_id"]
     send_guideline_message(channel_id, user_id)
+
+
+@app.event("app_home_opened")
+def update_home_tab(client, event, logger):
+  try:
+    # views.publish is the method that your app uses to push a view to the Home tab
+    client.views_publish(
+      # the user that opened your app's app home
+      user_id=event["user"],
+      # the view object that appears in the app home
+      view={
+        "type": "home",
+        "callback_id": "home_view",
+ 
+        # body of the view
+        "blocks": [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "AsKU_paper에 오신 것을 환영합니다 :)"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "지금 바로 검색창에 asku-paper 채널을 검색해서 강력한 논문 질의응답 앱 AsKU_paper를 경험해보세요!"
+            }
+          }
+        ]
+      }
+    )
+  
+  except Exception as e:
+    logger.error(f"Error publishing home tab: {e}")
 
 
 if __name__ == "__main__":  
