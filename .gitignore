@@ -1,5 +1,7 @@
 lim_helper_v2/kubig19th-conference-llm/papers_llm/papers_db/
 git rm -r --cached /root/limlab/lim_helper_v2/kubig19th-conference-llm/papers_llm/papers_db/
+lim_helper_v2/kubig19th-conference-llm/papers_llm/code_db/
+git rm -r --cached /root/limlab/lim_helper_v2/kubig19th-conference-llm/papers_llm/code_db/
 
 
 
