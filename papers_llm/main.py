@@ -184,7 +184,7 @@ def send_guideline_message(channel_id, user_id):
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": "*7️⃣ ⚠️한 번에 하나씩 질문하기!⚠️* 여러 개의 질문이 몰리면 AsKU가 힘들어 해요! 🤯 앞사람의 대답이 끝날 때까지 인내심을 가지고 기다려주세요!"
+                    "text": "*7️⃣ ⚠️한 번에 하나씩 질문하기!⚠️* 여러 개의 질문이 몰리면 AsKU가 힘들어 해요! 🤯 질문 하나 당 30초~1분 정도 요소되니 앞사람의 대답이 끝날 때까지 인내심을 가지고 기다려주세요!"
                 }
             },
             {
@@ -213,12 +213,14 @@ def send_guideline_message(channel_id, user_id):
 
 @app.event("member_joined_channel")
 def handle_member_joined_channel(event, say):
-    send_guideline_message(channel_id)
+    user_id = event["user"]
+    send_guideline_message(channel_id, user_id)
 
 @app.command("/view_guide")
 def handle_view_guide(ack, body):
     ack()
-    send_guideline_message(channel_id)
+    user_id = body["user_id"]
+    send_guideline_message(channel_id, user_id)
 
 
 if __name__ == "__main__":  
