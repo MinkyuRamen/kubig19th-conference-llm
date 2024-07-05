@@ -1,8 +1,10 @@
 # kubig19th-conference-llm
 
 <img width="100" alt="getpaper" src="https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/fe89e8ae-a4c8-4415-913c-1c2c3e22cff1">
+
 logo
-<img width="300" alt="getpaper" src="https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/5854ddc1-4f61-4042-96b8-dbff31b0a7b5">
+
+<img width="500" alt="overview" src="https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/5854ddc1-4f61-4042-96b8-dbff31b0a7b5">
 
 ### MOTIVATION
 Al 연구자들은 논문을 이해하고 정리하는데 LLM을 보조 도구로 사용 하고 있다. 그러나 LLM이 논문과 관련한 구체적인 질의응답을 더 잘 수행하기 위해서는 다음과 같은 한계점을 극복할 필요가 있다.
@@ -24,16 +26,19 @@ Al 연구자들은 논문을 이해하고 정리하는데 LLM을 보조 도구�
 
 ### SPEC
 1. **getpaper_v2**
-![loadpaper](https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/021e2c3f-f05f-4098-b273-905910942f15)
+
+<img width="500" alt="loadpaper" src="https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/021e2c3f-f05f-4098-b273-905910942f15">
 getpaper는 (1) user query에게 제공될 section 선정하고, (2) section들의 context 불러와서 질문에 대한 대답을 하며 (3) optionary하게 generated answer에 가장 알맞는 그림을 visualization하는 크게 3가지 phase으로 구성
 
 2. **recommendpaper**
-![recommendpaper](https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/c7d4a0e1-3f9f-4120-a27f-3500d5a9dc21)
+
+<img width="500" alt="recommendpaper" src="[https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/5854ddc1-4f61-4042-96b8-dbff31b0a7b5](https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/c7d4a0e1-3f9f-4120-a27f-3500d5a9dc21)">
 recommend paper는 (1) user query에 따라 citation paper(target paper를 인용한 논문)/reference paper(target paper가 인용한 논문) 중 어느것을 추천할지 결정 후 semantic scolar api로 context를 불러와서 (2) user가 원하는 개수의 paper를 추천해주는 phase로 구성
 
 
 3. **code_analysis**
-![codematching](https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/506c0f88-056f-46f0-a304-2d464d0dd22b)
+
+<img width="500" alt="codematching" src="[https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/5854ddc1-4f61-4042-96b8-dbff31b0a7b5](https://github.com/MinkyuRamen/kubig19th-conference-llm/assets/97013710/506c0f88-056f-46f0-a304-2d464d0dd22b)">
 codeanalysis는 (1) LLM이 user query를 보고 이에 맞는 code를 생성한 후 (2) 실제 github code와 이를 비교하여 실제로 어떻게 구현되어 있는지 찾는 phase로 구성
 
 ### AsKU Lite
